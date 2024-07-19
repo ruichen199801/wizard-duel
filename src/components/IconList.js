@@ -1,6 +1,6 @@
 import { icon } from './utils/assetPaths';
 
-const IconList = ({ setShowHelpModal }) => {
+const IconList = ({ setShowSettingsModal, setShowHelpModal }) => {
   return (
     <div className='d-flex justify-content-end m-2'>
       <img
@@ -18,6 +18,7 @@ const IconList = ({ setShowHelpModal }) => {
         data-bs-toggle='tooltip'
         data-bs-placement='bottom'
         data-bs-title='Settings'
+        onClick={() => setShowSettingsModal(true)}
       />
       <img
         src={icon.help}

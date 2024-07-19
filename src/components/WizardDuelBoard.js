@@ -22,6 +22,7 @@ import HelpModal from './HelpModal';
 import IconList from './IconList';
 import PlayerHand from './PlayerHand';
 import PlayerStats from './PlayerStats';
+import SettingsModal from './SettingsModal';
 
 const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
   // Preload to use cache and reduce latency
@@ -33,15 +34,12 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
   const [selectedCard, setSelectedCard] = useState(null);
   const [playerSelectedIndex, setPlayerSelectedIndex] = useState(null);
   const [gameState, setGameState] = useState(GameState.endTurnDisabled);
-  const [showGameoverModal, setShowGameoverModal] = useState(false);
   const [winner, setWinner] = useState(null);
+  const [showGameoverModal, setShowGameoverModal] = useState(false);
+  const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [showHelpModal, setShowHelpModal] = useState(false);
 
-  const { play } = useAudioPlayer();
-
-  const handlePlaySoundEffect = (src) => {
-    play(src);
-  };
+  const { playAudio, audioToggleMute } = useAudioPlayer();
 
   const handleDrawCard = async () => {
     if (ctx.gameover) {
@@ -80,7 +78,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
       setSelectedCard(aiSelectedCard);
 
       moves.playCard(aiSelectedIndex);
-      handlePlaySoundEffect(cardAudio(aiSelectedCard.id));
+      playAudio(cardAudio(aiSelectedCard.id));
     }
   };
 
@@ -92,7 +90,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
         setWinner(ctx.gameover.winner);
       }
       setShowGameoverModal(true);
-      handlePlaySoundEffect(ctx.gameover.winner === '0' ? victory : defeat);
+      playAudio(ctx.gameover.winner === '0' ? victory : defeat);
     }
     // Not needed if game restart is implemented via a full page reload
     // else {
@@ -121,7 +119,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
     if (gameState !== GameState.aiTurn) {
       setSelectedCard(G.players[0].hand[index]);
       setPlayerSelectedIndex(index);
-      handlePlaySoundEffect(click);
+      playAudio(click);
 
       setGameState(GameState.endTurnEnabled);
     }
@@ -130,7 +128,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
   const handleEndTurnButtonClick = () => {
     if (gameState === GameState.endTurnEnabled) {
       moves.playCard(playerSelectedIndex);
-      handlePlaySoundEffect(cardAudio(selectedCard.id));
+      playAudio(cardAudio(selectedCard.id));
 
       setGameState(GameState.aiTurn);
     }
@@ -148,7 +146,10 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
         </div>
 
         <div className='col-3'>
-          <IconList setShowHelpModal={setShowHelpModal} />
+          <IconList
+            setShowSettingsModal={setShowSettingsModal}
+            setShowHelpModal={setShowHelpModal}
+          />
         </div>
       </div>
 
@@ -186,6 +187,11 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
         showGameoverModal={showGameoverModal}
         winner={winner}
         handleRestart={handleRestart}
+      />
+      <SettingsModal
+        showSettingsModal={showSettingsModal}
+        setShowSettingsModal={setShowSettingsModal}
+        audioToggleMute={audioToggleMute}
       />
       <HelpModal
         showHelpModal={showHelpModal}
