@@ -17,7 +17,7 @@ export const p1 = {
   maxHp: 40,
   baseAtk: 3,
   baseDef: 3,
-  hp: 40,
+  hp: 4,
   atk: 3,
   def: 3,
   hand: [],
