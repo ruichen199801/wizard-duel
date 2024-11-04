@@ -1,3 +1,5 @@
+import { levelConfigs } from '../data/gameConfigs';
+
 export const shuffle = (deck) => {
   for (let i = deck.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -54,4 +56,27 @@ export const generateAIMoves = (G, ctx) => {
     moves.push({ move: 'playCard', args: [card] });
   });
   return moves;
+};
+
+export const applyLevelOverride = (G, level) => {
+  const { deck, statsOverride, effectsOverride, globalEffects } =
+    levelConfigs[level];
+
+  G.deck = shuffle([...deck]);
+
+  for (let key in statsOverride) {
+    if (statsOverride.hasOwnProperty(key)) {
+      if (key in G.players[0]) {
+        G.players[0][key] = statsOverride[key];
+      }
+      if (key in G.players[1]) {
+        G.players[1][key] = statsOverride[key];
+      }
+    }
+  }
+
+  G.players[0].effects.push(...effectsOverride);
+  G.players[1].effects.push(...effectsOverride);
+
+  // TODO: Apply globalEffects if any
 };

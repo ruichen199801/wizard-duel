@@ -1,6 +1,6 @@
 import { INVALID_MOVE } from 'boardgame.io/core';
-import { p0, p1 } from '../data/player';
 import { deck } from '../data/deck';
+import { p0, p1 } from '../data/player';
 import { applyEffect } from './effect';
 import {
   shuffle,
@@ -10,6 +10,7 @@ import {
   logGameResult,
   generateAIMoves,
   dealCards,
+  applyLevelOverride,
 } from './gameUtils';
 
 const setupData = () => {
@@ -21,6 +22,13 @@ const setupData = () => {
 
     deck: shuffle([...deck]),
   };
+
+  // localStorage.setItem('level', 1); // FOR TESTING
+  // localStorage.removeItem('level');
+  const currentLevel = localStorage.getItem('level');
+  if (currentLevel) {
+    applyLevelOverride(G, currentLevel);
+  }
 
   dealCards(G.players[0].hand, G.deck);
   dealCards(G.players[1].hand, G.deck);

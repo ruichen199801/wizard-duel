@@ -1,10 +1,10 @@
 export const p0 = {
-  name: `Player`,
+  name: 'Player',
   id: '0',
-  maxHp: 40,
+  maxHp: 30,
   baseAtk: 3,
   baseDef: 3,
-  hp: 40,
+  hp: 30,
   atk: 3,
   def: 3,
   hand: [],
@@ -12,12 +12,12 @@ export const p0 = {
 };
 
 export const p1 = {
-  name: `Opponent`,
+  name: 'Opponent',
   id: '1',
-  maxHp: 40,
+  maxHp: 30,
   baseAtk: 3,
   baseDef: 3,
-  hp: 40,
+  hp: 30,
   atk: 3,
   def: 3,
   hand: [],

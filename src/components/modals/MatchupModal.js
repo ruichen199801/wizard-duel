@@ -1,5 +1,6 @@
 import { smallScale, avatarHeight, avatarWidth } from '../utils/constants';
 import { avatar } from '../utils/assetPaths';
+import { enemyName, caption } from '../resources/scripts';
 
 const MatchupModal = ({
   showMatchupModal,

@@ -1,32 +1,27 @@
-const imgPrefix = 'images';
-const cardPrefix = `${imgPrefix}/cards`;
-const audioPrefix = 'audio';
-const musicPrefix = 'music';
-
 // IMAGES FILES
 
-const avatar = (playerId) => `${imgPrefix}/avatars/${playerId}.svg`;
+const avatar = (playerId) => `images/avatars/${playerId}.svg`;
 const icon = {
-  hp: `${imgPrefix}/icons/hp.svg`,
-  atk: `${imgPrefix}/icons/atk.svg`,
-  def: `${imgPrefix}/icons/def.svg`,
-  log: `${imgPrefix}/icons/log.svg`,
-  settings: `${imgPrefix}/icons/settings.svg`,
-  help: `${imgPrefix}/icons/help.svg`,
-  buff: `${imgPrefix}/icons/buff.svg`,
-  debuff: `${imgPrefix}/icons/debuff.svg`,
+  hp: 'images/icons/hp.svg',
+  atk: 'images/icons/atk.svg',
+  def: 'images/icons/def.svg',
+  log: 'images/icons/log.svg',
+  settings: 'images/icons/settings.svg',
+  help: 'images/icons/help.svg',
+  buff: 'images/icons/buff.svg',
+  debuff: 'images/icons/debuff.svg',
 };
 
-const cardFront = (cardId) => `${cardPrefix}/front/${cardId}.svg`;
-const cardBack = (playerId) => `${cardPrefix}/back/${playerId}.svg`;
+const cardFront = (cardId) => `images/cards/front/${cardId}.svg`;
+const cardBack = (playerId) => `images/cards/back/${playerId}.svg`;
 const cardPlaceholder = (playerId) =>
-  `${cardPrefix}/placeholder/${playerId}.svg`;
-const cardPile = `${cardPrefix}/pile.svg`;
+  `images/cards/placeholder/${playerId}.svg`;
+const cardPile = 'images/cards/pile.svg';
 
-const cardCount = 20; // TODO: DO NOT HARDCODE
+const cardCount = 22; // TODO: Update total count here when new cards are added
 const cardFronts = Array.from(
   { length: cardCount },
-  (_, cardId) => `${cardPrefix}/front/${cardId}.svg`
+  (_, cardId) => `images/cards/front/${cardId}.svg`
 );
 
 // AUDIO FILES
@@ -52,41 +47,42 @@ const cardAudioType = {
   17: 'magic',
   18: 'sword',
   19: 'shield',
+  // TODO: Add new cards here
 };
-const cardAudio = (cardId) => `${audioPrefix}/${cardAudioType[cardId]}.mp3`;
-const click = `${audioPrefix}/click.mp3`;
-const victory = `${audioPrefix}/victory.mp3`;
-const defeat = `${audioPrefix}/defeat.mp3`;
+const cardAudio = (cardId) => `audio/${cardAudioType[cardId]}.mp3`;
+const click = 'audio/click.mp3';
+const victory = 'audio/victory.mp3';
+const defeat = 'audio/defeat.mp3';
 
 // MUSIC FILES
 
-const classic = `${musicPrefix}/classic.mp3`;
+const classic = 'music/classic.mp3';
 
 // ALL FILES FOR PRELOAD
 
 const IMAGES = [
-  `${imgPrefix}/avatars/0.svg`,
-  `${imgPrefix}/avatars/1.svg`,
-  ...Object.values(icon), 
+  'images/avatars/0.svg',
+  'images/avatars/1.svg',
+  ...Object.values(icon),
   ...cardFronts,
-  `${cardPrefix}/back/0.svg`,
-  `${cardPrefix}/back/1.svg`,
-  `${cardPrefix}/placeholder/0.svg`,
-  `${cardPrefix}/placeholder/1.svg`,
+  'images/cards/back/0.svg',
+  'images/cards/back/1.svg',
+  'images/cards/placeholder/0.svg',
+  'images/cards/placeholder/1.svg',
   cardPile,
 ];
 const AUDIO = [
   click,
   victory,
   defeat,
-  `${audioPrefix}/fireball.mp3`,
-  `${audioPrefix}/freeze.mp3`,
-  `${audioPrefix}/thunder.mp3`,
-  `${audioPrefix}/heal.mp3`,
-  `${audioPrefix}/sword.mp3`,
-  `${audioPrefix}/shield.mp3`,
-  `${audioPrefix}/weaken.mp3`,
-  `${audioPrefix}/magic.mp3`,
+  'audio/fireball.mp3',
+  'audio/freeze.mp3',
+  'audio/thunder.mp3',
+  'audio/heal.mp3',
+  'audio/sword.mp3',
+  'audio/shield.mp3',
+  'audio/weaken.mp3',
+  'audio/magic.mp3',
 ];
 const MUSIC = [classic];
 

@@ -21,6 +21,7 @@ import {
   Block,
 } from './cards';
 
+// TODO - rename to baseDeck and DO NOT import, create a copy deck_level1
 const deck = [
   Fireball1,
   Fireball1,

@@ -32,3 +32,22 @@ export const sortEffects = (effects) => {
     }
   });
 };
+
+export const getLevel = () => {
+  return localStorage.getItem('level');
+};
+
+export const setNextLevel = () => {
+  const currentLevel = localStorage.getItem('level');
+  const nextLevel = currentLevel === null ? 1 : parseInt(currentLevel, 10) + 1; // localStorage stores data as string
+  localStorage.setItem('level', nextLevel);
+};
+
+export const clearLevel = () => {
+  localStorage.removeItem('level');
+};
+
+export const isSingleGame = () => {
+  // Only call this after game initialization
+  return getLevel() === null;
+};
