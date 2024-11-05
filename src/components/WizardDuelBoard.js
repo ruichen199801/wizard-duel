@@ -6,7 +6,13 @@ import useBsTooltip from './hooks/useBsTooltip';
 import useLog from './hooks/useLog';
 import { sleep } from './utils/utils';
 import { GameState, pauseInterval } from './utils/constants';
-import { cardAudio, click, victory, defeat, classic } from './utils/assetPaths';
+import {
+  cardAudio,
+  click,
+  victory,
+  defeat,
+  royalCity,
+} from './utils/assetPaths';
 
 import CardPile from './CardPile';
 import CardPreview from './CardPreview';
@@ -37,7 +43,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
 
   const { logEntries, addLogEntry } = useLog();
   const { playAudio, toggleAudioMute } = useAudioPlayer();
-  const { playMusic, pauseMusic, toggleMusic } = useMusicPlayer(classic);
+  const { playMusic, pauseMusic, toggleMusic } = useMusicPlayer(royalCity);
   const [hoveredAvatar, setHoveredAvatar] = useState(null);
 
   const handleDrawCard = async () => {

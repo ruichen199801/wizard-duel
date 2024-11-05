@@ -23,7 +23,7 @@ const cardPlaceholder = (playerId) =>
   `${cardPrefix}/placeholder/${playerId}.svg`;
 const cardPile = `${cardPrefix}/pile.svg`;
 
-const cardCount = 20; // TODO: DO NOT HARDCODE
+const cardCount = 22; // TODO: DO NOT HARDCODE
 const cardFronts = Array.from(
   { length: cardCount },
   (_, cardId) => `${cardPrefix}/front/${cardId}.svg`
@@ -52,6 +52,8 @@ const cardAudioType = {
   17: 'magic',
   18: 'sword',
   19: 'shield',
+  20: 'fireball',
+  21: 'magic',
 };
 const cardAudio = (cardId) => `${audioPrefix}/${cardAudioType[cardId]}.mp3`;
 const click = `${audioPrefix}/click.mp3`;
@@ -60,14 +62,16 @@ const defeat = `${audioPrefix}/defeat.mp3`;
 
 // MUSIC FILES
 
-const classic = `${musicPrefix}/classic.mp3`;
+const royalCity = `${musicPrefix}/royal-city.mp3`;
+const lavaPlains = `${musicPrefix}/lava-plains.mp3`;
 
 // ALL FILES FOR PRELOAD
 
 const IMAGES = [
   `${imgPrefix}/avatars/0.svg`,
   `${imgPrefix}/avatars/1.svg`,
-  ...Object.values(icon), 
+  `${imgPrefix}/avatars/wild-firemancer.svg`,
+  ...Object.values(icon),
   ...cardFronts,
   `${cardPrefix}/back/0.svg`,
   `${cardPrefix}/back/1.svg`,
@@ -88,7 +92,7 @@ const AUDIO = [
   `${audioPrefix}/weaken.mp3`,
   `${audioPrefix}/magic.mp3`,
 ];
-const MUSIC = [classic];
+const MUSIC = [royalCity, lavaPlains];
 
 export {
   // IMAGES FILES
@@ -107,7 +111,8 @@ export {
   defeat,
 
   // MUSIC FILES
-  classic,
+  royalCity,
+  lavaPlains,
 
   // ALL FILES FOR PRELOAD
   IMAGES,
