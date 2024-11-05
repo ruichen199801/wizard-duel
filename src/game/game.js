@@ -19,7 +19,7 @@ const setupData = () => {
       1: { ...p1 },
     },
 
-    deck: shuffle([...deck]),
+    deck: shuffle([...deck]), // Requires more than 10 cards
   };
 
   dealCards(G.players[0].hand, G.deck);
@@ -37,6 +37,7 @@ const drawCard = ({ G, ctx }) => {
   hand.push(G.deck.pop());
 
   if (G.deck.length === 0) {
+    console.log('Deck is empty, shuffling...');
     G.deck = shuffle([...deck]);
   }
 };

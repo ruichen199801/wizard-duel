@@ -19,6 +19,8 @@ import {
   Dispel,
   Enrage,
   Block,
+  Flame,
+  Resurrect,
 } from './cards';
 
 const deck = [
@@ -81,6 +83,12 @@ const deck = [
 
   Block,
   Block,
+
+  Flame,
+  Flame,
+
+  Resurrect,
+  Resurrect,
 ];
 
 export { deck };
