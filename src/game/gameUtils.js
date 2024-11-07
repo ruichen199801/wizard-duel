@@ -12,6 +12,20 @@ export const dealCards = (hand, deck) => {
   hand.push(...deck.splice(0, 5 - hand.length));
 };
 
+export const updateLastPlayed = (G, ctx, card) => {
+  const p = G.players[ctx.currentPlayer];
+
+  if (p.lastPlayed[0] === 'DAMAGE_STREAK') {
+    p.lastPlayed = [];
+  } else {
+    p.lastPlayed.unshift(card);
+  }
+
+  if (p.lastPlayed.length > 2) {
+    p.lastPlayed.pop();
+  }
+}
+
 export const removeCard = (hand, index) => {
   if (index !== -1) {
     hand.splice(index, 1);

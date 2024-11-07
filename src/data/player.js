@@ -9,6 +9,8 @@ export const p0 = {
   def: 3,
   hand: [],
   effects: [],
+  // The array to hold the last 2 played cards, the first index being the most recently played card
+  lastPlayed: [],
 };
 
 export const p1 = {
@@ -22,4 +24,5 @@ export const p1 = {
   def: 3,
   hand: [],
   effects: [],
+  lastPlayed: [],
 };

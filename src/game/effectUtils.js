@@ -51,11 +51,21 @@ export const undoEffect = (G, target, { type, value = 0 }) => {
     case EffectType.doubleDmg:
       break;
     case EffectType.preventDmg:
-      break;  
+      break;
     case EffectType.resurrect:
-      break;  
+      break;
     default:
       console.error(`Invalid effect type: ${type}`);
       return;
   }
+};
+
+// Check if all elements in the lastPlayed array match the same type of the triggered effect
+export const checkEffectStreak = (effectType, lastPlayed) => {
+  if (lastPlayed.length !== 2) {
+    return false;
+  }
+  return lastPlayed.every((card) =>
+    card.effects.every((effect) => effect.type === effectType)
+  );
 };

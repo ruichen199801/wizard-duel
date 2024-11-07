@@ -5,6 +5,7 @@ import {
   selectEffectsByGroup,
   removeEffectsByGroup,
   undoEffect,
+  checkEffectStreak,
 } from './effectUtils';
 import {
   EffectType,
@@ -18,15 +19,23 @@ const damage = (G, target, { value = 0 }) => {
 
   value = value + G.players[player].atk - G.players[target].def;
 
-  if (hasEffect(G, player, EffectType.doubleDmg)) {
+  // Level 2 Rules: If the player plays 3 damage cards in a row, the third card deals double damage.
+  // This effect is not stackable with other doubling effects, and all effects will be consumed if they co-exist.
+  // TODO - Add Level 2 check
+  if (checkEffectStreak(EffectType.damage, G.players[player].lastPlayed)) {
     value *= 2;
+    G.players[player].lastPlayed.unshift('DAMAGE_STREAK');
+    console.log(`a: ${JSON.stringify(G.players[player].lastPlayed)}`);
+  } else if (hasEffect(G, player, EffectType.doubleDmg)) {
+    value *= 2;
+    console.log(`b: ${JSON.stringify(G.players[player].lastPlayed)}`);
   }
   removeEffects(G, player, EffectType.doubleDmg);
 
   if (hasEffect(G, target, EffectType.preventDmg)) {
     value = 0;
+    removeEffects(G, target, EffectType.preventDmg);
   }
-  removeEffects(G, target, EffectType.preventDmg);
 
   value = Math.max(value, 0);
 

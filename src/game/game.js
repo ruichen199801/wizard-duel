@@ -10,6 +10,7 @@ import {
   logGameResult,
   generateAIMoves,
   dealCards,
+  updateLastPlayed,
 } from './gameUtils';
 
 const setupData = () => {
@@ -52,6 +53,9 @@ const playCard = ({ G, ctx }, index) => {
   card.effects.forEach((e) => {
     applyEffect(G, ctx, e);
   });
+
+  updateLastPlayed(G, ctx, { ...card });
+  console.log(JSON.stringify(G.players[ctx.currentPlayer].lastPlayed));
 
   removeCard(hand, index);
 
