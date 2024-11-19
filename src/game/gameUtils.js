@@ -1,3 +1,5 @@
+import { FINAL_LEVEL } from './gameConstants';
+
 export const shuffle = (deck) => {
   for (let i = deck.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -40,11 +42,21 @@ export const isVictory = ({ G, ctx }) => {
   }
 };
 
-export const logGameResult = ({ G, ctx }) => {
+export const onGameEnd = ({ G, ctx }) => {
+  // Print game result in the console
   if (!ctx.gameover.winner) {
     console.log('Draw!');
   } else {
     console.log(`${G.players[ctx.gameover.winner].name} wins!`);
+  }
+
+  // Enter next level when player wins, otherwise restarts from the last level.
+  //  - If current level is the first level of the game, do nothing.
+  //  - If current level is the final level of the game, do nothing.
+  if (ctx.gameover.winner && ctx.gameover.winner === '0') {
+    setNextLevel();
+  } else {
+    setPrevLevel();
   }
 };
 
@@ -54,4 +66,43 @@ export const generateAIMoves = (G, ctx) => {
     moves.push({ move: 'playCard', args: [card] });
   });
   return moves;
+};
+
+export const getCurrentLevel = () => {
+  try {
+    return sessionStorage.getItem('level') || '1';
+  } catch (e) {
+    console.error('Error parsing sessionStorage data:', e);
+  }
+};
+
+export const setPrevLevel = () => {
+  try {
+    const currentLevel = getCurrentLevel();
+    if (currentLevel === '1') {
+      return;
+    }
+    const prevLevel = parseInt(currentLevel, 10) - 1;
+    sessionStorage.setItem('level', prevLevel);
+  } catch (e) {
+    console.error('Error saving to sessionStorage:', e);
+  }
+};
+
+export const setNextLevel = () => {
+  try {
+    const currentLevel = getCurrentLevel();
+    if (currentLevel === FINAL_LEVEL) {
+      return;
+    }
+    const nextLevel = parseInt(currentLevel, 10) + 1;
+    sessionStorage.setItem('level', nextLevel);
+  } catch (e) {
+    console.error('Error saving to sessionStorage:', e);
+  }
+};
+
+// TODO: Clear level when user restarts the game
+export const clearLevel = () => {
+  sessionStorage.removeItem('level');
 };

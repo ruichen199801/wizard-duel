@@ -12,7 +12,6 @@ import {
   resurrect,
 } from './cardEffects';
 
-// ADD CARDS HERE
 // Card name and text added here only for logging purpose
 
 export const Fireball1 = {

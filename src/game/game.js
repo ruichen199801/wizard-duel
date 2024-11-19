@@ -1,27 +1,33 @@
 import { INVALID_MOVE } from 'boardgame.io/core';
 import { p0, p1 } from '../data/player';
-import { deck } from '../data/deck';
+import { getDeckForLevel } from '../data/deck';
 import { applyEffect } from './effect';
 import {
   shuffle,
   removeCard,
   logPlay,
   isVictory,
-  logGameResult,
+  onGameEnd,
   generateAIMoves,
   dealCards,
+  getCurrentLevel,
 } from './gameUtils';
 
 const setupData = () => {
+  let level = getCurrentLevel();
+  console.log(`Current level is ${level}`);
+
   let G = {
     players: {
       0: { ...p0 },
       1: { ...p1 },
     },
 
-    deck: shuffle([...deck]), // Requires more than 10 cards
-  };
+    deck: shuffle([...getDeckForLevel(level)]), 
 
+    level: level,
+  };
+  
   dealCards(G.players[0].hand, G.deck);
   dealCards(G.players[1].hand, G.deck);
 
@@ -38,7 +44,7 @@ const drawCard = ({ G, ctx }) => {
 
   if (G.deck.length === 0) {
     console.log('Deck is empty, shuffling...');
-    G.deck = shuffle([...deck]);
+    G.deck = shuffle([...getDeckForLevel(G.level)]);
   }
 };
 
@@ -78,7 +84,7 @@ export const WizardDuel = {
 
   endIf: isVictory,
 
-  onEnd: logGameResult,
+  onEnd: onGameEnd,
   // onEnd: ({ ctx }) => console.log(ctx.turn),
 
   ai: {

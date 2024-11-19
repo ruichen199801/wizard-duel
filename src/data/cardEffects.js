@@ -45,7 +45,6 @@ export const EffectGroup = {
   unique: [EffectType.doubleDmg, EffectType.preventDmg, EffectType.resurrect],
 };
 
-// ADD EFFECTS HERE
 // Only enduring effects have text and group (buff/debuff) field for logging purpose
 
 /**
