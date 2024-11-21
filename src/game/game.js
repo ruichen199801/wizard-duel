@@ -11,6 +11,7 @@ import {
   generateAIMoves,
   dealCards,
   getCurrentLevel,
+  applyLevelOverride
 } from './gameUtils';
 
 const setupData = () => {
@@ -27,6 +28,8 @@ const setupData = () => {
 
     level: level,
   };
+
+  applyLevelOverride(G);
   
   dealCards(G.players[0].hand, G.deck);
   dealCards(G.players[1].hand, G.deck);

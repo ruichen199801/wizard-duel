@@ -1,4 +1,4 @@
-import { FINAL_LEVEL } from './gameConstants';
+import { levelConfigs, finalLevel } from '../data/levelConfigs';
 
 export const shuffle = (deck) => {
   for (let i = deck.length - 1; i > 0; i--) {
@@ -92,7 +92,7 @@ export const setPrevLevel = () => {
 export const setNextLevel = () => {
   try {
     const currentLevel = getCurrentLevel();
-    if (currentLevel === FINAL_LEVEL) {
+    if (currentLevel === finalLevel) {
       return;
     }
     const nextLevel = parseInt(currentLevel, 10) + 1;
@@ -105,4 +105,25 @@ export const setNextLevel = () => {
 // TODO: Clear level when user restarts the game
 export const clearLevel = () => {
   sessionStorage.removeItem('level');
+};
+
+export const applyLevelOverride = (G) => {
+  const { statsOverride, handOverride, effectsOverride } = levelConfigs[G.level];
+
+  for (let key in statsOverride) {
+    if (statsOverride.hasOwnProperty(key)) {
+      if (key in G.players[0]) {
+        G.players[0][key] = statsOverride[key];
+      }
+      if (key in G.players[1]) {
+        G.players[1][key] = statsOverride[key];
+      }
+    }
+  }
+
+  G.players[0].hand.push(...handOverride);
+  G.players[1].hand.push(...handOverride);
+
+  G.players[0].effects.push(...effectsOverride);
+  G.players[1].effects.push(...effectsOverride);
 };

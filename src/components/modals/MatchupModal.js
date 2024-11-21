@@ -1,10 +1,12 @@
 import { smallScale, avatarHeight, avatarWidth } from '../utils/constants';
-import { avatar } from '../utils/assetPaths';
+import { getAvatarForLevel } from '../utils/assetPaths';
+import { getEnemyName, getBattleStartCaption } from '../utils/scripts';
 
 const MatchupModal = ({
   showMatchupModal,
   setShowMatchupModal,
   playMusic,
+  level,
   scale = smallScale,
 }) => {
   if (!showMatchupModal) {
@@ -31,7 +33,7 @@ const MatchupModal = ({
           <div className='modal-content bg-modal'>
             <div className='modal-header border-0'>
               <h4 className='modal-title w-100 text-center font-lora-bold'>
-                Battle Start
+                {getBattleStartCaption(level)}
               </h4>
             </div>
 
@@ -39,7 +41,7 @@ const MatchupModal = ({
               <div className='d-flex justify-content-evenly align-items-center'>
                 <div className='text-center'>
                   <img
-                    src={avatar('0')}
+                    src={getAvatarForLevel('0', level)}
                     alt='avatar'
                     height={height}
                     width={width}
@@ -51,12 +53,12 @@ const MatchupModal = ({
 
                 <div className='text-center'>
                   <img
-                    src={avatar('1')}
+                    src={getAvatarForLevel('1', level)}
                     alt='avatar'
                     height={height}
                     width={width}
                   />
-                  <p className='mt-2'>Opponent</p>
+                  <p className='mt-2'>{getEnemyName(level)}</p>
                 </div>
               </div>
             </div>

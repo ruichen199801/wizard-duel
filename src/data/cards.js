@@ -12,6 +12,7 @@ import {
   resurrect,
 } from './cardEffects';
 
+// READ-ONLY CARDS
 // Card name and text added here only for logging purpose
 
 export const Fireball1 = {

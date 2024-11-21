@@ -11,7 +11,7 @@ import {
   click,
   victory,
   defeat,
-  royalCity,
+  getMusicForLevel,
 } from './utils/assetPaths';
 
 import CardPile from './CardPile';
@@ -43,7 +43,9 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
 
   const { logEntries, addLogEntry } = useLog();
   const { playAudio, toggleAudioMute } = useAudioPlayer();
-  const { playMusic, pauseMusic, toggleMusic } = useMusicPlayer(royalCity);
+  const { playMusic, pauseMusic, toggleMusic } = useMusicPlayer(
+    getMusicForLevel(G.level)
+  );
   const [hoveredAvatar, setHoveredAvatar] = useState(null);
 
   const handleDrawCard = async () => {
@@ -153,6 +155,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
         <div className='col-3'>
           <PlayerStats
             player={G.players[1]}
+            level={G.level}
             setHoveredAvatar={setHoveredAvatar}
           />
         </div>
@@ -214,6 +217,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
         showMatchupModal={showMatchupModal}
         setShowMatchupModal={setShowMatchupModal}
         playMusic={playMusic}
+        level={G.level}
       />
 
       {/* Components rendered on demand */}

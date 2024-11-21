@@ -1,11 +1,24 @@
 const imgPrefix = 'images';
+const avatarPrefix = `${imgPrefix}/avatars`;
 const cardPrefix = `${imgPrefix}/cards`;
 const audioPrefix = 'audio';
 const musicPrefix = 'music';
 
 // IMAGES FILES
 
-const avatar = (playerId) => `${imgPrefix}/avatars/${playerId}.svg`;
+const player = `${avatarPrefix}/player.svg`;
+const wiseScholar = `${avatarPrefix}/wise-scholar.svg`;
+const wildFiremancer = `${avatarPrefix}/wild-firemancer.svg`;
+
+const avatarPaths = {
+  0: player,
+  1: wiseScholar,
+  2: wildFiremancer,
+};
+const getAvatarForLevel = (playerId, level = '1') => {
+  return playerId === '0' ? avatarPaths[0] : avatarPaths[level];
+};
+
 const icon = {
   hp: `${imgPrefix}/icons/hp.svg`,
   atk: `${imgPrefix}/icons/atk.svg`,
@@ -23,7 +36,7 @@ const cardPlaceholder = (playerId) =>
   `${cardPrefix}/placeholder/${playerId}.svg`;
 const cardPile = `${cardPrefix}/pile.svg`;
 
-const cardCount = 22; // TODO: DO NOT HARDCODE
+const cardCount = 22; // Increment this when new cards are added
 const cardFronts = Array.from(
   { length: cardCount },
   (_, cardId) => `${cardPrefix}/front/${cardId}.svg`
@@ -65,12 +78,18 @@ const defeat = `${audioPrefix}/defeat.mp3`;
 const royalCity = `${musicPrefix}/royal-city.mp3`;
 const lavaPlains = `${musicPrefix}/lava-plains.mp3`;
 
+const musicPaths = {
+  1: royalCity,
+  2: lavaPlains,
+};
+const getMusicForLevel = (level = '1') => musicPaths[level];
+
 // ALL FILES FOR PRELOAD
 
 const IMAGES = [
-  `${imgPrefix}/avatars/0.svg`,
-  `${imgPrefix}/avatars/1.svg`,
-  `${imgPrefix}/avatars/wild-firemancer.svg`,
+  player,
+  wiseScholar,
+  wildFiremancer,
   ...Object.values(icon),
   ...cardFronts,
   `${cardPrefix}/back/0.svg`,
@@ -96,7 +115,7 @@ const MUSIC = [royalCity, lavaPlains];
 
 export {
   // IMAGES FILES
-  avatar,
+  getAvatarForLevel,
   icon,
   cardFront,
   cardBack,
@@ -111,8 +130,7 @@ export {
   defeat,
 
   // MUSIC FILES
-  royalCity,
-  lavaPlains,
+  getMusicForLevel,
 
   // ALL FILES FOR PRELOAD
   IMAGES,
