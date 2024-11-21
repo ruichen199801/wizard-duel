@@ -11,6 +11,7 @@ import {
   click,
   victory,
   defeat,
+  getLocationForLevel,
   getMusicForLevel,
 } from './utils/assetPaths';
 
@@ -150,7 +151,10 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
   };
 
   return (
-    <div className='container-fluid vh-100 d-flex flex-column p-2 bg-board'>
+    <div
+      className='container-fluid vh-100 d-flex flex-column p-2 bg-board'
+      style={{ '--bg-image': `url(${getLocationForLevel(G.level)})` }}
+    >
       <div className='row'>
         <div className='col-3'>
           <PlayerStats

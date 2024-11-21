@@ -1,23 +1,26 @@
 const imgPrefix = 'images';
 const avatarPrefix = `${imgPrefix}/avatars`;
 const cardPrefix = `${imgPrefix}/cards`;
+const locationPrefix = `${imgPrefix}/locations`;
 const audioPrefix = 'audio';
 const musicPrefix = 'music';
 
 // IMAGES FILES
 
-const player = `${avatarPrefix}/player.svg`;
-const wiseScholar = `${avatarPrefix}/wise-scholar.svg`;
-const wildFiremancer = `${avatarPrefix}/wild-firemancer.svg`;
-
 const avatarPaths = {
-  0: player,
-  1: wiseScholar,
-  2: wildFiremancer,
+  0: `${avatarPrefix}/player.svg`,
+  1: `${avatarPrefix}/wise-scholar.svg`,
+  2: `${avatarPrefix}/wild-firemancer.svg`,
 };
 const getAvatarForLevel = (playerId, level = '1') => {
   return playerId === '0' ? avatarPaths[0] : avatarPaths[level];
 };
+
+const locationPaths = {
+  1: `${locationPrefix}/city.png`,
+  2: `${locationPrefix}/volcano.png`,
+};
+const getLocationForLevel = (level = '1') => locationPaths[level];
 
 const icon = {
   hp: `${imgPrefix}/icons/hp.svg`,
@@ -75,21 +78,17 @@ const defeat = `${audioPrefix}/defeat.mp3`;
 
 // MUSIC FILES
 
-const royalCity = `${musicPrefix}/royal-city.mp3`;
-const lavaPlains = `${musicPrefix}/lava-plains.mp3`;
-
 const musicPaths = {
-  1: royalCity,
-  2: lavaPlains,
+  1: `${musicPrefix}/royal-city.mp3`,
+  2: `${musicPrefix}/lava-plains.mp3`,
 };
 const getMusicForLevel = (level = '1') => musicPaths[level];
 
 // ALL FILES FOR PRELOAD
 
 const IMAGES = [
-  player,
-  wiseScholar,
-  wildFiremancer,
+  ...Object.values(avatarPaths),
+  ...Object.values(locationPaths),
   ...Object.values(icon),
   ...cardFronts,
   `${cardPrefix}/back/0.svg`,
@@ -111,11 +110,12 @@ const AUDIO = [
   `${audioPrefix}/weaken.mp3`,
   `${audioPrefix}/magic.mp3`,
 ];
-const MUSIC = [royalCity, lavaPlains];
+const MUSIC = [...Object.values(musicPaths)];
 
 export {
   // IMAGES FILES
   getAvatarForLevel,
+  getLocationForLevel,
   icon,
   cardFront,
   cardBack,
