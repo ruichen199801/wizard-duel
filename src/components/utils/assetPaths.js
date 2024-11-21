@@ -17,8 +17,8 @@ const getAvatarForLevel = (playerId, level = '1') => {
 };
 
 const locationPaths = {
-  1: `${locationPrefix}/city.png`,
-  2: `${locationPrefix}/volcano.png`,
+  1: `${locationPrefix}/city.svg`,
+  2: `${locationPrefix}/volcano.svg`,
 };
 const getLocationForLevel = (level = '1') => locationPaths[level];
 
