@@ -16,4 +16,27 @@ const battleStartCaptions = {
 };
 const getBattleStartCaption = (level = '1') => battleStartCaptions[level];
 
-export { getLevelName, getEnemyName, getBattleStartCaption };
+const battleStartInstrutions = {
+  1: {
+    intro: `Your journey as a budding wizard begins in the grand Royal City, where
+      the Wise Scholar awaits to test your skill.`,
+    levelRule: ``,
+    outro: ``,
+  },
+
+  2: {
+    intro: `You step into the blazing Lava Plains, where you will face the 
+      Wild Firemancer's fiery wrath. `,
+    levelRule: `You'll begin with random fireballs in your hand. `,
+    outro: `Burn or be burned!`,
+  },
+};
+const getBattleStartInstructions = (level = '1') =>
+  battleStartInstrutions[level];
+
+export {
+  getLevelName,
+  getEnemyName,
+  getBattleStartCaption,
+  getBattleStartInstructions,
+};

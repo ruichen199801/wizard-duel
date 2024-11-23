@@ -1,6 +1,10 @@
 import { smallScale, avatarHeight, avatarWidth } from '../utils/constants';
 import { getAvatarForLevel } from '../utils/assetPaths';
-import { getEnemyName, getBattleStartCaption } from '../utils/scripts';
+import {
+  getEnemyName,
+  getBattleStartCaption,
+  getBattleStartInstructions,
+} from '../utils/scripts';
 
 const MatchupModal = ({
   showMatchupModal,
@@ -20,6 +24,8 @@ const MatchupModal = ({
 
   const height = avatarHeight * scale;
   const width = avatarWidth * scale;
+
+  const instructions = getBattleStartInstructions(level);
 
   return (
     <>
@@ -60,6 +66,14 @@ const MatchupModal = ({
                   />
                   <p className='mt-2'>{getEnemyName(level)}</p>
                 </div>
+              </div>
+
+              <div className='w-80 mx-auto mt-2'>
+                <p>
+                  {instructions.intro}
+                  <b>{instructions.levelRule}</b>
+                  {instructions.outro}
+                </p>
               </div>
             </div>
 
