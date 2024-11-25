@@ -62,3 +62,8 @@
 .w-80 {
   width: 80%;
 }
+
+.level-effect-img {
+  height: 150px;
+  object-fit: cover;
+}
