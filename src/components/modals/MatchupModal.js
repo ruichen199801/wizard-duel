@@ -52,7 +52,7 @@ const MatchupModal = ({
                     height={height}
                     width={width}
                   />
-                  <p className='mt-2'>You</p>
+                  <p className='mt-2 fw-bold'>You</p>
                 </div>
 
                 <h5 className='mb-5'>VS</h5>
@@ -64,7 +64,7 @@ const MatchupModal = ({
                     height={height}
                     width={width}
                   />
-                  <p className='mt-2'>{getEnemyName(level)}</p>
+                  <p className='mt-2 fw-bold'>{getEnemyName(level)}</p>
                 </div>
               </div>
 

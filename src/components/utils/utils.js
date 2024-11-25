@@ -4,9 +4,21 @@ export const sleep = (ms) => {
 
 export const exitToMenu = () => {
   // Use full page rerender to keep the game state clean
+  clearLevel();
   window.location.href = '/';
 };
 
+export const resetGame = () => {
+  clearLevel();
+  window.location.reload();
+  // The alternative is to call reset() and clean up manual states on the client side
+};
+
+export const restartLevel = () => {
+  window.location.reload();
+};
+
+// TODO: Delete this method
 export const restartGame = () => {
   window.location.reload();
   // The alternative is to call reset() and clean up manual states on the client side
@@ -31,4 +43,8 @@ export const sortEffects = (effects) => {
       return 0; // Keep the original order if groups are the same but texts are different
     }
   });
+};
+
+const clearLevel = () => {
+  sessionStorage.removeItem('level');
 };

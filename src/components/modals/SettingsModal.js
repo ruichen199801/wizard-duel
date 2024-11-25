@@ -65,7 +65,7 @@ const SettingsModal = ({
                   className='btn btn-dark btn-width mb-3'
                   onClick={restartGame}
                 >
-                  Restart Game
+                  Reset Game
                 </button>
 
                 <button

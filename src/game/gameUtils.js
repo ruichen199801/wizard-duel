@@ -102,11 +102,6 @@ export const setNextLevel = () => {
   }
 };
 
-// TODO: Clear level when user restarts the game
-export const clearLevel = () => {
-  sessionStorage.removeItem('level');
-};
-
 export const applyLevelOverride = (G) => {
   const { statsOverride, handOverride, effectsOverride } = levelConfigs[G.level];
 
