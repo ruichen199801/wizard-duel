@@ -16,10 +16,10 @@ const levelConfigs = {
 
   2: {
     statsOverride: {
-      maxHp: 40,
-      hp: 40,
+      maxHp: 45,
+      hp: 45,
     },
-    handOverride: randomPopulateHand([Fireball1, Fireball2, Fireball3]),
+    handOverride: randomPopulateHand([Fireball2, Fireball3]),
     effectsOverride: [],
   },
 };
