@@ -25,6 +25,7 @@ import LevelEffectModal from './modals/LevelEffectModal';
 import LogModal from './modals/LogModal';
 import IconList from './IconList';
 import MatchupModal from './modals/MatchupModal';
+import NextLevelModal from './modals/NextLevelModal';
 import PlayerHand from './PlayerHand';
 import PlayerStats from './PlayerStats';
 import SettingsModal from './modals/SettingsModal';
@@ -38,6 +39,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
   const [gameState, setGameState] = useState(GameState.endTurnDisabled);
   const [winner, setWinner] = useState(null);
   const [showGameoverModal, setShowGameoverModal] = useState(false);
+  const [showNextLevelModal, setShowNextLevelModal] = useState(false);
   const [showLevelEffectModal, setShowLevelEffectModal] = useState(false);
   const [showLogModal, setShowLogModal] = useState(false);
   const [showSettingsModal, setShowSettingsModal] = useState(false);
@@ -230,9 +232,13 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
       {/* Components rendered on demand */}
       <GameoverModal
         showGameoverModal={showGameoverModal}
+        setShowGameoverModal={setShowGameoverModal}
+        setShowNextLevelModal={setShowNextLevelModal}
         winner={winner}
+        playAudio={playAudio}
         level={G.level}
       />
+      <NextLevelModal showNextLevelModal={showNextLevelModal} level={G.level} />
       <LevelEffectModal
         showLevelEffectModal={showLevelEffectModal}
         setShowLevelEffectModal={setShowLevelEffectModal}

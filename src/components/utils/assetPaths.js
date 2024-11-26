@@ -46,6 +46,11 @@ const cardFronts = Array.from(
   (_, cardId) => `${cardPrefix}/front/${cardId}.svg`
 );
 
+const nextLevelCards = {
+  1: [cardFront('20'), cardFront('21')],
+};
+const getNextCardsForLevel = (level = '1') => nextLevelCards[level];
+
 // AUDIO FILES
 
 const cardAudioType = {
@@ -117,6 +122,7 @@ export {
   // IMAGES FILES
   getAvatarForLevel,
   getLocationForLevel,
+  getNextCardsForLevel,
   icon,
   cardFront,
   cardBack,

@@ -1,7 +1,15 @@
 import { exitToMenu, resetGame, startLevel } from '../utils/utils';
 import { finalLevel } from '../../data/levelConfigs';
+import { click } from '../utils/assetPaths';
 
-const GameoverModal = ({ showGameoverModal, winner, level }) => {
+const GameoverModal = ({
+  showGameoverModal,
+  setShowGameoverModal,
+  setShowNextLevelModal,
+  winner,
+  playAudio,
+  level,
+}) => {
   if (!showGameoverModal) {
     return null;
   }
@@ -17,6 +25,12 @@ const GameoverModal = ({ showGameoverModal, winner, level }) => {
   const gameoverTitle = {
     0: 'Congratulations',
     1: 'Game Over',
+  };
+
+  const handleShowNextLevelModal = () => {
+    setShowGameoverModal(false);
+    setShowNextLevelModal(true);
+    playAudio(click);
   };
 
   return (
@@ -68,7 +82,7 @@ const GameoverModal = ({ showGameoverModal, winner, level }) => {
                     <button
                       type='button'
                       className='btn btn-dark'
-                      onClick={startLevel}
+                      onClick={handleShowNextLevelModal}
                     >
                       Continue
                     </button>
