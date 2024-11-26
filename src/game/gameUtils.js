@@ -103,22 +103,35 @@ export const setNextLevel = () => {
 };
 
 export const applyLevelOverride = (G) => {
-  const { statsOverride, handOverride, effectsOverride } = levelConfigs[G.level];
+  const {
+    playerStatsOverride,
+    enemyStatsOverride,
 
-  for (let key in statsOverride) {
-    if (statsOverride.hasOwnProperty(key)) {
+    playerHandOverride,
+    enemyHandOverride,
+
+    playerEffectsOverride,
+    enemyEffectsOverride,
+  } = levelConfigs[G.level];
+
+  for (let key in playerStatsOverride) {
+    if (playerStatsOverride.hasOwnProperty(key)) {
       if (key in G.players[0]) {
-        G.players[0][key] = statsOverride[key];
+        G.players[0][key] = playerStatsOverride[key];
       }
+    }
+  }
+  for (let key in enemyStatsOverride) {
+    if (enemyStatsOverride.hasOwnProperty(key)) {
       if (key in G.players[1]) {
-        G.players[1][key] = statsOverride[key];
+        G.players[1][key] = enemyStatsOverride[key];
       }
     }
   }
 
-  G.players[0].hand.push(...handOverride);
-  G.players[1].hand.push(...handOverride);
+  G.players[0].hand.push(...playerHandOverride);
+  G.players[1].hand.push(...enemyHandOverride);
 
-  G.players[0].effects.push(...effectsOverride);
-  G.players[1].effects.push(...effectsOverride);
+  G.players[0].effects.push(...playerEffectsOverride);
+  G.players[1].effects.push(...enemyEffectsOverride);
 };
