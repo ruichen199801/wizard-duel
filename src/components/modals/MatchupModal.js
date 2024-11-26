@@ -5,6 +5,7 @@ import {
   getBattleStartCaption,
   getBattleStartInstructions,
 } from '../utils/scripts';
+import useImageLoader from '../hooks/useImageLoader';
 
 const MatchupModal = ({
   showMatchupModal,
@@ -13,6 +14,11 @@ const MatchupModal = ({
   level,
   scale = smallScale,
 }) => {
+  const playerAvatar = getAvatarForLevel('0', level);
+  const enemyAvatar = getAvatarForLevel('1', level);
+
+  const { isLoading } = useImageLoader([playerAvatar, enemyAvatar], 300);
+
   if (!showMatchupModal) {
     return null;
   }
@@ -44,37 +50,47 @@ const MatchupModal = ({
             </div>
 
             <div className='modal-body'>
-              <div className='d-flex justify-content-evenly align-items-center'>
-                <div className='text-center'>
-                  <img
-                    src={getAvatarForLevel('0', level)}
-                    alt='avatar'
-                    height={height}
-                    width={width}
-                  />
-                  <p className='mt-2 fw-bold'>You</p>
+              {isLoading ? (
+                <div className='d-flex justify-content-center align-items-center'>
+                  <div className='spinner-border' role='status'>
+                    <span className='visually-hidden'>Loading...</span>
+                  </div>
                 </div>
+              ) : (
+                <>
+                  <div className='d-flex justify-content-evenly align-items-center'>
+                    <div className='text-center'>
+                      <img
+                        src={playerAvatar}
+                        alt='avatar'
+                        height={height}
+                        width={width}
+                      />
+                      <p className='mt-2 fw-bold'>You</p>
+                    </div>
 
-                <h5 className='mb-5'>VS</h5>
+                    <h5 className='mb-5'>VS</h5>
 
-                <div className='text-center'>
-                  <img
-                    src={getAvatarForLevel('1', level)}
-                    alt='avatar'
-                    height={height}
-                    width={width}
-                  />
-                  <p className='mt-2 fw-bold'>{getEnemyName(level)}</p>
-                </div>
-              </div>
+                    <div className='text-center'>
+                      <img
+                        src={enemyAvatar}
+                        alt='avatar'
+                        height={height}
+                        width={width}
+                      />
+                      <p className='mt-2 fw-bold'>{getEnemyName(level)}</p>
+                    </div>
+                  </div>
 
-              <div className='w-80 mx-auto mt-2'>
-                <p>
-                  {instructions.intro}
-                  <b>{instructions.levelRule}</b>
-                  {instructions.outro}
-                </p>
-              </div>
+                  <div className='w-80 mx-auto mt-2'>
+                    <p>
+                      {instructions.intro}
+                      <b>{instructions.levelRule}</b>
+                      {instructions.outro}
+                    </p>
+                  </div>
+                </>
+              )}
             </div>
 
             <div className='modal-footer border-0 justify-content-end'>

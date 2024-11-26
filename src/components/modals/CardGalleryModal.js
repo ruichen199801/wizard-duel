@@ -7,7 +7,7 @@ const CardGalleryModal = ({
   cardImages,
   playAudio,
 }) => {
-  const { isLoading } = useImageLoader(cardImages);
+  const { isLoading } = useImageLoader(cardImages, 1000);
 
   if (!showCardGallery) {
     return null;
