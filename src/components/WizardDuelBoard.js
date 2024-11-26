@@ -228,7 +228,11 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
       />
 
       {/* Components rendered on demand */}
-      <GameoverModal showGameoverModal={showGameoverModal} winner={winner} />
+      <GameoverModal
+        showGameoverModal={showGameoverModal}
+        winner={winner}
+        level={G.level}
+      />
       <LevelEffectModal
         showLevelEffectModal={showLevelEffectModal}
         setShowLevelEffectModal={setShowLevelEffectModal}

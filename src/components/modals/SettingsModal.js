@@ -1,4 +1,4 @@
-import { exitToMenu, restartGame } from '../utils/utils';
+import { exitToMenu, resetGame } from '../utils/utils';
 import { click } from '../utils/assetPaths';
 
 const SettingsModal = ({
@@ -63,7 +63,7 @@ const SettingsModal = ({
                 <button
                   type='button'
                   className='btn btn-dark btn-width mb-3'
-                  onClick={restartGame}
+                  onClick={resetGame}
                 >
                   Reset Game
                 </button>

@@ -8,20 +8,21 @@ export const exitToMenu = () => {
   window.location.href = '/';
 };
 
+/**
+ * Restarts the whole game from level 1. 
+ */
 export const resetGame = () => {
   clearLevel();
   window.location.reload();
   // The alternative is to call reset() and clean up manual states on the client side
 };
 
-export const restartLevel = () => {
+/**
+ * Triggers a reload to start a particular level.
+ * The level number is set on game end in `gameUtils.js`.
+ */
+export const startLevel = () => {
   window.location.reload();
-};
-
-// TODO: Delete this method
-export const restartGame = () => {
-  window.location.reload();
-  // The alternative is to call reset() and clean up manual states on the client side
 };
 
 export const sortEffects = (effects) => {
