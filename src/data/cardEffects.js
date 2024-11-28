@@ -10,6 +10,7 @@ export const EffectType = {
   doubleDmg: 'doubleDmg',
   preventDmg: 'preventDmg',
   resurrect: 'resurrect',
+  freeze: 'freeze',
 };
 
 export const EffectDuration = {
@@ -39,10 +40,15 @@ export const EffectGroup = {
   ],
 
   // Stackable negative effects applied to the opponent.
-  debuff: [EffectType.debuffAtk, EffectType.debuffDef],
+  debuff: [EffectType.debuffAtk, EffectType.debuffDef, EffectType.freeze],
 
   // Only one effect of the same type can exist at a time. Can be either buff or debuff.
-  unique: [EffectType.doubleDmg, EffectType.preventDmg, EffectType.resurrect],
+  unique: [
+    EffectType.doubleDmg,
+    EffectType.preventDmg,
+    EffectType.resurrect,
+    EffectType.freeze,
+  ],
 };
 
 // Only enduring effects have text and group (buff/debuff) field for logging purpose
@@ -180,4 +186,15 @@ export const resurrect = (value) => {
     group: EffectGroupName.buff,
     text: `+${value} HP on Death`,
   };
+};
+
+/**
+ * Invalidate the opponent's next card. Triggered immediately during their next turn.
+ */
+export const freeze = {
+  type: EffectType.freeze,
+  duration: EffectDuration.enduring,
+  target: EffectTarget.opponent,
+  group: EffectGroupName.debuff,
+  text: 'Next Card Invalidated',
 };

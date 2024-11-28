@@ -97,6 +97,8 @@ const preventDmg = () => {};
 
 const resurrect = () => {};
 
+const freeze = () => {};
+
 const effectHandlers = {
   [EffectType.damage]: damage,
   [EffectType.heal]: heal,
@@ -109,6 +111,7 @@ const effectHandlers = {
   [EffectType.doubleDmg]: doubleDmg,
   [EffectType.preventDmg]: preventDmg,
   [EffectType.resurrect]: resurrect,
+  [EffectType.freeze]: freeze,
 };
 
 export const applyEffect = (G, ctx, effect) => {
@@ -120,6 +123,11 @@ export const applyEffect = (G, ctx, effect) => {
   }
 
   const target = getTarget(ctx.currentPlayer, effect.target);
+
+  if (hasEffect(G, ctx.currentPlayer, EffectType.freeze)) {
+    removeEffects(G, ctx.currentPlayer, EffectType.freeze);
+    return;
+  }
 
   if (
     EffectGroup.unique.some((e) => e === effect.type) &&

@@ -10,6 +10,7 @@ import {
   doubleDmg,
   preventDmg,
   resurrect,
+  freeze,
 } from './cardEffects';
 
 // READ-ONLY CARDS
@@ -167,4 +168,18 @@ export const Resurrect = {
   name: 'Resurrect',
   text: '+15 HP on Death',
   effects: [resurrect(15)],
+};
+
+export const Petrify = {
+  id: '22',
+  name: 'Petrify',
+  text: 'Freeze Enemy 1 Turn',
+  effects: [freeze],
+};
+
+export const Aura = {
+  id: '23',
+  name: 'Aura',
+  text: '+3 HP per Turn',
+  effects: [], // TODO
 };

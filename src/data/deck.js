@@ -21,6 +21,8 @@ import {
   Block,
   Flame,
   Resurrect,
+  Petrify,
+  Aura,
 } from './cards';
 
 const baseDeck = [
@@ -51,7 +53,7 @@ const levelDecks = {
 
   2: [...baseDeck, Flame, Resurrect],
 
-  3: [...baseDeck], // TODO: Add new cards
+  3: [...baseDeck, Flame, Resurrect, Petrify, Aura],
 };
 
 export const getDeckForLevel = (level = '1') => {
