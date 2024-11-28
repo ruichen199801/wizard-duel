@@ -8,7 +8,7 @@ import {
 
 export const randomPopulateHand = (
   options = [Fireball1, Fireball2, Fireball3, Flame, Resurrect],
-  probabilities = [0.2, 0.3, 0.4, 0.08, 0.02]
+  probabilities = [0.3, 0.3, 0.3, 0.08, 0.02]
 ) => {
   if (options.length !== probabilities.length) {
     throw new Error('Options and probabilities must have the same length.');
