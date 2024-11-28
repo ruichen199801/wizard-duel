@@ -1,6 +1,12 @@
-import { Fireball1, Fireball2, Fireball3, Flame, Resurrect } from './cards';
+import {
+  Fireball1,
+  Fireball2,
+  Fireball3,
+  Flame,
+  Resurrect,
+} from '../data/cards';
 
-const randomPopulateHand = (
+export const randomPopulateHand = (
   options = [Fireball1, Fireball2, Fireball3, Flame, Resurrect],
   probabilities = [0.2, 0.3, 0.4, 0.08, 0.02]
 ) => {
@@ -26,41 +32,9 @@ const randomPopulateHand = (
         return options[i];
       }
     }
+
+    return options[0]; // Fallback logic, will never reach this line
   });
 
   return [...hand];
 };
-
-const levelConfigs = {
-  1: {
-    playerStatsOverride: {},
-    enemyStatsOverride: {},
-
-    playerHandOverride: [],
-    enemyHandOverride: [],
-
-    playerEffectsOverride: [],
-    enemyEffectsOverride: [],
-  },
-
-  2: {
-    playerStatsOverride: {
-      maxHp: 45,
-      hp: 45,
-    },
-    enemyStatsOverride: {
-      maxHp: 45,
-      hp: 45,
-    },
-
-    playerHandOverride: randomPopulateHand(),
-    enemyHandOverride: randomPopulateHand(),
-
-    playerEffectsOverride: [],
-    enemyEffectsOverride: [],
-  },
-};
-
-const finalLevel = '2';
-
-export { levelConfigs, finalLevel };

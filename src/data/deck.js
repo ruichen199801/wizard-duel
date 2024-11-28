@@ -89,6 +89,8 @@ const levelDecks = {
   1: [...baseDeck],
 
   2: [...baseDeck, Flame, Flame, Resurrect, Resurrect],
+
+  3: [...baseDeck], // TODO: Add new cards
 };
 
 export const getDeckForLevel = (level = '1') => {
