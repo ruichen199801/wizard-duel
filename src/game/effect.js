@@ -1,6 +1,8 @@
 import {
   getTarget,
   hasEffect,
+  hasSameEffect,
+  getEffects,
   removeEffects,
   selectEffectsByGroup,
   removeEffectsByGroup,
@@ -99,6 +101,8 @@ const resurrect = () => {};
 
 const freeze = () => {};
 
+const aura = () => {};
+
 const effectHandlers = {
   [EffectType.damage]: damage,
   [EffectType.heal]: heal,
@@ -112,9 +116,10 @@ const effectHandlers = {
   [EffectType.preventDmg]: preventDmg,
   [EffectType.resurrect]: resurrect,
   [EffectType.freeze]: freeze,
+  [EffectType.aura]: aura,
 };
 
-export const applyEffect = (G, ctx, effect) => {
+export const applyEffect = (G, ctx, effect, shouldProcessEoT = true) => {
   const handler = effectHandlers[effect.type];
 
   if (!handler) {
@@ -124,15 +129,29 @@ export const applyEffect = (G, ctx, effect) => {
 
   const target = getTarget(ctx.currentPlayer, effect.target);
 
+  // If you are frozen, the card you play this turn has no effect.
   if (hasEffect(G, ctx.currentPlayer, EffectType.freeze)) {
     removeEffects(G, ctx.currentPlayer, EffectType.freeze);
+    executeEndOfTurnEffects(G, ctx, shouldProcessEoT);
     return;
   }
 
+  // If you already have an active non-stackable effect, playing the same card will have no effect.
   if (
     EffectGroup.unique.some((e) => e === effect.type) &&
     hasEffect(G, target, effect.type)
   ) {
+    executeEndOfTurnEffects(G, ctx, shouldProcessEoT);
+    return;
+  }
+
+  // If an active aura effect with an exact match is found, playing the same card will have no effect.
+  // It is not put under `unique` group because multiple different `aura` type effects can co-exist.
+  if (
+    effect.type === EffectType.aura &&
+    hasSameEffect(G, ctx.currentPlayer, effect)
+  ) {
+    executeEndOfTurnEffects(G, ctx, shouldProcessEoT);
     return;
   }
 
@@ -141,4 +160,19 @@ export const applyEffect = (G, ctx, effect) => {
   if (effect.duration === EffectDuration.enduring) {
     G.players[target].effects.push(effect);
   }
+
+  executeEndOfTurnEffects(G, ctx, shouldProcessEoT);
+};
+
+const executeEndOfTurnEffects = (G, ctx, shouldProcessEoT) => {
+  if (shouldProcessEoT && hasEffect(G, ctx.currentPlayer, EffectType.aura)) {
+    const auraEffects = getEffects(G, ctx.currentPlayer, EffectType.aura);
+
+    auraEffects.forEach((auraEffect) => {
+      auraEffect.effectsToExecute.forEach((e) => {
+        applyEffect(G, ctx, e, false); // Skip the aura check to avoid recursive hell
+      });
+    });
+  }
+  // Add more end of turn effect types here
 };

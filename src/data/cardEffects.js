@@ -11,6 +11,7 @@ export const EffectType = {
   preventDmg: 'preventDmg',
   resurrect: 'resurrect',
   freeze: 'freeze',
+  aura: 'aura',
 };
 
 export const EffectDuration = {
@@ -37,6 +38,7 @@ export const EffectGroup = {
     EffectType.doubleDmg,
     EffectType.preventDmg,
     EffectType.resurrect,
+    EffectType.aura,
   ],
 
   // Stackable negative effects applied to the opponent.
@@ -197,4 +199,18 @@ export const freeze = {
   target: EffectTarget.opponent,
   group: EffectGroupName.debuff,
   text: 'Next Card Invalidated',
+};
+
+/**
+ * Trigger positive instant effect(s) at the end of your turn.
+ */
+export const aura = (effectsToExecute, text) => {
+  return {
+    type: EffectType.aura,
+    duration: EffectDuration.enduring,
+    target: EffectTarget.self,
+    group: EffectGroupName.buff,
+    text,
+    effectsToExecute,
+  };
 };

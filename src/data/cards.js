@@ -11,6 +11,7 @@ import {
   preventDmg,
   resurrect,
   freeze,
+  aura,
 } from './cardEffects';
 
 // READ-ONLY CARDS
@@ -181,5 +182,5 @@ export const Aura = {
   id: '23',
   name: 'Aura',
   text: '+3 HP per Turn',
-  effects: [], // TODO
+  effects: [aura([heal(3)], '+3 HP per Turn')],
 };
