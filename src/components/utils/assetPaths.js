@@ -34,6 +34,7 @@ const icon = {
   help: `${imgPrefix}/icons/help.svg`,
   buff: `${imgPrefix}/icons/buff.svg`,
   debuff: `${imgPrefix}/icons/debuff.svg`,
+  ice: `${imgPrefix}/icons/ice.svg`,
 };
 
 const cardFront = (cardId) => `${cardPrefix}/front/${cardId}.svg`;
