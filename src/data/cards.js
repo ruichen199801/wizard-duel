@@ -38,23 +38,23 @@ export const Fireball3 = {
   effects: [damage(9)],
 };
 
-export const Freeze1 = {
+export const Frost1 = {
   id: '3',
-  name: 'Freeze',
+  name: 'Frost',
   text: 'Damage 4',
   effects: [damage(4)],
 };
 
-export const Freeze2 = {
+export const Frost2 = {
   id: '4',
-  name: 'Freeze+',
+  name: 'Frost+',
   text: 'Damage 6',
   effects: [damage(6)],
 };
 
-export const Freeze3 = {
+export const Frost3 = {
   id: '5',
-  name: 'Freeze++',
+  name: 'Frost++',
   text: 'Damage 8',
   effects: [damage(8)],
 };
