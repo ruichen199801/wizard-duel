@@ -99,3 +99,10 @@ export const undoEffect = (G, target, { type, value = 0 }) => {
       return;
   }
 };
+
+/**
+ * Evaluates whether an effect should be executed based on a given probability.
+ */
+export const getChanceEffect = (chance) => {
+  return Math.random() < chance;
+};

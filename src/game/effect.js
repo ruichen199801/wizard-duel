@@ -7,31 +7,41 @@ import {
   selectEffectsByGroup,
   removeEffectsByGroup,
   undoEffect,
+  getChanceEffect,
 } from './effectUtils';
 import {
   EffectType,
   EffectDuration,
   EffectGroupName,
   EffectGroup,
+  freeze as freezeEffect,
 } from '../data/cardEffects';
 
 const damage = (G, target, { value = 0 }) => {
   const player = target === '0' ? '1' : '0';
 
+  // Calculate base damage: card damage + player's attack - target's defense.
   value = value + G.players[player].atk - G.players[target].def;
 
+  // Check if the attacking player has double damage effect.
   if (hasEffect(G, player, EffectType.doubleDmg)) {
     value *= 2;
   }
   removeEffects(G, player, EffectType.doubleDmg);
 
+  // Check if the target has prevent damage effect.
   if (hasEffect(G, target, EffectType.preventDmg)) {
     value = 0;
   }
   removeEffects(G, target, EffectType.preventDmg);
 
+  // Make sure damage value is non-negative.
   value = Math.max(value, 0);
 
+  // Apply level-specific impact to the damage and side effects if any.
+  value = applyDamageLevelEffects(G, target, value);
+
+  // Check if the target has resurrect effect.
   if (
     G.players[target].hp <= value &&
     hasEffect(G, target, EffectType.resurrect)
@@ -41,6 +51,7 @@ const damage = (G, target, { value = 0 }) => {
     return;
   }
 
+  // Apply the final damage to the target's HP.
   G.players[target].hp -= value;
 };
 
@@ -175,4 +186,17 @@ const executeEndOfTurnEffects = (G, ctx, shouldProcessEoT) => {
     });
   }
   // Add more end of turn effect types here
+};
+
+const applyDamageLevelEffects = (G, target, damage) => {
+  switch (G.level) {
+    case '3':
+      if (getChanceEffect(0.2)) {
+        G.players[target].effects.push(freezeEffect);
+      }
+      return damage;
+
+    default:
+      return damage;
+  }
 };
