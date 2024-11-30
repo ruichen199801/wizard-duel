@@ -45,8 +45,25 @@ const levelConfigs = {
     playerEffectsOverride: [],
     enemyEffectsOverride: [],
   },
+
+  4: {
+    playerStatsOverride: {
+      maxHp: 55,
+      hp: 55,
+    },
+    enemyStatsOverride: {
+      maxHp: 55,
+      hp: 55,
+    },
+
+    playerHandOverride: [],
+    enemyHandOverride: [],
+
+    playerEffectsOverride: [],
+    enemyEffectsOverride: [],
+  },
 };
 
-const finalLevel = '3';
+const finalLevel = '4';
 
 export { levelConfigs, finalLevel };

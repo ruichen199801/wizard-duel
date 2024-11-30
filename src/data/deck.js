@@ -54,6 +54,8 @@ const levelDecks = {
   2: [...baseDeck, Flame, Resurrect],
 
   3: [...baseDeck, Flame, Resurrect, Petrify, Aura],
+
+  4: [...baseDeck, Flame, Resurrect, Petrify, Aura], // TODO: Implement level 4
 };
 
 export const getDeckForLevel = (level = '1') => {
