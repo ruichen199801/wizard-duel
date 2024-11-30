@@ -16,6 +16,8 @@ import {
   EffectGroup,
   freeze as freezeEffect,
 } from '../data/cardEffects';
+import { getDeckForLevel } from '../data/deck';
+import { shuffle } from './gameUtils';
 
 const damage = (G, target, { value = 0 }) => {
   const player = target === '0' ? '1' : '0';
@@ -114,6 +116,26 @@ const freeze = () => {};
 
 const aura = () => {};
 
+const replaceHand = (G, target) => {
+  const hand = G.players[target].hand;
+  let skippedCurrent = false; // Skip the current `Sandstorm` card (once)
+
+  for (let i = 0; i < hand.length; i++) {
+    if (hand[i].id === '24') {
+      if (!skippedCurrent) {
+        skippedCurrent = true;
+        continue;
+      }
+    }
+    if (G.deck.length === 0) {
+      console.log('Deck is empty, shuffling...');
+      G.deck = shuffle([...getDeckForLevel(G.level)]);
+    }
+
+    hand[i] = G.deck.pop();
+  }
+};
+
 const effectHandlers = {
   [EffectType.damage]: damage,
   [EffectType.heal]: heal,
@@ -128,6 +150,7 @@ const effectHandlers = {
   [EffectType.resurrect]: resurrect,
   [EffectType.freeze]: freeze,
   [EffectType.aura]: aura,
+  [EffectType.replaceHand]: replaceHand,
 };
 
 export const applyEffect = (G, ctx, effect, shouldProcessEoT = true) => {

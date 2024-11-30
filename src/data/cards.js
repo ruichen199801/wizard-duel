@@ -12,6 +12,7 @@ import {
   resurrect,
   freeze,
   aura,
+  replaceHand,
 } from './cardEffects';
 
 // READ-ONLY CARDS
@@ -183,4 +184,11 @@ export const Aura = {
   name: 'Aura',
   text: '+3 HP per Turn',
   effects: [aura([heal(3)], '+3 HP per Turn')],
+};
+
+export const Sandstorm = {
+  id: '24',
+  name: 'Sandstorm',
+  text: 'Replace Hand',
+  effects: [replaceHand],
 };
