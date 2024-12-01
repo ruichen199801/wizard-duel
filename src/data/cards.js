@@ -231,3 +231,43 @@ export const Sandstorm = {
   effects: [replaceHand],
   keywords: [],
 };
+
+export const Wish1 = {
+  id: '25',
+  name: 'Wish',
+  text: 'Changes Effect Each Turn!',
+  effects: [],
+  keywords: [],
+};
+
+export const Wish2 = {
+  id: '26',
+  name: 'Wish',
+  text: 'Remove Buff and Freeze',
+  effects: [removeBuff, freeze],
+  keywords: [CardKeyword.effect],
+};
+
+export const Wish3 = {
+  id: '27',
+  name: 'Wish',
+  text: '+4 Attack and +4 Shield',
+  effects: [buffAtk(4), buffDef(4)],
+  keywords: [CardKeyword.effect],
+};
+
+export const Wish4 = {
+  id: '28',
+  name: 'Wish',
+  text: '+16 HP and Remove Debuff',
+  effects: [heal(16), removeDebuff],
+  keywords: [CardKeyword.heal, CardKeyword.effect],
+};
+
+export const Wish5 = {
+  id: '29',
+  name: 'Wish',
+  text: 'Damage 20',
+  effects: [damage(20)],
+  keywords: [CardKeyword.damage],
+};

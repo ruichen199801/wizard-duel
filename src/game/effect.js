@@ -34,7 +34,7 @@ const damage = (G, target, { value = 0 }, ctx) => {
   }
   removeEffects(G, player, EffectType.doubleDmg);
 
-  // Apply level-specific impact to the damage and side effects if any.
+  // Apply level-specific side effects related to damage calculation.
   value = applyDamageLevelEffects(G, target, value, ctx);
   if (value === -1) {
     return; // Exit early so that prevent damage effect is not exhausted
