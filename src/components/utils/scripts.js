@@ -24,29 +24,27 @@ const getBattleStartCaption = (level = '1') => battleStartCaptions[level];
 
 const battleStartInstrutions = {
   1: {
-    intro: `Your journey as a budding wizard begins in the grand Royal City, where
+    intro: `Your journey as a budding wizard begins in the Royal City, where
       the Wise Scholar awaits to test your skill.`,
     levelRule: ``,
     outro: ``,
   },
 
   2: {
-    intro: `You step into the blazing Lava Plains, where you will face the 
-      Wild Firemancer's fiery wrath. `,
+    intro: `You step into the Lava Plains, where you will face the Wild Firemancer's fiery wrath. `,
     levelRule: `You'll begin with random fire cards in your hand. `,
     outro: `Burn or be burned!`,
   },
 
   3: {
-    intro: `On the frozen crest of Ice Crown, the Ice Queen commands the battlefield with 
-    her chilling power. `,
+    intro: `On the Ice Crown, the Ice Queen commands the battlefield with her chilling power. `,
     levelRule: `Every damage has a chance to freeze your enemy (invalidate their next card).`,
     outro: ``,
   },
 
   4: {
-    intro: `Lost in the shifting sands, you encounter the crafty Traveling Merchant. `,
-    levelRule: `Every attack has a chance to miss.`,
+    intro: `Deep in the Lost Desert, you encounter the crafty Traveling Merchant. `,
+    levelRule: `Disrupted by the desert wind, every attack has a chance to miss.`,
     outro: ``,
   },
 };

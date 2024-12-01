@@ -96,6 +96,8 @@ const cardAudio = (cardId) => `${audioPrefix}/${cardAudioType[cardId]}.mp3`;
 const click = `${audioPrefix}/click.mp3`;
 const victory = `${audioPrefix}/victory.mp3`;
 const defeat = `${audioPrefix}/defeat.mp3`;
+const miss = `${audioPrefix}/wind.mp3`; // reuse the wind sound effect
+const defrost = `${audioPrefix}/freeze.mp3`; // reuse the freeze sound effect
 
 // MUSIC FILES
 
@@ -153,6 +155,8 @@ export {
   click,
   victory,
   defeat,
+  miss,
+  defrost,
 
   // MUSIC FILES
   getMusicForLevel,

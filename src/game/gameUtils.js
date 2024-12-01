@@ -112,6 +112,8 @@ export const applyLevelOverride = (G) => {
 
     playerEffectsOverride,
     enemyEffectsOverride,
+
+    globalEffectsOverride,
   } = levelConfigs[G.level];
 
   for (let key in playerStatsOverride) {
@@ -134,4 +136,6 @@ export const applyLevelOverride = (G) => {
 
   G.players[0].effects.push(...playerEffectsOverride);
   G.players[1].effects.push(...enemyEffectsOverride);
+
+  G.globalEffects.push(...globalEffectsOverride);
 };

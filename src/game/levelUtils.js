@@ -38,3 +38,14 @@ export const randomPopulateHand = (
 
   return [...hand];
 };
+
+export const generateAttackOutcomes = (
+  numTurns = 50,
+  missProbability = 0.2
+) => {
+  const outcomes = [];
+  for (let i = 0; i < numTurns; i++) {
+    outcomes.push(Math.random() < missProbability);
+  }
+  return outcomes;
+};

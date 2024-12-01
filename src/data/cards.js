@@ -15,6 +15,20 @@ import {
   replaceHand,
 } from './cardEffects';
 
+/**
+ * Defines keywords used by the frontend to execute logic based on card categories.
+ */
+export const CardKeyword = {
+  // Cards that deal direct damage to your opponent
+  damage: 'damage',
+
+  // Cards that restore your HP
+  heal: 'heal',
+
+  // Cards that impact you or your opponent's active effects
+  effect: 'effect',
+};
+
 // READ-ONLY CARDS
 // Card name and text added here only for logging purpose
 
@@ -23,6 +37,7 @@ export const Fireball1 = {
   name: 'Fireball',
   text: 'Damage 3',
   effects: [damage(3)],
+  keywords: [CardKeyword.damage],
 };
 
 export const Fireball2 = {
@@ -30,6 +45,7 @@ export const Fireball2 = {
   name: 'Fireball+',
   text: 'Damage 5',
   effects: [damage(5)],
+  keywords: [CardKeyword.damage],
 };
 
 export const Fireball3 = {
@@ -37,6 +53,7 @@ export const Fireball3 = {
   name: 'Fireball++',
   text: 'Damage 9',
   effects: [damage(9)],
+  keywords: [CardKeyword.damage],
 };
 
 export const Frost1 = {
@@ -44,6 +61,7 @@ export const Frost1 = {
   name: 'Frost',
   text: 'Damage 4',
   effects: [damage(4)],
+  keywords: [CardKeyword.damage],
 };
 
 export const Frost2 = {
@@ -51,6 +69,7 @@ export const Frost2 = {
   name: 'Frost+',
   text: 'Damage 6',
   effects: [damage(6)],
+  keywords: [CardKeyword.damage],
 };
 
 export const Frost3 = {
@@ -58,6 +77,7 @@ export const Frost3 = {
   name: 'Frost++',
   text: 'Damage 8',
   effects: [damage(8)],
+  keywords: [CardKeyword.damage],
 };
 
 export const Thunder1 = {
@@ -65,6 +85,7 @@ export const Thunder1 = {
   name: 'Thunder',
   text: 'Damage 7',
   effects: [damage(7)],
+  keywords: [CardKeyword.damage],
 };
 
 export const Thunder2 = {
@@ -72,6 +93,7 @@ export const Thunder2 = {
   name: 'Thunder+',
   text: 'Damage 12',
   effects: [damage(12)],
+  keywords: [CardKeyword.damage],
 };
 
 export const Thunder3 = {
@@ -79,6 +101,7 @@ export const Thunder3 = {
   name: 'Thunder++',
   text: 'Damage 18',
   effects: [damage(18)],
+  keywords: [CardKeyword.damage],
 };
 
 export const Heal1 = {
@@ -86,6 +109,7 @@ export const Heal1 = {
   name: 'Heal',
   text: '+5 HP',
   effects: [heal(5)],
+  keywords: [CardKeyword.heal],
 };
 
 export const Heal2 = {
@@ -93,6 +117,7 @@ export const Heal2 = {
   name: 'Heal+',
   text: '+10 HP',
   effects: [heal(10)],
+  keywords: [CardKeyword.heal],
 };
 
 export const Heal3 = {
@@ -100,6 +125,7 @@ export const Heal3 = {
   name: 'Heal++',
   text: '+15 HP',
   effects: [heal(15)],
+  keywords: [CardKeyword.heal],
 };
 
 export const Blessing = {
@@ -107,6 +133,7 @@ export const Blessing = {
   name: 'Blessing',
   text: '+3 Attack',
   effects: [buffAtk(3)],
+  keywords: [CardKeyword.effect],
 };
 
 export const Armor = {
@@ -114,6 +141,7 @@ export const Armor = {
   name: 'Armor',
   text: '+3 Shield',
   effects: [buffDef(3)],
+  keywords: [CardKeyword.effect],
 };
 
 export const Weaken = {
@@ -121,6 +149,7 @@ export const Weaken = {
   name: 'Weaken',
   text: 'Enemy -3 Attack',
   effects: [debuffAtk(3)],
+  keywords: [CardKeyword.effect],
 };
 
 export const Curse = {
@@ -128,6 +157,7 @@ export const Curse = {
   name: 'Curse',
   text: 'Enemy -3 Shield',
   effects: [debuffDef(3)],
+  keywords: [CardKeyword.effect],
 };
 
 export const Purify = {
@@ -135,6 +165,7 @@ export const Purify = {
   name: 'Purify',
   text: 'Remove Debuff',
   effects: [removeDebuff],
+  keywords: [CardKeyword.effect],
 };
 
 export const Dispel = {
@@ -142,6 +173,7 @@ export const Dispel = {
   name: 'Dispel',
   text: 'Remove Enemy Buff',
   effects: [removeBuff],
+  keywords: [CardKeyword.effect],
 };
 
 export const Enrage = {
@@ -149,6 +181,7 @@ export const Enrage = {
   name: 'Enrage',
   text: 'Next Damage x2',
   effects: [doubleDmg],
+  keywords: [CardKeyword.effect],
 };
 
 export const Block = {
@@ -156,6 +189,7 @@ export const Block = {
   name: 'Block',
   text: 'Prevent Next Damage',
   effects: [preventDmg],
+  keywords: [CardKeyword.effect],
 };
 
 export const Flame = {
@@ -163,6 +197,7 @@ export const Flame = {
   name: 'Flame',
   text: 'Damage 9 and +5 Attack',
   effects: [damage(9), buffAtk(5)],
+  keywords: [CardKeyword.damage, CardKeyword.effect],
 };
 
 export const Resurrect = {
@@ -170,6 +205,7 @@ export const Resurrect = {
   name: 'Resurrect',
   text: '+15 HP on Death',
   effects: [resurrect(15)],
+  keywords: [CardKeyword.heal, CardKeyword.effect],
 };
 
 export const Petrify = {
@@ -177,6 +213,7 @@ export const Petrify = {
   name: 'Petrify',
   text: 'Freeze Enemy 1 Turn',
   effects: [freeze],
+  keywords: [CardKeyword.effect],
 };
 
 export const Aura = {
@@ -184,6 +221,7 @@ export const Aura = {
   name: 'Aura',
   text: '+3 HP per Turn',
   effects: [aura([heal(3)], '+3 HP per Turn')],
+  keywords: [CardKeyword.heal, CardKeyword.effect],
 };
 
 export const Sandstorm = {
@@ -191,4 +229,5 @@ export const Sandstorm = {
   name: 'Sandstorm',
   text: 'Replace Hand',
   effects: [replaceHand],
+  keywords: [],
 };
