@@ -86,7 +86,7 @@ const cardAudioType = {
   22: 'freeze',
   23: 'heal',
   24: 'wind',
-  25: 'magic', // not used in the game
+  25: 'magic', 
   26: 'magic',
   27: 'magic',
   28: 'magic',
