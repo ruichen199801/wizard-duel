@@ -243,7 +243,7 @@ export const Wish1 = {
 export const Wish2 = {
   id: '26',
   name: 'Wish',
-  text: 'Remove Buff and Freeze',
+  text: 'Remove Buff and Freeze 1 Turn',
   effects: [removeBuff, freeze],
   keywords: [CardKeyword.effect],
 };
@@ -258,10 +258,10 @@ export const Wish3 = {
 
 export const Wish4 = {
   id: '28',
-  name: 'Wish',
-  text: '+16 HP and Remove Debuff',
-  effects: [heal(16), removeDebuff],
-  keywords: [CardKeyword.heal, CardKeyword.effect],
+  name: 'Wish',src/data/cards.js
+  text: 'Remove Debuff and +16 HP',
+  effects: [removeDebuff, heal(16)],
+  keywords: [CardKeyword.effect, CardKeyword.heal],
 };
 
 export const Wish5 = {
