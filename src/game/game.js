@@ -43,6 +43,8 @@ const setupData = () => {
 const drawCard = ({ G, ctx }) => {
   if (ctx.turn <= 2) return;
 
+  applyHandEffects(G, ctx);
+
   const hand = G.players[ctx.currentPlayer].hand;
   if (hand.length >= 5 || G.deck.length === 0) return INVALID_MOVE;
 
@@ -52,8 +54,6 @@ const drawCard = ({ G, ctx }) => {
     console.log('Deck is empty, shuffling...');
     G.deck = shuffle([...getDeckForLevel(G.level)]);
   }
-
-  applyHandEffects(G, ctx);
 };
 
 const playCard = ({ G, ctx }, index) => {
