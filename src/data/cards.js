@@ -258,7 +258,7 @@ export const Wish3 = {
 
 export const Wish4 = {
   id: '28',
-  name: 'Wish',src/data/cards.js
+  name: 'Wish',
   text: 'Remove Debuff and +16 HP',
   effects: [removeDebuff, heal(16)],
   keywords: [CardKeyword.effect, CardKeyword.heal],
