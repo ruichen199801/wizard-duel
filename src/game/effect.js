@@ -8,12 +8,12 @@ import {
   removeEffectsByGroup,
   undoEffect,
   getChanceEffect,
+  isUnique,
 } from './effectUtils';
 import {
   EffectType,
   EffectDuration,
   EffectGroupName,
-  EffectGroup,
   freeze as freezeEffect,
 } from '../data/cardEffects';
 import { getDeckForLevel } from '../data/deck';
@@ -139,6 +139,84 @@ const replaceHand = (G, target) => {
   }
 };
 
+const stealBuff = (G, target) => {
+  const opponentBuffs = selectEffectsByGroup(G, target, EffectGroupName.buff);
+  const playerBuffs = selectEffectsByGroup(
+    G,
+    target === '0' ? '1' : '0',
+    EffectGroupName.buff
+  );
+
+  // Helper function to check if a buff is a duplicate unique or aura effect
+  const isDuplicateBuff = (playerBuff, opponentBuff) => {
+    const isSameUniqueEffect =
+      playerBuff.type === opponentBuff.type && isUnique(playerBuff);
+    const isSameAuraEffect =
+      playerBuff.type === EffectType.aura &&
+      JSON.stringify(playerBuff) === JSON.stringify(opponentBuff);
+
+    return isSameUniqueEffect || isSameAuraEffect;
+  };
+
+  // Find candidate buffs to steal
+  let candidateBuffs = opponentBuffs.filter((opponentBuff) => {
+    return !playerBuffs.some((playerBuff) =>
+      isDuplicateBuff(playerBuff, opponentBuff)
+    );
+  });
+
+  // Try alternate conditions if no candidates found
+  if (candidateBuffs.length === 0) {
+    candidateBuffs = opponentBuffs.filter((opponentBuff) => {
+      return !playerBuffs.some(
+        (playerBuff) =>
+          playerBuff.type === opponentBuff.type && isUnique(playerBuff)
+      );
+    });
+  }
+  if (candidateBuffs.length === 0) {
+    candidateBuffs = opponentBuffs.filter((opponentBuff) => {
+      return !playerBuffs.some(
+        (playerBuff) =>
+          playerBuff.type === EffectType.aura &&
+          JSON.stringify(playerBuff) === JSON.stringify(opponentBuff)
+      );
+    });
+  }
+
+  // Exit if still no candidates
+  if (candidateBuffs.length === 0) {
+    console.log('x');
+    return;
+  }
+
+  // Pick a random effect from the list
+  const randomIndex = Math.floor(Math.random() * candidateBuffs.length);
+  const chosenBuff = candidateBuffs[randomIndex];
+
+  // Remove the chosen buff from the opponent's effect
+  const opponentEffects = G.players[target].effects;
+  const index = opponentEffects.findIndex(
+    (effect) => JSON.stringify(effect) === JSON.stringify(chosenBuff)
+  );
+  if (index !== -1) {
+    console.log(JSON.stringify(chosenBuff));
+    opponentEffects.splice(index, 1);
+  }
+
+  // Add the chosen buff to the player's effects if not already present
+
+  // Call apply effect
+  const playerEffects = G.players[target === '0' ? '1' : '0'].effects;
+  const alreadyExists = playerEffects.some(
+    (effect) => JSON.stringify(effect) === JSON.stringify(chosenBuff)
+  );
+  if (!alreadyExists) {
+    playerEffects.push({ ...chosenBuff });
+    // Not push, apply on them
+  }
+};
+
 const effectHandlers = {
   [EffectType.damage]: damage,
   [EffectType.heal]: heal,
@@ -154,6 +232,7 @@ const effectHandlers = {
   [EffectType.freeze]: freeze,
   [EffectType.aura]: aura,
   [EffectType.replaceHand]: replaceHand,
+  [EffectType.stealBuff]: stealBuff,
 };
 
 export const applyEffect = (G, ctx, effect, shouldProcessEoT = true) => {
@@ -173,17 +252,13 @@ export const applyEffect = (G, ctx, effect, shouldProcessEoT = true) => {
     return;
   }
 
-  // If you already have an active non-stackable effect, playing the same card will have no effect.
-  if (
-    EffectGroup.unique.some((e) => e === effect.type) &&
-    hasEffect(G, target, effect.type)
-  ) {
+  // If you already have a non-stackable effect, playing the same card will have no effect.
+  if (isUnique(effect) && hasEffect(G, target, effect.type)) {
     executeEndOfTurnEffects(G, ctx, shouldProcessEoT);
     return;
   }
 
-  // If an active aura effect with an exact match is found, playing the same card will have no effect.
-  // It is not put under `unique` group because multiple different `aura` type effects can co-exist.
+  // If you already have an existing aura effect, playing the same card will have no effect.
   if (
     effect.type === EffectType.aura &&
     hasSameEffect(G, ctx.currentPlayer, effect)

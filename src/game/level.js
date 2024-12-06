@@ -1,4 +1,12 @@
 import { randomPopulateHand, generateAttackOutcomes } from './levelUtils';
+import {
+  Ambush,
+  Resurrect,
+  Weaken,
+  Block,
+  Aura,
+  Blessing,
+} from '../data/cards';
 
 const levelConfigs = {
   1: {
@@ -85,8 +93,8 @@ const levelConfigs = {
       hp: 60,
     },
 
-    playerHandOverride: [],
-    enemyHandOverride: [],
+    playerHandOverride: [Ambush, Ambush, Ambush, Block, Aura],
+    enemyHandOverride: [Block, Block, Aura, Resurrect, Blessing],
 
     playerEffectsOverride: [],
     enemyEffectsOverride: [],

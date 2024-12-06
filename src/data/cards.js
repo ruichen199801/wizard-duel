@@ -13,6 +13,7 @@ import {
   freeze,
   aura,
   replaceHand,
+  stealBuff,
 } from './cardEffects';
 
 /**
@@ -258,7 +259,7 @@ export const Wish3 = {
 
 export const Wish4 = {
   id: '28',
-  name: 'Wish',src/data/cards.js
+  name: 'Wish',
   text: 'Remove Debuff and +16 HP',
   effects: [removeDebuff, heal(16)],
   keywords: [CardKeyword.effect, CardKeyword.heal],
@@ -270,4 +271,12 @@ export const Wish5 = {
   text: 'Damage 20',
   effects: [damage(20)],
   keywords: [CardKeyword.damage],
+};
+
+export const Ambush = {
+  id: '30',
+  name: 'Ambush',
+  text: 'Steal 1 Buff and Damage 12',
+  effects: [stealBuff, damage(12)],
+  keywords: [CardKeyword.effect, CardKeyword.damage],
 };

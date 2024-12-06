@@ -16,7 +16,7 @@ import {
 } from './gameUtils';
 
 const setupData = () => {
-  let level = getCurrentLevel();
+  let level = '5';
   console.log(`Current level is ${level}`);
 
   let G = {

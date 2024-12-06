@@ -13,6 +13,7 @@ export const EffectType = {
   freeze: 'freeze',
   aura: 'aura',
   replaceHand: 'replaceHand',
+  stealBuff: 'stealBuff',
 };
 
 export const EffectDuration = {
@@ -223,4 +224,13 @@ export const replaceHand = {
   type: EffectType.replaceHand,
   duration: EffectDuration.instant,
   target: EffectTarget.self,
+};
+
+/**
+ * Removes a random buff effect from your opponent and applies it on you.
+ */
+export const stealBuff = {
+  type: EffectType.stealBuff,
+  duration: EffectDuration.instant,
+  target: EffectTarget.opponent,
 };
