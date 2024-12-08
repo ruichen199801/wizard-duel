@@ -14,6 +14,7 @@ export const EffectType = {
   aura: 'aura',
   replaceHand: 'replaceHand',
   swapHp: 'swapHp',
+  stealBuff: 'stealBuff',
 };
 
 export const EffectDuration = {
@@ -233,4 +234,13 @@ export const swapHp = {
   type: EffectType.swapHp,
   duration: EffectDuration.instant,
   target: EffectTarget.self,
+};
+
+/**
+ * Removes a random buff effect from your opponent and applies it on you.
+ */
+export const stealBuff = {
+  type: EffectType.stealBuff,
+  duration: EffectDuration.instant,
+  target: EffectTarget.opponent,
 };

@@ -14,6 +14,7 @@ import {
   aura,
   replaceHand,
   swapHp,
+  stealBuff,
 } from './cardEffects';
 
 /**
@@ -279,4 +280,12 @@ export const Mutate = {
   text: 'Swap HP',
   effects: [swapHp],
   keywords: [],
+};
+
+export const Ambush = {
+  id: '31',
+  name: 'Ambush',
+  text: 'Steal 1 Buff',
+  effects: [stealBuff],
+  keywords: [CardKeyword.effect],
 };
