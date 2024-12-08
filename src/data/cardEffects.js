@@ -13,6 +13,7 @@ export const EffectType = {
   freeze: 'freeze',
   aura: 'aura',
   replaceHand: 'replaceHand',
+  swapHp: 'swapHp',
 };
 
 export const EffectDuration = {
@@ -32,7 +33,7 @@ export const EffectGroupName = {
 };
 
 export const EffectGroup = {
-  // Stackable positive effects applied to the player.
+  // Positive effects applied to the player.
   buff: [
     EffectType.buffAtk,
     EffectType.buffDef,
@@ -42,7 +43,7 @@ export const EffectGroup = {
     EffectType.aura,
   ],
 
-  // Stackable negative effects applied to the opponent.
+  // Negative effects applied to the opponent.
   debuff: [EffectType.debuffAtk, EffectType.debuffDef, EffectType.freeze],
 
   // Only one effect of the same type can exist at a time. Can be either buff or debuff.
@@ -221,6 +222,15 @@ export const aura = (effectsToExecute, text) => {
  */
 export const replaceHand = {
   type: EffectType.replaceHand,
+  duration: EffectDuration.instant,
+  target: EffectTarget.self,
+};
+
+/**
+ * Swap your current HP with your opponent's.
+ */
+export const swapHp = {
+  type: EffectType.swapHp,
   duration: EffectDuration.instant,
   target: EffectTarget.self,
 };

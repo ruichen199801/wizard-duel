@@ -13,6 +13,7 @@ import {
   freeze,
   aura,
   replaceHand,
+  swapHp,
 } from './cardEffects';
 
 /**
@@ -270,4 +271,12 @@ export const Wish5 = {
   text: 'Damage 12',
   effects: [damage(12)],
   keywords: [CardKeyword.damage],
+};
+
+export const Mutate = {
+  id: '30',
+  name: 'Mutate',
+  text: 'Swap HP',
+  effects: [swapHp],
+  keywords: [],
 };

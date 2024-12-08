@@ -94,8 +94,8 @@ const cardAudioType = {
   27: 'magic',
   28: 'magic',
   29: 'magic',
-  30: 'arrow',
-  31: 'magic',
+  30: 'magic',
+  31: 'arrow',
 };
 const cardAudio = (cardId) => `${audioPrefix}/${cardAudioType[cardId]}.mp3`;
 const click = `${audioPrefix}/click.mp3`;

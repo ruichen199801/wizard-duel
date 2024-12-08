@@ -139,6 +139,13 @@ const replaceHand = (G, target) => {
   }
 };
 
+const swapHp = (G, target) => {
+  const opponent = target === '0' ? '1' : '0';
+  const temp = G.players[target].hp;
+  G.players[target].hp = G.players[opponent].hp;
+  G.players[opponent].hp = temp;
+};
+
 const effectHandlers = {
   [EffectType.damage]: damage,
   [EffectType.heal]: heal,
@@ -154,6 +161,7 @@ const effectHandlers = {
   [EffectType.freeze]: freeze,
   [EffectType.aura]: aura,
   [EffectType.replaceHand]: replaceHand,
+  [EffectType.swapHp]: swapHp,
 };
 
 export const applyEffect = (G, ctx, effect, shouldProcessEoT = true) => {
