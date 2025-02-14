@@ -137,6 +137,12 @@ const replaceHand = (G, target) => {
 
     hand[i] = G.deck.pop();
   }
+
+  // Handle the edge case where deck has less than 2 cards after playing `Sandstorm`
+  if (G.deck.length <= 1) {
+    console.log('Deck is almost empty, shuffling...');
+    G.deck = shuffle([...getDeckForLevel(G.level)]);
+  }
 };
 
 const swapHp = (G, target) => {

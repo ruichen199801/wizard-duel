@@ -53,7 +53,7 @@ const battleStartInstrutions = {
 
   5: {
     intro: `Deep in the Misty Woods, the Forest Ranger stalks your every move. `,
-    levelRule: `Instead of drawing, you’ll pick your cards from three options to find your way through the forest.`,
+    levelRule: `You’ll pick your card from two options to find your way through the forest.`,
     outro: ``,
   },
 };
