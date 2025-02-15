@@ -72,6 +72,19 @@ const levelDecks = {
     Mutate,
     Ambush,
   ],
+
+  // TODO - Implement level 6
+  6: [
+    ...baseDeck,
+    Flame,
+    Resurrect,
+    Petrify,
+    Aura,
+    Sandstorm,
+    Wish1,
+    Mutate,
+    Ambush,
+  ],
 };
 
 export const getDeckForLevel = (level = '1') => {

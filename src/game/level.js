@@ -5,7 +5,7 @@ export const DrawMode = {
   select: 'select',
 };
 
-export const finalLevel = '5';
+export const finalLevel = '6';
 
 export const maxTurn = 50;
 
@@ -118,6 +118,29 @@ export const levelConfigs = {
     globalEffects: [
       {
         drawMode: DrawMode.select,
+      },
+    ],
+  },
+
+  6: {
+    playerStatsOverride: {
+      maxHp: 55,
+      hp: 55,
+    },
+    enemyStatsOverride: {
+      maxHp: 55,
+      hp: 55,
+    },
+
+    playerHandOverride: [],
+    enemyHandOverride: [],
+
+    playerEffectsOverride: [],
+    enemyEffectsOverride: [],
+
+    globalEffects: [
+      {
+        drawMode: DrawMode.draw,
       },
     ],
   },

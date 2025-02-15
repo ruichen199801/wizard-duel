@@ -49,7 +49,7 @@ export const randomPopulateHand = (
  */
 export const generateAttackOutcomes = (
   numTurns = maxTurn,
-  missProbability = 0.2
+  missProbability = 0.15
 ) => {
   const outcomes = [];
   for (let i = 0; i < numTurns; i++) {

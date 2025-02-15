@@ -14,6 +14,7 @@ const avatarPaths = {
   3: `${avatarPrefix}/ice-queen.svg`,
   4: `${avatarPrefix}/traveling-merchant.svg`,
   5: `${avatarPrefix}/forest-ranger.svg`,
+  6: `${avatarPrefix}/murloc-oracle.svg`,
 };
 const getAvatarForLevel = (playerId, level = '1') => {
   return playerId === '0' ? avatarPaths[0] : avatarPaths[level];
@@ -25,6 +26,7 @@ const locationPaths = {
   3: `${locationPrefix}/snow-mountain.svg`,
   4: `${locationPrefix}/desert.svg`,
   5: `${locationPrefix}/forest.svg`,
+  6: `${locationPrefix}/ocean.svg`,
 };
 const getLocationForLevel = (level = '1') => locationPaths[level];
 
@@ -47,7 +49,7 @@ const cardPlaceholder = (playerId) =>
   `${cardPrefix}/placeholder/${playerId}.svg`;
 const cardPile = `${cardPrefix}/pile.svg`;
 
-const cardCount = 32; // Increment this when new cards are added
+const cardCount = 34; // Increment this when new cards are added
 const cardFronts = Array.from(
   { length: cardCount },
   (_, cardId) => `${cardPrefix}/front/${cardId}.svg`
@@ -58,6 +60,7 @@ const nextLevelCards = {
   2: [cardFront('22'), cardFront('23')],
   3: [cardFront('24'), cardFront('25')],
   4: [cardFront('30'), cardFront('31')],
+  5: [cardFront('32'), cardFront('33')],
 };
 const getNextCardsForLevel = (level = '1') => nextLevelCards[level];
 
@@ -90,12 +93,14 @@ const cardAudioType = {
   23: 'heal',
   24: 'wind',
   25: 'magic', 
-  26: 'magic',
-  27: 'magic',
-  28: 'magic',
-  29: 'magic',
+  26: 'freeze',
+  27: 'sword',
+  28: 'heal',
+  29: 'fireball',
   30: 'magic',
   31: 'arrow',
+  32: 'waves',
+  33: 'waves',
 };
 const cardAudio = (cardId) => `${audioPrefix}/${cardAudioType[cardId]}.mp3`;
 const click = `${audioPrefix}/click.mp3`;
@@ -112,6 +117,7 @@ const musicPaths = {
   3: `${musicPrefix}/ice-crown.mp3`,
   4: `${musicPrefix}/lost-desert.mp3`,
   5: `${musicPrefix}/misty-woods.mp3`,
+  6: `${musicPrefix}/coral-bay.mp3`,
 };
 const getMusicForLevel = (level = '1') => musicPaths[level];
 
@@ -142,6 +148,7 @@ const AUDIO = [
   `${audioPrefix}/magic.mp3`,
   `${audioPrefix}/wind.mp3`,
   `${audioPrefix}/arrow.mp3`,
+  `${audioPrefix}/waves.mp3`,
 ];
 const MUSIC = [...Object.values(musicPaths)];
 
