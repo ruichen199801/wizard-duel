@@ -79,7 +79,7 @@ const MainMenu = () => {
       <CardGalleryModal
         showCardGallery={showCardGallery}
         setShowCardGallery={setShowCardGallery}
-        cardImages={cardFronts}
+        cardImages={cardFronts.filter((_, cardId) => cardId !== 25)} // Exclude the first Wish card
         playAudio={playAudio}
       />
     </div>
