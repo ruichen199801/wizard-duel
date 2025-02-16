@@ -31,7 +31,7 @@ const setupData = () => {
 
     level: level,
 
-    globalEffects: [],
+    globalEffects: {},
   };
 
   applyLevelOverride(G);

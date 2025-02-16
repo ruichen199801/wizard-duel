@@ -20,11 +20,10 @@ export const levelConfigs = {
     playerEffectsOverride: [],
     enemyEffectsOverride: [],
 
-    globalEffects: [
-      {
-        drawMode: DrawMode.draw,
-      },
-    ],
+    globalEffects: {
+      drawMode: DrawMode.draw,
+      showEnemyHand: false,
+    },
   },
 
   2: {
@@ -43,11 +42,10 @@ export const levelConfigs = {
     playerEffectsOverride: [],
     enemyEffectsOverride: [],
 
-    globalEffects: [
-      {
-        drawMode: DrawMode.draw,
-      },
-    ],
+    globalEffects: {
+      drawMode: DrawMode.draw,
+      showEnemyHand: false,
+    },
   },
 
   3: {
@@ -66,11 +64,10 @@ export const levelConfigs = {
     playerEffectsOverride: [],
     enemyEffectsOverride: [],
 
-    globalEffects: [
-      {
-        drawMode: DrawMode.draw,
-      },
-    ],
+    globalEffects: {
+      drawMode: DrawMode.draw,
+      showEnemyHand: false,
+    },
   },
 
   4: {
@@ -89,14 +86,11 @@ export const levelConfigs = {
     playerEffectsOverride: [],
     enemyEffectsOverride: [],
 
-    globalEffects: [
-      {
-        drawMode: DrawMode.draw,
-      },
-      {
-        shouldMiss: generateAttackOutcomes(),
-      },
-    ],
+    globalEffects: {
+      drawMode: DrawMode.draw,
+      showEnemyHand: false,
+      shouldMiss: generateAttackOutcomes(),
+    },
   },
 
   5: {
@@ -115,11 +109,10 @@ export const levelConfigs = {
     playerEffectsOverride: [],
     enemyEffectsOverride: [],
 
-    globalEffects: [
-      {
-        drawMode: DrawMode.select,
-      },
-    ],
+    globalEffects: {
+      drawMode: DrawMode.select,
+      showEnemyHand: false,
+    },
   },
 
   6: {
@@ -138,10 +131,9 @@ export const levelConfigs = {
     playerEffectsOverride: [],
     enemyEffectsOverride: [],
 
-    globalEffects: [
-      {
-        drawMode: DrawMode.draw,
-      },
-    ],
+    globalEffects: {
+      drawMode: DrawMode.draw,
+      showEnemyHand: false,
+    },
   },
 };

@@ -152,7 +152,7 @@ const swapHp = (G, target) => {
   G.players[opponent].hp = temp;
 };
 
-const stealBuff = (G, target, ctx) => {
+const stealBuff = (G, target, effect, ctx) => {
   const opponentBuffs = selectEffectsByGroup(G, target, EffectGroupName.buff);
   if (opponentBuffs.length === 0) {
     return;
@@ -182,6 +182,12 @@ const stealBuff = (G, target, ctx) => {
   }
 };
 
+const showEnemyHand = (G, target, effect, ctx) => {
+  if (ctx.currentPlayer === '0') {
+    G.globalEffects.showEnemyHand = true;
+  }
+};
+
 const effectHandlers = {
   [EffectType.damage]: damage,
   [EffectType.heal]: heal,
@@ -199,6 +205,7 @@ const effectHandlers = {
   [EffectType.replaceHand]: replaceHand,
   [EffectType.swapHp]: swapHp,
   [EffectType.stealBuff]: stealBuff,
+  [EffectType.showEnemyHand]: showEnemyHand,
 };
 
 export const applyEffect = (G, ctx, effect, shouldProcessEoT = true) => {
@@ -264,8 +271,10 @@ const applyDamageLevelEffects = (G, target, damage, ctx) => {
       return damage;
 
     case '4':
-      const shouldMissObj = G.globalEffects.find((e) => e.shouldMiss);
-      if (shouldMissObj?.shouldMiss[ctx.turn - 1]) {
+      if (
+        'shouldMiss' in G.globalEffects &&
+        G.globalEffects.shouldMiss[ctx.turn - 1]
+      ) {
         return -1;
       } else {
         return damage;

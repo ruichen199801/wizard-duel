@@ -15,6 +15,7 @@ export const EffectType = {
   replaceHand: 'replaceHand',
   swapHp: 'swapHp',
   stealBuff: 'stealBuff',
+  showEnemyHand: 'showEnemyHand',
 };
 
 export const EffectDuration = {
@@ -241,6 +242,15 @@ export const swapHp = {
  */
 export const stealBuff = {
   type: EffectType.stealBuff,
+  duration: EffectDuration.instant,
+  target: EffectTarget.opponent,
+};
+
+/**
+ * Display enemy's hand for the rest of the game.
+ */
+export const showEnemyHand = {
+  type: EffectType.showEnemyHand,
   duration: EffectDuration.instant,
   target: EffectTarget.opponent,
 };

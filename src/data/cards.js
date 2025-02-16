@@ -15,6 +15,7 @@ import {
   replaceHand,
   swapHp,
   stealBuff,
+  showEnemyHand,
 } from './cardEffects';
 
 /**
@@ -294,7 +295,7 @@ export const Vision = {
   id: '32',
   name: 'Vision',
   text: 'Show Enemy Hand',
-  effects: [],
+  effects: [showEnemyHand],
   keywords: [],
 };
 

@@ -75,11 +75,14 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
       (e) => e.type === EffectType.freeze
     );
     const hasDamageKeyword = card.keywords.includes(CardKeyword.damage);
-    const shouldMissObj = G.globalEffects.find((e) => e.shouldMiss);
 
     if (hasFreezeEffect) {
       playAudio(defrost);
-    } else if (hasDamageKeyword && shouldMissObj?.shouldMiss[ctx.turn - 1]) {
+    } else if (
+      hasDamageKeyword &&
+      'shouldMiss' in G.globalEffects &&
+      G.globalEffects.shouldMiss[ctx.turn - 1]
+    ) {
       playAudio(miss);
     } else {
       playAudio(cardAudio(card.id));
@@ -98,11 +101,10 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
       await sleep(pauseInterval); // Interval between preview and draw
     }
 
-    const drawModeObj = G.globalEffects.find((e) => e.drawMode);
     if (
       ctx.turn > 1 &&
       ctx.currentPlayer === '0' &&
-      drawModeObj?.drawMode === DrawMode.select
+      G.globalEffects.drawMode === DrawMode.select
     ) {
       setSelectableCardsToDraw(getSelectableCardIds());
       setShowSelectCardModal(true);
@@ -231,7 +233,10 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
         </div>
 
         <div className='col-6'>
-          <PlayerHand player={G.players[1]} />
+          <PlayerHand
+            player={G.players[1]}
+            showEnemyHand={G.globalEffects.showEnemyHand}
+          />
         </div>
 
         <div className='col-3'>
@@ -272,7 +277,11 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
         </div>
 
         <div className='col-6'>
-          <PlayerHand player={G.players[0]} handleCardClick={handleCardClick} />
+          <PlayerHand
+            player={G.players[0]}
+            showEnemyHand={G.globalEffects.showEnemyHand}
+            handleCardClick={handleCardClick}
+          />
         </div>
 
         <div className='col-3'>
