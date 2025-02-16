@@ -37,7 +37,7 @@ const damage = (G, target, { value = 0 }, ctx) => {
   // Apply level-specific side effects related to damage calculation.
   value = applyDamageLevelEffects(G, target, value, ctx);
   if (value === -1) {
-    return; // Exit early so that prevent damage effect is not exhausted
+    return 0; // Exit early so that prevent damage effect is not exhausted
   }
 
   // Check if the target has prevent damage effect.
@@ -53,11 +53,12 @@ const damage = (G, target, { value = 0 }, ctx) => {
   ) {
     G.players[target].hp = 15;
     removeEffects(G, target, EffectType.resurrect);
-    return;
+    return 0;
   }
 
   // Apply the final damage to the target's HP.
   G.players[target].hp -= value;
+  return value;
 };
 
 const heal = (G, target, { value = 0 }) => {
@@ -188,6 +189,14 @@ const showEnemyHand = (G, target, effect, ctx) => {
   }
 };
 
+const lifesteal = (G, target, effect, ctx) => {
+  const player = target === '0' ? '1' : '0';
+  const value = damage(G, target, effect, ctx);
+  if (value > 0) {
+    heal(G, player, { value });
+  }
+};
+
 const effectHandlers = {
   [EffectType.damage]: damage,
   [EffectType.heal]: heal,
@@ -206,6 +215,7 @@ const effectHandlers = {
   [EffectType.swapHp]: swapHp,
   [EffectType.stealBuff]: stealBuff,
   [EffectType.showEnemyHand]: showEnemyHand,
+  [EffectType.lifesteal]: lifesteal,
 };
 
 export const applyEffect = (G, ctx, effect, shouldProcessEoT = true) => {

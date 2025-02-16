@@ -16,6 +16,7 @@ import {
   swapHp,
   stealBuff,
   showEnemyHand,
+  lifesteal,
 } from './cardEffects';
 
 /**
@@ -303,6 +304,6 @@ export const Tide = {
   id: '33',
   name: 'Tide',
   text: 'Damage 16 and + Same HP',
-  effects: [damage(16)], // drain
+  effects: [lifesteal(16)], 
   keywords: [CardKeyword.damage, CardKeyword.heal],
 };
