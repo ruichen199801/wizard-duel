@@ -97,7 +97,7 @@ const cardAudioType = {
   27: 'sword',
   28: 'heal',
   29: 'fireball',
-  30: 'magic',
+  30: 'heal',
   31: 'arrow',
   32: 'waves',
   33: 'waves',

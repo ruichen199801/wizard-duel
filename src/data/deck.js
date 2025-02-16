@@ -27,6 +27,8 @@ import {
   Wish1,
   Mutate,
   Ambush,
+  Vision,
+  Tide,
 } from './cards';
 
 const baseDeck = [
@@ -73,7 +75,6 @@ const levelDecks = {
     Ambush,
   ],
 
-  // TODO - Implement level 6
   6: [
     ...baseDeck,
     Flame,
@@ -84,6 +85,8 @@ const levelDecks = {
     Wish1,
     Mutate,
     Ambush,
+    Vision,
+    Tide,
   ],
 };
 

@@ -289,3 +289,19 @@ export const Ambush = {
   effects: [stealBuff],
   keywords: [CardKeyword.effect],
 };
+
+export const Vision = {
+  id: '32',
+  name: 'Vision',
+  text: 'Show Enemy Hand',
+  effects: [],
+  keywords: [],
+};
+
+export const Tide = {
+  id: '33',
+  name: 'Tide',
+  text: 'Damage 16 and + Same HP',
+  effects: [damage(16)], // drain
+  keywords: [CardKeyword.damage, CardKeyword.heal],
+};
