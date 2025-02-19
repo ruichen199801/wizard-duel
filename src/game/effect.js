@@ -275,7 +275,7 @@ const executeEndOfTurnEffects = (G, ctx, shouldProcessEoT) => {
 const applyDamageLevelEffects = (G, target, damage, ctx) => {
   switch (G.level) {
     case '3':
-      if (getChanceEffect(0.2)) {
+      if (getChanceEffect(0.25)) {
         G.players[target].effects.push(freezeEffect);
       }
       return damage;

@@ -1,4 +1,11 @@
 import { randomPopulateHand, generateAttackOutcomes } from './levelUtils';
+import {
+  Fireball1,
+  Fireball2,
+  Fireball3,
+  Flame,
+  Resurrect,
+} from '../data/cards';
 
 export const DrawMode = {
   draw: 'draw',
@@ -36,8 +43,14 @@ export const levelConfigs = {
       hp: 35,
     },
 
-    playerHandOverride: randomPopulateHand(),
-    enemyHandOverride: randomPopulateHand(),
+    playerHandOverride: randomPopulateHand(
+      [Fireball1, Fireball2, Fireball3, Flame, Resurrect],
+      [0.3, 0.4, 0.25, 0.04, 0.01]
+    ),
+    enemyHandOverride: randomPopulateHand(
+      [Fireball1, Fireball2, Fireball3, Flame, Resurrect],
+      [0.3, 0.4, 0.25, 0.04, 0.01]
+    ),
 
     playerEffectsOverride: [],
     enemyEffectsOverride: [],
@@ -89,7 +102,7 @@ export const levelConfigs = {
     globalEffects: {
       drawMode: DrawMode.draw,
       showEnemyHand: false,
-      shouldMiss: generateAttackOutcomes(),
+      shouldMiss: generateAttackOutcomes(maxTurn, 0.15),
     },
   },
 
