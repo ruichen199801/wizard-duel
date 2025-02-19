@@ -1,5 +1,6 @@
 import { levelConfigs, finalLevel } from './level';
 import { Wish2, Wish3, Wish4, Wish5 } from '../data/cards';
+import { maxTurn } from './level';
 
 /**
  * Shuffle a deck of cards using Fisher-Yates algorithm.
@@ -66,7 +67,7 @@ export const logPlay = (G, ctx, card) => {
  * Determine if the game has ended and return the result.
  */
 export const isVictory = ({ G, ctx }) => {
-  if ((G.players[0].hp <= 0 && G.players[1].hp <= 0) || ctx.turn >= 50) {
+  if ((G.players[0].hp <= 0 && G.players[1].hp <= 0) || ctx.turn >= maxTurn) {
     return { draw: true };
   } else if (G.players[0].hp <= 0) {
     return { winner: '1' };

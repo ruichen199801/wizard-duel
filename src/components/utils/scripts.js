@@ -37,7 +37,7 @@ const battleStartInstrutions = {
 
   2: {
     intro: `You step into Lava Plains, where you will face the Wild Firemancer's fiery wrath. `,
-    levelRule: `You'll begin with random fire cards in your hand. `,
+    levelRule: `You'll begin with random copies of fire cards in your hand. `,
     outro: `Burn or be burned!`,
   },
 

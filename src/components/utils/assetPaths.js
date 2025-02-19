@@ -41,6 +41,9 @@ const icon = {
   buff: `${imgPrefix}/icons/buff.svg`,
   debuff: `${imgPrefix}/icons/debuff.svg`,
   ice: `${imgPrefix}/icons/ice.svg`,
+  level: `${imgPrefix}/icons/level.svg`,
+  turn: `${imgPrefix}/icons/turn.svg`,
+  deck: `${imgPrefix}/icons/deck.svg`,
 };
 
 const cardFront = (cardId) => `${cardPrefix}/front/${cardId}.svg`;
@@ -92,7 +95,7 @@ const cardAudioType = {
   22: 'freeze',
   23: 'heal',
   24: 'wind',
-  25: 'magic', 
+  25: 'magic',
   26: 'freeze',
   27: 'sword',
   28: 'heal',

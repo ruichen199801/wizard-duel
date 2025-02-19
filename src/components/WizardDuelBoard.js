@@ -20,12 +20,13 @@ import { random } from './utils/ai';
 import { CardKeyword } from '../data/cards';
 import { EffectType } from '../data/cardEffects';
 import { DrawMode } from '../game/level';
+import { maxTurn } from '../game/level';
 
-import CardPile from './CardPile';
 import CardPreview from './CardPreview';
 import EffectStack from './EffectStack';
 import EndTurnButton from './EndTurnButton';
 import GameoverModal from './modals/GameoverModal';
+import GameStats from './GameStats';
 import HelpModal from './modals/HelpModal';
 import LevelEffectModal from './modals/LevelEffectModal';
 import LogModal from './modals/LogModal';
@@ -63,6 +64,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
     getMusicForLevel(G.level)
   );
   const [hoveredAvatar, setHoveredAvatar] = useState(null);
+  const [visibleCurrentTurn, setVisibleCurrentTurn] = useState(0);
 
   /**
    * Plays the appropriate audio when a card is played.
@@ -96,9 +98,20 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
 
     if (ctx.turn > 1) {
       await sleep(pauseInterval); // Preview card duration
+
+      // Turn 2 does not have draw phase, hence displaying updated turn number immediately
+      if (ctx.turn === 2) {
+        setVisibleCurrentTurn((prevTurn) => prevTurn + 1);
+      }
+
       setSelectedCardToPlay(null);
       setPlayerSelectedIndexToPlay(null);
       await sleep(pauseInterval); // Interval between preview and draw
+    }
+
+    // Delay displaying updated turn number until when a card is drawn
+    if (ctx.turn !== 2) {
+      setVisibleCurrentTurn((prevTurn) => prevTurn + 1);
     }
 
     if (
@@ -263,8 +276,12 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
           <CardPreview selectedCard={selectedCardToPlay} />
         </div>
 
-        <div className='col-3'>
-          <CardPile />
+        <div className='col-3 d-flex flex-column align-items-end justify-content-center'>
+          <GameStats
+            level={G.level}
+            visibleTurn={visibleCurrentTurn}
+            deckSize={G.deck.length}
+          />
         </div>
       </div>
 

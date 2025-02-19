@@ -28,9 +28,6 @@ const PlayerStats = ({
         className='me-2 position-relative'
         onMouseEnter={() => setHoveredAvatar(player.id)}
         onMouseLeave={() => setHoveredAvatar(null)}
-        // data-bs-toggle='tooltip'
-        // data-bs-placement={player.id === '0' ? 'top' : 'bottom'}
-        // data-bs-title={player.id === '0' ? 'Player' : 'Opponent'}
       >
         <img
           src={getAvatarForLevel(player.id, level)}
