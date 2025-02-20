@@ -55,55 +55,58 @@ const SettingsModal = ({
             <div className='modal-body'>
               <div className='d-flex flex-column align-items-center'>
                 {/* Sound and music settings are effective for current game only and is not persistent */}
-                <button
-                  type='button'
-                  className='btn btn-dark btn-width mb-3'
-                  onClick={toggleAudioMute}
-                >
-                  Toggle Sound
-                </button>
+                <div className='btn-group-vertical btn-width mb-3'>
+                  <button
+                    type='button'
+                    className='btn btn-dark mb-1'
+                    onClick={toggleAudioMute}
+                  >
+                    Toggle Sound
+                  </button>
+                  <button
+                    type='button'
+                    className='btn btn-dark'
+                    onClick={toggleMusic}
+                  >
+                    Toggle Music
+                  </button>
+                </div>
 
-                <button
-                  type='button'
-                  className='btn btn-dark btn-width mb-3'
-                  onClick={toggleMusic}
-                >
-                  Toggle Music
-                </button>
+                <div className='btn-group-vertical btn-width mb-3'>
+                  <button
+                    type='button'
+                    className='btn btn-dark mb-1'
+                    onClick={toggleEffectStackDisplay}
+                  >
+                    {showEffectStack
+                      ? 'Hide Player Effects'
+                      : 'Display Player Effects'}
+                  </button>
+                  <button
+                    type='button'
+                    className='btn btn-dark'
+                    onClick={toggleGameStatsDisplay}
+                  >
+                    {showGameStats ? 'Hide Game Stats' : 'Display Game Stats'}
+                  </button>
+                </div>
 
-                <button
-                  type='button'
-                  className='btn btn-dark btn-width mb-3'
-                  onClick={toggleEffectStackDisplay}
-                >
-                  {showEffectStack
-                    ? 'Hide Player Effects'
-                    : 'Display Player Effects'}
-                </button>
-
-                <button
-                  type='button'
-                  className='btn btn-dark btn-width mb-3'
-                  onClick={toggleGameStatsDisplay}
-                >
-                  {showGameStats ? 'Hide Game Stats' : 'Display Game Stats'}
-                </button>
-
-                <button
-                  type='button'
-                  className='btn btn-secondary btn-width mb-3'
-                  onClick={resetGame}
-                >
-                  Reset Game
-                </button>
-
-                <button
-                  type='button'
-                  className='btn btn-secondary btn-width mb-2'
-                  onClick={exitToMenu}
-                >
-                  Exit to Title
-                </button>
+                <div className='btn-group-vertical btn-width mb-2'>
+                  <button
+                    type='button'
+                    className='btn btn-dark mb-1'
+                    onClick={resetGame}
+                  >
+                    Reset Game
+                  </button>
+                  <button
+                    type='button'
+                    className='btn btn-dark'
+                    onClick={exitToMenu}
+                  >
+                    Exit to Title
+                  </button>
+                </div>
               </div>
             </div>
           </div>
