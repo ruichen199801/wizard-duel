@@ -9,6 +9,8 @@ const SettingsModal = ({
   toggleMusic,
   showGameStats,
   setShowGameStats,
+  showEffectStack,
+  setShowEffectStack,
 }) => {
   if (!showSettingsModal) {
     return null;
@@ -21,6 +23,10 @@ const SettingsModal = ({
 
   const toggleGameStatsDisplay = () => {
     setShowGameStats((prevState) => !prevState);
+  };
+
+  const toggleEffectStackDisplay = () => {
+    setShowEffectStack((prevState) => !prevState);
   };
 
   return (
@@ -68,6 +74,24 @@ const SettingsModal = ({
                 <button
                   type='button'
                   className='btn btn-dark btn-width mb-3'
+                  onClick={toggleEffectStackDisplay}
+                >
+                  {showEffectStack
+                    ? 'Hide Player Effects'
+                    : 'Display Player Effects'}
+                </button>
+
+                <button
+                  type='button'
+                  className='btn btn-dark btn-width mb-3'
+                  onClick={toggleGameStatsDisplay}
+                >
+                  {showGameStats ? 'Hide Game Stats' : 'Display Game Stats'}
+                </button>
+
+                <button
+                  type='button'
+                  className='btn btn-secondary btn-width mb-3'
                   onClick={resetGame}
                 >
                   Reset Game
@@ -75,18 +99,10 @@ const SettingsModal = ({
 
                 <button
                   type='button'
-                  className='btn btn-dark btn-width mb-3'
+                  className='btn btn-secondary btn-width mb-2'
                   onClick={exitToMenu}
                 >
                   Exit to Title
-                </button>
-
-                <button
-                  type='button'
-                  className='btn btn-dark btn-width mb-2'
-                  onClick={toggleGameStatsDisplay}
-                >
-                  {showGameStats ? 'Hide Game Stats' : 'Display Game Stats'}
                 </button>
               </div>
             </div>

@@ -58,13 +58,13 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
   const [selectableCardsToDraw, setSelectableCardsToDraw] = useState([]);
 
   const [showGameStats, setShowGameStats] = useState(true);
+  const [showEffectStack, setShowEffectStack] = useState(true);
 
   const { logEntries, addLogEntry } = useLog();
   const { playAudio, toggleAudioMute } = useAudioPlayer();
   const { playMusic, pauseMusic, toggleMusic } = useMusicPlayer(
     getMusicForLevel(G.level)
   );
-  const [hoveredAvatar, setHoveredAvatar] = useState(null);
   const [visibleCurrentTurn, setVisibleCurrentTurn] = useState(0);
 
   /**
@@ -239,11 +239,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
     >
       <div className='row'>
         <div className='col-3'>
-          <PlayerStatsPanel
-            player={G.players[1]}
-            level={G.level}
-            setHoveredAvatar={setHoveredAvatar}
-          />
+          <PlayerStatsPanel player={G.players[1]} level={G.level} />
         </div>
 
         <div className='col-6'>
@@ -269,7 +265,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
           <EffectStack
             opponentEffects={G.players[1].effects}
             playerEffects={G.players[0].effects}
-            hoveredAvatar={hoveredAvatar}
+            showEffectStack={showEffectStack}
           />
         </div>
 
@@ -289,10 +285,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
 
       <div className='row align-items-end'>
         <div className='col-3'>
-          <PlayerStatsPanel
-            player={G.players[0]}
-            setHoveredAvatar={setHoveredAvatar}
-          />
+          <PlayerStatsPanel player={G.players[0]} />
         </div>
 
         <div className='col-6'>
@@ -349,6 +342,8 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
         toggleMusic={toggleMusic}
         showGameStats={showGameStats}
         setShowGameStats={setShowGameStats}
+        showEffectStack={showEffectStack}
+        setShowEffectStack={setShowEffectStack}
       />
       <HelpModal
         showHelpModal={showHelpModal}
