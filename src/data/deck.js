@@ -93,7 +93,7 @@ const levelDecks = {
 export const getDeckForLevel = (level = '1') => {
   const levelDeck = levelDecks[level] || [];
   if (levelDeck.length < 10) {
-    throw new Error('Deck array length is less than 10.');
+    throw new Error('Deck array length is less than 10.'); // Dev testing issue only
   }
   return [...levelDeck];
 };

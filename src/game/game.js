@@ -63,9 +63,8 @@ const drawCard = ({ G, ctx }, cardId = '') => {
     hand.push(G.deck.pop());
   }
 
-  // Make sure the deck has at least 2 cards for Select mode to work properly
-  if (G.deck.length <= 1) {
-    console.log('Deck is almost empty, shuffling...');
+  if (G.deck.length === 0) {
+    console.log('Deck is empty, shuffling...');
     G.deck = shuffle([...getDeckForLevel(G.level)]);
   }
 };

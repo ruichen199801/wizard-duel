@@ -138,10 +138,12 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
   };
 
   const getSelectableCardIds = () => {
-    if (G.deck.length < 2) {
-      throw new Error('Deck must have at least two cards.');
+    if (G.deck.length === 0) {
+      throw new Error('Deck must have at least one card.');
     }
-
+    if (G.deck.length === 1) {
+      return [G.deck[0].id];
+    }
     let firstIndex = Math.floor(Math.random() * G.deck.length);
     let secondIndex = Math.floor(Math.random() * G.deck.length);
     while (secondIndex === firstIndex) {
