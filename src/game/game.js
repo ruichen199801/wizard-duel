@@ -80,6 +80,12 @@ const playCard = ({ G, ctx }, index) => {
     });
   }
 
+  // TODO: Refactor into separate function, sth. like applyGlobalEoTEffects
+  if (G.globalEffects.shouldClearEffects?.[ctx.turn - 1]) {
+    G.players[0].effects = [];
+    G.players[1].effects = [];
+  }
+
   removeCard(hand, index);
 
   logPlay(G, ctx, card);

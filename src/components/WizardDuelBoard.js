@@ -13,6 +13,7 @@ import {
   defeat,
   miss,
   defrost,
+  cleanse,
   getLocationForLevel,
   getMusicForLevel,
 } from './utils/assetPaths';
@@ -69,23 +70,26 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
 
   /**
    * Plays the appropriate audio when a card is played.
-   *  1. If the current player has an active `freeze` effect, play the `defrost` audio.
-   *  2. If the played card contains the `damage` keyword and the current attack is set to miss, play the `miss` audio.
-   *  3. In all other cases, play the default audio associated with the card.
+   *  1. If the played card contains the `effect` keyword and the current turn is set to clear all effects, play the `cleanse` audio.
+   *  2. If the current player has an active `freeze` effect, play the `defrost` audio.
+   *  3. If the played card contains the `damage` keyword and the current attack is set to miss, play the `miss` audio.
+   *  4. In all other cases, play the default audio associated with the card.
    */
   const playCardAudio = (card) => {
     const hasFreezeEffect = G.players[ctx.currentPlayer].effects.some(
       (e) => e.type === EffectType.freeze
     );
     const hasDamageKeyword = card.keywords.includes(CardKeyword.damage);
+    const hasEffectKeyward = card.keywords.includes(CardKeyword.effect);
+    const shouldMiss = G.globalEffects.shouldMiss?.[ctx.turn - 1];
+    const shouldClearEffects =
+      G.globalEffects.shouldClearEffects?.[ctx.turn - 1];
 
-    if (hasFreezeEffect) {
+    if (hasEffectKeyward && shouldClearEffects) {
+      playAudio(cleanse);
+    } else if (hasFreezeEffect) {
       playAudio(defrost);
-    } else if (
-      hasDamageKeyword &&
-      'shouldMiss' in G.globalEffects &&
-      G.globalEffects.shouldMiss[ctx.turn - 1]
-    ) {
+    } else if (hasDamageKeyword && shouldMiss) {
       playAudio(miss);
     } else {
       playAudio(cardAudio(card.id));

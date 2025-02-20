@@ -1,4 +1,8 @@
-import { randomPopulateHand, generateAttackOutcomes } from './levelUtils';
+import {
+  randomPopulateHand,
+  generateAttackOutcomes,
+  getClearEffectSchedule,
+} from './levelUtils';
 import {
   Fireball1,
   Fireball2,
@@ -147,6 +151,7 @@ export const levelConfigs = {
     globalEffects: {
       drawMode: DrawMode.draw,
       showEnemyHand: false,
+      shouldClearEffects: getClearEffectSchedule(maxTurn, 10),
     },
   },
 };

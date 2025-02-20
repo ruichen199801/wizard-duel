@@ -42,10 +42,23 @@ export const generateAttackOutcomes = (numTurns, missProbability) => {
   if (!numTurns || !missProbability) {
     throw new Error('Total turn number or miss probability is not provided.');
   }
-
   const outcomes = [];
   for (let i = 0; i < numTurns; i++) {
     outcomes.push(Math.random() < missProbability);
   }
   return outcomes;
+};
+
+/**
+ * Generates a boolean array indicating the turns when effects should be cleared. E.g. if clearing every 10 turns,
+ * it triggers on 10th turn after all effects have been evaluated post playCard.
+ */
+export const getClearEffectSchedule = (numTurns, turnInterval) => {
+  if (!numTurns || !turnInterval) {
+    throw new Error('Total turn number or turn interval is not provided.');
+  }
+  return Array.from(
+    { length: numTurns },
+    (_, index) => (index + 1) % turnInterval === 0
+  );
 };

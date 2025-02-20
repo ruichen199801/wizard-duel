@@ -111,6 +111,7 @@ const victory = `${audioPrefix}/victory.mp3`;
 const defeat = `${audioPrefix}/defeat.mp3`;
 const miss = `${audioPrefix}/wind.mp3`; // reuse the wind sound effect
 const defrost = `${audioPrefix}/freeze.mp3`; // reuse the freeze sound effect
+const cleanse = `${audioPrefix}/waves.mp3`; // reuse the waves sound effect
 
 // MUSIC FILES
 
@@ -174,6 +175,7 @@ export {
   defeat,
   miss,
   defrost,
+  cleanse,
 
   // MUSIC FILES
   getMusicForLevel,
