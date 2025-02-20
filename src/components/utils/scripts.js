@@ -61,7 +61,7 @@ const battleStartInstrutions = {
 
   6: {
     intro: `Beneath the shimmering waves of Coral Bay, the tides shift in unpredictable ways. `,
-    levelRule: `Every 5 turns, all buffs and debuffs are washed away.`,
+    levelRule: `Every 6 turns, all buffs and debuffs are washed away.`,
     outro: ``,
   },
 };
