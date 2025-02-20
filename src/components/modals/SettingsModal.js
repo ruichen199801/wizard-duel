@@ -7,6 +7,8 @@ const SettingsModal = ({
   playAudio,
   toggleAudioMute,
   toggleMusic,
+  showGameStats,
+  setShowGameStats,
 }) => {
   if (!showSettingsModal) {
     return null;
@@ -15,6 +17,10 @@ const SettingsModal = ({
   const handleSettingsClose = () => {
     setShowSettingsModal(false);
     playAudio(click);
+  };
+
+  const toggleGameStatsDisplay = () => {
+    setShowGameStats((prevState) => !prevState);
   };
 
   return (
@@ -43,7 +49,6 @@ const SettingsModal = ({
             <div className='modal-body'>
               <div className='d-flex flex-column align-items-center'>
                 {/* Sound and music settings are effective for current game only and is not persistent */}
-
                 <button
                   type='button'
                   className='btn btn-dark btn-width mb-3'
@@ -70,10 +75,18 @@ const SettingsModal = ({
 
                 <button
                   type='button'
-                  className='btn btn-dark btn-width mb-2'
+                  className='btn btn-dark btn-width mb-3'
                   onClick={exitToMenu}
                 >
                   Exit to Title
+                </button>
+
+                <button
+                  type='button'
+                  className='btn btn-dark btn-width mb-2'
+                  onClick={toggleGameStatsDisplay}
+                >
+                  {showGameStats ? 'Hide Game Stats' : 'Display Game Stats'}
                 </button>
               </div>
             </div>

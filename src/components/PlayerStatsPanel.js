@@ -3,7 +3,7 @@ import { smallScale, avatarHeight, avatarWidth } from './utils/constants';
 import { getAvatarForLevel, icon } from './utils/assetPaths';
 import { EffectType } from '../data/cardEffects';
 
-const PlayerStats = ({
+const PlayerStatsPanel = ({
   player,
   level,
   setHoveredAvatar,
@@ -75,4 +75,4 @@ const PlayerStats = ({
   );
 };
 
-export default PlayerStats;
+export default PlayerStatsPanel;

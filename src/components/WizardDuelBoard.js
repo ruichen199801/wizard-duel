@@ -20,13 +20,12 @@ import { random } from './utils/ai';
 import { CardKeyword } from '../data/cards';
 import { EffectType } from '../data/cardEffects';
 import { DrawMode } from '../game/level';
-import { maxTurn } from '../game/level';
 
 import CardPreview from './CardPreview';
 import EffectStack from './EffectStack';
 import EndTurnButton from './EndTurnButton';
 import GameoverModal from './modals/GameoverModal';
-import GameStats from './GameStats';
+import GameStatsPanel from './GameStatsPanel';
 import HelpModal from './modals/HelpModal';
 import LevelEffectModal from './modals/LevelEffectModal';
 import LogModal from './modals/LogModal';
@@ -34,7 +33,7 @@ import IconList from './IconList';
 import MatchupModal from './modals/MatchupModal';
 import NextLevelModal from './modals/NextLevelModal';
 import PlayerHand from './PlayerHand';
-import PlayerStats from './PlayerStats';
+import PlayerStatsPanel from './PlayerStatsPanel';
 import SettingsModal from './modals/SettingsModal';
 import SelectCardModal from './modals/SelectCardModal';
 
@@ -57,6 +56,8 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
 
   const [showSelectCardModal, setShowSelectCardModal] = useState(false);
   const [selectableCardsToDraw, setSelectableCardsToDraw] = useState([]);
+
+  const [showGameStats, setShowGameStats] = useState(true);
 
   const { logEntries, addLogEntry } = useLog();
   const { playAudio, toggleAudioMute } = useAudioPlayer();
@@ -238,7 +239,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
     >
       <div className='row'>
         <div className='col-3'>
-          <PlayerStats
+          <PlayerStatsPanel
             player={G.players[1]}
             level={G.level}
             setHoveredAvatar={setHoveredAvatar}
@@ -277,17 +278,18 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
         </div>
 
         <div className='col-3 d-flex flex-column align-items-end justify-content-center'>
-          <GameStats
+          <GameStatsPanel
             level={G.level}
             visibleTurn={visibleCurrentTurn}
             deckSize={G.deck.length}
+            showGameStats={showGameStats}
           />
         </div>
       </div>
 
       <div className='row align-items-end'>
         <div className='col-3'>
-          <PlayerStats
+          <PlayerStatsPanel
             player={G.players[0]}
             setHoveredAvatar={setHoveredAvatar}
           />
@@ -345,6 +347,8 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
         playAudio={playAudio}
         toggleAudioMute={toggleAudioMute}
         toggleMusic={toggleMusic}
+        showGameStats={showGameStats}
+        setShowGameStats={setShowGameStats}
       />
       <HelpModal
         showHelpModal={showHelpModal}
