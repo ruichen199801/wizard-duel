@@ -80,7 +80,7 @@ const playCard = ({ G, ctx }, index) => {
     });
   }
 
-  // TODO: Refactor into separate function, sth. like applyGlobalEoTEffects
+  // Apply global effects that trigger at end of turn here
   if (G.globalEffects.shouldClearEffects?.[ctx.turn - 1]) {
     G.players[0].effects = [];
     G.players[1].effects = [];
