@@ -67,7 +67,7 @@ export const logPlay = (G, ctx, card) => {
  * Determine if the game has ended and return the result.
  */
 export const isVictory = ({ G, ctx }) => {
-  if ((G.players[0].hp <= 0 && G.players[1].hp <= 0) || ctx.turn >= maxTurn) {
+  if ((G.players[0].hp <= 0 && G.players[1].hp <= 0) || ctx.turn >= maxTurn + 1) {
     return { draw: true };
   } else if (G.players[0].hp <= 0) {
     return { winner: '1' };
