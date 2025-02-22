@@ -16,7 +16,7 @@ export const DrawMode = {
   select: 'select',
 };
 
-export const finalLevel = '6';
+export const finalLevel = '7';
 
 export const maxTurn = 50;
 
@@ -152,6 +152,29 @@ export const levelConfigs = {
       drawMode: DrawMode.draw,
       showEnemyHand: false,
       shouldClearEffects: getClearEffectSchedule(maxTurn, 10),
+    },
+  },
+
+  7: {
+    playerStatsOverride: {
+      maxHp: 60,
+      hp: 60,
+    },
+    enemyStatsOverride: {
+      maxHp: 60,
+      hp: 60,
+    },
+
+    playerHandOverride: [],
+    enemyHandOverride: [],
+
+    playerEffectsOverride: [],
+    enemyEffectsOverride: [],
+
+    globalEffects: {
+      drawMode: DrawMode.draw,
+      showEnemyHand: false,
+      // TODO: Add level 7 effect
     },
   },
 };

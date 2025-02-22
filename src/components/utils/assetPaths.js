@@ -15,6 +15,7 @@ const avatarPaths = {
   4: `${avatarPrefix}/traveling-merchant.svg`,
   5: `${avatarPrefix}/forest-ranger.svg`,
   6: `${avatarPrefix}/murloc-oracle.svg`,
+  7: `${avatarPrefix}/crimson-witch.svg`,
 };
 const getAvatarForLevel = (playerId, level = '1') => {
   return playerId === '0' ? avatarPaths[0] : avatarPaths[level];
@@ -27,6 +28,7 @@ const locationPaths = {
   4: `${locationPrefix}/desert.svg`,
   5: `${locationPrefix}/forest.svg`,
   6: `${locationPrefix}/ocean.svg`,
+  7: `${locationPrefix}/marsh.svg`,
 };
 const getLocationForLevel = (level = '1') => locationPaths[level];
 
@@ -52,7 +54,7 @@ const cardPlaceholder = (playerId) =>
   `${cardPrefix}/placeholder/${playerId}.svg`;
 const cardPile = `${cardPrefix}/pile.svg`;
 
-const cardCount = 34; // Increment this when new cards are added
+const cardCount = 36; // Increment this when new cards are added
 const cardFronts = Array.from(
   { length: cardCount },
   (_, cardId) => `${cardPrefix}/front/${cardId}.svg`
@@ -64,6 +66,7 @@ const nextLevelCards = {
   3: [cardFront('24'), cardFront('25')],
   4: [cardFront('30'), cardFront('31')],
   5: [cardFront('32'), cardFront('33')],
+  6: [cardFront('34'), cardFront('35')],
 };
 const getNextCardsForLevel = (level = '1') => nextLevelCards[level];
 
@@ -104,6 +107,8 @@ const cardAudioType = {
   31: 'arrow',
   32: 'waves',
   33: 'waves',
+  34: 'roar',
+  35: 'potion',
 };
 const cardAudio = (cardId) => `${audioPrefix}/${cardAudioType[cardId]}.mp3`;
 const click = `${audioPrefix}/click.mp3`;
@@ -122,6 +127,7 @@ const musicPaths = {
   4: `${musicPrefix}/lost-desert.mp3`,
   5: `${musicPrefix}/misty-woods.mp3`,
   6: `${musicPrefix}/coral-bay.mp3`,
+  7: `${musicPrefix}/shadow-swamp.mp3`,
 };
 const getMusicForLevel = (level = '1') => musicPaths[level];
 
@@ -153,6 +159,8 @@ const AUDIO = [
   `${audioPrefix}/wind.mp3`,
   `${audioPrefix}/arrow.mp3`,
   `${audioPrefix}/waves.mp3`,
+  `${audioPrefix}/roar.mp3`,
+  `${audioPrefix}/potion.mp3`,
 ];
 const MUSIC = [...Object.values(musicPaths)];
 

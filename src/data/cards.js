@@ -304,6 +304,22 @@ export const Tide = {
   id: '33',
   name: 'Tide',
   text: 'Damage 16 and + Same HP',
-  effects: [lifesteal(16)], 
+  effects: [lifesteal(16)],
   keywords: [CardKeyword.damage, CardKeyword.heal],
+};
+
+export const Revenge = {
+  id: '34',
+  name: 'Revenge',
+  text: 'Counter Attack 9',
+  effects: [], // TODO: Implement Revenge effect
+  keywords: [CardKeyword.effect],
+};
+
+export const Poison = {
+  id: '35',
+  name: 'Poison',
+  text: "Enemy Can't Heal",
+  effects: [], // TODO: Implement Poison effect
+  keywords: [CardKeyword.effect],
 };
