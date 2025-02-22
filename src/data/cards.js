@@ -255,24 +255,24 @@ export const Wish2 = {
 export const Wish3 = {
   id: '27',
   name: 'Wish',
-  text: '+6 Attack',
-  effects: [buffAtk(6)],
+  text: '+8 Attack',
+  effects: [buffAtk(8)],
   keywords: [CardKeyword.effect],
 };
 
 export const Wish4 = {
   id: '28',
   name: 'Wish',
-  text: 'Remove Debuff and +10 HP',
-  effects: [removeDebuff, heal(10)],
+  text: 'Remove Debuff and +15 HP',
+  effects: [removeDebuff, heal(15)],
   keywords: [CardKeyword.effect, CardKeyword.heal],
 };
 
 export const Wish5 = {
   id: '29',
   name: 'Wish',
-  text: 'Damage 12',
-  effects: [damage(12)],
+  text: 'Damage 20',
+  effects: [damage(20)],
   keywords: [CardKeyword.damage],
 };
 

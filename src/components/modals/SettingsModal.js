@@ -97,7 +97,7 @@ const SettingsModal = ({
                     className='btn btn-dark mb-1'
                     onClick={resetGame}
                   >
-                    Reset Entire Game
+                    Reset Entire Run
                   </button>
                   <button
                     type='button'

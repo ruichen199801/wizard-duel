@@ -49,11 +49,11 @@ export const levelConfigs = {
 
     playerHandOverride: randomPopulateHand(
       [Fireball1, Fireball2, Fireball3, Flame, Resurrect],
-      [0.3, 0.4, 0.25, 0.04, 0.01]
+      [0.3, 0.4, 0.2, 0.05, 0.05]
     ),
     enemyHandOverride: randomPopulateHand(
       [Fireball1, Fireball2, Fireball3, Flame, Resurrect],
-      [0.3, 0.4, 0.25, 0.04, 0.01]
+      [0.3, 0.4, 0.2, 0.05, 0.05]
     ),
 
     playerEffectsOverride: [],
