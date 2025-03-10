@@ -100,7 +100,7 @@
   position: absolute;
   inset: 0;
   width: 100%;
-  transform: scale(1.8) translateY(10px);
+  transform: scale(1.8) translateX(-5px) translateY(15px);
 }
 
 .vfx-thunder {
