@@ -4,6 +4,7 @@ import { WizardDuel } from './game/game';
 import MainMenu from './components/MainMenu';
 import WizardDuelBoard from './components/WizardDuelBoard';
 import { SpeedInsights } from '@vercel/speed-insights/react';
+import { Analytics } from '@vercel/analytics/react';
 
 const WizardDuelClient = Client({
   game: WizardDuel,
@@ -22,8 +23,10 @@ const App = () => {
         </Routes>
       </BrowserRouter>
 
-      {/* Add additional plugins here */}
+      {/* Provides website performance metrics */}
       <SpeedInsights />
+      {/* Count visitors and page views */}
+      <Analytics />
     </>
   );
 };
