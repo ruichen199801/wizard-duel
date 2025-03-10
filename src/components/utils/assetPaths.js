@@ -278,7 +278,7 @@ const cardAnimation = {
   },
   27: {
     type: 'star-strike',
-    target: AnimationTarget.enemy,
+    target: AnimationTarget.self,
   },
   28: {
     type: 'star-bounce',
