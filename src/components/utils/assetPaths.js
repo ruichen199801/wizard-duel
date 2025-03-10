@@ -1,7 +1,10 @@
+import { AnimationTarget } from './constants';
+
 const imgPrefix = 'images';
 const avatarPrefix = `${imgPrefix}/avatars`;
 const cardPrefix = `${imgPrefix}/cards`;
 const locationPrefix = `${imgPrefix}/locations`;
+const animationPrefix = 'animations';
 const audioPrefix = 'audio';
 const musicPrefix = 'music';
 
@@ -69,6 +72,248 @@ const nextLevelCards = {
   6: [cardFront('34'), cardFront('35')],
 };
 const getNextCardsForLevel = (level = '1') => nextLevelCards[level];
+
+// ANIMATION FILES
+
+const getAnimationPath = (type) => `${animationPrefix}/${type}.gif`;
+const animationData = {
+  fireball: {
+    type: 'fireball',
+    path: getAnimationPath('fireball'),
+    timeout: 500,
+  },
+  freeze: {
+    type: 'freeze',
+    path: getAnimationPath('freeze'),
+    timeout: 1000,
+  },
+  thunder: {
+    type: 'thunder',
+    path: getAnimationPath('thunder'),
+    timeout: 1000,
+  },
+  heal: {
+    type: 'heal',
+    path: getAnimationPath('heal'),
+    timeout: 500,
+  },
+  sword: {
+    type: 'sword',
+    path: getAnimationPath('sword'),
+    timeout: 1000,
+  },
+  shield: {
+    type: 'shield',
+    path: getAnimationPath('shield'),
+    timeout: 1200,
+  },
+  'ghost-bounce': {
+    type: 'ghost-bounce',
+    path: getAnimationPath('ghost-bounce'),
+    timeout: 1200,
+  },
+  skull: {
+    type: 'skull',
+    path: getAnimationPath('skull'),
+    timeout: 1800,
+  },
+  hammer: {
+    type: 'hammer',
+    path: getAnimationPath('hammer'),
+    timeout: 1000,
+  },
+  'blood-strike': {
+    type: 'blood-strike',
+    path: getAnimationPath('blood-strike'),
+    timeout: 1000,
+  },
+  'blood-burst': {
+    type: 'blood-burst',
+    path: getAnimationPath('blood-burst'),
+    timeout: 1000,
+  },
+  'star-bounce': {
+    type: 'star-bounce',
+    path: getAnimationPath('star-bounce'),
+    timeout: 1200,
+  },
+  'star-strike': {
+    type: 'star-strike',
+    path: getAnimationPath('star-strike'),
+    timeout: 1000,
+  },
+  'star-impact': {
+    type: 'star-impact',
+    path: getAnimationPath('star-impact'),
+    timeout: 600,
+  },
+  'slime-swirl': {
+    type: 'slime-swirl',
+    path: getAnimationPath('slime-swirl'),
+    timeout: 1000,
+  },
+  'slime-strike': {
+    type: 'slime-strike',
+    path: getAnimationPath('slime-strike'),
+    timeout: 600,
+  },
+  'water-explode': {
+    type: 'water-explode',
+    path: getAnimationPath('water-explode'),
+    timeout: 800,
+  },
+  'blood-cross-strike': {
+    type: 'blood-cross-strike',
+    path: getAnimationPath('blood-cross-strike'),
+    timeout: 800,
+  },
+  'slime-splash': {
+    type: 'slime-splash',
+    path: getAnimationPath('slime-splash'),
+    timeout: 500,
+  },
+};
+const cardAnimation = {
+  0: {
+    type: 'fireball',
+    target: AnimationTarget.enemy,
+  },
+  1: {
+    type: 'fireball',
+    target: AnimationTarget.enemy,
+  },
+  2: {
+    type: 'fireball',
+    target: AnimationTarget.enemy,
+  },
+  3: {
+    type: 'freeze',
+    target: AnimationTarget.enemy,
+  },
+  4: {
+    type: 'freeze',
+    target: AnimationTarget.enemy,
+  },
+  5: {
+    type: 'freeze',
+    target: AnimationTarget.enemy,
+  },
+  6: {
+    type: 'thunder',
+    target: AnimationTarget.enemy,
+  },
+  7: {
+    type: 'thunder',
+    target: AnimationTarget.enemy,
+  },
+  8: {
+    type: 'thunder',
+    target: AnimationTarget.enemy,
+  },
+  9: {
+    type: 'heal',
+    target: AnimationTarget.self,
+  },
+  10: {
+    type: 'heal',
+    target: AnimationTarget.self,
+  },
+  11: {
+    type: 'heal',
+    target: AnimationTarget.self,
+  },
+  12: {
+    type: 'sword',
+    target: AnimationTarget.self,
+  },
+  13: {
+    type: 'shield',
+    target: AnimationTarget.self,
+  },
+  14: {
+    type: 'ghost-bounce',
+    target: AnimationTarget.enemy,
+  },
+  15: {
+    type: 'skull',
+    target: AnimationTarget.enemy,
+  },
+  16: {
+    type: 'hammer',
+    target: AnimationTarget.self,
+  },
+  17: {
+    type: 'blood-strike',
+    target: AnimationTarget.enemy,
+  },
+  18: {
+    type: 'sword',
+    target: AnimationTarget.self,
+  },
+  19: {
+    type: 'shield',
+    target: AnimationTarget.self,
+  },
+  20: {
+    type: 'fireball',
+    target: AnimationTarget.enemy,
+  },
+  21: {
+    type: 'blood-burst',
+    target: AnimationTarget.self,
+  },
+  22: {
+    type: 'freeze',
+    target: AnimationTarget.enemy,
+  },
+  23: {
+    type: 'heal',
+    target: AnimationTarget.self,
+  },
+  24: null, 
+  25: null,
+  26: {
+    type: 'star-bounce',
+    target: AnimationTarget.enemy,
+  },
+  27: {
+    type: 'star-strike',
+    target: AnimationTarget.enemy,
+  },
+  28: {
+    type: 'star-bounce',
+    target: AnimationTarget.self,
+  },
+  29: {
+    type: 'star-impact',
+    target: AnimationTarget.enemy,
+  },
+  30: {
+    type: 'slime-swirl',
+    target: AnimationTarget.both,
+  },
+  31: {
+    type: 'slime-strike',
+    target: AnimationTarget.enemy,
+  },
+  32: null, 
+  33: {
+    type: 'water-explode',
+    target: AnimationTarget.enemy,
+  },
+  34: {
+    type: 'blood-cross-strike',
+    target: AnimationTarget.self,
+  },
+  35: {
+    type: 'slime-splash',
+    target: AnimationTarget.enemy,
+  },
+};
+const getAnimationDataForCard = (cardId) =>
+  animationData[cardAnimation[cardId]?.type];
+// Same animation can be reused to different targets, hence separating it from animationData object
+const getAnimationTargetForCard = (cardId) => cardAnimation[cardId]?.target;
 
 // AUDIO FILES
 
@@ -144,6 +389,7 @@ const IMAGES = [
   `${cardPrefix}/placeholder/1.svg`,
   cardPile,
 ];
+const ANIMATION = Object.values(animationData).map((data) => data.path);
 const AUDIO = [
   click,
   victory,
@@ -176,6 +422,10 @@ export {
   cardPile,
   cardFronts,
 
+  // ANIMATION FILES
+  getAnimationDataForCard,
+  getAnimationTargetForCard,
+
   // AUDIO FILES
   cardAudio,
   click,
@@ -190,6 +440,7 @@ export {
 
   // ALL FILES FOR PRELOAD
   IMAGES,
+  ANIMATION,
   AUDIO,
   MUSIC,
 };

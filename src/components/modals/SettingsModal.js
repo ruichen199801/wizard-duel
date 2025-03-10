@@ -1,4 +1,4 @@
-import { exitToMenu, resetGame } from '../utils/utils';
+import { exitToMenu, resetGame } from '../utils/commonUtils';
 import { click } from '../utils/assetPaths';
 
 const SettingsModal = ({

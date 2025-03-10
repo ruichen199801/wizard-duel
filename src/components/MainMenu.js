@@ -1,13 +1,20 @@
 import { useState } from 'react';
 import useAudioPlayer from './hooks/useAudioPlayer';
 import usePreloadAssets from './hooks/usePreloadAssets';
-import { cardFronts, click, IMAGES, AUDIO, MUSIC } from './utils/assetPaths';
+import {
+  cardFronts,
+  click,
+  IMAGES,
+  ANIMATION,
+  AUDIO,
+  MUSIC,
+} from './utils/assetPaths';
 import CardGalleryModal from './modals/CardGalleryModal';
 import HelpModal from './modals/HelpModal';
 
 const MainMenu = () => {
   // Preload to use cache and reduce latency
-  usePreloadAssets(IMAGES, AUDIO, MUSIC);
+  usePreloadAssets(IMAGES, ANIMATION, AUDIO, MUSIC);
 
   const [showHelpModal, setShowHelpModal] = useState(false);
   const [showCardGallery, setShowCardGallery] = useState(false);

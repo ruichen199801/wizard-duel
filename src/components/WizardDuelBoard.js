@@ -4,7 +4,8 @@ import useAudioPlayer from './hooks/useAudioPlayer';
 import useMusicPlayer from './hooks/useMusicPlayer';
 import useBsTooltip from './hooks/useBsTooltip';
 import useLog from './hooks/useLog';
-import { sleep } from './utils/utils';
+import useCardAnimation from './hooks/useCardAnimation';
+import { sleep } from './utils/commonUtils';
 import { GameState, pauseInterval } from './utils/constants';
 import {
   cardAudio,
@@ -66,6 +67,12 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
   const { playMusic, pauseMusic, toggleMusic } = useMusicPlayer(
     getMusicForLevel(G.level)
   );
+  const {
+    cardAnimationData,
+    showPlayerAnimation,
+    showEnemyAnimation,
+    handleShowCardAnimation,
+  } = useCardAnimation(ctx, G);
   const [visibleCurrentTurn, setVisibleCurrentTurn] = useState(0);
 
   /**
@@ -175,6 +182,9 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
 
       moves.playCard(aiSelectedIndex);
       playCardAudio(aiSelectedCard);
+
+      handleShowCardAnimation(aiSelectedCard);
+
       addLogEntry(
         ctx.turn,
         G.players[1].name,
@@ -227,6 +237,9 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
     if (gameState === GameState.endTurnEnabled) {
       moves.playCard(playerSelectedIndexToPlay);
       playCardAudio(selectedCardToPlay);
+
+      handleShowCardAnimation(selectedCardToPlay);
+
       addLogEntry(
         ctx.turn,
         G.players[0].name,
@@ -245,7 +258,12 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
     >
       <div className='row'>
         <div className='col-3'>
-          <PlayerStatsPanel player={G.players[1]} level={G.level} />
+          <PlayerStatsPanel
+            player={G.players[1]}
+            level={G.level}
+            showCardAnimation={showEnemyAnimation}
+            cardAnimationData={cardAnimationData}
+          />
         </div>
 
         <div className='col-6'>
@@ -291,7 +309,11 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
 
       <div className='row align-items-end'>
         <div className='col-3'>
-          <PlayerStatsPanel player={G.players[0]} />
+          <PlayerStatsPanel
+            player={G.players[0]}
+            showCardAnimation={showPlayerAnimation}
+            cardAnimationData={cardAnimationData}
+          />
         </div>
 
         <div className='col-6'>
