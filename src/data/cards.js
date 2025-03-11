@@ -17,6 +17,7 @@ import {
   stealBuff,
   showEnemyHand,
   lifesteal,
+  poison,
 } from './cardEffects';
 
 /**
@@ -26,8 +27,8 @@ export const CardKeyword = {
   // Cards that deal direct damage to your opponent
   damage: 'damage',
 
-  // Cards that restore your HP
-  heal: 'heal',
+  // Cards that heal or add additional HP
+  sustain: 'sustain',
 
   // Cards that impact you or your opponent's active effects
   effect: 'effect',
@@ -113,7 +114,7 @@ export const Heal1 = {
   name: 'Heal',
   text: '+5 HP',
   effects: [heal(5)],
-  keywords: [CardKeyword.heal],
+  keywords: [CardKeyword.sustain],
 };
 
 export const Heal2 = {
@@ -121,7 +122,7 @@ export const Heal2 = {
   name: 'Heal+',
   text: '+10 HP',
   effects: [heal(10)],
-  keywords: [CardKeyword.heal],
+  keywords: [CardKeyword.sustain],
 };
 
 export const Heal3 = {
@@ -129,7 +130,7 @@ export const Heal3 = {
   name: 'Heal++',
   text: '+15 HP',
   effects: [heal(15)],
-  keywords: [CardKeyword.heal],
+  keywords: [CardKeyword.sustain],
 };
 
 export const Blessing = {
@@ -209,7 +210,7 @@ export const Resurrect = {
   name: 'Resurrect',
   text: '+15 HP on Death',
   effects: [resurrect(15)],
-  keywords: [CardKeyword.heal, CardKeyword.effect],
+  keywords: [CardKeyword.sustain, CardKeyword.effect],
 };
 
 export const Petrify = {
@@ -225,7 +226,7 @@ export const Aura = {
   name: 'Aura',
   text: '+3 HP per Turn',
   effects: [aura(heal(3), '+3 HP per Turn')],
-  keywords: [CardKeyword.heal, CardKeyword.effect],
+  keywords: [CardKeyword.sustain, CardKeyword.effect],
 };
 
 export const Sandstorm = {
@@ -265,7 +266,7 @@ export const Wish4 = {
   name: 'Wish',
   text: 'Remove Debuff and +15 HP',
   effects: [removeDebuff, heal(15)],
-  keywords: [CardKeyword.effect, CardKeyword.heal],
+  keywords: [CardKeyword.effect, CardKeyword.sustain],
 };
 
 export const Wish5 = {
@@ -305,7 +306,7 @@ export const Tide = {
   name: 'Tide',
   text: 'Damage 16 and + Same HP',
   effects: [lifesteal(16)],
-  keywords: [CardKeyword.damage, CardKeyword.heal],
+  keywords: [CardKeyword.damage, CardKeyword.sustain],
 };
 
 export const Revenge = {
@@ -320,6 +321,6 @@ export const Poison = {
   id: '35',
   name: 'Poison',
   text: "Enemy Can't Heal",
-  effects: [], // TODO: Implement Poison effect
+  effects: [poison],
   keywords: [CardKeyword.effect],
 };

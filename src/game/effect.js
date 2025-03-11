@@ -61,6 +61,10 @@ const damage = (G, target, { value = 0 }, ctx) => {
 };
 
 const heal = (G, target, { value = 0 }) => {
+  if (hasEffect(G, target, EffectType.poison)) {
+    return;
+  }
+
   G.players[target].hp += value;
 
   G.players[target].hp = Math.min(
@@ -196,6 +200,8 @@ const lifesteal = (G, target, effect, ctx) => {
   }
 };
 
+const poison = () => {};
+
 const effectHandlers = {
   [EffectType.damage]: damage,
   [EffectType.heal]: heal,
@@ -215,6 +221,7 @@ const effectHandlers = {
   [EffectType.stealBuff]: stealBuff,
   [EffectType.showEnemyHand]: showEnemyHand,
   [EffectType.lifesteal]: lifesteal,
+  [EffectType.poison]: poison,
 };
 
 export const applyEffect = (G, ctx, effect) => {

@@ -17,6 +17,7 @@ export const EffectType = {
   stealBuff: 'stealBuff',
   showEnemyHand: 'showEnemyHand',
   lifesteal: 'lifesteal',
+  poison: 'poison',
 };
 
 export const EffectDuration = {
@@ -47,7 +48,12 @@ export const EffectGroup = {
   ],
 
   // Negative effects applied to the opponent.
-  debuff: [EffectType.debuffAtk, EffectType.debuffDef, EffectType.freeze],
+  debuff: [
+    EffectType.debuffAtk,
+    EffectType.debuffDef,
+    EffectType.freeze,
+    EffectType.poison,
+  ],
 
   // Only one effect of the same type can exist at a time. Can be either buff or debuff.
   unique: [
@@ -55,6 +61,7 @@ export const EffectGroup = {
     EffectType.preventDmg,
     EffectType.resurrect,
     EffectType.freeze,
+    EffectType.poison,
   ],
 };
 
@@ -266,4 +273,15 @@ export const lifesteal = (value) => {
     target: EffectTarget.opponent,
     value,
   };
+};
+
+/**
+ * All healing effects applied to the opponent are invalidated.
+ */
+export const poison = {
+  type: EffectType.poison,
+  duration: EffectDuration.enduring,
+  target: EffectTarget.opponent,
+  group: EffectGroupName.debuff,
+  text: 'Healing Invalidated',
 };
