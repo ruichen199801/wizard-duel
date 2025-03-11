@@ -2,7 +2,6 @@ import {
   getTarget,
   hasEffect,
   hasSameEffect,
-  getEffects,
   removeEffects,
   selectEffectsByGroup,
   removeEffectsByGroup,
@@ -218,7 +217,7 @@ const effectHandlers = {
   [EffectType.lifesteal]: lifesteal,
 };
 
-export const applyEffect = (G, ctx, effect, shouldProcessEoT = true) => {
+export const applyEffect = (G, ctx, effect) => {
   const handler = effectHandlers[effect.type];
 
   if (!handler) {
@@ -231,22 +230,17 @@ export const applyEffect = (G, ctx, effect, shouldProcessEoT = true) => {
   // If you are frozen, the card you play this turn has no effect.
   if (hasEffect(G, ctx.currentPlayer, EffectType.freeze)) {
     removeEffects(G, ctx.currentPlayer, EffectType.freeze);
-    executeEndOfTurnEffects(G, ctx, shouldProcessEoT);
     return;
   }
-
   // If you already have a non-stackable effect, playing the same card will have no effect.
   if (isUnique(effect) && hasEffect(G, target, effect.type)) {
-    executeEndOfTurnEffects(G, ctx, shouldProcessEoT);
     return;
   }
-
   // If you already have an existing aura effect, playing the same card will have no effect.
   if (
     effect.type === EffectType.aura &&
     hasSameEffect(G, ctx.currentPlayer, effect)
   ) {
-    executeEndOfTurnEffects(G, ctx, shouldProcessEoT);
     return;
   }
 
@@ -255,21 +249,6 @@ export const applyEffect = (G, ctx, effect, shouldProcessEoT = true) => {
   if (effect.duration === EffectDuration.enduring) {
     G.players[target].effects.push(effect);
   }
-
-  executeEndOfTurnEffects(G, ctx, shouldProcessEoT);
-};
-
-const executeEndOfTurnEffects = (G, ctx, shouldProcessEoT) => {
-  if (shouldProcessEoT && hasEffect(G, ctx.currentPlayer, EffectType.aura)) {
-    const auraEffects = getEffects(G, ctx.currentPlayer, EffectType.aura);
-
-    auraEffects.forEach((auraEffect) => {
-      auraEffect.effectsToExecute.forEach((e) => {
-        applyEffect(G, ctx, e, false); // Skip the aura check to avoid recursive hell
-      });
-    });
-  }
-  // Add more end of turn effect types here
 };
 
 const applyDamageLevelEffects = (G, target, damage, ctx) => {

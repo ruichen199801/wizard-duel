@@ -207,16 +207,16 @@ export const freeze = {
 };
 
 /**
- * Trigger positive instant effect(s) at the end of your turn.
+ * Trigger a positive instant effect at the end of your turn.
  */
-export const aura = (effectsToExecute, text) => {
+export const aura = (effect, text) => {
   return {
     type: EffectType.aura,
     duration: EffectDuration.enduring,
     target: EffectTarget.self,
     group: EffectGroupName.buff,
     text,
-    effectsToExecute,
+    effect,
   };
 };
 
