@@ -17,6 +17,7 @@ import {
   stealBuff,
   showEnemyHand,
   lifesteal,
+  counterAttack,
   poison,
 } from './cardEffects';
 
@@ -313,7 +314,7 @@ export const Revenge = {
   id: '34',
   name: 'Revenge',
   text: 'Counter Attack 9',
-  effects: [], // TODO: Implement Revenge effect
+  effects: [counterAttack(9)],
   keywords: [CardKeyword.effect],
 };
 

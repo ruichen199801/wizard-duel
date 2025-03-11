@@ -17,6 +17,7 @@ export const EffectType = {
   stealBuff: 'stealBuff',
   showEnemyHand: 'showEnemyHand',
   lifesteal: 'lifesteal',
+  counterAttack: 'counterAttack',
   poison: 'poison',
 };
 
@@ -45,6 +46,7 @@ export const EffectGroup = {
     EffectType.preventDmg,
     EffectType.resurrect,
     EffectType.aura,
+    EffectType.counterAttack,
   ],
 
   // Negative effects applied to the opponent.
@@ -60,6 +62,7 @@ export const EffectGroup = {
     EffectType.doubleDmg,
     EffectType.preventDmg,
     EffectType.resurrect,
+    EffectType.counterAttack,
     EffectType.freeze,
     EffectType.poison,
   ],
@@ -272,6 +275,22 @@ export const lifesteal = (value) => {
     duration: EffectDuration.instant,
     target: EffectTarget.opponent,
     value,
+  };
+};
+
+/**
+ * Reduce the opponent's HP by value when attacked (cannot be reduced below 1).
+ * This effect will be triggered whenever a damage card targeting the player is played,
+ * regardless of whether any actual damage is dealt (e.g. miss/freeze/preventDamage/etc.)
+ */
+export const counterAttack = (value) => {
+  return {
+    type: EffectType.counterAttack,
+    duration: EffectDuration.enduring,
+    target: EffectTarget.self,
+    value,
+    group: EffectGroupName.buff,
+    text: `Counter Attack ${value}`,
   };
 };
 

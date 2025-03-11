@@ -1,5 +1,6 @@
 import {
   getTarget,
+  getEffects,
   hasEffect,
   hasSameEffect,
   removeEffects,
@@ -20,6 +21,15 @@ import { shuffle } from './gameUtils';
 
 const damage = (G, target, { value = 0 }, ctx) => {
   const player = target === '0' ? '1' : '0';
+
+  // Trigger counter attack.
+  if (hasEffect(G, target, EffectType.counterAttack)) {
+    G.players[player].hp = Math.max(
+      1,
+      G.players[player].hp -
+        getEffects(G, target, EffectType.counterAttack)[0].value
+    );
+  }
 
   // Calculate base damage: card damage + player's attack - target's defense.
   value = value + G.players[player].atk - G.players[target].def;
@@ -200,6 +210,8 @@ const lifesteal = (G, target, effect, ctx) => {
   }
 };
 
+const counterAttack = () => {};
+
 const poison = () => {};
 
 const effectHandlers = {
@@ -221,6 +233,7 @@ const effectHandlers = {
   [EffectType.stealBuff]: stealBuff,
   [EffectType.showEnemyHand]: showEnemyHand,
   [EffectType.lifesteal]: lifesteal,
+  [EffectType.counterAttack]: counterAttack,
   [EffectType.poison]: poison,
 };
 
@@ -243,7 +256,7 @@ export const applyEffect = (G, ctx, effect) => {
   if (isUnique(effect) && hasEffect(G, target, effect.type)) {
     return;
   }
-  // If you already have an existing aura effect, playing the same card will have no effect.
+  // If you already have an existing aura effect of the exact same kind, playing the same card will have no effect.
   if (
     effect.type === EffectType.aura &&
     hasSameEffect(G, ctx.currentPlayer, effect)

@@ -95,6 +95,8 @@ export const undoEffect = (G, target, { type, value = 0 }) => {
       break;
     case EffectType.aura:
       break;
+    case EffectType.counterAttack:
+      break;
     case EffectType.poison:
       break;
     default:
