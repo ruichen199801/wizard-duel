@@ -34,3 +34,19 @@ export const startLevel = () => {
 const clearLevel = () => {
   sessionStorage.removeItem('level');
 };
+
+/**
+ * Set game to a specific level - FOR TESTING PURPOSE ONLY.
+ */
+export const jumpToLevel = (level = '1') => {
+  setLevelTo(level);
+  window.location.reload();
+};
+
+const setLevelTo = (level) => {
+  try {
+    sessionStorage.setItem('level', level);
+  } catch (e) {
+    console.error('Error saving to sessionStorage:', e);
+  }
+};

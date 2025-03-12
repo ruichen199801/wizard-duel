@@ -18,6 +18,8 @@ export const DrawMode = {
 
 export const finalLevel = '7';
 
+export const devTestLevel = '7'; // Update this when new level is developed
+
 export const maxTurn = 50;
 
 export const levelConfigs = {
