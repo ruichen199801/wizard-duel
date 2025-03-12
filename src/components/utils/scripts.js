@@ -69,8 +69,8 @@ const battleStartInstrutions = {
   },
 
   7: {
-    intro: `The cursed Shadow Swamp blocks your way to the final trial. `,
-    levelRule: `Both players lose HP at the end of their turns, starting at 1 and increasing each turn.`,
+    intro: `The cursed Shadow Swamp stands in your way before the final trial. `,
+    levelRule: `Both players lose 3 HP at the end of their turn (it can't drop below 1).`,
     outro: ``,
   },
 };

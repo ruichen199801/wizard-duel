@@ -258,5 +258,11 @@ export const executeGlobalEndOfTurnEffects = (G, ctx) => {
     G.players[1].effects = [];
   }
 
+  // Lose HP every turn
+  if (G.globalEffects.loseHpAmount) {
+    const player = G.players[ctx.currentPlayer];
+    player.hp = Math.max(1, player.hp - G.globalEffects.loseHpAmount);
+  }
+
   // Add more effects here
 };

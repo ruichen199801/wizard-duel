@@ -174,7 +174,7 @@ export const levelConfigs = {
     globalEffects: {
       drawMode: DrawMode.draw,
       showEnemyHand: false,
-      // TODO: Add level 7 effect
+      loseHpAmount: 3,
     },
   },
 };
