@@ -6,22 +6,19 @@ import useBsTooltip from './hooks/useBsTooltip';
 import useLog from './hooks/useLog';
 import useCardAnimation from './hooks/useCardAnimation';
 import { sleep } from './utils/commonUtils';
+import {
+  resolveCardAudio,
+  getSelectableCardIds,
+} from './utils/presentationUtils';
 import { GameState, pauseInterval } from './utils/constants';
 import {
-  cardAudio,
   click,
   victory,
   defeat,
-  miss,
-  defrost,
-  cleanse,
-  potion,
   getLocationForLevel,
   getMusicForLevel,
 } from './utils/assetPaths';
 import { random } from './utils/ai';
-import { CardKeyword } from '../data/cards';
-import { EffectType } from '../data/cardEffects';
 import { DrawMode } from '../game/level';
 
 import CardPreview from './CardPreview';
@@ -76,40 +73,8 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
   } = useCardAnimation(ctx, G);
   const [visibleCurrentTurn, setVisibleCurrentTurn] = useState(0);
 
-  /**
-   * Plays the appropriate audio when a card is played.
-   *  1. If the played card contains the `effect` keyword and the current turn is set to clear all effects, play the `cleanse` audio.
-   *  2. If the current player has an active `freeze` effect, play the `defrost` audio.
-   *  3. If the played card contains the `damage` keyword and the current attack is set to miss, play the `miss` audio.
-   *  4. If the played card has single effect which is self-healing and the current player has `poison` effect, play the `potion` audio.
-   *  5. In all other cases, play the default audio associated with the card.
-   */
   const playCardAudio = (card) => {
-    const hasFreezeEffect = G.players[ctx.currentPlayer].effects.some(
-      (e) => e.type === EffectType.freeze
-    );
-    const hasPoisonEffect = G.players[ctx.currentPlayer].effects.some(
-      (e) => e.type === EffectType.poison
-    );
-    const hasDamageKeyword = card.keywords.includes(CardKeyword.damage);
-    const hasEffectKeyward = card.keywords.includes(CardKeyword.effect);
-    const isUniqueHealCard =
-      card.effects.length === 1 && card.effects[0].type === EffectType.heal;
-    const shouldMiss = G.globalEffects.shouldMiss?.[ctx.turn - 1];
-    const shouldClearEffects =
-      G.globalEffects.shouldClearEffects?.[ctx.turn - 1];
-
-    if (hasEffectKeyward && shouldClearEffects) {
-      playAudio(cleanse);
-    } else if (hasFreezeEffect) {
-      playAudio(defrost);
-    } else if (hasDamageKeyword && shouldMiss) {
-      playAudio(miss);
-    } else if (isUniqueHealCard && hasPoisonEffect) {
-      playAudio(potion);
-    } else {
-      playAudio(cardAudio(card.id));
-    }
+    playAudio(resolveCardAudio(card, G, ctx));
   };
 
   const handleDrawCard = async () => {
@@ -140,7 +105,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
       ctx.currentPlayer === '0' &&
       G.globalEffects.drawMode === DrawMode.select
     ) {
-      setSelectableCardsToDraw(getSelectableCardIds());
+      setSelectableCardsToDraw(getSelectableCardIds(G));
       setShowSelectCardModal(true);
     } else {
       moves.drawCard();
@@ -155,21 +120,6 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
     setShowSelectCardModal(false);
     setSelectableCardsToDraw([]);
     moves.drawCard(cardId);
-  };
-
-  const getSelectableCardIds = () => {
-    if (G.deck.length === 0) {
-      throw new Error('Deck must have at least one card.');
-    }
-    if (G.deck.length === 1) {
-      return [G.deck[0].id];
-    }
-    let firstIndex = Math.floor(Math.random() * G.deck.length);
-    let secondIndex = Math.floor(Math.random() * G.deck.length);
-    while (secondIndex === firstIndex) {
-      secondIndex = Math.floor(Math.random() * G.deck.length);
-    }
-    return [G.deck[firstIndex].id, G.deck[secondIndex].id];
   };
 
   const handleAiPlayCard = async () => {
