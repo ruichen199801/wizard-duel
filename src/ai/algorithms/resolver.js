@@ -1,5 +1,5 @@
-import { EffectGroupName, EffectType } from '../data/cardEffects';
-import { CardKeyword } from '../data/cards';
+import { EffectGroupName, EffectType } from '../../data/cardEffects';
+import { CardKeyword } from '../../data/cards';
 import { random } from './random';
 
 /**
