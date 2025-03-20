@@ -249,7 +249,6 @@ export const applyEffect = (G, ctx, effect) => {
 
   // If you are frozen, the card you play this turn has no effect.
   if (hasEffect(G, ctx.currentPlayer, EffectType.freeze)) {
-    removeEffects(G, ctx.currentPlayer, EffectType.freeze);
     return;
   }
   // If you already have a non-stackable effect, playing the same card will have no effect.

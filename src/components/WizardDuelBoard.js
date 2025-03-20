@@ -18,7 +18,7 @@ import {
   getLocationForLevel,
   getMusicForLevel,
 } from './utils/assetPaths';
-import { random } from './utils/ai';
+import { AI, Algorithm } from '../ai/ai';
 import { DrawMode } from '../game/level';
 
 import CardPreview from './CardPreview';
@@ -135,7 +135,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
         await sleep(pauseInterval);
       }
 
-      const aiSelectedIndex = random();
+      const aiSelectedIndex = AI(Algorithm.sanity)(G, ctx);
       const aiSelectedCard = G.players[1].hand[aiSelectedIndex];
       setSelectedCardToPlay(aiSelectedCard);
 

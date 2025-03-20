@@ -1,7 +1,9 @@
 import { INVALID_MOVE } from 'boardgame.io/core';
 import { p0, p1 } from '../data/player';
 import { getDeckForLevel } from '../data/deck';
+import { EffectType } from '../data/cardEffects';
 import { applyEffect } from './effect';
+import { removeEffects } from './effectUtils';
 import {
   shuffle,
   removeCard,
@@ -81,6 +83,8 @@ const playCard = ({ G, ctx }, index) => {
       applyEffect(G, ctx, e);
     });
   }
+
+  removeEffects(G, ctx.currentPlayer, EffectType.freeze); 
 
   executeEndOfTurnEffects(G, ctx);
 
