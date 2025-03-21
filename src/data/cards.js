@@ -41,16 +41,16 @@ export const CardKeyword = {
 export const Fireball1 = {
   id: '0',
   name: 'Fireball',
-  text: 'Damage 3',
-  effects: [damage(3)],
+  text: 'Damage 5',
+  effects: [damage(5)],
   keywords: [CardKeyword.damage],
 };
 
 export const Fireball2 = {
   id: '1',
   name: 'Fireball+',
-  text: 'Damage 5',
-  effects: [damage(5)],
+  text: 'Damage 7',
+  effects: [damage(7)],
   keywords: [CardKeyword.damage],
 };
 
@@ -65,48 +65,48 @@ export const Fireball3 = {
 export const Frost1 = {
   id: '3',
   name: 'Frost',
-  text: 'Damage 4',
-  effects: [damage(4)],
+  text: 'Damage 6',
+  effects: [damage(6)],
   keywords: [CardKeyword.damage],
 };
 
 export const Frost2 = {
   id: '4',
   name: 'Frost+',
-  text: 'Damage 6',
-  effects: [damage(6)],
+  text: 'Damage 8',
+  effects: [damage(8)],
   keywords: [CardKeyword.damage],
 };
 
 export const Frost3 = {
   id: '5',
   name: 'Frost++',
-  text: 'Damage 8',
-  effects: [damage(8)],
+  text: 'Damage 10',
+  effects: [damage(10)],
   keywords: [CardKeyword.damage],
 };
 
 export const Thunder1 = {
   id: '6',
   name: 'Thunder',
-  text: 'Damage 7',
-  effects: [damage(7)],
+  text: 'Damage 12',
+  effects: [damage(12)],
   keywords: [CardKeyword.damage],
 };
 
 export const Thunder2 = {
   id: '7',
   name: 'Thunder+',
-  text: 'Damage 12',
-  effects: [damage(12)],
+  text: 'Damage 14',
+  effects: [damage(14)],
   keywords: [CardKeyword.damage],
 };
 
 export const Thunder3 = {
   id: '8',
   name: 'Thunder++',
-  text: 'Damage 18',
-  effects: [damage(18)],
+  text: 'Damage 16',
+  effects: [damage(16)],
   keywords: [CardKeyword.damage],
 };
 
@@ -201,8 +201,8 @@ export const Block = {
 export const Flame = {
   id: '20',
   name: 'Flame',
-  text: 'Damage 9 and +5 Attack',
-  effects: [damage(9), buffAtk(5)],
+  text: 'Damage 12 and +6 Attack',
+  effects: [damage(12), buffAtk(6)],
   keywords: [CardKeyword.damage, CardKeyword.effect],
 };
 
@@ -257,8 +257,8 @@ export const Wish2 = {
 export const Wish3 = {
   id: '27',
   name: 'Wish',
-  text: '+8 Attack',
-  effects: [buffAtk(8)],
+  text: '+10 Attack',
+  effects: [buffAtk(10)],
   keywords: [CardKeyword.effect],
 };
 
@@ -305,8 +305,8 @@ export const Vision = {
 export const Tide = {
   id: '33',
   name: 'Tide',
-  text: 'Damage 16 and + Same HP',
-  effects: [lifesteal(16)],
+  text: 'Damage 18 and + Same HP',
+  effects: [lifesteal(18)],
   keywords: [CardKeyword.damage, CardKeyword.sustain],
 };
 

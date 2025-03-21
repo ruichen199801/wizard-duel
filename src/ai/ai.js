@@ -6,14 +6,16 @@ export const Algorithm = {
   // AI makes random moves.
   random: 'random',
 
-  // AI makes sensible moves based on the board state but is unaware of level effects,
-  // which player can take advantage of.
-  sanity: 'sanity',
+  // AI filters bad moves, but is not able to make optimal moves.
+  filter: 'filter',
+
+  // AI makes optimal moves based on the board state but is unaware of level effects.
+  optimal: 'optimal',
 };
 
 /**
  * Encapsulates the decision-making logic for the AI to play a card.
- * Example usage: const selectedIndex = AI(Algorithm.sanity)(G, ctx);
+ * Example usage: const selectedIndex = AI(Algorithm.filter)(G, ctx);
  *
  * @returns The index of the card to play from the AI's hand.
  */
@@ -22,7 +24,10 @@ export const AI = (algo) => (G, ctx) => {
 
   const strategies = {
     random: () => random(cards),
-    sanity: () => {
+
+    filter: () => random(filterActions(cards, G, ctx)),
+
+    optimal: () => {
       const actions = filterActions(cards, G, ctx);
       return actions.length === 1 ? actions[0] : resolveAction(actions, G);
     },

@@ -41,21 +41,21 @@ export const levelConfigs = {
 
   2: {
     playerStatsOverride: {
-      maxHp: 35,
-      hp: 35,
+      maxHp: 50,
+      hp: 50,
     },
     enemyStatsOverride: {
-      maxHp: 35,
-      hp: 35,
+      maxHp: 50,
+      hp: 50,
     },
 
     playerHandOverride: randomPopulateHand(
       [Fireball1, Fireball2, Fireball3, Flame, Resurrect],
-      [0.3, 0.4, 0.2, 0.05, 0.05]
+      [0.3, 0.3, 0.3, 0.05, 0.05]
     ),
     enemyHandOverride: randomPopulateHand(
       [Fireball1, Fireball2, Fireball3, Flame, Resurrect],
-      [0.3, 0.4, 0.2, 0.05, 0.05]
+      [0.3, 0.3, 0.3, 0.05, 0.05]
     ),
 
     playerEffectsOverride: [],
@@ -69,12 +69,12 @@ export const levelConfigs = {
 
   3: {
     playerStatsOverride: {
-      maxHp: 40,
-      hp: 40,
+      maxHp: 55,
+      hp: 55,
     },
     enemyStatsOverride: {
-      maxHp: 40,
-      hp: 40,
+      maxHp: 55,
+      hp: 55,
     },
 
     playerHandOverride: [],
@@ -91,12 +91,12 @@ export const levelConfigs = {
 
   4: {
     playerStatsOverride: {
-      maxHp: 45,
-      hp: 45,
+      maxHp: 60,
+      hp: 60,
     },
     enemyStatsOverride: {
-      maxHp: 45,
-      hp: 45,
+      maxHp: 60,
+      hp: 60,
     },
 
     playerHandOverride: [],
@@ -114,12 +114,12 @@ export const levelConfigs = {
 
   5: {
     playerStatsOverride: {
-      maxHp: 50,
-      hp: 50,
+      maxHp: 65,
+      hp: 65,
     },
     enemyStatsOverride: {
-      maxHp: 50,
-      hp: 50,
+      maxHp: 65,
+      hp: 65,
     },
 
     playerHandOverride: [],
@@ -136,12 +136,12 @@ export const levelConfigs = {
 
   6: {
     playerStatsOverride: {
-      maxHp: 55,
-      hp: 55,
+      maxHp: 70,
+      hp: 70,
     },
     enemyStatsOverride: {
-      maxHp: 55,
-      hp: 55,
+      maxHp: 70,
+      hp: 70,
     },
 
     playerHandOverride: [],
@@ -159,12 +159,12 @@ export const levelConfigs = {
 
   7: {
     playerStatsOverride: {
-      maxHp: 60,
-      hp: 60,
+      maxHp: 75,
+      hp: 75,
     },
     enemyStatsOverride: {
-      maxHp: 60,
-      hp: 60,
+      maxHp: 75,
+      hp: 75,
     },
 
     playerHandOverride: [],

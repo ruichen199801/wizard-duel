@@ -135,7 +135,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
         await sleep(pauseInterval);
       }
 
-      const aiSelectedIndex = AI(Algorithm.sanity)(G, ctx);
+      const aiSelectedIndex = AI(Algorithm.filter)(G, ctx);
       const aiSelectedCard = G.players[1].hand[aiSelectedIndex];
       setSelectedCardToPlay(aiSelectedCard);
 
