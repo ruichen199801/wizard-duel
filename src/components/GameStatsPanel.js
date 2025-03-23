@@ -7,38 +7,40 @@ const GameStatsPanel = ({ level, visibleTurn, deckSize, showGameStats }) => {
       <CardPile />
 
       {showGameStats && (
-        <div className='d-flex mt-2'>
-          <div className='d-flex align-items-center me-2'>
-            <img
-              src={icon.level}
-              alt='level'
-              data-bs-toggle='tooltip'
-              data-bs-placement='bottom'
-              data-bs-title='Current level'
-            />
-            <span className='fw-semibold'>{level}</span>
-          </div>
+        <div className='d-inline-block p-1 mt-2 bg-panel'>
+          <div className='d-flex justify-content-center gstats-panel-width'>
+            <div className='d-flex align-items-center me-2'>
+              <img
+                src={icon.level}
+                alt='level'
+                data-bs-toggle='tooltip'
+                data-bs-placement='bottom'
+                data-bs-title='Current level'
+              />
+              <span className='fw-semibold'>{level}</span>
+            </div>
 
-          <div className='d-flex align-items-center me-2'>
-            <img
-              src={icon.turn}
-              alt='turn'
-              data-bs-toggle='tooltip'
-              data-bs-placement='bottom'
-              data-bs-title='Current turn'
-            />
-            <span className='fw-semibold'>{visibleTurn}</span>
-          </div>
+            <div className='d-flex align-items-center me-2'>
+              <img
+                src={icon.turn}
+                alt='turn'
+                data-bs-toggle='tooltip'
+                data-bs-placement='bottom'
+                data-bs-title='Current turn'
+              />
+              <span className='fw-semibold'>{visibleTurn}</span>
+            </div>
 
-          <div className='d-flex align-items-center'>
-            <img
-              src={icon.deck}
-              alt='deck'
-              data-bs-toggle='tooltip'
-              data-bs-placement='bottom'
-              data-bs-title='Cards left'
-            />
-            <span className='fw-semibold'>{deckSize}</span>
+            <div className='d-flex align-items-center'>
+              <img
+                src={icon.deck}
+                alt='deck'
+                data-bs-toggle='tooltip'
+                data-bs-placement='bottom'
+                data-bs-title='Cards left'
+              />
+              <span className='fw-semibold'>{deckSize}</span>
+            </div>
           </div>
         </div>
       )}
