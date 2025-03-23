@@ -7,7 +7,7 @@ const GameStatsPanel = ({ level, visibleTurn, deckSize, showGameStats }) => {
       <CardPile />
 
       {showGameStats && (
-        <div className='d-inline-block p-1 mt-2 bg-panel'>
+        <div className='d-inline-block p-1 mt-2 rounded bg-panel'>
           <div className='d-flex justify-content-center gstats-panel-width'>
             <div className='d-flex align-items-center me-2'>
               <img

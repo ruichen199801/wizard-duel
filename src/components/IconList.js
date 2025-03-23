@@ -29,7 +29,7 @@ const IconList = ({
 
   return (
     <div className='d-flex justify-content-end'>
-      <div className='d-inline-block px-1 bg-panel'>
+      <div className='d-inline-block px-1 rounded bg-panel'>
         <div className='d-flex m-2'>
           <img
             src={icon.effect}

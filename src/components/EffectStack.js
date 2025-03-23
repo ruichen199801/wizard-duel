@@ -22,53 +22,40 @@ const EffectStack = ({ opponentEffects, playerEffects, showEffectStack }) => {
     });
   };
 
+  // Only 10 effects can be rendered at a time without overflowing the panel.
+  const renderEffectStack = (effects) => {
+    return (
+      <ul className='list-group'>
+        {sortEffects([...effects]).map((effect, index) => (
+          <li
+            key={index}
+            className='list-group-item bg-panel p-0 px-1 border-0 fxstack-width'
+          >
+            {effect.text && effect.group ? (
+              <>
+                <img
+                  src={icon[effect.group]}
+                  className='ms-1 me-2 mb-1'
+                  alt='effect'
+                />
+                <span>{effect.text}</span>
+              </>
+            ) : null}
+          </li>
+        ))}
+      </ul>
+    );
+  };
+
   return (
     showEffectStack && (
       <div className='d-flex flex-column h-100 justify-content-between'>
-        {/* Opponent effect stack */}
         <div className='fxstack-mb'>
-          <ul className='list-group'>
-            {sortEffects([...opponentEffects]).map((effect, index) => (
-              <li
-                key={index}
-                className='list-group-item bg-transparent p-0 border-0'
-              >
-                {effect.text && effect.group ? (
-                  <>
-                    <img
-                      src={icon[effect.group]}
-                      className='me-2 mb-1'
-                      alt='effect'
-                    />
-                    <span>{effect.text}</span>
-                  </>
-                ) : null}
-              </li>
-            ))}
-          </ul>
+          {renderEffectStack([...opponentEffects])}
         </div>
 
-        {/* Player effect stack */}
         <div className='fxstack-mt'>
-          <ul className='list-group'>
-            {sortEffects([...playerEffects]).map((effect, index) => (
-              <li
-                key={index}
-                className='list-group-item bg-transparent p-0 border-0'
-              >
-                {effect.text && effect.group ? (
-                  <>
-                    <img
-                      src={icon[effect.group]}
-                      className='me-2 mb-1'
-                      alt='effect'
-                    />
-                    <span>{effect.text}</span>
-                  </>
-                ) : null}
-              </li>
-            ))}
-          </ul>
+          {renderEffectStack([...playerEffects])}
         </div>
       </div>
     )

@@ -27,7 +27,7 @@ const PlayerStatsPanel = ({
   };
 
   return (
-    <div className='d-inline-block p-2 bg-panel'>
+    <div className='d-inline-block p-2 rounded bg-panel'>
       <div className='d-flex align-items-center'>
         <div
           className='me-3 position-relative'

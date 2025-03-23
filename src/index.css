@@ -40,7 +40,6 @@
 
 .bg-panel {
   background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
 }
 
 .icon:hover {
@@ -63,6 +62,10 @@
 .fxstack-mt {
   position: relative;
   top: 25px;
+}
+
+.fxstack-width {
+  max-width: 275px;
 }
 
 .w-80 {
