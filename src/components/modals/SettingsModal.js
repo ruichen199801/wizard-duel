@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { exitToMenu, resetGame, jumpToLevel } from '../utils/commonUtils';
 import { click } from '../utils/assetPaths';
 import { devTestLevel } from '../../game/level';
+import { Algorithm } from '../../ai/ai';
 
 const SettingsModal = ({
   showSettingsModal,
@@ -13,6 +14,8 @@ const SettingsModal = ({
   setShowGameStats,
   showEffectStack,
   setShowEffectStack,
+  aiAlgorithm,
+  setAiAlgorithm,
 }) => {
   const [headerClickCount, setHeaderClickCount] = useState(0);
   const showJumpLevelOption = headerClickCount >= 6;
@@ -32,6 +35,12 @@ const SettingsModal = ({
 
   const toggleEffectStackDisplay = () => {
     setShowEffectStack((prevState) => !prevState);
+  };
+
+  const handleAiDifficultyChange = () => {
+    setAiAlgorithm((prevState) =>
+      prevState === Algorithm.filter ? Algorithm.optimal : Algorithm.filter
+    );
   };
 
   const handleHeaderClick = () => {
@@ -66,6 +75,18 @@ const SettingsModal = ({
 
             <div className='modal-body'>
               <div className='d-flex flex-column align-items-center'>
+                <div className='btn-group-vertical btn-width mb-3'>
+                  <button
+                    type='button'
+                    className='btn btn-dark mb-1'
+                    onClick={handleAiDifficultyChange}
+                  >
+                    {aiAlgorithm === Algorithm.filter
+                      ? 'AI Difficulty: Normal'
+                      : 'AI Difficulty: Hard'}
+                  </button>
+                </div>
+
                 {/* Sound and music settings are effective for current game only and is not persistent */}
                 <div className='btn-group-vertical btn-width mb-3'>
                   <button

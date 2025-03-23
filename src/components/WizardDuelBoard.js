@@ -54,6 +54,8 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
   const [showHelpModal, setShowHelpModal] = useState(false);
   const [showMatchupModal, setShowMatchupModal] = useState(true);
 
+  const [aiAlgorithm, setAiAlgorithm] = useState(Algorithm.filter);
+
   const [showSelectCardModal, setShowSelectCardModal] = useState(false);
   const [selectableCardsToDraw, setSelectableCardsToDraw] = useState([]);
 
@@ -135,7 +137,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
         await sleep(pauseInterval);
       }
 
-      const aiSelectedIndex = AI(Algorithm.filter)(G, ctx);
+      const aiSelectedIndex = AI(aiAlgorithm)(G, ctx);
       const aiSelectedCard = G.players[1].hand[aiSelectedIndex];
       setSelectedCardToPlay(aiSelectedCard);
 
@@ -331,6 +333,8 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
         setShowGameStats={setShowGameStats}
         showEffectStack={showEffectStack}
         setShowEffectStack={setShowEffectStack}
+        aiAlgorithm={aiAlgorithm}
+        setAiAlgorithm={setAiAlgorithm}
       />
       <HelpModal
         showHelpModal={showHelpModal}
