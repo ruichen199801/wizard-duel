@@ -67,14 +67,18 @@ const PlayerStatsPanel = ({
         >
           <div className='d-flex align-items-center mb-2'>
             <img src={icon.hp} className='me-2 pstats-icon' alt='hp' />
-            <span className='fw-semibold pstats-text'>
+            <span className='fw-semibold pstats-text pstats-panel-width'>
               {player.hp} {isStatsIconsHovered && `/ ${player.maxHp}`}
             </span>
           </div>
 
           <div className='d-flex align-items-center mb-2'>
             <img src={icon.atk} className='me-2 pstats-icon' alt='atk' />
-            <span className='fw-semibold pstats-text'>
+            <span
+              className={`fw-semibold pstats-text ${
+                player.atk < 0 ? 'text-danger' : ''
+              }`}
+            >
               {isStatsIconsHovered
                 ? formatValueDisplay(player.atk, player.baseAtk)
                 : player.atk}
@@ -83,7 +87,11 @@ const PlayerStatsPanel = ({
 
           <div className='d-flex align-items-center'>
             <img src={icon.def} className='me-2 pstats-icon' alt='def' />
-            <span className='fw-semibold pstats-text pstats-panel-width'>
+            <span
+              className={`fw-semibold pstats-text ${
+                player.def < 0 ? 'text-danger' : ''
+              }`}
+            >
               {isStatsIconsHovered
                 ? formatValueDisplay(player.def, player.baseDef)
                 : player.def}
