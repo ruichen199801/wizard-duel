@@ -5,6 +5,7 @@ import {
   avatarMediumScale,
 } from './utils/constants';
 import { getAvatarForLevel, icon } from './utils/assetPaths';
+import { getEnemyName } from './utils/scripts';
 import { EffectType } from '../data/cardEffects';
 
 const PlayerStatsPanel = ({
@@ -33,7 +34,7 @@ const PlayerStatsPanel = ({
           className='me-3 position-relative'
           data-bs-toggle='tooltip'
           data-bs-placement={player.id === '0' ? 'top' : 'bottom'}
-          data-bs-title={player.id === '0' ? 'Player' : 'Opponent'}
+          data-bs-title={player.id === '0' ? 'You' : getEnemyName(level)}
         >
           {/* Player avatar */}
           <img

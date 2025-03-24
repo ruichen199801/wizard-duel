@@ -29,7 +29,7 @@ const EffectStack = ({ opponentEffects, playerEffects, showEffectStack }) => {
         {sortEffects([...effects]).map((effect, index) => (
           <li
             key={index}
-            className='list-group-item bg-panel p-0 px-1 border-0 fxstack-width'
+            className='list-group-item bg-panel p-0 px-1 pt-1 border-0 fxstack-width'
           >
             {effect.text && effect.group ? (
               <>
@@ -38,7 +38,7 @@ const EffectStack = ({ opponentEffects, playerEffects, showEffectStack }) => {
                   className='ms-1 me-2 mb-1'
                   alt='effect'
                 />
-                <span>{effect.text}</span>
+                <span className='fw-semibold'>{effect.text}</span>
               </>
             ) : null}
           </li>
