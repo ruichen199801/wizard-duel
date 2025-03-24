@@ -18,6 +18,7 @@ import {
 } from '../data/cardEffects';
 import { getDeckForLevel } from '../data/deck';
 import { shuffle } from './gameUtils';
+import { freezeRate } from './level';
 
 const damage = (G, target, { value = 0 }, ctx) => {
   const player = target === '0' ? '1' : '0';
@@ -273,7 +274,7 @@ export const applyEffect = (G, ctx, effect) => {
 const applyDamageLevelEffects = (G, target, damage, ctx) => {
   switch (G.level) {
     case '3':
-      if (getChanceEffect(0.25)) {
+      if (getChanceEffect(freezeRate)) {
         G.players[target].effects.push(freezeEffect);
       }
       return damage;

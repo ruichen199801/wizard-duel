@@ -3,7 +3,7 @@ import { p0, p1 } from '../data/player';
 import { getDeckForLevel } from '../data/deck';
 import { EffectType } from '../data/cardEffects';
 import { applyEffect } from './effect';
-import { removeEffects } from './effectUtils';
+import { hasEffect, removeEffects } from './effectUtils';
 import {
   shuffle,
   removeCard,
@@ -84,11 +84,15 @@ const playCard = ({ G, ctx }, index) => {
     });
   }
 
-  removeEffects(G, ctx.currentPlayer, EffectType.freeze); 
+  let freezeTriggered = false;
+  if (hasEffect(G, ctx.currentPlayer, EffectType.freeze)) {
+    removeEffects(G, ctx.currentPlayer, EffectType.freeze);
+    freezeTriggered = true;
+  }
 
   executeEndOfTurnEffects(G, ctx);
 
-  executeGlobalEndOfTurnEffects(G, ctx);
+  executeGlobalEndOfTurnEffects(G, ctx, card, freezeTriggered);
 
   removeCard(hand, index);
 

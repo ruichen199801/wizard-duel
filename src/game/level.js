@@ -11,16 +11,21 @@ import {
   Resurrect,
 } from '../data/cards';
 
+// General constants
 export const DrawMode = {
   draw: 'draw',
   select: 'select',
 };
-
 export const finalLevel = '7';
-
-export const devTestLevel = '7'; // Update this when new level is developed
-
+export const devTestLevel = '7';
 export const maxTurn = 50;
+
+// Level specific constants
+export const handDistribution = [0.3, 0.3, 0.3, 0.05, 0.05]; // Level 2
+export const freezeRate = 0.25; // Level 3
+export const missRate = 0.2; // Level 4
+export const clearEffectInterval = 10; // Level 6
+export const loseHpAmount = 5; // Level 7
 
 export const levelConfigs = {
   1: {
@@ -51,11 +56,11 @@ export const levelConfigs = {
 
     playerHandOverride: randomPopulateHand(
       [Fireball1, Fireball2, Fireball3, Flame, Resurrect],
-      [0.3, 0.3, 0.3, 0.05, 0.05]
+      handDistribution
     ),
     enemyHandOverride: randomPopulateHand(
       [Fireball1, Fireball2, Fireball3, Flame, Resurrect],
-      [0.3, 0.3, 0.3, 0.05, 0.05]
+      handDistribution
     ),
 
     playerEffectsOverride: [],
@@ -108,7 +113,7 @@ export const levelConfigs = {
     globalEffects: {
       drawMode: DrawMode.draw,
       showEnemyHand: false,
-      shouldMiss: generateAttackOutcomes(maxTurn, 0.15),
+      shouldMiss: generateAttackOutcomes(maxTurn, missRate),
     },
   },
 
@@ -153,7 +158,7 @@ export const levelConfigs = {
     globalEffects: {
       drawMode: DrawMode.draw,
       showEnemyHand: false,
-      shouldClearEffects: getClearEffectSchedule(maxTurn, 10),
+      shouldClearEffects: getClearEffectSchedule(maxTurn, clearEffectInterval),
     },
   },
 
@@ -176,7 +181,7 @@ export const levelConfigs = {
     globalEffects: {
       drawMode: DrawMode.draw,
       showEnemyHand: false,
-      loseHpAmount: 3,
+      loseHpAmount,
     },
   },
 };
