@@ -1,7 +1,12 @@
 import CardPile from './CardPile';
 import { icon } from './utils/assetPaths';
+import { maxTurn } from '../game/level';
 
 const GameStatsPanel = ({ level, visibleTurn, deckSize, showGameStats }) => {
+  // Set reminder when game is close to end in a draw.
+  const getTurnHighlightStyle = () =>
+    visibleTurn >= maxTurn - 9 ? 'text-danger' : '';
+
   return (
     <div className='d-flex flex-column'>
       <CardPile />
@@ -28,7 +33,10 @@ const GameStatsPanel = ({ level, visibleTurn, deckSize, showGameStats }) => {
                 data-bs-placement='bottom'
                 data-bs-title='Current turn'
               />
-              <span className='fw-semibold'>{visibleTurn}</span>
+
+              <span className={`fw-semibold ${getTurnHighlightStyle()}`}>
+                {visibleTurn}
+              </span>
             </div>
 
             <div className='d-flex align-items-center'>
