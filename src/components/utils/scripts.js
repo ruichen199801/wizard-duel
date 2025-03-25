@@ -20,50 +20,56 @@ const battleStartCaptions = {
 };
 const getBattleStartCaption = (level = '1') => battleStartCaptions[level];
 
-const battleStartInstrutions = {
+const battleInstrutions = {
   1: {
     intro: `You are a young wizard on a quest to challenge the greatest sorcerers. Your adventure begins at the Citadel to face Arden the Wise.`,
     levelRule: ``,
     outro: ``,
+    tips: ``,
   },
 
   2: {
     intro: `G0B1N-X is a mischievous goblin mage who LOVES playing with fire. `,
     levelRule: `Both players get random copies of fire cards in their starting hand.`,
     outro: ``,
+    tips: ``,
   },
 
   3: {
     intro: `Mount Everfrost is shrouded in an eternal winter caused by Queen Shiro's frost magic. `,
     levelRule: `Damage cards have a chance to freeze the target.`,
     outro: ``,
+    tips: `Freezing a player invalidates their next card.`,
   },
 
   4: {
     intro: `In the heart of Xibalda, you meet Hassan Sarbah, master of ancient sand spells. Disrupted by the desert wind, `,
     levelRule: `attacks will miss on certain turns.`,
     outro: ``,
+    tips: `Red turn number means your attack will miss.`,
   },
 
   5: {
     intro: `Kai, a seasoned hunter, is one with the secrets of Whisperwood. `,
     levelRule: `Every turn, you’ll pick between two cards `,
     outro: `to find your way through the forest.`,
+    tips: ``,
   },
 
   6: {
     intro: `Beneath the shimmering waves of Coral Bay, the tides shift in unpredictable ways. `,
     levelRule: `Every 11 turns, all buffs and debuffs are washed away.`,
     outro: ``,
+    tips: `Red turn number means effects will clear this turn.`,
   },
 
   7: {
-    intro: `The cursed Shadowland drains the life of all who enter. `,
-    levelRule: `Non-damage cards cost 5 HP to play. HP can’t drop below 1 in this way.`,
+    intro: `Zara Shadowbane rules the cursed Shadowland, draining the life of all who enter. `,
+    levelRule: `Non-damage cards cost 5 HP to play.`,
     outro: ``,
+    tips: `HP can’t drop below 1 in this way.`,
   },
 };
-const getBattleStartInstructions = (level = '1') =>
-  battleStartInstrutions[level];
+const getBattleInstructions = (level = '1') => battleInstrutions[level];
 
-export { getEnemyName, getBattleStartCaption, getBattleStartInstructions };
+export { getEnemyName, getBattleStartCaption, getBattleInstructions };
