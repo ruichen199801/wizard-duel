@@ -22,7 +22,7 @@ const getBattleStartCaption = (level = '1') => battleStartCaptions[level];
 
 const battleStartInstrutions = {
   1: {
-    intro: `You are a young wizard on a quest to travel across the realm and challenge the greatest sorcerers. Your adventure begins at the Citadel, where Arden the Wise awaits your first duel.`,
+    intro: `You are a young wizard on a quest to challenge the greatest sorcerers. Your adventure begins at the Citadel to face Arden the Wise.`,
     levelRule: ``,
     outro: ``,
   },
