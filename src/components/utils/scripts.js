@@ -29,19 +29,19 @@ const battleStartInstrutions = {
 
   2: {
     intro: `G0B1N-X is a mischievous goblin mage who LOVES playing with fire. `,
-    levelRule: `Both players get random copies of fire cards in their starting hand. `,
-    outro: `Burn or be burned!`,
+    levelRule: `Both players get random copies of fire cards in their starting hand.`,
+    outro: ``,
   },
 
   3: {
     intro: `Mount Everfrost is shrouded in an eternal winter caused by Queen Shiro's frost magic. `,
-    levelRule: `Every time a damage card is played, it has a chance to freeze the target (invalidate their next card).`,
+    levelRule: `Damage cards have a chance to freeze the target.`,
     outro: ``,
   },
 
   4: {
-    intro: `In the heart of Xibalda, you meet Hassan Sarbah, master of ancient sand spells. `,
-    levelRule: `Disrupted by the desert wind, attacks will miss on certain turns.`,
+    intro: `In the heart of Xibalda, you meet Hassan Sarbah, master of ancient sand spells. Disrupted by the desert wind, `,
+    levelRule: `attacks will miss on certain turns.`,
     outro: ``,
   },
 
@@ -59,7 +59,7 @@ const battleStartInstrutions = {
 
   7: {
     intro: `The cursed Shadowland drains the life of all who enter. `,
-    levelRule: `Non-damage cards cost 5 HP to play (HP can’t drop below 1 from this effect).`,
+    levelRule: `Non-damage cards cost 5 HP to play. HP can’t drop below 1 in this way.`,
     outro: ``,
   },
 };
