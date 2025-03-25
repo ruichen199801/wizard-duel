@@ -226,7 +226,7 @@ export const Aura = {
   id: '23',
   name: 'Aura',
   text: '+3 HP per Turn',
-  effects: [aura(heal(3), '+3 HP per Turn')],
+  effects: [aura(heal(3), '+3 HP per Turn', '+3 HP per Turn')],
   keywords: [CardKeyword.sustain, CardKeyword.effect],
 };
 
