@@ -10,6 +10,21 @@ import { random } from './random';
  * @returns The resolved card object.
  */
 export const resolveAction = (actions, G) => {
+  // When AI is frozen, resolve to random(cards)
+  if (G.players[1].effects.some((e) => e.type === EffectType.freeze)) {
+    console.log('Resolve to random card when frozen');
+    return random(actions);
+  }
+
+  // When HP diff is huge, resolve to random(Mutate cards) if any
+  if (
+    actions.some((card) => card.id === '30') &&
+    G.players[0].hp - G.players[1].hp >= 20
+  ) {
+    console.log('Resolve to Mutate');
+    return actions.find((card) => card.id === '30');
+  }
+
   // When AI has multiple debuffs, resolve to random(Purify cards) if any
   if (
     actions.some((card) => card.id === '16') &&
