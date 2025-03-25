@@ -260,9 +260,8 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
 
         <div className='col-3 d-flex flex-column align-items-end justify-content-center'>
           <GameStatsPanel
-            level={G.level}
+            G={G}
             visibleTurn={visibleCurrentTurn}
-            deckSize={G.deck.length}
             showGameStats={showGameStats}
           />
         </div>

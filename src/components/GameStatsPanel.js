@@ -1,11 +1,19 @@
 import CardPile from './CardPile';
 import { icon } from './utils/assetPaths';
-import { maxTurn } from '../game/level';
 
-const GameStatsPanel = ({ level, visibleTurn, deckSize, showGameStats }) => {
-  // Set reminder when game is close to end in a draw.
-  const getTurnHighlightStyle = () =>
-    visibleTurn >= maxTurn - 9 ? 'text-danger' : '';
+const GameStatsPanel = ({ G, visibleTurn, showGameStats }) => {
+  const shouldMiss = G.globalEffects.shouldMiss?.[visibleTurn - 1];
+  const shouldClearEffects =
+    G.globalEffects.shouldClearEffects?.[visibleTurn - 1];
+
+  // Highlight turn number for (mutually exclusive) level effects
+  const getTurnHighlightStyle = () => {
+    if (shouldMiss || shouldClearEffects) {
+      return 'text-danger';
+    } else {
+      return '';
+    }
+  };
 
   return (
     <div className='d-flex flex-column'>
@@ -22,7 +30,7 @@ const GameStatsPanel = ({ level, visibleTurn, deckSize, showGameStats }) => {
                 data-bs-placement='bottom'
                 data-bs-title='Current level'
               />
-              <span className='fw-semibold'>{level}</span>
+              <span className='fw-semibold'>{G.level}</span>
             </div>
 
             <div className='d-flex align-items-center me-2'>
@@ -47,7 +55,7 @@ const GameStatsPanel = ({ level, visibleTurn, deckSize, showGameStats }) => {
                 data-bs-placement='bottom'
                 data-bs-title='Cards left'
               />
-              <span className='fw-semibold'>{deckSize}</span>
+              <span className='fw-semibold'>{G.deck.length}</span>
             </div>
           </div>
         </div>
