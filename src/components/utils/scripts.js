@@ -46,7 +46,7 @@ const battleInstrutions = {
     intro: `In the heart of Xibalda, you meet Hassan Sarbah, master of ancient sand spells. Disrupted by the desert wind, `,
     levelRule: `attacks will miss on certain turns.`,
     outro: ``,
-    tips: `Red turn number means your attack will miss.`,
+    tips: `Red turn number means your attack will miss!`,
   },
 
   5: {
@@ -60,7 +60,7 @@ const battleInstrutions = {
     intro: `Beneath the shimmering waves of Coral Bay, the tides shift in unpredictable ways. `,
     levelRule: `Every 11 turns, all buffs and debuffs are washed away.`,
     outro: ``,
-    tips: `Red turn number means effects will clear this turn.`,
+    tips: `Red turn number means effects will clear this turn!`,
   },
 
   7: {
