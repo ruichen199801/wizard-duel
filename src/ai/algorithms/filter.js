@@ -47,7 +47,7 @@ const filters = [
   },
   {
     rule: (card, G, ctx) =>
-      G.players[1].hp < Math.ceil(G.players[1].maxHp * 0.8) ||
+      G.players[1].hp < Math.ceil(G.players[1].maxHp * 0.7) ||
       !card.keywords.includes(CardKeyword.sustain),
     reason: 'Filter healing cards when AI has high HP',
   },
