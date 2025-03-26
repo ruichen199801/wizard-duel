@@ -22,8 +22,8 @@ export const maxTurn = 50;
 
 // Level specific constants
 export const handDistribution = [0.1, 0.4, 0.4, 0.05, 0.05]; // Level 2
-export const freezeRate = 0.25; // Level 3
-export const missRate = 0.2; // Level 4
+export const freezeRate = 0.3; // Level 3
+export const missRate = 0.25; // Level 4
 export const clearEffectInterval = 11; // Level 6
 export const loseHpAmount = 5; // Level 7
 
