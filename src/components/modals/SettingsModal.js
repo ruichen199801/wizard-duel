@@ -115,15 +115,17 @@ const SettingsModal = ({
                     onClick={toggleEffectStackDisplay}
                   >
                     {showEffectStack
-                      ? 'Hide Player Effects'
-                      : 'Display Player Effects'}
+                      ? 'Hide Buffs & Debuffs'
+                      : 'Show Buffs & Debuffs'}
                   </button>
                   <button
                     type='button'
                     className='btn btn-dark'
                     onClick={toggleGameStatsDisplay}
                   >
-                    {showGameStats ? 'Hide Game Stats' : 'Display Game Stats'}
+                    {showGameStats
+                      ? 'Hide Turn & Deck Info'
+                      : 'Show Turn & Deck Info'}
                   </button>
                 </div>
 
