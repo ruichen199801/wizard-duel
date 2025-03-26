@@ -5,6 +5,7 @@ import useMusicPlayer from './hooks/useMusicPlayer';
 import useBsTooltip from './hooks/useBsTooltip';
 import useLog from './hooks/useLog';
 import useCardAnimation from './hooks/useCardAnimation';
+import usePersistentState from './hooks/usePersistentState';
 import { sleep } from './utils/commonUtils';
 import {
   resolveCardAudio,
@@ -54,13 +55,21 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
   const [showHelpModal, setShowHelpModal] = useState(false);
   const [showMatchupModal, setShowMatchupModal] = useState(true);
 
-  const [aiAlgorithm, setAiAlgorithm] = useState(Algorithm.filter);
-
   const [showSelectCardModal, setShowSelectCardModal] = useState(false);
   const [selectableCardsToDraw, setSelectableCardsToDraw] = useState([]);
 
-  const [showGameStats, setShowGameStats] = useState(true);
-  const [showEffectStack, setShowEffectStack] = useState(true);
+  const [aiAlgorithm, setAiAlgorithm] = usePersistentState(
+    'aiAlgorithm',
+    Algorithm.filter
+  );
+  const [showGameStats, setShowGameStats] = usePersistentState(
+    'showGameStats',
+    true
+  );
+  const [showEffectStack, setShowEffectStack] = usePersistentState(
+    'showEffectStack',
+    true
+  );
 
   const { logEntries, addLogEntry } = useLog();
   const { playAudio, toggleAudioMute } = useAudioPlayer();
