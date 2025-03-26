@@ -11,6 +11,7 @@ const SettingsModal = ({
   toggleAudioMute,
   isAudioMuted,
   toggleMusic,
+  isMusicMuted,
   showGameStats,
   setShowGameStats,
   showEffectStack,
@@ -88,23 +89,20 @@ const SettingsModal = ({
                   </button>
                 </div>
 
-                {/* Sound and music settings are effective for current game only and is not persistent */}
                 <div className='btn-group-vertical btn-width mb-3'>
                   <button
                     type='button'
                     className='btn btn-dark mb-1'
-                    onClick={toggleAudioMute}
+                    onClick={toggleMusic}
                   >
-                    {isAudioMuted
-                      ? 'Unmute Sound Effects'
-                      : 'Mute Sound Effects'}
+                    {isMusicMuted ? 'Unmute Game Music' : 'Mute Game Music'}
                   </button>
                   <button
                     type='button'
                     className='btn btn-dark'
-                    onClick={toggleMusic}
+                    onClick={toggleAudioMute}
                   >
-                    Toggle Music
+                    {isAudioMuted ? 'Unmute Game Sounds' : 'Mute Game Sounds'}
                   </button>
                 </div>
 

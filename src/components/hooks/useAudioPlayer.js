@@ -3,8 +3,7 @@ import { useState, useEffect } from 'react';
 const useAudioPlayer = () => {
   const [audio, setAudio] = useState(null);
   const [isAudioMuted, setIsAudioMuted] = useState(() => {
-    const savedMuteState = sessionStorage.getItem('isAudioMuted');
-    return savedMuteState ? JSON.parse(savedMuteState) : false;
+    return JSON.parse(sessionStorage.getItem('isAudioMuted')) || false;
   });
 
   useEffect(() => {
