@@ -9,6 +9,7 @@ const SettingsModal = ({
   setShowSettingsModal,
   playAudio,
   toggleAudioMute,
+  isAudioMuted,
   toggleMusic,
   showGameStats,
   setShowGameStats,
@@ -94,7 +95,9 @@ const SettingsModal = ({
                     className='btn btn-dark mb-1'
                     onClick={toggleAudioMute}
                   >
-                    Toggle Sound
+                    {isAudioMuted
+                      ? 'Unmute Sound Effects'
+                      : 'Mute Sound Effects'}
                   </button>
                   <button
                     type='button'

@@ -72,7 +72,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
   );
 
   const { logEntries, addLogEntry } = useLog();
-  const { playAudio, toggleAudioMute } = useAudioPlayer();
+  const { playAudio, toggleAudioMute, isAudioMuted } = useAudioPlayer();
   const { playMusic, pauseMusic, toggleMusic } = useMusicPlayer(
     getMusicForLevel(G.level)
   );
@@ -336,6 +336,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
         setShowSettingsModal={setShowSettingsModal}
         playAudio={playAudio}
         toggleAudioMute={toggleAudioMute}
+        isAudioMuted={isAudioMuted}
         toggleMusic={toggleMusic}
         showGameStats={showGameStats}
         setShowGameStats={setShowGameStats}
