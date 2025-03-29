@@ -15,10 +15,18 @@ const GameoverModal = ({
   }
 
   const gameoverMessage = {
-    0:
-      level === finalLevel
-        ? 'You have defeated all your opponents. Thanks for playing, and stay tuned for more levels!'
-        : 'You have advanced to the next level!',
+    0: (() => {
+      const currentLevelInt = parseInt(level);
+      const finalLevelInt = parseInt(finalLevel);
+      switch (currentLevelInt) {
+        case finalLevelInt - 1:
+          return 'You have advanced to the final level!';
+        case finalLevelInt:
+          return 'You have defeated all your opponents. Thanks for playing, and stay tuned for more levels!';
+        default:
+          return 'You have advanced to the next level!';
+      }
+    })(),
     1: 'Defeated... better luck next time!',
   };
 

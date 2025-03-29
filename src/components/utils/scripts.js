@@ -6,6 +6,7 @@ const enemyNames = {
   5: 'Kai Stormbow',
   6: 'Mystfin',
   7: 'Zara Shadowbane',
+  8: 'Nedra the Fallen',
 };
 const getEnemyName = (level = '1') => enemyNames[level];
 
@@ -17,6 +18,7 @@ const battleStartCaptions = {
   5: 'Level 5: Whisperwood',
   6: 'Level 6: Coral Bay',
   7: 'Level 7: Shadowland',
+  8: 'Level 8: Bloodmoon Castle',
 };
 const getBattleStartCaption = (level = '1') => battleStartCaptions[level];
 
@@ -68,6 +70,13 @@ const battleInstrutions = {
     levelRule: `Non-damage cards cost 5 HP to play.`,
     outro: ``,
     tips: `HP can’t drop below 1 in this way.`,
+  },
+
+  8: {
+    intro: `TBD. `,
+    levelRule: `TBD.`,
+    outro: ``,
+    tips: ``,
   },
 };
 const getBattleInstructions = (level = '1') => battleInstrutions[level];

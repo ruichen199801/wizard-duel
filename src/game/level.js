@@ -16,8 +16,8 @@ export const DrawMode = {
   draw: 'draw',
   select: 'select',
 };
-export const finalLevel = '7';
-export const devTestLevel = '7';
+export const finalLevel = '8';
+export const devTestLevel = '8';
 export const maxTurn = 50;
 
 // Level specific constants
@@ -182,6 +182,28 @@ export const levelConfigs = {
       drawMode: DrawMode.draw,
       showEnemyHand: false,
       loseHpAmount,
+    },
+  },
+
+  8: {
+    playerStatsOverride: {
+      maxHp: 80,
+      hp: 80,
+    },
+    enemyStatsOverride: {
+      maxHp: 80,
+      hp: 80,
+    },
+
+    playerHandOverride: [],
+    enemyHandOverride: [],
+
+    playerEffectsOverride: [],
+    enemyEffectsOverride: [],
+
+    globalEffects: {
+      drawMode: DrawMode.draw,
+      showEnemyHand: false,
     },
   },
 };

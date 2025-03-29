@@ -106,6 +106,22 @@ const levelDecks = {
     Revenge,
     Poison,
   ],
+
+  8: [
+    ...baseDeck,
+    Flame,
+    Resurrect,
+    Petrify,
+    Aura,
+    Sandstorm,
+    Wish1,
+    Mutate,
+    Ambush,
+    Vision,
+    Tide,
+    Revenge,
+    Poison,
+  ],
 };
 
 export const getDeckForLevel = (level = '1') => {
