@@ -1,3 +1,5 @@
+import { PowerClass } from './constants';
+
 const enemyNames = {
   1: 'Arden the Wise',
   2: 'G0B1N-X',
@@ -81,4 +83,37 @@ const battleInstrutions = {
 };
 const getBattleInstructions = (level = '1') => battleInstrutions[level];
 
-export { getEnemyName, getBattleStartCaption, getBattleInstructions };
+const powers = [
+  {
+    level: '2',
+    name: 'Pyro',
+    class: PowerClass.pyro,
+  },
+  {
+    level: '3',
+    name: 'Cryo',
+    class: PowerClass.cryo,
+  },
+  {
+    level: '4',
+    name: 'Psammo',
+    class: PowerClass.psammo,
+  },
+  {
+    level: '5',
+    name: 'Dentro',
+    class: PowerClass.dentro,
+  },
+  {
+    level: '6',
+    name: 'Hydro',
+    class: PowerClass.hydro,
+  },
+  {
+    level: '7',
+    name: 'Erebo',
+    class: PowerClass.erebo,
+  },
+];
+
+export { getEnemyName, getBattleStartCaption, getBattleInstructions, powers };

@@ -6,6 +6,7 @@ const GameoverModal = ({
   showGameoverModal,
   setShowGameoverModal,
   setShowNextLevelModal,
+  setShowSelectPowerModal,
   winner,
   playAudio,
   level,
@@ -37,7 +38,13 @@ const GameoverModal = ({
 
   const handleShowNextLevelModal = () => {
     setShowGameoverModal(false);
-    setShowNextLevelModal(true);
+
+    if (parseInt(level) === parseInt(finalLevel) - 1) {
+      setShowSelectPowerModal(true);
+    } else {
+      setShowNextLevelModal(true);
+    }
+
     playAudio(click);
   };
 

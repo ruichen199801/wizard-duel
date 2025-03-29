@@ -1,0 +1,93 @@
+import { useState } from 'react';
+import {
+  avatarSmallScale,
+  avatarHeight,
+  avatarWidth,
+} from '../utils/constants';
+import { getAvatarForLevel, click } from '../utils/assetPaths';
+import { powers } from '../utils/scripts';
+import { startLevel } from '../utils/commonUtils';
+
+const SelectPowerModal = ({ showSelectPowerModal, playAudio }) => {
+  const [selectedPowerClass, setSelectedPowerClass] = useState(null);
+
+  if (!showSelectPowerModal) {
+    return null;
+  }
+
+  const handleSelectPower = (power) => {
+    setSelectedPowerClass(power.class);
+    playAudio(click);
+  };
+
+  const handleNextLevel = () => {
+    if (selectedPowerClass) {
+      sessionStorage.setItem('power', selectedPowerClass);
+      startLevel();
+    }
+  };
+
+  return (
+    <>
+      <div
+        className='modal modal-xl fade show d-block'
+        data-bs-backdrop='static'
+        data-bs-keyboard='false'
+        tabIndex='-1'
+      >
+        <div className='modal-dialog modal-dialog-centered'>
+          <div className='modal-content bg-modal'>
+            <div className='modal-header border-0'>
+              <h4 className='modal-title w-100 text-center font-lora-bold'>
+                Pick Your Power
+              </h4>
+            </div>
+
+            <div className='modal-body'>
+              <p className='pwr-text pb-3'>
+                Claim a power from a past opponent to use in the boss fight,{' '}
+                <i>but at a cost!</i>
+              </p>
+
+              <div className='d-flex justify-content-center gap-5'>
+                {powers.map((power, index) => (
+                  <div
+                    className={`pwr-li text-center p-2 rounded ${
+                      selectedPowerClass === power.class
+                        ? `border pwr-border-${power.class} shadow`
+                        : ''
+                    }`}
+                    onClick={() => handleSelectPower(power)}
+                  >
+                    <img
+                      key={index}
+                      src={getAvatarForLevel('1', power.level)}
+                      alt={power.name}
+                      height={avatarHeight * avatarSmallScale}
+                      width={avatarWidth * avatarSmallScale}
+                    />
+                    <p className='mt-2 fw-bold'>{power.name}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className='modal-footer border-0 justify-content-end'>
+              <button
+                type='button'
+                className='btn btn-dark'
+                onClick={handleNextLevel}
+                disabled={!selectedPowerClass}
+              >
+                Next Level
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className='modal-backdrop fade show'></div>
+    </>
+  );
+};
+
+export default SelectPowerModal;
