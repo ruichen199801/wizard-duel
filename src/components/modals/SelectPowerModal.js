@@ -34,7 +34,7 @@ const SelectPowerModal = ({ showSelectPowerModal, playAudio }) => {
   return (
     <>
       <div
-        className='modal modal-xl fade show d-block'
+        className='modal modal-lg fade show d-block'
         data-bs-backdrop='static'
         data-bs-keyboard='false'
         tabIndex='-1'
@@ -57,11 +57,11 @@ const SelectPowerModal = ({ showSelectPowerModal, playAudio }) => {
               ) : (
                 <>
                   <p className='pwr-text pb-3'>
-                    Claim a power from a past opponent to use in the upcoming
+                    Take a power from a past opponent to use in the upcoming
                     boss fight, <i>but at a cost!</i>
                   </p>
 
-                  <div className='d-flex justify-content-center gap-5'>
+                  <div className='d-flex justify-content-center'>
                     {powers.map((power) => (
                       <div
                         key={power.class}
