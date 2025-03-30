@@ -1,9 +1,10 @@
-import { levelConfigs, finalLevel, maxTurn } from './level';
+import { levelConfigs, finalLevel, maxTurn, DrawMode } from './level';
 import { Wish2, Wish3, Wish4, Wish5 } from '../data/cards';
 import { EffectType } from '../data/cardEffects';
 import { CardKeyword } from '../data/cards';
 import { applyEffect } from './effect';
 import { hasEffect, getEffects, undoEffect } from './effectUtils';
+import { PowerClass } from '../components/utils/constants';
 
 /**
  * Shuffle a deck of cards using Fisher-Yates algorithm.
@@ -137,6 +138,7 @@ export const setPrevLevel = () => {
     }
     const prevLevel = parseInt(currentLevel, 10) - 1;
     sessionStorage.setItem('level', prevLevel);
+    sessionStorage.removeItem('power');
   } catch (e) {
     console.error('Error saving to sessionStorage:', e);
   }
@@ -149,6 +151,8 @@ export const setNextLevel = () => {
   try {
     const currentLevel = getCurrentLevel();
     if (currentLevel === finalLevel) {
+      sessionStorage.removeItem('level');
+      sessionStorage.removeItem('power');
       return;
     }
     const nextLevel = parseInt(currentLevel, 10) + 1;
@@ -197,6 +201,38 @@ export const applyLevelOverride = (G) => {
   G.players[1].effects.push(...enemyEffectsOverride);
 
   G.globalEffects = { ...globalEffects };
+};
+
+/**
+ * Apply overrides to G based on the power class player has selected for the final level.
+ */
+export const applyPowerOverride = (G) => {
+  if (G.level !== finalLevel) {
+    return;
+  }
+  const powerClass = sessionStorage.getItem('power');
+  switch (powerClass) {
+    case PowerClass.cryo:
+      G.players[0].hp /= 2;
+      G.players[0].maxHp /= 2;
+      break;
+
+    case PowerClass.dentro:
+      G.globalEffects.drawMode = DrawMode.select;
+      G.players[1].hp += 40;
+      G.players[1].maxHp += 40;
+      break;
+
+    case PowerClass.hydro:
+      G.players[1].atk += 3;
+      G.players[1].baseAtk += 3;
+      G.players[1].def += 3;
+      G.players[1].baseDef += 3;
+      break;
+
+    default:
+      return;
+  }
 };
 
 /**

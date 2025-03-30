@@ -16,6 +16,7 @@ import {
   dealCards,
   getCurrentLevel,
   applyLevelOverride,
+  applyPowerOverride,
   applyHandEffects,
   executeEndOfTurnEffects,
   executeGlobalEndOfTurnEffects,
@@ -39,6 +40,7 @@ const setupData = () => {
   };
 
   applyLevelOverride(G);
+  applyPowerOverride(G);
 
   dealCards(G.players[0].hand, G.deck);
   dealCards(G.players[1].hand, G.deck);

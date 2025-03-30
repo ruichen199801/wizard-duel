@@ -10,6 +10,7 @@ import {
   Flame,
   Resurrect,
 } from '../data/cards';
+import { PowerClass } from '../components/utils/constants';
 
 // General constants
 export const DrawMode = {
@@ -18,7 +19,8 @@ export const DrawMode = {
 };
 export const finalLevel = '8';
 export const devTestLevel = '7';
-export const maxTurn = 50;
+export const maxTurn =
+  sessionStorage.getItem('power') === PowerClass.pyro ? 30 : 50;
 
 // Level specific constants
 export const fireHandDistribution = [0.1, 0.4, 0.4, 0.05, 0.05]; // Level 2
