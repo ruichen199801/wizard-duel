@@ -75,8 +75,8 @@ const battleInstrutions = {
   },
 
   8: {
-    intro: `TBD. `,
-    levelRule: `TBD.`,
+    intro: `Nedra plots to corrupt the world with dark magic. Defeat him in the final duel to save the world! `,
+    levelRule: ``,
     outro: ``,
     tips: ``,
   },
@@ -88,32 +88,62 @@ const powers = [
     level: '2',
     name: 'Pyro',
     class: PowerClass.pyro,
+    ruleText:
+      'you get a fire hand at the end of each turn, but you lose after 30 turns.',
   },
   {
     level: '3',
     name: 'Cryo',
     class: PowerClass.cryo,
+    ruleText:
+      'your attacks may freeze the enemy and you are immune to freeze cards, but you start with half HP.',
   },
   {
     level: '4',
     name: 'Psammo',
     class: PowerClass.psammo,
+    ruleText:
+      'your cards may become a wish at the start of each turn, but your attacks may miss this game.',
   },
   {
     level: '5',
     name: 'Dentro',
     class: PowerClass.dentro,
+    ruleText:
+      'you pick a card instead of drawing, but the enemy gains 40 more HP.',
   },
   {
     level: '6',
     name: 'Hydro',
     class: PowerClass.hydro,
+    ruleText:
+      'you get a random buff at the end of each turn, but the enemy has permanent +3 Attack/+3 Shield.',
   },
   {
     level: '7',
     name: 'Erebo',
     class: PowerClass.erebo,
+    ruleText:
+      "your damage may also reduce the enemy's Max HP, but you can't heal this game.",
   },
 ];
 
-export { getEnemyName, getBattleStartCaption, getBattleInstructions, powers };
+const getRuleByPower = () => {
+  const power = powers.find(
+    (power) => power.class === sessionStorage.getItem('power')
+  );
+  return power
+    ? {
+        intro: `Embraced by the ${power.name} power, `,
+        rule: `${power.ruleText}`,
+      }
+    : ``;
+};
+
+export {
+  getEnemyName,
+  getBattleStartCaption,
+  getBattleInstructions,
+  powers,
+  getRuleByPower,
+};

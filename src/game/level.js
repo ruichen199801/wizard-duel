@@ -17,11 +17,11 @@ export const DrawMode = {
   select: 'select',
 };
 export const finalLevel = '8';
-export const devTestLevel = '8';
+export const devTestLevel = '7';
 export const maxTurn = 50;
 
 // Level specific constants
-export const handDistribution = [0.1, 0.4, 0.4, 0.05, 0.05]; // Level 2
+export const fireHandDistribution = [0.1, 0.4, 0.4, 0.05, 0.05]; // Level 2
 export const freezeRate = 0.3; // Level 3
 export const missRate = 0.25; // Level 4
 export const clearEffectInterval = 11; // Level 6
@@ -56,11 +56,11 @@ export const levelConfigs = {
 
     playerHandOverride: randomPopulateHand(
       [Fireball1, Fireball2, Fireball3, Flame, Resurrect],
-      handDistribution
+      fireHandDistribution
     ),
     enemyHandOverride: randomPopulateHand(
       [Fireball1, Fireball2, Fireball3, Flame, Resurrect],
-      handDistribution
+      fireHandDistribution
     ),
 
     playerEffectsOverride: [],

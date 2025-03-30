@@ -7,9 +7,13 @@ import {
 import { getAvatarForLevel, click } from '../utils/assetPaths';
 import { powers } from '../utils/scripts';
 import { startLevel } from '../utils/commonUtils';
+import useImageLoader from '../hooks/useImageLoader';
 
 const SelectPowerModal = ({ showSelectPowerModal, playAudio }) => {
   const [selectedPowerClass, setSelectedPowerClass] = useState(null);
+
+  const avatars = [powers.map((power) => getAvatarForLevel(power.level))];
+  const { isLoading } = useImageLoader(avatars, 300);
 
   if (!showSelectPowerModal) {
     return null;
@@ -44,32 +48,42 @@ const SelectPowerModal = ({ showSelectPowerModal, playAudio }) => {
             </div>
 
             <div className='modal-body'>
-              <p className='pwr-text pb-3'>
-                Claim a power from a past opponent to use in the boss fight,{' '}
-                <i>but at a cost!</i>
-              </p>
-
-              <div className='d-flex justify-content-center gap-5'>
-                {powers.map((power, index) => (
-                  <div
-                    className={`pwr-li text-center p-2 rounded ${
-                      selectedPowerClass === power.class
-                        ? `border pwr-border-${power.class} shadow`
-                        : ''
-                    }`}
-                    onClick={() => handleSelectPower(power)}
-                  >
-                    <img
-                      key={index}
-                      src={getAvatarForLevel('1', power.level)}
-                      alt={power.name}
-                      height={avatarHeight * avatarSmallScale}
-                      width={avatarWidth * avatarSmallScale}
-                    />
-                    <p className='mt-2 fw-bold'>{power.name}</p>
+              {isLoading ? (
+                <div className='d-flex justify-content-center align-items-center'>
+                  <div className='spinner-border' role='status'>
+                    <span className='visually-hidden'>Loading...</span>
                   </div>
-                ))}
-              </div>
+                </div>
+              ) : (
+                <>
+                  <p className='pwr-text pb-3'>
+                    Claim a power from a past opponent to use in the upcoming
+                    boss fight, <i>but at a cost!</i>
+                  </p>
+
+                  <div className='d-flex justify-content-center gap-5'>
+                    {powers.map((power) => (
+                      <div
+                        key={power.class}
+                        className={`pwr-li text-center p-2 rounded ${
+                          selectedPowerClass === power.class
+                            ? `border pwr-border-${power.class} shadow`
+                            : ''
+                        }`}
+                        onClick={() => handleSelectPower(power)}
+                      >
+                        <img
+                          src={getAvatarForLevel('1', power.level)}
+                          alt={power.name}
+                          height={avatarHeight * avatarSmallScale}
+                          width={avatarWidth * avatarSmallScale}
+                        />
+                        <p className='mt-2 fw-bold'>{power.name}</p>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
 
             <div className='modal-footer border-0 justify-content-end'>
