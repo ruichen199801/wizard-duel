@@ -23,7 +23,7 @@ const GameoverModal = ({
         case finalLevelInt - 1:
           return 'You have advanced to the final level!';
         case finalLevelInt:
-          return 'You have defeated all your opponents. Thanks for playing, and stay tuned for more levels!';
+          return 'You defeated all the opponents and saved the world from evil. Great job, and thank for playing!';
         default:
           return 'You have advanced to the next level!';
       }
