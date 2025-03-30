@@ -75,11 +75,12 @@ const heal = (G, target, { value = 0 }) => {
   if (hasEffect(G, target, EffectType.poison)) {
     return;
   }
-
-  G.players[target].hp += value;
-
+  // Caused by playing Mutate in final level
+  if (G.players[target].maxHp < G.players[target].hp) {
+    return;
+  }
   G.players[target].hp = Math.min(
-    G.players[target].hp,
+    G.players[target].hp + value,
     G.players[target].maxHp
   );
 };

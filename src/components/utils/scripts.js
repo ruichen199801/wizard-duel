@@ -96,7 +96,7 @@ const powers = [
     name: 'Cryo',
     class: PowerClass.cryo,
     ruleText:
-      'your attacks may freeze the enemy and you are immune to freeze cards, but you start with half HP.',
+      "your attacks may freeze the enemy and you are immune to freeze cards, but you can't heal this game.",
   },
   {
     level: '4',
@@ -110,7 +110,7 @@ const powers = [
     name: 'Dentro',
     class: PowerClass.dentro,
     ruleText:
-      'you pick a card instead of drawing, but the enemy gains 40 more HP.',
+      'you pick a card instead of drawing, but the enemy starts with 20 more HP.',
   },
   {
     level: '6',
@@ -124,7 +124,7 @@ const powers = [
     name: 'Erebo',
     class: PowerClass.erebo,
     ruleText:
-      "your damage may also reduce the enemy's Max HP, but you can't heal this game.",
+      "your damage also reduces the enemy's Max HP, but you start with half HP",
   },
 ];
 

@@ -212,15 +212,10 @@ export const applyPowerOverride = (G) => {
   }
   const powerClass = sessionStorage.getItem('power');
   switch (powerClass) {
-    case PowerClass.cryo:
-      G.players[0].hp /= 2;
-      G.players[0].maxHp /= 2;
-      break;
-
     case PowerClass.dentro:
       G.globalEffects.drawMode = DrawMode.select;
-      G.players[1].hp += 40;
-      G.players[1].maxHp += 40;
+      G.players[1].hp += 20;
+      G.players[1].maxHp += 20;
       break;
 
     case PowerClass.hydro:
@@ -228,6 +223,11 @@ export const applyPowerOverride = (G) => {
       G.players[1].baseAtk += 3;
       G.players[1].def += 3;
       G.players[1].baseDef += 3;
+      break;
+
+    case PowerClass.erebo:
+      G.players[0].hp /= 2;
+      G.players[0].maxHp /= 2;
       break;
 
     default:
