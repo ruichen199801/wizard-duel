@@ -24,7 +24,6 @@ import {
 
 const setupData = () => {
   let level = getCurrentLevel();
-  console.log(`Current level is ${level}`);
 
   let G = {
     players: {

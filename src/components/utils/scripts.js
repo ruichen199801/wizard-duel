@@ -41,9 +41,9 @@ const battleInstrutions = {
 
   3: {
     intro: `Mount Everfrost is shrouded in an eternal winter caused by Queen Shiro's frost magic. `,
-    levelRule: `Damage cards have a chance to freeze the target.`,
+    levelRule: `Damage cards may freeze the target (invalidate their next card).`,
     outro: ``,
-    tips: `Freezing a player invalidates their next card.`,
+    tips: ``,
   },
 
   4: {
@@ -69,9 +69,9 @@ const battleInstrutions = {
 
   7: {
     intro: `Zara Shadowbane rules the cursed Shadowland, draining the life of all who enter. `,
-    levelRule: `Non-damage cards cost 5 HP to play.`,
+    levelRule: `Non-damage cards cost 5 HP to play (can't drop below 1).`,
     outro: ``,
-    tips: `HP can’t drop below 1 in this way.`,
+    tips: ``,
   },
 
   8: {
