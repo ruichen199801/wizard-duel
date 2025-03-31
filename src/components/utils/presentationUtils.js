@@ -23,13 +23,17 @@ export const resolveCardAudio = (card, G, ctx) => {
     (card.effects.length === 1 && card.effects[0].type === EffectType.heal) ||
     card.id === '23';
   const shouldMiss = G.globalEffects.shouldMiss?.[ctx.turn - 1];
+  const shouldPlayerMiss = G.globalEffects.shouldPlayerMiss?.[ctx.turn - 1];
   const shouldClearEffects = G.globalEffects.shouldClearEffects?.[ctx.turn - 1];
 
   if (hasEffectKeyward && shouldClearEffects) {
     return cleanse;
   } else if (hasFreezeEffect) {
     return defrost;
-  } else if (hasDamageKeyword && shouldMiss) {
+  } else if (
+    (hasDamageKeyword && shouldMiss) ||
+    (ctx.currentPlayer === '0' && hasDamageKeyword && shouldPlayerMiss)
+  ) {
     return miss;
   } else if (isUniqueHealCard && hasPoisonEffect) {
     return potion;

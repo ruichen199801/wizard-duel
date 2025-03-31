@@ -289,6 +289,9 @@ const applyDamageLevelEffects = (G, target, damage, ctx) => {
     case '4':
       return G.globalEffects.shouldMiss?.[ctx.turn - 1] ? -1 : damage;
 
+    case '8':
+      return G.globalEffects.shouldPlayerMiss?.[ctx.turn - 1] ? -1 : damage;
+
     default:
       return damage;
   }

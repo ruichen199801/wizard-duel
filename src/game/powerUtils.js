@@ -11,9 +11,10 @@ import {
   Wish4,
   Wish5,
 } from '../data/cards';
+import { applyEffect } from './effect';
 import { hasSameEffect, getChanceEffect } from './effectUtils';
-import { finalLevel, DrawMode } from './level';
-import { randomPopulateHand } from './levelUtils';
+import { finalLevel, maxTurn, DrawMode } from './level';
+import { randomPopulateHand, generateAttackOutcomes } from './levelUtils';
 import { PowerClass } from './power';
 
 /**
@@ -23,6 +24,13 @@ const applyPowerOverride = (G) => {
   if (G.level !== finalLevel) return;
   const powerClass = sessionStorage.getItem('power');
   switch (powerClass) {
+    // Psammo debuff
+    case PowerClass.psammo:
+      G.globalEffects = {
+        ...G.globalEffects,
+        shouldPlayerMiss: generateAttackOutcomes(maxTurn, 0.2),
+      };
+      break;
     // Dentro buff+debuff
     case PowerClass.dentro:
       G.globalEffects.drawMode = DrawMode.select;
@@ -120,7 +128,9 @@ const applyRandomBuff = (G, ctx) => {
     (buff) => !hasSameEffect(G, '0', buff)
   );
   if (availableBuffs.length > 0) {
-    G.players[0].effects.push(
+    applyEffect(
+      G,
+      ctx,
       availableBuffs[Math.floor(Math.random() * availableBuffs.length)]
     );
   }
