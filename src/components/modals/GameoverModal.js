@@ -23,7 +23,7 @@ const GameoverModal = ({
         case finalLevelInt - 1:
           return 'You have advanced to the final level!';
         case finalLevelInt:
-          return 'You have defeated all your opponents. Thank for playing, and stay tuned for more updates!';
+          return 'You defeated every opponent and saved the world! Thanks for playing, and stay tuned for more updates!';
         default:
           return 'You have advanced to the next level!';
       }
@@ -64,7 +64,7 @@ const GameoverModal = ({
               </h3>
             </div>
             <div className='modal-body'>
-              <p className='fs-5 ms-2 mb-4'>
+              <p className='ms-2 mb-4 gameover-text'>
                 {gameoverMessage[winner] ||
                   'Time runs out, the duel ends in a draw.'}
               </p>

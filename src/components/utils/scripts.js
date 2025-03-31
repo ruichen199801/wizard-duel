@@ -96,35 +96,35 @@ const powers = [
     name: 'Cryo',
     class: PowerClass.cryo,
     ruleText:
-      "your attacks may freeze the enemy and you are immune to freeze cards, but you can't heal this game.",
+      "your attacks may freeze enemy, but you can't heal. Extra damage cards are added to the deck.",
   },
   {
     level: '4',
     name: 'Psammo',
     class: PowerClass.psammo,
     ruleText:
-      'your card may become a wish at the start of your turns, but your attacks may miss this game.',
+      'your cards may turn into wishes at the start of your turns, but your attacks can miss.',
   },
   {
     level: '5',
     name: 'Dentro',
     class: PowerClass.dentro,
     ruleText:
-      'you pick a card instead of drawing, but the enemy starts with 20 more HP.',
+      'you pick a card instead of drawing, but enemy starts with 20 more HP.',
   },
   {
     level: '6',
     name: 'Hydro',
     class: PowerClass.hydro,
     ruleText:
-      'you may get a random buff at the end of your turns, but the enemy has permanent +3 Attack/+3 Shield.',
+      'you may gain a random buff at the end of your turns, but enemy has +3 Attack/+3 Shield permanently.',
   },
   {
     level: '7',
     name: 'Erebo',
     class: PowerClass.erebo,
     ruleText:
-      'your damage cards also reduce Max HP, but you start with half HP. HP swap is disabled this game.',
+      'your damage cards reduce Max HP, but you start with half HP. HP swap is disabled.',
   },
 ];
 

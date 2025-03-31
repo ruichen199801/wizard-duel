@@ -102,6 +102,10 @@
   margin-left: 5px;
 }
 
+.gameover-text {
+  font-size: 1.1rem;
+}
+
 /* Override Bootstrap border with custom colors. */
 
 .pwr-border-pyro {

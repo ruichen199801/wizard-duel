@@ -130,7 +130,9 @@ export const getDeckForLevel = (level = '1') => {
   if (levelDeck.length < 10) {
     throw new Error('Deck array length is less than 10.'); // Dev testing issue only
   }
-  if (sessionStorage.getItem('power') === PowerClass.erebo) {
+  if (sessionStorage.getItem('power') === PowerClass.cryo) {
+    return [...levelDeck, Frost1, Frost1, Frost2, Frost2, Frost3, Frost3]; // Cryo effect
+  } else if (sessionStorage.getItem('power') === PowerClass.erebo) {
     return levelDeck.filter((card) => card.id !== Mutate.id); // Erebo effect
   }
   return [...levelDeck];
