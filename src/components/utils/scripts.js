@@ -1,4 +1,4 @@
-import { PowerClass } from './constants';
+import { PowerClass } from '../../game/power';
 
 const enemyNames = {
   1: 'Arden the Wise',
@@ -89,7 +89,7 @@ const powers = [
     name: 'Pyro',
     class: PowerClass.pyro,
     ruleText:
-      'you get a fire hand at the end of each turn, but you lose after 30 turns.',
+      'you get a new fire hand at the end of your turns, but you lose after 30 turns.',
   },
   {
     level: '3',
@@ -103,7 +103,7 @@ const powers = [
     name: 'Psammo',
     class: PowerClass.psammo,
     ruleText:
-      'your cards may become a wish at the start of each turn, but your attacks may miss this game.',
+      'your card may become a wish at the start of your turns, but your attacks may miss this game.',
   },
   {
     level: '5',
@@ -117,14 +117,14 @@ const powers = [
     name: 'Hydro',
     class: PowerClass.hydro,
     ruleText:
-      'you get a random buff at the end of each turn, but the enemy has permanent +3 Attack/+3 Shield.',
+      'you may get a random buff at the end of your turns, but the enemy has permanent +3 Attack/+3 Shield.',
   },
   {
     level: '7',
     name: 'Erebo',
     class: PowerClass.erebo,
     ruleText:
-      "your damage also reduces the enemy's Max HP, but you start with half HP",
+      "your damage also reduces the enemy's Max HP, but you start with half HP (HP swap is disabled this game).",
   },
 ];
 

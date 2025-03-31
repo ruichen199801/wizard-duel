@@ -16,8 +16,7 @@ import {
   dealCards,
   getCurrentLevel,
   applyLevelOverride,
-  applyPowerOverride,
-  applyHandEffects,
+  executeStartOfTurnEffects,
   executeEndOfTurnEffects,
   executeGlobalEndOfTurnEffects,
 } from './gameUtils';
@@ -39,7 +38,6 @@ const setupData = () => {
   };
 
   applyLevelOverride(G);
-  applyPowerOverride(G);
 
   dealCards(G.players[0].hand, G.deck);
   dealCards(G.players[1].hand, G.deck);
@@ -50,7 +48,7 @@ const setupData = () => {
 const drawCard = ({ G, ctx }, cardId = '') => {
   if (ctx.turn <= 2) return;
 
-  applyHandEffects(G, ctx);
+  executeStartOfTurnEffects(G, ctx);
 
   const hand = G.players[ctx.currentPlayer].hand;
   if (hand.length >= 5 || G.deck.length === 0) return INVALID_MOVE;

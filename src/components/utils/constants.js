@@ -36,15 +36,6 @@ export const AnimationTarget = {
   none: 'none',
 };
 
-export const PowerClass = {
-  pyro: 'pyro',
-  cryo: 'cryo',
-  psammo: 'psammo',
-  dentro: 'dentro',
-  hydro: 'hydro',
-  erebo: 'erebo',
-};
-
 export const pauseInterval = 1200;
 
 export const cardHeight = 210;

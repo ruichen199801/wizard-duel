@@ -61,7 +61,7 @@ const damage = (G, target, { value = 0 }, ctx) => {
     G.players[target].hp <= value &&
     hasEffect(G, target, EffectType.resurrect)
   ) {
-    G.players[target].hp = 15;
+    G.players[target].hp = getEffects(G, target, EffectType.resurrect)[0].value;
     removeEffects(G, target, EffectType.resurrect);
     return 0;
   }

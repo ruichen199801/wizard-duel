@@ -32,6 +32,7 @@ import {
   Revenge,
   Poison,
 } from './cards';
+import { PowerClass } from '../game/power';
 
 const baseDeck = [
   Fireball1,
@@ -128,6 +129,9 @@ export const getDeckForLevel = (level = '1') => {
   const levelDeck = levelDecks[level] || [];
   if (levelDeck.length < 10) {
     throw new Error('Deck array length is less than 10.'); // Dev testing issue only
+  }
+  if (sessionStorage.getItem('power') === PowerClass.erebo) {
+    return levelDeck.filter((card) => card.id !== Mutate.id); // Erebo effect
   }
   return [...levelDeck];
 };

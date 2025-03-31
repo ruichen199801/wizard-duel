@@ -1,10 +1,14 @@
-import { levelConfigs, finalLevel, maxTurn, DrawMode } from './level';
+import { levelConfigs, finalLevel, maxTurn } from './level';
 import { Wish2, Wish3, Wish4, Wish5 } from '../data/cards';
 import { EffectType } from '../data/cardEffects';
 import { CardKeyword } from '../data/cards';
 import { applyEffect } from './effect';
 import { hasEffect, getEffects, undoEffect } from './effectUtils';
-import { PowerClass } from '../components/utils/constants';
+import {
+  applyPowerOverride,
+  applyStartOfTurnPowerEffects,
+  applyEndOfTurnPowerEffects,
+} from './powerUtils';
 
 /**
  * Shuffle a deck of cards using Fisher-Yates algorithm.
@@ -201,47 +205,16 @@ export const applyLevelOverride = (G) => {
   G.players[1].effects.push(...enemyEffectsOverride);
 
   G.globalEffects = { ...globalEffects };
+
+  applyPowerOverride(G);
 };
 
 /**
- * Apply overrides to G based on the power class player has selected for the final level.
+ * Apply effects at the start of turn if any, such as transforming the current player's hand.
  */
-export const applyPowerOverride = (G) => {
-  if (G.level !== finalLevel) {
-    return;
-  }
-  const powerClass = sessionStorage.getItem('power');
-  switch (powerClass) {
-    case PowerClass.dentro:
-      G.globalEffects.drawMode = DrawMode.select;
-      G.players[1].hp += 20;
-      G.players[1].maxHp += 20;
-      break;
-
-    case PowerClass.hydro:
-      G.players[1].atk += 3;
-      G.players[1].baseAtk += 3;
-      G.players[1].def += 3;
-      G.players[1].baseDef += 3;
-      break;
-
-    case PowerClass.erebo:
-      G.players[0].hp /= 2;
-      G.players[0].maxHp /= 2;
-      break;
-
-    default:
-      return;
-  }
-};
-
-/**
- * Apply effects to the player's hand at the start of their turn if any.
- */
-export const applyHandEffects = (G, ctx) => {
+export const executeStartOfTurnEffects = (G, ctx) => {
   const replaceWishCards = (hand) => {
     const replacementOptions = [Wish2, Wish3, Wish4, Wish5];
-
     return hand.map((card) => {
       if (card.name === 'Wish') {
         const availableOptions = replacementOptions.filter(
@@ -255,13 +228,12 @@ export const applyHandEffects = (G, ctx) => {
       }
     });
   };
-
   // Transform `Wish` to a random effect
   G.players[ctx.currentPlayer].hand = replaceWishCards(
     G.players[ctx.currentPlayer].hand
   );
 
-  // Add more effects here
+  applyStartOfTurnPowerEffects(G, ctx);
 };
 
 /**
@@ -310,5 +282,5 @@ export const executeGlobalEndOfTurnEffects = (
     player.hp = Math.max(1, player.hp - G.globalEffects.loseHpAmount);
   }
 
-  // Add more effects here
+  applyEndOfTurnPowerEffects(G, ctx);
 };

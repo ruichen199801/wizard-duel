@@ -10,7 +10,7 @@ import {
   Flame,
   Resurrect,
 } from '../data/cards';
-import { PowerClass } from '../components/utils/constants';
+import { PowerClass } from './power';
 
 // General constants
 export const DrawMode = {
@@ -20,14 +20,14 @@ export const DrawMode = {
 export const finalLevel = '8';
 export const devTestLevel = '7';
 export const maxTurn =
-  sessionStorage.getItem('power') === PowerClass.pyro ? 30 : 50;
+  sessionStorage.getItem('power') === PowerClass.pyro ? 30 : 50; // Pyro debuff
 
 // Level specific constants
-export const fireHandDistribution = [0.1, 0.4, 0.4, 0.05, 0.05]; // Level 2
+const fireHandDistribution = [0.1, 0.4, 0.4, 0.05, 0.05]; // Level 2
 export const freezeRate = 0.3; // Level 3
-export const missRate = 0.25; // Level 4
-export const clearEffectInterval = 11; // Level 6
-export const loseHpAmount = 5; // Level 7
+const missRate = 0.25; // Level 4
+const clearEffectInterval = 11; // Level 6
+const loseHpAmount = 5; // Level 7
 
 export const levelConfigs = {
   1: {
@@ -58,11 +58,13 @@ export const levelConfigs = {
 
     playerHandOverride: randomPopulateHand(
       [Fireball1, Fireball2, Fireball3, Flame, Resurrect],
-      fireHandDistribution
+      fireHandDistribution,
+      5
     ),
     enemyHandOverride: randomPopulateHand(
       [Fireball1, Fireball2, Fireball3, Flame, Resurrect],
-      fireHandDistribution
+      fireHandDistribution,
+      5
     ),
 
     playerEffectsOverride: [],

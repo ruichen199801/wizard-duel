@@ -13,7 +13,7 @@ import { removeBuffCards, removeDebuffCards, uselessCards } from './algoUtils';
  */
 export const filterActions = (cards, G, ctx) => {
   let cardsBefore = cards;
-  for (const { rule, reason } of filters) {
+  for (const { rule } of filters) {
     const [result, cardsAfter] = applyFilter(cardsBefore, rule, G, ctx);
     if (result) {
       // console.log(`Exit from filter rule: ${reason}`);
