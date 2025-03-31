@@ -18,8 +18,8 @@ import {
 } from '../data/cardEffects';
 import { getDeckForLevel } from '../data/deck';
 import { shuffle } from './gameUtils';
-import { freezeRate } from './level';
-import { PowerClass } from './power';
+import { levelFreezeRate } from './level';
+import { PowerClass, cryoFreezeRate } from './power';
 
 const damage = (G, target, { value = 0 }, ctx) => {
   const player = target === '0' ? '1' : '0';
@@ -281,7 +281,7 @@ export const applyEffect = (G, ctx, effect) => {
 const applyDamageLevelEffects = (G, target, damage, ctx) => {
   switch (G.level) {
     case '3':
-      if (getChanceEffect(freezeRate)) {
+      if (getChanceEffect(levelFreezeRate)) {
         G.players[target].effects.push(freezeEffect);
       }
       return damage;
@@ -290,6 +290,14 @@ const applyDamageLevelEffects = (G, target, damage, ctx) => {
       return G.globalEffects.shouldMiss?.[ctx.turn - 1] ? -1 : damage;
 
     case '8':
+      if (
+        target === '1' &&
+        sessionStorage.getItem('power') === PowerClass.cryo
+      ) {
+        if (getChanceEffect(cryoFreezeRate)) {
+          G.players[target].effects.push(freezeEffect); // Cryo buff
+        }
+      }
       return G.globalEffects.shouldPlayerMiss?.[ctx.turn - 1] ? -1 : damage;
 
     default:

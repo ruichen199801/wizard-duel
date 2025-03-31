@@ -16,6 +16,12 @@ import { hasSameEffect, getChanceEffect } from './effectUtils';
 import { finalLevel, maxTurn, DrawMode } from './level';
 import { randomPopulateHand, generateAttackOutcomes } from './levelUtils';
 import { PowerClass } from './power';
+import {
+  pyroHandDistribution,
+  psammoMissRate,
+  psammoWishRate,
+  hydroBuffRate,
+} from './power';
 
 /**
  * Apply overrides to G based on the selected power class when the game initializes.
@@ -28,7 +34,7 @@ const applyPowerOverride = (G) => {
     case PowerClass.psammo:
       G.globalEffects = {
         ...G.globalEffects,
-        shouldPlayerMiss: generateAttackOutcomes(maxTurn, 0.2),
+        shouldPlayerMiss: generateAttackOutcomes(maxTurn, psammoMissRate),
       };
       break;
     // Dentro buff+debuff
@@ -90,11 +96,10 @@ const applyEndOfTurnPowerEffects = (G, ctx) => {
   }
 };
 
-const wishTransformOptions = [Wish2, Wish3, Wish4, Wish5];
-const wishCards = [Wish1, ...wishTransformOptions];
-const wishRate = 0.2;
 const randomCardToWish = (G, ctx) => {
-  if (ctx.currentPlayer === '1' || !getChanceEffect(wishRate)) return;
+  if (ctx.currentPlayer === '1' || !getChanceEffect(psammoWishRate)) return;
+  const wishTransformOptions = [Wish2, Wish3, Wish4, Wish5];
+  const wishCards = [Wish1, ...wishTransformOptions];
   const playerHand = G.players[0].hand;
   const nonWishCards = playerHand.filter((card) => !wishCards.includes(card));
   if (nonWishCards.length) {
@@ -109,21 +114,19 @@ const randomCardToWish = (G, ctx) => {
   }
 };
 
-const fireHandDistribution = [0.4, 0.4, 0.1, 0.09, 0.01];
 const applyRandomFireHand = (G, ctx) => {
   if (ctx.currentPlayer === '1') return;
   const newHand = randomPopulateHand(
     [Fireball1, Fireball2, Fireball3, Flame, Resurrect],
-    fireHandDistribution,
+    pyroHandDistribution,
     4
   );
   G.players[0].hand = newHand;
 };
 
-const randomBuffList = [buffAtk(2), buffDef(2), doubleDmg, preventDmg];
-const buffRate = 0.3;
 const applyRandomBuff = (G, ctx) => {
-  if (ctx.currentPlayer === '1' || !getChanceEffect(buffRate)) return;
+  if (ctx.currentPlayer === '1' || !getChanceEffect(hydroBuffRate)) return;
+  const randomBuffList = [buffAtk(2), buffDef(2), doubleDmg, preventDmg];
   const availableBuffs = randomBuffList.filter(
     (buff) => !hasSameEffect(G, '0', buff)
   );
