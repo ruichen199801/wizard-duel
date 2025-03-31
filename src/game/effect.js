@@ -78,7 +78,10 @@ const damage = (G, target, { value = 0 }, ctx) => {
 };
 
 const heal = (G, target, { value = 0 }) => {
-  if (hasEffect(G, target, EffectType.poison)) {
+  if (
+    hasEffect(G, target, EffectType.poison) ||
+    (target === '0' && sessionStorage.getItem('power') === PowerClass.cryo) // Cryo debuff
+  ) {
     return;
   }
   // Caused by playing Mutate in final level

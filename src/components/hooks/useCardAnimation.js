@@ -7,6 +7,7 @@ import {
 import { sleep } from '../utils/commonUtils';
 import { CardKeyword } from '../../data/cards';
 import { EffectType } from '../../data/cardEffects';
+import { PowerClass } from '../../game/power';
 
 const useCardAnimation = (ctx, G) => {
   const [showPlayerAnimation, setShowPlayerAnimation] = useState(false);
@@ -69,7 +70,10 @@ const useCardAnimation = (ctx, G) => {
       hasFreezeEffect ||
       (hasDamageKeyword && shouldMiss) ||
       (ctx.currentPlayer === '0' && hasDamageKeyword && shouldPlayerMiss) ||
-      (isUniqueHealCard && hasPoisonEffect)
+      (isUniqueHealCard && hasPoisonEffect) ||
+      (ctx.currentPlayer === '0' &&
+        isUniqueHealCard &&
+        sessionStorage.getItem('power') === PowerClass.cryo)
     ) {
       return false;
     }

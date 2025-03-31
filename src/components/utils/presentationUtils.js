@@ -1,6 +1,7 @@
 import { cleanse, defrost, miss, potion, cardAudio } from './assetPaths';
 import { EffectType } from '../../data/cardEffects';
 import { CardKeyword } from '../../data/cards';
+import { PowerClass } from '../../game/power';
 
 /**
  * Returns the corresponding audio path when a card is played.
@@ -35,7 +36,12 @@ export const resolveCardAudio = (card, G, ctx) => {
     (ctx.currentPlayer === '0' && hasDamageKeyword && shouldPlayerMiss)
   ) {
     return miss;
-  } else if (isUniqueHealCard && hasPoisonEffect) {
+  } else if (
+    (isUniqueHealCard && hasPoisonEffect) ||
+    (ctx.currentPlayer === '0' &&
+      isUniqueHealCard &&
+      sessionStorage.getItem('power') === PowerClass.cryo)
+  ) {
     return potion;
   } else {
     return cardAudio(card.id);
