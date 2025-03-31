@@ -20,7 +20,10 @@ import {
   pyroHandDistribution,
   psammoMissRate,
   psammoWishRate,
+  dentroEnemyBuffValue,
   hydroBuffRate,
+  hydroPlayerBuffValue,
+  hydroEnemyBuffValue,
 } from './power';
 
 /**
@@ -40,15 +43,15 @@ const applyPowerOverride = (G) => {
     // Dentro buff+debuff
     case PowerClass.dentro:
       G.globalEffects.drawMode = DrawMode.select;
-      G.players[1].hp += 20;
-      G.players[1].maxHp += 20;
+      G.players[1].hp += dentroEnemyBuffValue;
+      G.players[1].maxHp += dentroEnemyBuffValue;
       break;
     // Hydro debuff
     case PowerClass.hydro:
-      G.players[1].atk += 3;
-      G.players[1].baseAtk += 3;
-      G.players[1].def += 3;
-      G.players[1].baseDef += 3;
+      G.players[1].atk += hydroEnemyBuffValue;
+      G.players[1].baseAtk += hydroEnemyBuffValue;
+      G.players[1].def += hydroEnemyBuffValue;
+      G.players[1].baseDef += hydroEnemyBuffValue;
       break;
     // Erebo debuff
     case PowerClass.erebo:
@@ -126,7 +129,12 @@ const applyRandomFireHand = (G, ctx) => {
 
 const applyRandomBuff = (G, ctx) => {
   if (ctx.currentPlayer === '1' || !getChanceEffect(hydroBuffRate)) return;
-  const randomBuffList = [buffAtk(2), buffDef(2), doubleDmg, preventDmg];
+  const randomBuffList = [
+    buffAtk(hydroPlayerBuffValue),
+    buffDef(hydroPlayerBuffValue),
+    doubleDmg,
+    preventDmg,
+  ];
   const availableBuffs = randomBuffList.filter(
     (buff) => !hasSameEffect(G, '0', buff)
   );
