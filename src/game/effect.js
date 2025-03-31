@@ -19,6 +19,7 @@ import {
 import { getDeckForLevel } from '../data/deck';
 import { shuffle } from './gameUtils';
 import { freezeRate } from './level';
+import { PowerClass } from './power';
 
 const damage = (G, target, { value = 0 }, ctx) => {
   const player = target === '0' ? '1' : '0';
@@ -68,6 +69,11 @@ const damage = (G, target, { value = 0 }, ctx) => {
 
   // Apply the final damage to the target's HP.
   G.players[target].hp -= value;
+
+  if (target === '1' && sessionStorage.getItem('power') === PowerClass.erebo) {
+    G.players[target].maxHp -= value; // Erebo buff
+  }
+
   return value;
 };
 
