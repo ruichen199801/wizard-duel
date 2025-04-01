@@ -68,6 +68,13 @@ const GameoverModal = ({
                 {gameoverMessage[winner] ||
                   'Time runs out, the duel ends in a draw.'}
               </p>
+
+              {level === finalLevel && winner === '0' && (
+                <p className='ms-2 mb-4 gameover-text fst-italic text-muted'>
+                  Cheat code: Open Settings menu and click the header 6 times to
+                  skip early levels.
+                </p>
+              )}
             </div>
 
             <div className='modal-footer border-0 justify-content-end'>

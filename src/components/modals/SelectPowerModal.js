@@ -8,6 +8,7 @@ import { getAvatarForLevel, click } from '../utils/assetPaths';
 import { powers } from '../utils/scripts';
 import { startLevel } from '../utils/commonUtils';
 import useImageLoader from '../hooks/useImageLoader';
+import { GameMode } from '../../game/power';
 
 const SelectPowerModal = ({ showSelectPowerModal, playAudio }) => {
   const [selectedPowerClass, setSelectedPowerClass] = useState(null);
@@ -24,9 +25,10 @@ const SelectPowerModal = ({ showSelectPowerModal, playAudio }) => {
     playAudio(click);
   };
 
-  const handleNextLevel = () => {
+  const handleNextLevel = (mode) => {
     if (selectedPowerClass) {
       sessionStorage.setItem('power', selectedPowerClass);
+      sessionStorage.setItem('mode', mode);
       startLevel();
     }
   };
@@ -90,10 +92,19 @@ const SelectPowerModal = ({ showSelectPowerModal, playAudio }) => {
               <button
                 type='button'
                 className='btn btn-dark'
-                onClick={handleNextLevel}
+                onClick={() => handleNextLevel(GameMode.normal)}
                 disabled={!selectedPowerClass}
               >
-                Next Level
+                Next Level: Normal
+              </button>
+
+              <button
+                type='button'
+                className='btn btn-dark'
+                onClick={() => handleNextLevel(GameMode.hard)}
+                disabled={!selectedPowerClass}
+              >
+                Next Level: Hard
               </button>
             </div>
           </div>

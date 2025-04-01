@@ -1,7 +1,4 @@
-/**
- * Creates a separate file for PowerClass definition to avoid circular dependency.
- */
-export const PowerClass = {
+const PowerClass = {
   pyro: 'pyro',
   cryo: 'cryo',
   psammo: 'psammo',
@@ -10,12 +7,45 @@ export const PowerClass = {
   erebo: 'erebo',
 };
 
-// Power specific constants
-export const pyroHandDistribution = [0.4, 0.4, 0.1, 0.09, 0.01];
-export const cryoFreezeRate = 0.4;
-export const psammoMissRate = 0.15;
-export const psammoWishRate = 0.3;
-export const dentroEnemyBuffValue = 20;
-export const hydroBuffRate = 0.5;
-export const hydroPlayerBuffValue = 4;
-export const hydroEnemyBuffValue = 3;
+// Difficulty of the boss level
+const GameMode = {
+  normal: 'normal',
+  hard: 'hard',
+};
+
+// GameMode agnostic contants
+const powerConfigs = {
+  pyroHandDistribution: [0.4, 0.4, 0.1, 0.09, 0.01],
+  cryoFreezeRate: 0.5,
+  psammoWishRate: 0.4,
+  hydroBuffRate: 0.5,
+  hydroPlayerStatBuffPoint: 4,
+};
+
+// GameMode dependent contants
+const powerModeConfigs = {
+  [GameMode.normal]: {
+    pyroMaxTurn: 35,
+    psammoMissRate: 0.15,
+    dentroEnemyHpBuffPoint: 20,
+    hydroEnemyStatBuffPoint: 3,
+    ereboPlayerInitialHp: 45,
+  },
+  [GameMode.hard]: {
+    pyroMaxTurn: 25,
+    psammoMissRate: 0.3,
+    dentroEnemyHpBuffPoint: 40,
+    hydroEnemyStatBuffPoint: 6,
+    ereboPlayerInitialHp: 30,
+  },
+};
+
+const getPowerConfigs = () => {
+  const mode = sessionStorage.getItem('mode') || GameMode.normal;
+  return {
+    ...powerConfigs,
+    ...powerModeConfigs[mode],
+  };
+};
+
+export { PowerClass, GameMode, getPowerConfigs };

@@ -1,4 +1,4 @@
-import { PowerClass } from '../../game/power';
+import { PowerClass, GameMode } from '../../game/power';
 
 const enemyNames = {
   1: 'Arden the Wise',
@@ -88,43 +88,71 @@ const powers = [
     level: '2',
     name: 'Pyro',
     class: PowerClass.pyro,
-    ruleText:
-      'you get a new fire hand at the end of your turns, but you lose after 30 turns.',
+    ruleText: {
+      [GameMode.normal]:
+        'you get a new fire hand at the end of your turns, but you lose after 35 turns.',
+      [GameMode.hard]:
+        'you get a new fire hand at the end of your turns, but you lose after 25 turns.',
+    },
   },
+
   {
     level: '3',
     name: 'Cryo',
     class: PowerClass.cryo,
-    ruleText:
-      "your attacks may freeze enemy, but you can't heal. Extra damage cards are added to the deck.",
+    ruleText: {
+      [GameMode.normal]:
+        "your attacks may freeze enemy, but you can't heal. Extra damage cards are added to the deck.",
+      [GameMode.hard]: "your attacks may freeze enemy, but you can't heal.",
+    },
   },
+
   {
     level: '4',
     name: 'Psammo',
     class: PowerClass.psammo,
-    ruleText:
-      'your cards may turn into wishes at the start of your turns, but your attacks can miss.',
+    ruleText: {
+      [GameMode.normal]:
+        'your cards may turn into wishes at the start of your turns, but your attacks occasionally miss.',
+      [GameMode.hard]:
+        'your cards may turn into wishes at the start of your turns, but your attacks have a moderate chance to miss.',
+    },
   },
+
   {
     level: '5',
     name: 'Dentro',
     class: PowerClass.dentro,
-    ruleText:
-      'you pick a card instead of drawing, but enemy starts with 20 more HP.',
+    ruleText: {
+      [GameMode.normal]:
+        'you pick a card instead of drawing, but enemy starts with 20 more HP.',
+      [GameMode.hard]:
+        'you pick a card instead of drawing, but enemy starts with 40 more HP.',
+    },
   },
+
   {
     level: '6',
     name: 'Hydro',
     class: PowerClass.hydro,
-    ruleText:
-      'you may gain a random buff at the end of your turns, but enemy has +3 Attack/+3 Shield permanently.',
+    ruleText: {
+      [GameMode.normal]:
+        'you may gain a random buff at the end of your turns, but enemy has +3 Attack/+3 Shield permanently.',
+      [GameMode.hard]:
+        'you may gain a random buff at the end of your turns, but enemy has +6 Attack/+6 Shield permanently.',
+    },
   },
+
   {
     level: '7',
     name: 'Erebo',
     class: PowerClass.erebo,
-    ruleText:
-      'your damage cards reduce Max HP, but you start with half HP. HP swap is disabled.',
+    ruleText: {
+      [GameMode.normal]:
+        'your damage cards reduce Max HP, but you start with 45 HP. HP swap is disabled.',
+      [GameMode.hard]:
+        'your damage cards reduce Max HP, but you start with 30 HP. HP swap is disabled.',
+    },
   },
 ];
 
@@ -132,10 +160,11 @@ const getRuleByPower = () => {
   const power = powers.find(
     (power) => power.class === sessionStorage.getItem('power')
   );
+  const mode = sessionStorage.getItem('mode') || GameMode.normal;
   return power
     ? {
         intro: `Embraced by the ${power.name} power, `,
-        rule: `${power.ruleText}`,
+        rule: `${power.ruleText[mode]}`,
       }
     : ``;
 };

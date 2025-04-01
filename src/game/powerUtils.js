@@ -15,16 +15,9 @@ import { applyEffect } from './effect';
 import { hasSameEffect, getChanceEffect } from './effectUtils';
 import { finalLevel, maxTurn, DrawMode } from './level';
 import { randomPopulateHand, generateAttackOutcomes } from './levelUtils';
-import { PowerClass } from './power';
-import {
-  pyroHandDistribution,
-  psammoMissRate,
-  psammoWishRate,
-  dentroEnemyBuffValue,
-  hydroBuffRate,
-  hydroPlayerBuffValue,
-  hydroEnemyBuffValue,
-} from './power';
+import { PowerClass, getPowerConfigs } from './power';
+
+const powerConfig = getPowerConfigs();
 
 /**
  * Apply overrides to G based on the selected power class when the game initializes.
@@ -37,26 +30,29 @@ const applyPowerOverride = (G) => {
     case PowerClass.psammo:
       G.globalEffects = {
         ...G.globalEffects,
-        shouldPlayerMiss: generateAttackOutcomes(maxTurn, psammoMissRate),
+        shouldPlayerMiss: generateAttackOutcomes(
+          maxTurn,
+          powerConfig.psammoMissRate
+        ),
       };
       break;
     // Dentro buff+debuff
     case PowerClass.dentro:
       G.globalEffects.drawMode = DrawMode.select;
-      G.players[1].hp += dentroEnemyBuffValue;
-      G.players[1].maxHp += dentroEnemyBuffValue;
+      G.players[1].hp += powerConfig.dentroEnemyHpBuffPoint;
+      G.players[1].maxHp += powerConfig.dentroEnemyHpBuffPoint;
       break;
     // Hydro debuff
     case PowerClass.hydro:
-      G.players[1].atk += hydroEnemyBuffValue;
-      G.players[1].baseAtk += hydroEnemyBuffValue;
-      G.players[1].def += hydroEnemyBuffValue;
-      G.players[1].baseDef += hydroEnemyBuffValue;
+      G.players[1].atk += powerConfig.hydroEnemyStatBuffPoint;
+      G.players[1].baseAtk += powerConfig.hydroEnemyStatBuffPoint;
+      G.players[1].def += powerConfig.hydroEnemyStatBuffPoint;
+      G.players[1].baseDef += powerConfig.hydroEnemyStatBuffPoint;
       break;
     // Erebo debuff
     case PowerClass.erebo:
-      G.players[0].hp /= 2;
-      G.players[0].maxHp /= 2;
+      G.players[0].hp = powerConfig.ereboPlayerInitialHp;
+      G.players[0].maxHp = powerConfig.ereboPlayerInitialHp;
       break;
     default:
       return;
@@ -100,7 +96,8 @@ const applyEndOfTurnPowerEffects = (G, ctx) => {
 };
 
 const randomCardToWish = (G, ctx) => {
-  if (ctx.currentPlayer === '1' || !getChanceEffect(psammoWishRate)) return;
+  if (ctx.currentPlayer === '1' || !getChanceEffect(powerConfig.psammoWishRate))
+    return;
   const wishTransformOptions = [Wish2, Wish3, Wish4, Wish5];
   const wishCards = [Wish1, ...wishTransformOptions];
   const playerHand = G.players[0].hand;
@@ -121,17 +118,18 @@ const applyRandomFireHand = (G, ctx) => {
   if (ctx.currentPlayer === '1') return;
   const newHand = randomPopulateHand(
     [Fireball1, Fireball2, Fireball3, Flame, Resurrect],
-    pyroHandDistribution,
+    powerConfig.pyroHandDistribution,
     4
   );
   G.players[0].hand = newHand;
 };
 
 const applyRandomBuff = (G, ctx) => {
-  if (ctx.currentPlayer === '1' || !getChanceEffect(hydroBuffRate)) return;
+  if (ctx.currentPlayer === '1' || !getChanceEffect(powerConfig.hydroBuffRate))
+    return;
   const randomBuffList = [
-    buffAtk(hydroPlayerBuffValue),
-    buffDef(hydroPlayerBuffValue),
+    buffAtk(powerConfig.hydroPlayerStatBuffPoint),
+    buffDef(powerConfig.hydroPlayerStatBuffPoint),
     doubleDmg,
     preventDmg,
   ];

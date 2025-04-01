@@ -143,6 +143,7 @@ export const setPrevLevel = () => {
     const prevLevel = parseInt(currentLevel, 10) - 1;
     sessionStorage.setItem('level', prevLevel);
     sessionStorage.removeItem('power');
+    sessionStorage.removeItem('mode');
   } catch (e) {
     console.error('Error saving to sessionStorage:', e);
   }
@@ -157,6 +158,7 @@ export const setNextLevel = () => {
     if (currentLevel === finalLevel) {
       sessionStorage.removeItem('level');
       sessionStorage.removeItem('power');
+      sessionStorage.removeItem('mode');
       return;
     }
     const nextLevel = parseInt(currentLevel, 10) + 1;
