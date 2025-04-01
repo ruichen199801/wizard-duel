@@ -90,9 +90,9 @@ const powers = [
     class: PowerClass.pyro,
     ruleText: {
       [GameMode.normal]:
-        'you get a new fire hand at the end of your turns, but you lose after 35 turns.',
+        'you get a new fire hand at the end of your turns, but you lose after 40 turns.',
       [GameMode.hard]:
-        'you get a new fire hand at the end of your turns, but you lose after 25 turns.',
+        'you get a new fire hand at the end of your turns, but you lose after 30 turns.',
     },
   },
 
@@ -151,7 +151,7 @@ const powers = [
       [GameMode.normal]:
         'your damage cards reduce Max HP, but you start with 45 HP. HP swap is disabled.',
       [GameMode.hard]:
-        'your damage cards reduce Max HP, but you start with 30 HP. HP swap is disabled.',
+        'your damage cards reduce Max HP, but you start with 35 HP. HP swap is disabled.',
     },
   },
 ];

@@ -25,18 +25,18 @@ const powerConfigs = {
 // GameMode dependent contants
 const powerModeConfigs = {
   [GameMode.normal]: {
-    pyroMaxTurn: 35,
+    pyroMaxTurn: 40,
     psammoMissRate: 0.15,
     dentroEnemyHpBuffPoint: 20,
     hydroEnemyStatBuffPoint: 3,
     ereboPlayerInitialHp: 45,
   },
   [GameMode.hard]: {
-    pyroMaxTurn: 25,
+    pyroMaxTurn: 30,
     psammoMissRate: 0.3,
     dentroEnemyHpBuffPoint: 40,
     hydroEnemyStatBuffPoint: 6,
-    ereboPlayerInitialHp: 30,
+    ereboPlayerInitialHp: 35,
   },
 };
 
