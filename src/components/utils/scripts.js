@@ -69,7 +69,7 @@ const battleInstrutions = {
 
   7: {
     intro: `Zara Shadowbane rules the cursed Shadowland, draining the life of all who enter. `,
-    levelRule: `Non-damage cards cost 5 HP to play. HP can't drop below 1.`,
+    levelRule: `Non-damage cards cost 5 HP to play. HP can't drop below 1 in this way.`,
     outro: ``,
     tips: ``,
   },

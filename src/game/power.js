@@ -15,8 +15,8 @@ const GameMode = {
 
 // GameMode agnostic contants
 const powerConfigs = {
-  pyroHandDistribution: [0.4, 0.4, 0.1, 0.09, 0.01],
-  cryoFreezeRate: 0.5,
+  pyroHandDistribution: [0.4, 0.4, 0.15, 0.04, 0.01],
+  cryoFreezeRate: 0.4,
   psammoWishRate: 0.4,
   hydroBuffRate: 0.5,
   hydroPlayerStatBuffPoint: 4,
