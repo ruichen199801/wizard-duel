@@ -29,7 +29,7 @@ const CardGalleryModal = ({
         <div className='modal-dialog modal-dialog-scrollable modal-dialog-centered'>
           <div className='modal-content bg-modal h-100'>
             <div className='modal-header border-0'>
-              <h4 className='modal-title w-100 text-center font-lora-bold'>
+              <h4 className='modal-title w-100 text-center font-bold'>
                 Card Gallery
               </h4>
               <button

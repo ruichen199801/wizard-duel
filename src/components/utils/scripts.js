@@ -33,7 +33,7 @@ const battleInstrutions = {
   },
 
   2: {
-    intro: `G0B1N-X is a mischievous goblin mage who LOVES playing with fire. `,
+    intro: `G0B1N-X is a goblin mage who LOVES playing with fire. `,
     levelRule: `Both players get random copies of fire cards in their starting hand.`,
     outro: ``,
     tips: ``,

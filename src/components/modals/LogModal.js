@@ -21,7 +21,7 @@ const LogModal = ({ showLogModal, setShowLogModal, logEntries, playAudio }) => {
         <div className='modal-dialog modal-dialog-scrollable modal-dialog-centered'>
           <div className='modal-content bg-modal h-50'>
             <div className='modal-header border-0'>
-              <h4 className='modal-title w-100 text-center font-lora-bold'>
+              <h4 className='modal-title w-100 text-center font-bold'>
                 Battle Log
               </h4>
               <button

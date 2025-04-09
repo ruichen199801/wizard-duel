@@ -61,7 +61,7 @@ const SettingsModal = ({
           <div className='modal-content bg-modal'>
             <div className='modal-header border-0'>
               <h4
-                className='modal-title w-100 text-center font-lora-bold ms-3'
+                className='modal-title w-100 text-center font-bold ms-3'
                 onClick={handleHeaderClick}
               >
                 Settings

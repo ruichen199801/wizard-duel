@@ -19,7 +19,7 @@ const NextLevelModal = ({ showNextLevelModal, level }) => {
         <div className='modal-dialog modal-dialog-centered'>
           <div className='modal-content bg-modal'>
             <div className='modal-header border-0'>
-              <h4 className='modal-title w-100 text-center font-lora-bold'>
+              <h4 className='modal-title w-100 text-center font-bold'>
                 New Cards Unlocked
               </h4>
             </div>

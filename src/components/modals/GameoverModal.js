@@ -59,7 +59,7 @@ const GameoverModal = ({
         <div className='modal-dialog modal-dialog-centered'>
           <div className='modal-content bg-modal'>
             <div className='modal-header border-0'>
-              <h3 className='modal-title w-100 text-center font-lora-bold'>
+              <h3 className='modal-title w-100 text-center font-bold'>
                 {gameoverTitle[winner] || 'Game Over'}
               </h3>
             </div>
@@ -71,7 +71,7 @@ const GameoverModal = ({
 
               {level === finalLevel && winner === '0' && (
                 <p className='ms-2 mb-4 gameover-text fst-italic text-muted'>
-                  Cheat code: Open Settings menu and click the header 6 times to
+                  CHEAT CODE: Open Settings menu and click the header 6 times to
                   skip early levels.
                 </p>
               )}
