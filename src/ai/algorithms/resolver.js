@@ -46,9 +46,10 @@ export const resolveAction = (actions, G) => {
     return actions.find((card) => removeBuffCards.includes(card.id));
   }
 
-  // When AI is low on HP, resolve to random(CardKeyword.sustain) if any
+  // When AI is low on HP and healing is not invalidated, resolve to random(CardKeyword.sustain) if any
   if (
     actions.some((card) => card.keywords.includes(CardKeyword.sustain)) &&
+    !G.players[1].effects.some((e) => e.type === EffectType.poison) &&
     G.players[1].hp <= Math.ceil(G.players[1].maxHp * 0.3)
   ) {
     // console.log('Resolve to healing cards');
