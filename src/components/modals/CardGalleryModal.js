@@ -57,6 +57,7 @@ const CardGalleryModal = ({
                           src={image}
                           alt='card front'
                           className='img-fluid'
+                          loading='lazy'
                         />
                       </div>
                     ))}
