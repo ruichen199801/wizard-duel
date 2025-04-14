@@ -3,11 +3,11 @@ import { AnimationTarget } from '../utils/constants';
 import {
   getAnimationTargetForCard,
   getAnimationDataForCard,
-} from '../utils/assetPaths';
+} from '../utils/assets';
 import { sleep } from '../utils/commonUtils';
-import { CardKeyword } from '../../data/cards';
-import { EffectType } from '../../data/cardEffects';
-import { PowerClass } from '../../game/power';
+import { CardKeyword } from '../data/cards';
+import { EffectType } from '../data/cardEffects';
+import { PowerClass } from '../core/power/power';
 
 const useCardAnimation = (ctx, G) => {
   const [showPlayerAnimation, setShowPlayerAnimation] = useState(false);

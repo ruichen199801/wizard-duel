@@ -32,7 +32,7 @@ import {
   Revenge,
   Poison,
 } from './cards';
-import { PowerClass, GameMode } from '../game/power';
+import { PowerClass, GameMode } from '../core/power/power';
 
 const baseDeck = [
   Fireball1,

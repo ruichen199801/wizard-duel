@@ -15,11 +15,11 @@ import {
   EffectDuration,
   EffectGroupName,
   freeze as freezeEffect,
-} from '../data/cardEffects';
-import { getDeckForLevel } from '../data/deck';
-import { shuffle } from './gameUtils';
-import { levelFreezeRate } from './level';
-import { PowerClass, getPowerConfigs } from './power';
+} from '../../data/cardEffects';
+import { getDeckForLevel } from '../../data/deck';
+import { shuffle } from '../game/gameUtils';
+import { levelFreezeRate } from '../level/level';
+import { PowerClass, getPowerConfigs } from '../power/power';
 
 const damage = (G, target, { value = 0 }, ctx) => {
   const player = target === '0' ? '1' : '0';

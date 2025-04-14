@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { exitToMenu, resetGame, jumpToLevel } from '../utils/commonUtils';
-import { click } from '../utils/assetPaths';
-import { preFinalLevel } from '../../game/level';
+import { exitToMenu, resetGame, jumpToLevel } from '../../utils/commonUtils';
+import { click } from '../../utils/assets';
+import { preFinalLevel } from '../../core/level/level';
 import { Algorithm } from '../../ai/ai';
 
 const SettingsModal = ({

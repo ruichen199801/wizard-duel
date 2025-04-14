@@ -1,4 +1,4 @@
-import { click } from '../utils/assetPaths';
+import { click } from '../../utils/assets';
 
 const LogModal = ({ showLogModal, setShowLogModal, logEntries, playAudio }) => {
   if (!showLogModal) {

@@ -3,10 +3,10 @@ import {
   avatarHeight,
   avatarWidth,
   avatarMediumScale,
-} from './utils/constants';
-import { getAvatarForLevel, icon } from './utils/assetPaths';
-import { getEnemyName } from './utils/scripts';
-import { EffectType } from '../data/cardEffects';
+} from '../../utils/constants';
+import { getAvatarForLevel, icon } from '../../utils/assets';
+import { getEnemyName } from '../../utils/scripts';
+import { EffectType } from '../../data/cardEffects';
 
 const PlayerStatsPanel = ({
   player,
@@ -68,7 +68,8 @@ const PlayerStatsPanel = ({
           <div className='d-flex align-items-center mb-2'>
             <img src={icon.hp} className='me-2 pstats-icon' alt='hp' />
             <span className='fw-semibold pstats-text pstats-panel-width'>
-              {player.hp}{isStatsIconsHovered && `/${player.maxHp}`}
+              {player.hp}
+              {isStatsIconsHovered && `/${player.maxHp}`}
             </span>
           </div>
 

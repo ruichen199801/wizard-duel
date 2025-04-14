@@ -1,5 +1,5 @@
-import { click } from '../utils/assetPaths';
-import useImageLoader from '../hooks/useImageLoader';
+import { click } from '../../utils/assets';
+import useImageLoader from '../../hooks/useImageLoader';
 
 const CardGalleryModal = ({
   showCardGallery,

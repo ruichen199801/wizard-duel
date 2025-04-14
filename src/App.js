@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Client } from 'boardgame.io/react';
-import { WizardDuel } from './game/game';
-import MainMenu from './components/MainMenu';
-import WizardDuelBoard from './components/WizardDuelBoard';
+import { WizardDuel } from './core/game/game';
+import MainMenu from './components/board/MainMenu';
+import WizardDuelBoard from './components/board/WizardDuelBoard';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Analytics } from '@vercel/analytics/react';
 

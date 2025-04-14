@@ -9,8 +9,8 @@ import {
   Fireball3,
   Flame,
   Resurrect,
-} from '../data/cards';
-import { PowerClass, getPowerConfigs } from './power';
+} from '../../data/cards';
+import { PowerClass, getPowerConfigs } from '../power/power';
 
 // General constants
 export const DrawMode = {

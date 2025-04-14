@@ -2,16 +2,16 @@ import {
   avatarSmallScale,
   avatarHeight,
   avatarWidth,
-} from '../utils/constants';
-import { getAvatarForLevel } from '../utils/assetPaths';
+} from '../../utils/constants';
+import { getAvatarForLevel } from '../../utils/assets';
 import {
   getEnemyName,
   getBattleStartCaption,
   getBattleInstructions,
   getRuleByPower,
-} from '../utils/scripts';
-import { finalLevel } from '../../game/level';
-import useImageLoader from '../hooks/useImageLoader';
+} from '../../utils/scripts';
+import { finalLevel } from '../../core/level/level';
+import useImageLoader from '../../hooks/useImageLoader';
 
 const MatchupModal = ({
   showMatchupModal,

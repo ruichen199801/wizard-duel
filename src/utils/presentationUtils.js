@@ -1,7 +1,7 @@
-import { cleanse, defrost, miss, potion, cardAudio } from './assetPaths';
-import { EffectType } from '../../data/cardEffects';
-import { CardKeyword } from '../../data/cards';
-import { PowerClass } from '../../game/power';
+import { cleanse, defrost, miss, potion, cardAudio } from './assets';
+import { EffectType } from '../data/cardEffects';
+import { CardKeyword } from '../data/cards';
+import { PowerClass } from '../core/power/power';
 
 /**
  * Returns the corresponding audio path when a card is played.

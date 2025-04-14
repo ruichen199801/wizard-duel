@@ -1,4 +1,4 @@
-import { PowerClass, GameMode } from '../../game/power';
+import { PowerClass, GameMode } from '../core/power/power';
 
 const enemyNames = {
   1: 'Arden the Wise',

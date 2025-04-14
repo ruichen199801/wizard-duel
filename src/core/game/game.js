@@ -1,9 +1,9 @@
 import { INVALID_MOVE } from 'boardgame.io/core';
-import { p0, p1 } from '../data/player';
-import { getDeckForLevel } from '../data/deck';
-import { EffectType } from '../data/cardEffects';
-import { applyEffect } from './effect';
-import { hasEffect, removeEffects } from './effectUtils';
+import { p0, p1 } from '../../data/player';
+import { getDeckForLevel } from '../../data/deck';
+import { EffectType } from '../../data/cardEffects';
+import { applyEffect } from '../effect/effect';
+import { hasEffect, removeEffects } from '../effect/effectUtils';
 import {
   shuffle,
   removeCard,

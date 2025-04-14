@@ -1,6 +1,6 @@
-import { exitToMenu, resetGame, startLevel } from '../utils/commonUtils';
-import { finalLevel } from '../../game/level';
-import { click } from '../utils/assetPaths';
+import { exitToMenu, resetGame, startLevel } from '../../utils/commonUtils';
+import { finalLevel } from '../../core/level/level';
+import { click } from '../../utils/assets';
 
 const GameoverModal = ({
   showGameoverModal,

@@ -1,4 +1,4 @@
-import { click } from '../utils/assetPaths';
+import { click } from '../../utils/assets';
 
 const HelpModal = ({ showHelpModal, setShowHelpModal, playAudio }) => {
   if (!showHelpModal) {

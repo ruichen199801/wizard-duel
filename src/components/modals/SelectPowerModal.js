@@ -3,12 +3,12 @@ import {
   avatarSmallScale,
   avatarHeight,
   avatarWidth,
-} from '../utils/constants';
-import { getAvatarForLevel, click } from '../utils/assetPaths';
-import { powers } from '../utils/scripts';
-import { startLevel } from '../utils/commonUtils';
-import useImageLoader from '../hooks/useImageLoader';
-import { GameMode } from '../../game/power';
+} from '../../utils/constants';
+import { getAvatarForLevel, click } from '../../utils/assets';
+import { powers } from '../../utils/scripts';
+import { startLevel } from '../../utils/commonUtils';
+import useImageLoader from '../../hooks/useImageLoader';
+import { GameMode } from '../../core/power/power';
 
 const SelectPowerModal = ({ showSelectPowerModal, playAudio }) => {
   const [selectedPowerClass, setSelectedPowerClass] = useState(null);
