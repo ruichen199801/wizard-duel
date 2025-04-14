@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { exitToMenu, resetGame, jumpToLevel } from '../utils/commonUtils';
-import { click } from '../utils/assetPaths';
-import { preFinalLevel } from '../../game/level';
+import { exitToMenu, resetGame, jumpToLevel } from '../../utils/commonUtils';
+import { click } from '../../utils/assets';
+import { preFinalLevel } from '../../core/level/level';
 import { Algorithm } from '../../ai/ai';
 
 const SettingsModal = ({
@@ -61,7 +61,7 @@ const SettingsModal = ({
           <div className='modal-content bg-modal'>
             <div className='modal-header border-0'>
               <h4
-                className='modal-title w-100 text-center font-lora-bold ms-3'
+                className='modal-title w-100 text-center font-bold ms-3'
                 onClick={handleHeaderClick}
               >
                 Settings

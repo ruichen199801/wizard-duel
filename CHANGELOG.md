@@ -1,3 +1,7 @@
+# 🚀 Release v1.0 (2025-4-13)
+
+Stable release with minor game balance tweaks and font improvements from the previous version.
+
 # 🚀 Release v0.18 (2025-3-31)
 
 ☠️ Level 8: Bloodmoon Castle

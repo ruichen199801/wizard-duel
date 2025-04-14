@@ -1,5 +1,5 @@
-import { click } from '../utils/assetPaths';
-import useImageLoader from '../hooks/useImageLoader';
+import { click } from '../../utils/assets';
+import useImageLoader from '../../hooks/useImageLoader';
 
 const CardGalleryModal = ({
   showCardGallery,
@@ -29,7 +29,7 @@ const CardGalleryModal = ({
         <div className='modal-dialog modal-dialog-scrollable modal-dialog-centered'>
           <div className='modal-content bg-modal h-100'>
             <div className='modal-header border-0'>
-              <h4 className='modal-title w-100 text-center font-lora-bold'>
+              <h4 className='modal-title w-100 text-center font-bold'>
                 Card Gallery
               </h4>
               <button
@@ -57,6 +57,7 @@ const CardGalleryModal = ({
                           src={image}
                           alt='card front'
                           className='img-fluid'
+                          loading='lazy'
                         />
                       </div>
                     ))}

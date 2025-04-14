@@ -1,4 +1,4 @@
-import { EffectType, EffectTarget, EffectGroup } from '../data/cardEffects';
+import { EffectType, EffectTarget, EffectGroup } from '../../data/cardEffects';
 
 /**
  * Returns the target player id of the card.

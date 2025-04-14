@@ -1,11 +1,11 @@
-import { click } from '../utils/assetPaths';
+import { click } from '../../utils/assets';
 import {
   getBattleStartCaption,
   getBattleInstructions,
   getRuleByPower,
-} from '../utils/scripts';
-import { getLocationForLevel } from '../utils/assetPaths';
-import { finalLevel } from '../../game/level';
+} from '../../utils/scripts';
+import { getLocationForLevel } from '../../utils/assets';
+import { finalLevel } from '../../core/level/level';
 
 const LevelEffectModal = ({
   showLevelEffectModal,
@@ -36,7 +36,7 @@ const LevelEffectModal = ({
         <div className='modal-dialog modal-dialog-scrollable modal-dialog-centered'>
           <div className='modal-content bg-modal'>
             <div className='modal-header border-0'>
-              <h4 className='modal-title w-100 text-center font-lora-bold'>
+              <h4 className='modal-title w-100 text-center font-bold'>
                 {getBattleStartCaption(level)}
               </h4>
               <button

@@ -2,16 +2,16 @@ import {
   avatarSmallScale,
   avatarHeight,
   avatarWidth,
-} from '../utils/constants';
-import { getAvatarForLevel } from '../utils/assetPaths';
+} from '../../utils/constants';
+import { getAvatarForLevel } from '../../utils/assets';
 import {
   getEnemyName,
   getBattleStartCaption,
   getBattleInstructions,
   getRuleByPower,
-} from '../utils/scripts';
-import { finalLevel } from '../../game/level';
-import useImageLoader from '../hooks/useImageLoader';
+} from '../../utils/scripts';
+import { finalLevel } from '../../core/level/level';
+import useImageLoader from '../../hooks/useImageLoader';
 
 const MatchupModal = ({
   showMatchupModal,
@@ -52,7 +52,7 @@ const MatchupModal = ({
         <div className='modal-dialog modal-dialog-centered'>
           <div className='modal-content bg-modal'>
             <div className='modal-header border-0'>
-              <h4 className='modal-title w-100 text-center font-lora-bold'>
+              <h4 className='modal-title w-100 text-center font-bold'>
                 {getBattleStartCaption(level)}
               </h4>
             </div>

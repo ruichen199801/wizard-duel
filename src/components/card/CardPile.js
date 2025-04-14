@@ -1,5 +1,5 @@
-import { cardSmallScale, cardHeight, cardWidth } from './utils/constants';
-import { cardPile } from './utils/assetPaths';
+import { cardSmallScale, cardHeight, cardWidth } from '../../utils/constants';
+import { cardPile } from '../../utils/assets';
 
 const CardPile = ({ scale = cardSmallScale }) => {
   const height = cardHeight * scale;

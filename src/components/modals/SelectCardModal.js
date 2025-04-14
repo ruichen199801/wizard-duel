@@ -1,4 +1,4 @@
-import { cardFront } from '../utils/assetPaths';
+import { cardFront } from '../../utils/assets';
 
 const SelectCardModal = ({
   cardIdList,
@@ -20,7 +20,7 @@ const SelectCardModal = ({
         <div className='modal-dialog modal-dialog-centered'>
           <div className='modal-content bg-modal'>
             <div className='modal-header border-0'>
-              <h4 className='modal-title w-100 text-center font-lora-bold'>
+              <h4 className='modal-title w-100 text-center font-bold'>
                 Pick a Card
               </h4>
             </div>

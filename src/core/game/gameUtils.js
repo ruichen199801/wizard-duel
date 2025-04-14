@@ -1,14 +1,14 @@
-import { levelConfigs, finalLevel, maxTurn } from './level';
-import { Wish2, Wish3, Wish4, Wish5 } from '../data/cards';
-import { EffectType } from '../data/cardEffects';
-import { CardKeyword } from '../data/cards';
-import { applyEffect } from './effect';
-import { hasEffect, getEffects, undoEffect } from './effectUtils';
+import { levelConfigs, finalLevel, maxTurn } from '../level/level';
+import { Wish2, Wish3, Wish4, Wish5 } from '../../data/cards';
+import { EffectType } from '../../data/cardEffects';
+import { CardKeyword } from '../../data/cards';
+import { applyEffect } from '../effect/effect';
+import { hasEffect, getEffects, undoEffect } from '../effect/effectUtils';
 import {
   applyPowerOverride,
   applyStartOfTurnPowerEffects,
   applyEndOfTurnPowerEffects,
-} from './powerUtils';
+} from '../power/powerUtils';
 
 /**
  * Shuffle a deck of cards using Fisher-Yates algorithm.

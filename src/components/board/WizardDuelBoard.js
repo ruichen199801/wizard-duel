@@ -1,43 +1,44 @@
 import { useEffect, useState } from 'react';
 
-import useAudioPlayer from './hooks/useAudioPlayer';
-import useMusicPlayer from './hooks/useMusicPlayer';
-import useBsTooltip from './hooks/useBsTooltip';
-import useLog from './hooks/useLog';
-import useCardAnimation from './hooks/useCardAnimation';
-import usePersistentState from './hooks/usePersistentState';
-import { sleep } from './utils/commonUtils';
+import useAudioPlayer from '../../hooks/useAudioPlayer';
+import useMusicPlayer from '../../hooks/useMusicPlayer';
+import useBsTooltip from '../../hooks/useBsTooltip';
+import useLog from '../../hooks/useLog';
+import useCardAnimation from '../../hooks/useCardAnimation';
+import usePersistentState from '../../hooks/usePersistentState';
+
+import { sleep } from '../../utils/commonUtils';
 import {
   resolveCardAudio,
   getSelectableCardIds,
-} from './utils/presentationUtils';
-import { GameState, pauseInterval } from './utils/constants';
+} from '../../utils/presentationUtils';
+import { GameState, pauseInterval } from '../../utils/constants';
 import {
   click,
   victory,
   defeat,
   getLocationForLevel,
   getMusicForLevel,
-} from './utils/assetPaths';
-import { AI, Algorithm } from '../ai/ai';
-import { DrawMode } from '../game/level';
+} from '../../utils/assets';
+import { AI, Algorithm } from '../../ai/ai';
+import { DrawMode } from '../../core/level/level';
 
-import CardPreview from './CardPreview';
-import EffectStack from './EffectStack';
-import EndTurnButton from './EndTurnButton';
-import GameoverModal from './modals/GameoverModal';
-import GameStatsPanel from './GameStatsPanel';
-import HelpModal from './modals/HelpModal';
-import LevelEffectModal from './modals/LevelEffectModal';
-import LogModal from './modals/LogModal';
-import IconList from './IconList';
-import MatchupModal from './modals/MatchupModal';
-import NextLevelModal from './modals/NextLevelModal';
-import PlayerHand from './PlayerHand';
-import PlayerStatsPanel from './PlayerStatsPanel';
-import SettingsModal from './modals/SettingsModal';
-import SelectCardModal from './modals/SelectCardModal';
-import SelectPowerModal from './modals/SelectPowerModal';
+import CardPreview from '../card/CardPreview';
+import PlayerHand from '../card/PlayerHand';
+import EffectStack from '../ui/EffectStack';
+import EndTurnButton from '../ui/EndTurnButton';
+import GameStatsPanel from '../ui/GameStatsPanel';
+import IconList from '../ui/IconList';
+import PlayerStatsPanel from '../ui/PlayerStatsPanel';
+import HelpModal from '../modals/HelpModal';
+import GameoverModal from '../modals/GameoverModal';
+import LevelEffectModal from '../modals/LevelEffectModal';
+import LogModal from '../modals/LogModal';
+import MatchupModal from '../modals/MatchupModal';
+import NextLevelModal from '../modals/NextLevelModal';
+import SettingsModal from '../modals/SettingsModal';
+import SelectCardModal from '../modals/SelectCardModal';
+import SelectPowerModal from '../modals/SelectPowerModal';
 
 const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
   // Initialize Bootstrap tooltips

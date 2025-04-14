@@ -1,5 +1,5 @@
-import CardPile from './CardPile';
-import { icon } from './utils/assetPaths';
+import CardPile from '../card/CardPile';
+import { icon } from '../../utils/assets';
 
 const GameStatsPanel = ({ G, visibleTurn, showGameStats }) => {
   const shouldMiss = G.globalEffects.shouldMiss?.[visibleTurn - 1];

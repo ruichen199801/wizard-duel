@@ -1,4 +1,9 @@
-import { buffAtk, buffDef, doubleDmg, preventDmg } from '../data/cardEffects';
+import {
+  buffAtk,
+  buffDef,
+  doubleDmg,
+  preventDmg,
+} from '../../data/cardEffects';
 import {
   Fireball1,
   Fireball2,
@@ -10,11 +15,14 @@ import {
   Wish3,
   Wish4,
   Wish5,
-} from '../data/cards';
-import { applyEffect } from './effect';
-import { hasSameEffect, getChanceEffect } from './effectUtils';
-import { finalLevel, maxTurn, DrawMode } from './level';
-import { randomPopulateHand, generateAttackOutcomes } from './levelUtils';
+} from '../../data/cards';
+import { applyEffect } from '../effect/effect';
+import { hasSameEffect, getChanceEffect } from '../effect/effectUtils';
+import { finalLevel, maxTurn, DrawMode } from '../level/level';
+import {
+  randomPopulateHand,
+  generateAttackOutcomes,
+} from '../level/levelUtils';
 import { PowerClass, getPowerConfigs } from './power';
 
 const powerConfig = getPowerConfigs();

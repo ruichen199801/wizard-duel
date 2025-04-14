@@ -1,4 +1,4 @@
-import { icon, click } from './utils/assetPaths';
+import { icon, click } from '../../utils/assets';
 
 const IconList = ({
   setShowLevelEffectModal,

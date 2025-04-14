@@ -15,11 +15,11 @@ import {
   EffectDuration,
   EffectGroupName,
   freeze as freezeEffect,
-} from '../data/cardEffects';
-import { getDeckForLevel } from '../data/deck';
-import { shuffle } from './gameUtils';
-import { levelFreezeRate } from './level';
-import { PowerClass, getPowerConfigs } from './power';
+} from '../../data/cardEffects';
+import { getDeckForLevel } from '../../data/deck';
+import { shuffle } from '../game/gameUtils';
+import { levelFreezeRate } from '../level/level';
+import { PowerClass, getPowerConfigs } from '../power/power';
 
 const damage = (G, target, { value = 0 }, ctx) => {
   const player = target === '0' ? '1' : '0';
@@ -250,7 +250,6 @@ const effectHandlers = {
 
 export const applyEffect = (G, ctx, effect) => {
   const handler = effectHandlers[effect.type];
-
   if (!handler) {
     console.error(`Invalid effect type: ${effect.type}`);
     return;
@@ -259,20 +258,15 @@ export const applyEffect = (G, ctx, effect) => {
   const target = getTarget(ctx.currentPlayer, effect.target);
 
   // If you are frozen, the card you play this turn has no effect.
-  if (hasEffect(G, ctx.currentPlayer, EffectType.freeze)) {
-    return;
-  }
+  if (hasEffect(G, ctx.currentPlayer, EffectType.freeze)) return;
   // If you already have a non-stackable effect, playing the same card will have no effect.
-  if (isUnique(effect) && hasEffect(G, target, effect.type)) {
-    return;
-  }
+  if (isUnique(effect) && hasEffect(G, target, effect.type)) return;
   // If you already have an existing aura effect of the exact same kind, playing the same card will have no effect.
   if (
     effect.type === EffectType.aura &&
     hasSameEffect(G, ctx.currentPlayer, effect)
-  ) {
+  )
     return;
-  }
 
   handler(G, target, effect, ctx);
 

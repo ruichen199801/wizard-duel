@@ -1,6 +1,6 @@
 import { EffectGroupName } from '../../data/cardEffects';
 import { CardKeyword } from '../../data/cards';
-import { isUnique, hasEffect, getTarget } from '../../game/effectUtils';
+import { isUnique, hasEffect, getTarget } from '../../core/effect/effectUtils';
 import { random } from './random';
 import { removeBuffCards, removeDebuffCards, uselessCards } from './algoUtils';
 

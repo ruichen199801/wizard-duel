@@ -1,5 +1,5 @@
 import Card from './Card';
-import { CardType } from './utils/constants';
+import { CardType } from '../../utils/constants';
 
 const PlayerHand = ({ player, showEnemyHand, handleCardClick }) => {
   return (

@@ -1,4 +1,4 @@
-import { PowerClass, GameMode } from '../../game/power';
+import { PowerClass, GameMode } from '../core/power/power';
 
 const enemyNames = {
   1: 'Arden the Wise',
@@ -33,7 +33,7 @@ const battleInstrutions = {
   },
 
   2: {
-    intro: `G0B1N-X is a mischievous goblin mage who LOVES playing with fire. `,
+    intro: `G0B1N-X is a goblin mage who LOVES playing with fire. `,
     levelRule: `Both players get random copies of fire cards in their starting hand.`,
     outro: ``,
     tips: ``,
@@ -69,7 +69,7 @@ const battleInstrutions = {
 
   7: {
     intro: `Zara Shadowbane rules the cursed Shadowland, draining the life of all who enter. `,
-    levelRule: `Non-damage cards cost 5 HP to play. HP can't drop below 1.`,
+    levelRule: `Non-damage cards cost 5 HP to play. HP can't drop below 1 in this way.`,
     outro: ``,
     tips: ``,
   },

@@ -3,8 +3,8 @@ import {
   cardSmallScale,
   cardHeight,
   cardWidth,
-} from './utils/constants';
-import { cardFront, cardBack, cardPlaceholder } from './utils/assetPaths';
+} from '../../utils/constants';
+import { cardFront, cardBack, cardPlaceholder } from '../../utils/assets';
 
 const Card = ({
   cardType = CardType.placeholder,

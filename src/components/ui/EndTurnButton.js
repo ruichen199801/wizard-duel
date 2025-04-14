@@ -1,4 +1,4 @@
-import { GameState } from './utils/constants';
+import { GameState } from '../../utils/constants';
 
 const EndTurnButton = ({ gameState, handleEndTurnButtonClick }) => {
   const buttonStyles = {

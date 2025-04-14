@@ -1,4 +1,4 @@
-import { click } from '../utils/assetPaths';
+import { click } from '../../utils/assets';
 
 const HelpModal = ({ showHelpModal, setShowHelpModal, playAudio }) => {
   if (!showHelpModal) {
@@ -21,7 +21,7 @@ const HelpModal = ({ showHelpModal, setShowHelpModal, playAudio }) => {
         <div className='modal-dialog modal-dialog-scrollable modal-dialog-centered'>
           <div className='modal-content bg-modal h-50'>
             <div className='modal-header border-0'>
-              <h4 className='modal-title w-100 text-center font-lora-bold'>
+              <h4 className='modal-title w-100 text-center font-bold'>
                 Game Rules
               </h4>
               <button
