@@ -60,7 +60,7 @@ const SelectPowerModal = ({ showSelectPowerModal, playAudio }) => {
                 <>
                   <p className='pwr-text pb-3'>
                     Take a power from a past opponent to use in the upcoming
-                    boss fight, <i>but at a cost!</i>
+                    boss fight, <b>but at a cost!</b>
                   </p>
 
                   <div className='d-flex justify-content-center'>

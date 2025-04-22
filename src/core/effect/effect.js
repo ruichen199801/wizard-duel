@@ -64,7 +64,7 @@ const damage = (G, target, { value = 0 }, ctx) => {
   ) {
     G.players[target].hp = getEffects(G, target, EffectType.resurrect)[0].value;
     removeEffects(G, target, EffectType.resurrect);
-    return 0;
+    return value;
   }
 
   // Apply the final damage to the target's HP.
