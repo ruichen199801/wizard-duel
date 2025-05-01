@@ -8,6 +8,6 @@
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "noEmit": false,
+    "noEmit": true,
   }
 }
