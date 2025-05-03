@@ -2,11 +2,11 @@ import { useState } from 'react';
 import useAudioPlayer from '../../hooks/useAudioPlayer';
 import usePreloadAssets from '../../hooks/usePreloadAssets';
 import {
+  ANIMATION,
+  AUDIO,
   cardFronts,
   click,
   IMAGES,
-  ANIMATION,
-  AUDIO,
   MUSIC,
 } from '../../utils/assets';
 import CardGalleryModal from '../modals/CardGalleryModal';
@@ -47,9 +47,6 @@ const MainMenu = () => {
         <span className='badge bg-dark ms-2'>v1.1</span>
       </div>
 
-      {/* Without the beta tag
-      <p className='font-cinzel-semibold menu-title-fs mb-5'>Wizard Duel</p> */}
-
       <div className='d-flex flex-column mt-5'>
         <button
           className='btn btn-dark btn-lg btn-width mb-3'
@@ -86,7 +83,7 @@ const MainMenu = () => {
       <CardGalleryModal
         showCardGallery={showCardGallery}
         setShowCardGallery={setShowCardGallery}
-        cardImages={cardFronts.filter((_, cardId) => cardId !== 25)} // Exclude the first Wish card
+        cardImages={cardFronts.filter((_, cardId) => cardId !== 25)} // Exclude Wish1 card
         playAudio={playAudio}
       />
     </div>

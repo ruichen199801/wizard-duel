@@ -1,16 +1,15 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Client } from 'boardgame.io/react';
-import { WizardDuel } from './core/game/game';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MainMenu from './components/board/MainMenu';
 import WizardDuelBoard from './components/board/WizardDuelBoard';
-import { SpeedInsights } from '@vercel/speed-insights/react';
-import { Analytics } from '@vercel/analytics/react';
+import { WizardDuel } from './core/game/game';
 
 const WizardDuelClient = Client({
   game: WizardDuel,
   board: WizardDuelBoard,
-  // Set to false for enabling debug panel
-  debug: { collapseOnLoad: true, hideToggleButton: true },
+  debug: { collapseOnLoad: true, hideToggleButton: true }, // Set to false for enabling debug panel
 });
 
 const App = () => {
