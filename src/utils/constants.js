@@ -1,15 +1,14 @@
-// TODO - Rename this
-export const GameState = {
-  // State during a player's turn after drawing a card but before clicking a card for preview.
-  // The end turn button is labeled as player's turn and is disabled.
+export const VisibleTurnPhase = {
+  // The player has drawn a card but hasn't clicked to preview any yet.
+  // The end-turn button shows "End Turn" and is disabled.
   endTurnDisabled: 'end turn disabled',
 
-  // State during a player's turn after previewing a card but before ending the turn.
-  // The end turn button is labeled as player's turn and is clickable.
+  // The player has previewed a card and can end their turn.
+  // The end-turn button shows "End Turn" and is enabled.
   endTurnEnabled: 'end turn enabled',
 
-  // State after the player ends their turn but before drawing a card finishes in the player's next turn.
-  // The end turn button is labeled as AI's turn and is disabled.
+  // The AI is taking its turn. Player cannot interact.
+  // The end-turn button shows "Enemy Turn" and is disabled.
   aiTurn: 'ai turn',
 };
 

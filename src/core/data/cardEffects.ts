@@ -37,7 +37,6 @@ export enum EffectGroupName {
   unique = 'unique',
 }
 
-// TODO - Move this to effectUtils.ts as it's used there
 export const effectsByGroup: Record<EffectGroupName, EffectType[]> = {
   // Positive effects applied to the player.
   buff: [

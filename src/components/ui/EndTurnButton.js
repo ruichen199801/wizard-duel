@@ -1,20 +1,20 @@
-import { GameState } from '../../utils/constants';
+import { VisibleTurnPhase } from '../../utils/constants';
 
-const EndTurnButton = ({ gameState, handleEndTurnButtonClick }) => {
+const EndTurnButton = ({ turnPhase, handleEndTurnButtonClick }) => {
   const buttonStyles = {
-    [GameState.endTurnDisabled]: 'btn-secondary',
-    [GameState.endTurnEnabled]: 'btn-dark',
-    [GameState.aiTurn]: 'btn-secondary',
+    [VisibleTurnPhase.endTurnDisabled]: 'btn-secondary',
+    [VisibleTurnPhase.endTurnEnabled]: 'btn-dark',
+    [VisibleTurnPhase.aiTurn]: 'btn-secondary',
   };
 
   return (
     <div className='d-flex justify-content-end m-2'>
       <button
-        className={`btn btn-lg ${buttonStyles[gameState]}`}
+        className={`btn btn-lg ${buttonStyles[turnPhase]}`}
         onClick={handleEndTurnButtonClick}
-        disabled={gameState !== GameState.endTurnEnabled}
+        disabled={turnPhase !== VisibleTurnPhase.endTurnEnabled}
       >
-        {gameState === GameState.aiTurn ? 'Enemy Turn' : 'End Turn'}
+        {turnPhase === VisibleTurnPhase.aiTurn ? 'Enemy Turn' : 'End Turn'}
       </button>
     </div>
   );

@@ -17,7 +17,7 @@ import {
   victory,
 } from '../../utils/assets';
 import { sleep } from '../../utils/commonUtils';
-import { GameState, pauseInterval } from '../../utils/constants';
+import { VisibleTurnPhase, pauseInterval } from '../../utils/constants';
 import {
   getSelectableCardIds,
   resolveCardAudio,
@@ -47,7 +47,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
   const [selectedCardToPlay, setSelectedCardToPlay] = useState(null);
   const [playerSelectedIndexToPlay, setPlayerSelectedIndexToPlay] =
     useState(null);
-  const [gameState, setGameState] = useState(GameState.endTurnDisabled);
+  const [turnPhase, setTurnPhase] = useState(VisibleTurnPhase.endTurnDisabled);
   const [winner, setWinner] = useState(null);
   const [showGameoverModal, setShowGameoverModal] = useState(false);
   const [showNextLevelModal, setShowNextLevelModal] = useState(false);
@@ -126,7 +126,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
     }
 
     if (ctx.turn > 1 && ctx.currentPlayer === '0') {
-      setGameState(GameState.endTurnDisabled);
+      setTurnPhase(VisibleTurnPhase.endTurnDisabled);
     }
   };
 
@@ -197,17 +197,17 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
   }, [ctx.gameover]);
 
   const handleCardClick = async (index) => {
-    if (gameState !== GameState.aiTurn) {
+    if (turnPhase !== VisibleTurnPhase.aiTurn) {
       setSelectedCardToPlay(G.players[0].hand[index]);
       setPlayerSelectedIndexToPlay(index);
       playAudio(click);
 
-      setGameState(GameState.endTurnEnabled);
+      setTurnPhase(VisibleTurnPhase.endTurnEnabled);
     }
   };
 
   const handleEndTurnButtonClick = () => {
-    if (gameState === GameState.endTurnEnabled) {
+    if (turnPhase === VisibleTurnPhase.endTurnEnabled) {
       moves.playCard(playerSelectedIndexToPlay);
       playCardAudio(selectedCardToPlay);
 
@@ -220,7 +220,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
         G.players[0].hand[playerSelectedIndexToPlay].text
       );
 
-      setGameState(GameState.aiTurn);
+      setTurnPhase(VisibleTurnPhase.aiTurn);
     }
   };
 
@@ -298,7 +298,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
 
         <div className='col-3'>
           <EndTurnButton
-            gameState={gameState}
+            turnPhase={turnPhase}
             handleEndTurnButtonClick={handleEndTurnButtonClick}
           />
         </div>
