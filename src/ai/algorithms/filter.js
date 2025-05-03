@@ -1,8 +1,8 @@
-import { EffectGroupName } from '../../data/cardEffects';
-import { CardKeyword } from '../../data/cards';
-import { isUnique, hasEffect, getTarget } from '../../core/effect/effectUtils';
-import { random } from './random';
+import { EffectGroupName } from '../../core/data/cardEffects';
+import { CardKeyword } from '../../core/data/cards';
+import { getTarget, hasEffect, isUnique } from '../../core/effect/effectUtils';
 import { removeBuffCards, removeDebuffCards, uselessCards } from './algoUtils';
+import { random } from './random';
 
 /**
  * Filters unwanted card play from AI's hand based on a chain of rules.

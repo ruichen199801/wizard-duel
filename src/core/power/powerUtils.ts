@@ -1,11 +1,6 @@
 import { Ctx } from 'boardgame.io';
 
-import {
-  buffAtk,
-  buffDef,
-  doubleDmg,
-  preventDmg,
-} from '../../data/cardEffects';
+import { buffAtk, buffDef, doubleDmg, preventDmg } from '../data/cardEffects';
 import {
   Fireball1,
   Fireball2,
@@ -17,7 +12,7 @@ import {
   Wish3,
   Wish4,
   Wish5,
-} from '../../data/cards';
+} from '../data/cards';
 import { applyEffect } from '../effect/effect';
 import { getChanceEffect, hasSameEffect } from '../effect/effectUtils';
 import { WizardDuelState } from '../game/game';

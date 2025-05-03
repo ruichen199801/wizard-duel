@@ -1,7 +1,7 @@
-import { EffectGroupName, EffectType } from '../../data/cardEffects';
-import { CardKeyword } from '../../data/cards';
+import { EffectGroupName, EffectType } from '../../core/data/cardEffects';
+import { CardKeyword } from '../../core/data/cards';
+import { powerfulCards, removeBuffCards, removeDebuffCards } from './algoUtils';
 import { random } from './random';
-import { removeBuffCards, removeDebuffCards, powerfulCards } from './algoUtils';
 
 /**
  * Resolves the card to play from a list of filtered actions.

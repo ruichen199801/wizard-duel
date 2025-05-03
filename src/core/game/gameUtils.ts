@@ -1,15 +1,8 @@
 import { AiEnumerate, Ctx } from 'boardgame.io';
 
-import { Effect, EffectType } from '../../data/cardEffects';
-import {
-  Card,
-  CardKeyword,
-  Wish2,
-  Wish3,
-  Wish4,
-  Wish5,
-} from '../../data/cards';
-import { Player } from '../../data/player';
+import { Effect, EffectType } from '../data/cardEffects';
+import { Card, CardKeyword, Wish2, Wish3, Wish4, Wish5 } from '../data/cards';
+import { Player } from '../data/player';
 import { applyEffect } from '../effect/effect';
 import { getEffects, hasEffect, undoEffect } from '../effect/effectUtils';
 import { FINAL_LEVEL, levelConfigs, maxTurn } from '../level/level';
@@ -204,7 +197,7 @@ export const applyLevelOverride = (G: WizardDuelState) => {
     if (Object.prototype.hasOwnProperty.call(playerStatsOverride, key)) {
       const k = key as keyof Player;
       if (k !== 'id' && k !== 'name' && k in G.players[0]) {
-        G.players[0][k] = playerStatsOverride[k]!;
+        G.players[0][k] = playerStatsOverride[k];
       }
     }
   }

@@ -1,12 +1,12 @@
 import { useState } from 'react';
+import { EffectType } from '../../core/data/cardEffects';
+import { getAvatarForLevel, icon } from '../../utils/assets';
 import {
   avatarHeight,
-  avatarWidth,
   avatarMediumScale,
+  avatarWidth,
 } from '../../utils/constants';
-import { getAvatarForLevel, icon } from '../../utils/assets';
 import { getEnemyName } from '../../utils/scripts';
-import { EffectType } from '../../data/cardEffects';
 
 const PlayerStatsPanel = ({
   player,

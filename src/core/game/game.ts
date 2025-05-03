@@ -1,9 +1,9 @@
 import { Game, Move, PlayerID } from 'boardgame.io';
 
-import { EffectType } from '../../data/cardEffects';
-import { Card } from '../../data/cards';
-import { getDeckForLevel } from '../../data/deck';
-import { p0, p1, Player } from '../../data/player';
+import { EffectType } from '../data/cardEffects';
+import { Card } from '../data/cards';
+import { getDeckForLevel } from '../data/deck';
+import { p0, p1, Player } from '../data/player';
 import { applyEffect } from '../effect/effect';
 import { hasEffect, removeEffects } from '../effect/effectUtils';
 import { DrawMode } from '../level/level';
@@ -64,7 +64,7 @@ const setupData = (): WizardDuelState => {
   return G;
 };
 
-const DrawCard: Move<WizardDuelState> = ({ G, ctx }, cardId = '') => {
+const drawCard: Move<WizardDuelState> = ({ G, ctx }, cardId = '') => {
   if (ctx.turn <= 2) return;
 
   executeStartOfTurnEffects(G, ctx);
@@ -93,7 +93,7 @@ const DrawCard: Move<WizardDuelState> = ({ G, ctx }, cardId = '') => {
   }
 };
 
-const PlayCard: Move<WizardDuelState> = ({ G, ctx }, index: number) => {
+const playCard: Move<WizardDuelState> = ({ G, ctx }, index: number) => {
   const hand = G.players[ctx.currentPlayer].hand;
   if (index < 0 || index >= hand.length) {
     throw new Error('Invalid move: card index out of bounds.');
@@ -127,8 +127,8 @@ export const WizardDuel: Game<WizardDuelState> = {
   setup: setupData,
 
   moves: {
-    drawCard: DrawCard,
-    playCard: PlayCard,
+    drawCard,
+    playCard,
   },
 
   turn: {

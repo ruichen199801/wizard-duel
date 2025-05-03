@@ -1,6 +1,6 @@
 import { useState } from 'react';
+import { EffectGroupName } from '../../core/data/cardEffects';
 import { icon } from '../../utils/assets';
-import { EffectGroupName } from '../../data/cardEffects';
 
 const EffectStack = ({ opponentEffects, playerEffects, showEffectStack }) => {
   const fxListItemStyle =

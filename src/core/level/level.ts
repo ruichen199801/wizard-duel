@@ -4,7 +4,7 @@ import {
   Fireball3,
   Flame,
   Resurrect,
-} from '../../data/cards';
+} from '../data/cards';
 import { PowerClass, getPowerConfigs } from '../power/power';
 import {
   generateAttackOutcomes,

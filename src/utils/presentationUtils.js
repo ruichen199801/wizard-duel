@@ -1,6 +1,6 @@
+import { EffectType } from '../core/data/cardEffects';
+import { CardKeyword } from '../core/data/cards';
 import { PowerClass } from '../core/power/power';
-import { EffectType } from '../data/cardEffects';
-import { CardKeyword } from '../data/cards';
 import { cardAudio, cleanse, defrost, miss, potion } from './assets';
 
 /**

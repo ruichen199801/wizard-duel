@@ -1,4 +1,4 @@
-import { GameDifficulty, PowerClass } from '../core/power/power';
+import { PowerClass, GameDifficulty } from '../power/power';
 import {
   Ambush,
   Armor,

@@ -6,8 +6,8 @@ import {
   EffectGroupName,
   EffectType,
   freeze as freezeEffect,
-} from '../../data/cardEffects';
-import { getDeckForLevel } from '../../data/deck';
+} from '../data/cardEffects';
+import { getDeckForLevel } from '../data/deck';
 import { WizardDuelState } from '../game/game';
 import { shuffle } from '../game/gameUtils';
 import { levelRules } from '../level/level';
@@ -64,7 +64,7 @@ const damage: EffectHandler = ({ G, ctx, target, effect }) => {
   removeEffects(G, player, EffectType.doubleDmg);
 
   // Apply level-specific side effects related to damage calculation.
-  value = applyDamageLevelEffects(G, target, value, ctx);
+  value = applyDamageLevelEffects(G, ctx, target, value);
   if (value === -1) {
     return 0; // Exit early so that prevent damage effect is not exhausted
   }
@@ -309,9 +309,9 @@ export const applyEffect = (G: WizardDuelState, ctx: Ctx, effect: Effect) => {
 
 const applyDamageLevelEffects = (
   G: WizardDuelState,
+  ctx: Ctx,
   target: PlayerID,
-  damage: number,
-  ctx: Ctx
+  damage: number
 ): number => {
   switch (G.level) {
     case '3':

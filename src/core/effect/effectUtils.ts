@@ -5,7 +5,7 @@ import {
   effectsByGroup,
   EffectTarget,
   EffectType,
-} from '../../data/cardEffects';
+} from '../data/cardEffects';
 import { WizardDuelState } from '../game/game';
 
 /**

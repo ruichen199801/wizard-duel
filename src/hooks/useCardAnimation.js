@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { AnimationTarget } from '../utils/constants';
+import { EffectType } from '../core/data/cardEffects';
+import { CardKeyword } from '../core/data/cards';
+import { PowerClass } from '../core/power/power';
 import {
-  getAnimationTargetForCard,
   getAnimationDataForCard,
+  getAnimationTargetForCard,
 } from '../utils/assets';
 import { sleep } from '../utils/commonUtils';
-import { CardKeyword } from '../data/cards';
-import { EffectType } from '../data/cardEffects';
-import { PowerClass } from '../core/power/power';
+import { AnimationTarget } from '../utils/constants';
 
 const useCardAnimation = (ctx, G) => {
   const [showPlayerAnimation, setShowPlayerAnimation] = useState(false);
