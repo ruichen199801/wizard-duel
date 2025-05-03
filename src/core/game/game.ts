@@ -1,39 +1,58 @@
-import { INVALID_MOVE } from 'boardgame.io/core';
-import { p0, p1 } from '../../data/player';
-import { getDeckForLevel } from '../../data/deck';
+import { Game, Move, PlayerID } from 'boardgame.io';
+
 import { EffectType } from '../../data/cardEffects';
+import { Card } from '../../data/cards';
+import { getDeckForLevel } from '../../data/deck';
+import { p0, p1, Player } from '../../data/player';
 import { applyEffect } from '../effect/effect';
 import { hasEffect, removeEffects } from '../effect/effectUtils';
+import { DrawMode } from '../level/level';
 import {
-  shuffle,
-  removeCard,
-  getCardById,
-  removeCardById,
-  logPlay,
-  isVictory,
-  onGameEnd,
-  generateAIMoves,
-  dealCards,
-  getCurrentLevel,
   applyLevelOverride,
-  executeStartOfTurnEffects,
+  dealCards,
   executeEndOfTurnEffects,
   executeGlobalEndOfTurnEffects,
+  executeStartOfTurnEffects,
+  generateAIMoves,
+  getCardById,
+  getCurrentLevel,
+  isVictory,
+  logPlay,
+  onGameEnd,
+  removeCard,
+  removeCardById,
+  shuffle,
 } from './gameUtils';
 
-const setupData = () => {
-  let level = getCurrentLevel();
+export interface GlobalEffectProps {
+  // Level-related effects
+  drawMode?: DrawMode;
+  showEnemyHand?: boolean;
+  shouldMiss?: boolean[];
+  shouldClearEffects?: boolean[];
+  loseHpAmount?: number;
 
-  let G = {
+  // Power-related effects
+  shouldPlayerMiss?: boolean[];
+}
+
+export interface WizardDuelState {
+  readonly players: Record<PlayerID, Player>;
+  readonly level: string;
+  deck: Card[];
+  globalEffects: GlobalEffectProps;
+}
+
+const setupData = (): WizardDuelState => {
+  const level = getCurrentLevel();
+
+  const G: WizardDuelState = {
     players: {
       0: { ...p0 },
       1: { ...p1 },
     },
-
     deck: shuffle([...getDeckForLevel(level)]),
-
-    level: level,
-
+    level,
     globalEffects: {},
   };
 
@@ -45,25 +64,27 @@ const setupData = () => {
   return G;
 };
 
-const drawCard = ({ G, ctx }, cardId = '') => {
+const DrawCard: Move<WizardDuelState> = ({ G, ctx }, cardId = '') => {
   if (ctx.turn <= 2) return;
 
   executeStartOfTurnEffects(G, ctx);
 
   const hand = G.players[ctx.currentPlayer].hand;
-  if (hand.length >= 5 || G.deck.length === 0) return INVALID_MOVE;
+  if (hand.length >= 5 || G.deck.length === 0) {
+    throw new Error('Invalid move: cannot draw more cards.');
+  }
 
   if (cardId !== '') {
     // Select mode
     const card = getCardById(G.deck, cardId);
-    if (!card) {
-      throw new Error(`Card with id ${cardId} not found in the deck.`);
-    }
+    if (!card) throw new Error(`Card with id ${cardId} not found in the deck.`);
     hand.push(card);
     removeCardById(G.deck, cardId);
   } else {
     // Draw mode
-    hand.push(G.deck.pop());
+    const card = G.deck.pop();
+    if (!card) throw new Error('Tried to draw from an empty deck.');
+    hand.push(card);
   }
 
   if (G.deck.length === 0) {
@@ -72,9 +93,11 @@ const drawCard = ({ G, ctx }, cardId = '') => {
   }
 };
 
-const playCard = ({ G, ctx }, index) => {
+const PlayCard: Move<WizardDuelState> = ({ G, ctx }, index: number) => {
   const hand = G.players[ctx.currentPlayer].hand;
-  if (index < 0 || index >= hand.length) return INVALID_MOVE;
+  if (index < 0 || index >= hand.length) {
+    throw new Error('Invalid move: card index out of bounds.');
+  }
 
   const card = hand[index];
   if (card.effects) {
@@ -98,14 +121,14 @@ const playCard = ({ G, ctx }, index) => {
   logPlay(G, ctx, card);
 };
 
-export const WizardDuel = {
+export const WizardDuel: Game<WizardDuelState> = {
   name: 'wizard-duel',
 
   setup: setupData,
 
   moves: {
-    drawCard,
-    playCard,
+    drawCard: DrawCard,
+    playCard: PlayCard,
   },
 
   turn: {

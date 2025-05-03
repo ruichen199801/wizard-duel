@@ -37,7 +37,7 @@ export const startLevel = () => {
 const clearSession = () => {
   sessionStorage.removeItem('level');
   sessionStorage.removeItem('power');
-  sessionStorage.removeItem('mode');
+  sessionStorage.removeItem('difficulty');
 };
 
 /**

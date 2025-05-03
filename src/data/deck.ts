@@ -1,4 +1,4 @@
-import { GameMode, PowerClass } from '../core/power/power';
+import { GameDifficulty, PowerClass } from '../core/power/power';
 import {
   Ambush,
   Armor,
@@ -135,7 +135,7 @@ export const getDeckForLevel = (level = '1'): Card[] => {
   // TODO - Make this type safe when power class is refactored to typescript
   if (
     sessionStorage.getItem('power') === PowerClass.cryo &&
-    sessionStorage.getItem('mode') === GameMode.normal
+    sessionStorage.getItem('difficulty') === GameDifficulty.normal
   ) {
     return [...levelDeck, Frost1, Frost1, Frost2, Frost2, Frost3, Frost3]; // Cryo effect
   } else if (sessionStorage.getItem('power') === PowerClass.erebo) {

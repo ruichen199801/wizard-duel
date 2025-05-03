@@ -1,6 +1,6 @@
-import { exitToMenu, resetGame, startLevel } from '../../utils/commonUtils';
-import { finalLevel } from '../../core/level/level';
+import { FINAL_LEVEL } from '../../core/level/level';
 import { click } from '../../utils/assets';
+import { exitToMenu, resetGame, startLevel } from '../../utils/commonUtils';
 
 const GameoverModal = ({
   showGameoverModal,
@@ -18,7 +18,7 @@ const GameoverModal = ({
   const gameoverMessage = {
     0: (() => {
       const currentLevelInt = parseInt(level);
-      const finalLevelInt = parseInt(finalLevel);
+      const finalLevelInt = parseInt(FINAL_LEVEL);
       switch (currentLevelInt) {
         case finalLevelInt - 1:
           return 'You have advanced to the final level!';
@@ -39,7 +39,7 @@ const GameoverModal = ({
   const handleShowNextLevelModal = () => {
     setShowGameoverModal(false);
 
-    if (parseInt(level) === parseInt(finalLevel) - 1) {
+    if (parseInt(level) === parseInt(FINAL_LEVEL) - 1) {
       setShowSelectPowerModal(true);
     } else {
       setShowNextLevelModal(true);
@@ -69,7 +69,7 @@ const GameoverModal = ({
                   'Time runs out, the duel ends in a draw.'}
               </p>
 
-              {level === finalLevel && winner === '0' && (
+              {level === FINAL_LEVEL && winner === '0' && (
                 <p className='ms-2 mb-4 gameover-text fst-italic text-muted'>
                   CHEAT CODE: Open Settings menu and click the header 6 times to
                   skip early levels.
@@ -79,7 +79,7 @@ const GameoverModal = ({
 
             <div className='modal-footer border-0 justify-content-end'>
               {winner === '0' ? (
-                level === finalLevel ? (
+                level === FINAL_LEVEL ? (
                   // Case 1: Player wins the final level
                   <>
                     <button

@@ -1,3 +1,5 @@
+import { Ctx } from 'boardgame.io';
+
 import {
   buffAtk,
   buffDef,
@@ -17,21 +19,22 @@ import {
   Wish5,
 } from '../../data/cards';
 import { applyEffect } from '../effect/effect';
-import { hasSameEffect, getChanceEffect } from '../effect/effectUtils';
-import { finalLevel, maxTurn, DrawMode } from '../level/level';
+import { getChanceEffect, hasSameEffect } from '../effect/effectUtils';
+import { WizardDuelState } from '../game/game';
+import { DrawMode, FINAL_LEVEL, maxTurn } from '../level/level';
 import {
-  randomPopulateHand,
   generateAttackOutcomes,
+  randomPopulateHand,
 } from '../level/levelUtils';
 import { PowerClass, getPowerConfigs } from './power';
 
-const powerConfig = getPowerConfigs();
+const powerConfig: Record<string, any> = getPowerConfigs();
 
 /**
  * Apply overrides to G based on the selected power class when the game initializes.
  */
-const applyPowerOverride = (G) => {
-  if (G.level !== finalLevel) return;
+const applyPowerOverride = (G: WizardDuelState) => {
+  if (G.level !== FINAL_LEVEL) return;
   const powerClass = sessionStorage.getItem('power');
   switch (powerClass) {
     // Psammo debuff
@@ -44,12 +47,14 @@ const applyPowerOverride = (G) => {
         ),
       };
       break;
+
     // Dentro buff+debuff
     case PowerClass.dentro:
       G.globalEffects.drawMode = DrawMode.select;
       G.players[1].hp += powerConfig.dentroEnemyHpBuffPoint;
       G.players[1].maxHp += powerConfig.dentroEnemyHpBuffPoint;
       break;
+
     // Hydro debuff
     case PowerClass.hydro:
       G.players[1].atk += powerConfig.hydroEnemyStatBuffPoint;
@@ -57,11 +62,13 @@ const applyPowerOverride = (G) => {
       G.players[1].def += powerConfig.hydroEnemyStatBuffPoint;
       G.players[1].baseDef += powerConfig.hydroEnemyStatBuffPoint;
       break;
+
     // Erebo debuff
     case PowerClass.erebo:
       G.players[0].hp = powerConfig.ereboPlayerInitialHp;
       G.players[0].maxHp = powerConfig.ereboPlayerInitialHp;
       break;
+
     default:
       return;
   }
@@ -70,8 +77,8 @@ const applyPowerOverride = (G) => {
 /**
  * Apply power effects on the target(s) triggered at the start of turn.
  */
-const applyStartOfTurnPowerEffects = (G, ctx) => {
-  if (G.level !== finalLevel) return;
+const applyStartOfTurnPowerEffects = (G: WizardDuelState, ctx: Ctx) => {
+  if (G.level !== FINAL_LEVEL) return;
   const powerClass = sessionStorage.getItem('power');
   switch (powerClass) {
     // Psammo buff
@@ -86,8 +93,8 @@ const applyStartOfTurnPowerEffects = (G, ctx) => {
 /**
  * Apply power effects on the target(s) triggered at the end of turn.
  */
-const applyEndOfTurnPowerEffects = (G, ctx) => {
-  if (G.level !== finalLevel) return;
+const applyEndOfTurnPowerEffects = (G: WizardDuelState, ctx: Ctx) => {
+  if (G.level !== FINAL_LEVEL) return;
   const powerClass = sessionStorage.getItem('power');
   switch (powerClass) {
     // Pyro buff
@@ -103,7 +110,7 @@ const applyEndOfTurnPowerEffects = (G, ctx) => {
   }
 };
 
-const randomCardToWish = (G, ctx) => {
+const randomCardToWish = (G: WizardDuelState, ctx: Ctx) => {
   if (ctx.currentPlayer === '1' || !getChanceEffect(powerConfig.psammoWishRate))
     return;
   const wishTransformOptions = [Wish2, Wish3, Wish4, Wish5];
@@ -122,7 +129,7 @@ const randomCardToWish = (G, ctx) => {
   }
 };
 
-const applyRandomFireHand = (G, ctx) => {
+const applyRandomFireHand = (G: WizardDuelState, ctx: Ctx) => {
   if (ctx.currentPlayer === '1') return;
   const newHand = randomPopulateHand(
     [Fireball1, Fireball2, Fireball3, Flame, Resurrect],
@@ -132,7 +139,7 @@ const applyRandomFireHand = (G, ctx) => {
   G.players[0].hand = newHand;
 };
 
-const applyRandomBuff = (G, ctx) => {
+const applyRandomBuff = (G: WizardDuelState, ctx: Ctx) => {
   if (ctx.currentPlayer === '1' || !getChanceEffect(powerConfig.hydroBuffRate))
     return;
   const randomBuffList = [
@@ -154,7 +161,7 @@ const applyRandomBuff = (G, ctx) => {
 };
 
 export {
+  applyEndOfTurnPowerEffects,
   applyPowerOverride,
   applyStartOfTurnPowerEffects,
-  applyEndOfTurnPowerEffects,
 };

@@ -1,17 +1,17 @@
-import {
-  avatarSmallScale,
-  avatarHeight,
-  avatarWidth,
-} from '../../utils/constants';
+import { FINAL_LEVEL } from '../../core/level/level';
+import useImageLoader from '../../hooks/useImageLoader';
 import { getAvatarForLevel } from '../../utils/assets';
 import {
-  getEnemyName,
-  getBattleStartCaption,
+  avatarHeight,
+  avatarSmallScale,
+  avatarWidth,
+} from '../../utils/constants';
+import {
   getBattleInstructions,
+  getBattleStartCaption,
+  getEnemyName,
   getRuleByPower,
 } from '../../utils/scripts';
-import { finalLevel } from '../../core/level/level';
-import useImageLoader from '../../hooks/useImageLoader';
 
 const MatchupModal = ({
   showMatchupModal,
@@ -98,7 +98,7 @@ const MatchupModal = ({
                     </p>
                   </div>
 
-                  {level === finalLevel && (
+                  {level === FINAL_LEVEL && (
                     <div className='w-80 mx-auto'>
                       <p>
                         {finalLevelRule.intro}

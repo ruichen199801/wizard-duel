@@ -1,9 +1,4 @@
 import {
-  randomPopulateHand,
-  generateAttackOutcomes,
-  getClearEffectSchedule,
-} from './levelUtils';
-import {
   Fireball1,
   Fireball2,
   Fireball3,
@@ -11,27 +6,35 @@ import {
   Resurrect,
 } from '../../data/cards';
 import { PowerClass, getPowerConfigs } from '../power/power';
+import {
+  generateAttackOutcomes,
+  getClearEffectSchedule,
+  randomPopulateHand,
+} from './levelUtils';
 
-// General constants
-export const DrawMode = {
-  draw: 'draw',
-  select: 'select',
-};
-export const finalLevel = '8';
-export const preFinalLevel = '7';
-export const maxTurn =
+export enum DrawMode {
+  draw = 'draw',
+  select = 'select',
+}
+
+export const FINAL_LEVEL = '8';
+export const PRE_FINAL_LEVEL = '7';
+
+export const maxTurn: number =
   sessionStorage.getItem('power') === PowerClass.pyro
     ? getPowerConfigs().pyroMaxTurn // Pyro debuff
     : 50;
 
-// Level specific constants
-const fireHandDistribution = [0.2, 0.3, 0.4, 0.09, 0.01]; // Level 2
-export const levelFreezeRate = 0.4; // Level 3
-const missRate = 0.5; // Level 4
-const clearEffectInterval = 11; // Level 6
-const loseHpAmount = 5; // Level 7
+export const levelRules: Record<string, any> = {
+  fireHandDistribution: [0.2, 0.3, 0.4, 0.09, 0.01], // Level 2
+  freezeRate: 0.4, // Level 3
+  missRate: 0.5, // Level 4
+  clearEffectInterval: 11, // Level 6
+  loseHpAmount: 5, // Level 7
+};
 
-export const levelConfigs = {
+// TODO - Use default config to avoid boilerplate code and change any type
+export const levelConfigs: Record<string, any> = {
   1: {
     playerStatsOverride: {},
     enemyStatsOverride: {},
@@ -60,12 +63,12 @@ export const levelConfigs = {
 
     playerHandOverride: randomPopulateHand(
       [Fireball1, Fireball2, Fireball3, Flame, Resurrect],
-      fireHandDistribution,
+      levelRules.fireHandDistribution,
       5
     ),
     enemyHandOverride: randomPopulateHand(
       [Fireball1, Fireball2, Fireball3, Flame, Resurrect],
-      fireHandDistribution,
+      levelRules.fireHandDistribution,
       5
     ),
 
@@ -119,7 +122,7 @@ export const levelConfigs = {
     globalEffects: {
       drawMode: DrawMode.draw,
       showEnemyHand: false,
-      shouldMiss: generateAttackOutcomes(maxTurn, missRate),
+      shouldMiss: generateAttackOutcomes(maxTurn, levelRules.missRate),
     },
   },
 
@@ -164,7 +167,10 @@ export const levelConfigs = {
     globalEffects: {
       drawMode: DrawMode.draw,
       showEnemyHand: false,
-      shouldClearEffects: getClearEffectSchedule(maxTurn, clearEffectInterval),
+      shouldClearEffects: getClearEffectSchedule(
+        maxTurn,
+        levelRules.clearEffectInterval
+      ),
     },
   },
 
@@ -187,7 +193,7 @@ export const levelConfigs = {
     globalEffects: {
       drawMode: DrawMode.draw,
       showEnemyHand: false,
-      loseHpAmount,
+      loseHpAmount: levelRules.loseHpAmount,
     },
   },
 

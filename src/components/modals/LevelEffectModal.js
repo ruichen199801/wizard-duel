@@ -1,11 +1,10 @@
-import { click } from '../../utils/assets';
+import { FINAL_LEVEL } from '../../core/level/level';
+import { click, getLocationForLevel } from '../../utils/assets';
 import {
-  getBattleStartCaption,
   getBattleInstructions,
+  getBattleStartCaption,
   getRuleByPower,
 } from '../../utils/scripts';
-import { getLocationForLevel } from '../../utils/assets';
-import { finalLevel } from '../../core/level/level';
 
 const LevelEffectModal = ({
   showLevelEffectModal,
@@ -65,7 +64,7 @@ const LevelEffectModal = ({
                 </p>
               </div>
 
-              {level === finalLevel && (
+              {level === FINAL_LEVEL && (
                 <div className='w-80 mx-auto'>
                   <p>
                     {finalLevelRule.intro}

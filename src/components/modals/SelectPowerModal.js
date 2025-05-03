@@ -1,14 +1,14 @@
 import { useState } from 'react';
+import { GameDifficulty } from '../../core/power/power';
+import useImageLoader from '../../hooks/useImageLoader';
+import { click, getAvatarForLevel } from '../../utils/assets';
+import { startLevel } from '../../utils/commonUtils';
 import {
-  avatarSmallScale,
   avatarHeight,
+  avatarSmallScale,
   avatarWidth,
 } from '../../utils/constants';
-import { getAvatarForLevel, click } from '../../utils/assets';
 import { powers } from '../../utils/scripts';
-import { startLevel } from '../../utils/commonUtils';
-import useImageLoader from '../../hooks/useImageLoader';
-import { GameMode } from '../../core/power/power';
 
 const SelectPowerModal = ({ showSelectPowerModal, playAudio }) => {
   const [selectedPowerClass, setSelectedPowerClass] = useState(null);
@@ -25,10 +25,10 @@ const SelectPowerModal = ({ showSelectPowerModal, playAudio }) => {
     playAudio(click);
   };
 
-  const handleNextLevel = (mode) => {
+  const handleNextLevel = (difficulty) => {
     if (selectedPowerClass) {
       sessionStorage.setItem('power', selectedPowerClass);
-      sessionStorage.setItem('mode', mode);
+      sessionStorage.setItem('difficulty', difficulty);
       startLevel();
     }
   };
@@ -92,7 +92,7 @@ const SelectPowerModal = ({ showSelectPowerModal, playAudio }) => {
               <button
                 type='button'
                 className='btn btn-dark'
-                onClick={() => handleNextLevel(GameMode.normal)}
+                onClick={() => handleNextLevel(GameDifficulty.normal)}
                 disabled={!selectedPowerClass}
               >
                 Next Level: Normal
@@ -101,7 +101,7 @@ const SelectPowerModal = ({ showSelectPowerModal, playAudio }) => {
               <button
                 type='button'
                 className='btn btn-dark'
-                onClick={() => handleNextLevel(GameMode.hard)}
+                onClick={() => handleNextLevel(GameDifficulty.hard)}
                 disabled={!selectedPowerClass}
               >
                 Next Level: Hard

@@ -1,3 +1,4 @@
+// TODO - Rename this
 export const GameState = {
   // State during a player's turn after drawing a card but before clicking a card for preview.
   // The end turn button is labeled as player's turn and is disabled.

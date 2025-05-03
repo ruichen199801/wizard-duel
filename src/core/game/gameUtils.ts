@@ -1,19 +1,29 @@
-import { levelConfigs, finalLevel, maxTurn } from '../level/level';
-import { Wish2, Wish3, Wish4, Wish5 } from '../../data/cards';
-import { EffectType } from '../../data/cardEffects';
-import { CardKeyword } from '../../data/cards';
-import { applyEffect } from '../effect/effect';
-import { hasEffect, getEffects, undoEffect } from '../effect/effectUtils';
+import { AiEnumerate, Ctx } from 'boardgame.io';
+
+import { Effect, EffectType } from '../../data/cardEffects';
 import {
+  Card,
+  CardKeyword,
+  Wish2,
+  Wish3,
+  Wish4,
+  Wish5,
+} from '../../data/cards';
+import { Player } from '../../data/player';
+import { applyEffect } from '../effect/effect';
+import { getEffects, hasEffect, undoEffect } from '../effect/effectUtils';
+import { FINAL_LEVEL, levelConfigs, maxTurn } from '../level/level';
+import {
+  applyEndOfTurnPowerEffects,
   applyPowerOverride,
   applyStartOfTurnPowerEffects,
-  applyEndOfTurnPowerEffects,
 } from '../power/powerUtils';
+import { WizardDuelState } from './game';
 
 /**
  * Shuffle a deck of cards using Fisher-Yates algorithm.
  */
-export const shuffle = (deck) => {
+export const shuffle = (deck: Card[]): Card[] => {
   for (let i = deck.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     const temp = deck[i];
@@ -26,14 +36,14 @@ export const shuffle = (deck) => {
 /**
  * Deal cards to a player's hand until it contains 5 cards.
  */
-export const dealCards = (hand, deck) => {
+export const dealCards = (hand: Card[], deck: Card[]) => {
   hand.push(...deck.splice(0, 5 - hand.length));
 };
 
 /**
  * Remove a card from the player's hand by index.
  */
-export const removeCard = (hand, index) => {
+export const removeCard = (hand: Card[], index: number) => {
   if (index !== -1) {
     hand.splice(index, 1);
   }
@@ -42,14 +52,18 @@ export const removeCard = (hand, index) => {
 /**
  * Get one copy of a card from a deck by id.
  */
-export const getCardById = (deck, cardId) => {
-  return deck.find((card) => card.id === cardId);
+export const getCardById = (deck: Card[], cardId: string): Card => {
+  const card = deck.find((card) => card.id === cardId);
+  if (!card) {
+    throw new Error(`Card with id ${cardId} not found in the deck.`);
+  }
+  return card;
 };
 
 /**
  * Remove one copy of a card from a deck by id.
  */
-export const removeCardById = (deck, cardId) => {
+export const removeCardById = (deck: Card[], cardId: string) => {
   const index = deck.findIndex((card) => card.id === cardId);
   if (index !== -1) {
     deck.splice(index, 1);
@@ -59,7 +73,7 @@ export const removeCardById = (deck, cardId) => {
 /**
  * Log the details of the current turn and game state in browser.
  */
-export const logPlay = (G, ctx, card) => {
+export const logPlay = (G: WizardDuelState, ctx: Ctx, card: Card) => {
   const p = G.players[ctx.currentPlayer];
   console.log(`Turn ${ctx.turn}: ${p.name} played ${card.name} (${card.text})`);
   Object.keys(G.players).forEach((pid) => {
@@ -74,7 +88,7 @@ export const logPlay = (G, ctx, card) => {
 /**
  * Determine if the game has ended and return the result.
  */
-export const isVictory = ({ G, ctx }) => {
+export const isVictory = ({ G, ctx }: { G: WizardDuelState; ctx: Ctx }) => {
   if (
     (G.players[0].hp <= 0 && G.players[1].hp <= 0) ||
     ctx.turn >= maxTurn + 1
@@ -92,7 +106,7 @@ export const isVictory = ({ G, ctx }) => {
  *  1. Print game result in the console.
  *  2. Progress or reset the level based on the game result.
  */
-export const onGameEnd = ({ G, ctx }) => {
+export const onGameEnd = ({ G, ctx }: { G: WizardDuelState; ctx: Ctx }) => {
   if (!ctx.gameover.winner) {
     console.log('Draw!');
   } else {
@@ -112,8 +126,8 @@ export const onGameEnd = ({ G, ctx }) => {
 /**
  * Function used for AI simulation.
  */
-export const generateAIMoves = (G, ctx) => {
-  let moves = [];
+export const generateAIMoves = (G: WizardDuelState, ctx: Ctx): AiEnumerate => {
+  const moves: AiEnumerate = [];
   G.players[ctx.currentPlayer].hand.forEach((card) => {
     moves.push({ move: 'playCard', args: [card] });
   });
@@ -123,11 +137,12 @@ export const generateAIMoves = (G, ctx) => {
 /**
  * Get current game level.
  */
-export const getCurrentLevel = () => {
+export const getCurrentLevel = (): string => {
   try {
     return sessionStorage.getItem('level') || '1';
   } catch (e) {
     console.error('Error parsing sessionStorage data:', e);
+    return '1';
   }
 };
 
@@ -141,9 +156,9 @@ export const setPrevLevel = () => {
       return;
     }
     const prevLevel = parseInt(currentLevel, 10) - 1;
-    sessionStorage.setItem('level', prevLevel);
+    sessionStorage.setItem('level', prevLevel.toString());
     sessionStorage.removeItem('power');
-    sessionStorage.removeItem('mode');
+    sessionStorage.removeItem('difficulty');
   } catch (e) {
     console.error('Error saving to sessionStorage:', e);
   }
@@ -155,14 +170,14 @@ export const setPrevLevel = () => {
 export const setNextLevel = () => {
   try {
     const currentLevel = getCurrentLevel();
-    if (currentLevel === finalLevel) {
+    if (currentLevel === FINAL_LEVEL) {
       sessionStorage.removeItem('level');
       sessionStorage.removeItem('power');
-      sessionStorage.removeItem('mode');
+      sessionStorage.removeItem('difficulty');
       return;
     }
     const nextLevel = parseInt(currentLevel, 10) + 1;
-    sessionStorage.setItem('level', nextLevel);
+    sessionStorage.setItem('level', nextLevel.toString());
   } catch (e) {
     console.error('Error saving to sessionStorage:', e);
   }
@@ -171,7 +186,7 @@ export const setNextLevel = () => {
 /**
  * Apply overrides to game state G based on the current level.
  */
-export const applyLevelOverride = (G) => {
+export const applyLevelOverride = (G: WizardDuelState) => {
   const {
     playerStatsOverride,
     enemyStatsOverride,
@@ -185,17 +200,19 @@ export const applyLevelOverride = (G) => {
     globalEffects,
   } = levelConfigs[G.level];
 
-  for (let key in playerStatsOverride) {
-    if (playerStatsOverride.hasOwnProperty(key)) {
-      if (key in G.players[0]) {
-        G.players[0][key] = playerStatsOverride[key];
+  for (const key in playerStatsOverride) {
+    if (Object.prototype.hasOwnProperty.call(playerStatsOverride, key)) {
+      const k = key as keyof Player;
+      if (k !== 'id' && k !== 'name' && k in G.players[0]) {
+        G.players[0][k] = playerStatsOverride[k]!;
       }
     }
   }
-  for (let key in enemyStatsOverride) {
-    if (enemyStatsOverride.hasOwnProperty(key)) {
-      if (key in G.players[1]) {
-        G.players[1][key] = enemyStatsOverride[key];
+  for (const key in enemyStatsOverride) {
+    if (Object.prototype.hasOwnProperty.call(enemyStatsOverride, key)) {
+      const k = key as keyof Player;
+      if (k !== 'id' && k !== 'name' && k in G.players[1]) {
+        G.players[1][k] = enemyStatsOverride[k];
       }
     }
   }
@@ -214,8 +231,8 @@ export const applyLevelOverride = (G) => {
 /**
  * Apply effects at the start of turn if any, such as transforming the current player's hand.
  */
-export const executeStartOfTurnEffects = (G, ctx) => {
-  const replaceWishCards = (hand) => {
+export const executeStartOfTurnEffects = (G: WizardDuelState, ctx: Ctx) => {
+  const replaceWishCards = (hand: Card[]) => {
     const replacementOptions = [Wish2, Wish3, Wish4, Wish5];
     return hand.map((card) => {
       if (card.name === 'Wish') {
@@ -242,11 +259,11 @@ export const executeStartOfTurnEffects = (G, ctx) => {
  * Apply active end of turn effects on current player if any.
  * This must be applied after all effects have been executed for a card to avoid duplicates.
  */
-export const executeEndOfTurnEffects = (G, ctx) => {
+export const executeEndOfTurnEffects = (G: WizardDuelState, ctx: Ctx) => {
   if (hasEffect(G, ctx.currentPlayer, EffectType.aura)) {
     const auraEffects = getEffects(G, ctx.currentPlayer, EffectType.aura);
-    auraEffects.forEach((aura) => {
-      applyEffect(G, ctx, aura.effect);
+    auraEffects.forEach((aura: Effect) => {
+      applyEffect(G, ctx, aura.effect as Effect);
     });
   }
 };
@@ -255,10 +272,10 @@ export const executeEndOfTurnEffects = (G, ctx) => {
  * Apply global effects triggered at end of turn if any.
  */
 export const executeGlobalEndOfTurnEffects = (
-  G,
-  ctx,
-  card,
-  freezeTriggered
+  G: WizardDuelState,
+  ctx: Ctx,
+  card: Card,
+  freezeTriggered: boolean
 ) => {
   // Clear all buffs and debuffs on scheduled turns
   if (G.globalEffects.shouldClearEffects?.[ctx.turn - 1]) {

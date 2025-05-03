@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { exitToMenu, resetGame, jumpToLevel } from '../../utils/commonUtils';
-import { click } from '../../utils/assets';
-import { preFinalLevel } from '../../core/level/level';
 import { Algorithm } from '../../ai/ai';
+import { PRE_FINAL_LEVEL } from '../../core/level/level';
+import { click } from '../../utils/assets';
+import { exitToMenu, jumpToLevel, resetGame } from '../../utils/commonUtils';
 
 const SettingsModal = ({
   showSettingsModal,
@@ -153,7 +153,7 @@ const SettingsModal = ({
                     <button
                       type='button'
                       className='btn btn-dark'
-                      onClick={() => jumpToLevel(preFinalLevel)}
+                      onClick={() => jumpToLevel(PRE_FINAL_LEVEL)}
                     >
                       Skip Levels!
                     </button>

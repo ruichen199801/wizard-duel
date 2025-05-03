@@ -1,35 +1,49 @@
+import { PlayerID } from 'boardgame.io';
 import {
+  Effect,
+  EffectGroupName,
   effectsByGroup,
   EffectTarget,
   EffectType,
 } from '../../data/cardEffects';
+import { WizardDuelState } from '../game/game';
 
 /**
  * Returns the target player id of the card.
  */
-export const getTarget = (currentPlayer, targetType) => {
+export const getTarget = (
+  currentPlayer: PlayerID,
+  targetType: EffectTarget
+): PlayerID => {
   switch (targetType) {
     case EffectTarget.self:
       return currentPlayer;
     case EffectTarget.opponent:
       return currentPlayer === '0' ? '1' : '0';
     default:
-      console.error(`Invalid target type: ${targetType}`);
-      return null;
+      throw new Error(`Invalid target type: ${targetType}`);
   }
 };
 
 /**
  * Checks if a specific effect type exists on the target player.
  */
-export const hasEffect = (G, target, effectType) => {
+export const hasEffect = (
+  G: WizardDuelState,
+  target: PlayerID,
+  effectType: EffectType
+): boolean => {
   return G.players[target].effects.some((e) => e.type === effectType);
 };
 
 /**
  * Checks if the target player has the *exact same* effect as the given one.
  */
-export const hasSameEffect = (G, target, effect) => {
+export const hasSameEffect = (
+  G: WizardDuelState,
+  target: PlayerID,
+  effect: Effect
+): boolean => {
   return G.players[target].effects.some(
     (e) => JSON.stringify(e) === JSON.stringify(effect)
   );
@@ -38,14 +52,22 @@ export const hasSameEffect = (G, target, effect) => {
 /**
  * Returns all active effects of a specific type for the target player.
  */
-export const getEffects = (G, target, effectType) => {
+export const getEffects = (
+  G: WizardDuelState,
+  target: PlayerID,
+  effectType: EffectType
+): Effect[] => {
   return G.players[target].effects.filter((e) => e.type === effectType);
 };
 
 /**
  * Removes all effects of a specific type from the target player.
  */
-export const removeEffects = (G, target, effectType) => {
+export const removeEffects = (
+  G: WizardDuelState,
+  target: PlayerID,
+  effectType: EffectType
+) => {
   G.players[target].effects = G.players[target].effects.filter(
     (e) => e.type !== effectType
   );
@@ -54,18 +76,26 @@ export const removeEffects = (G, target, effectType) => {
 /**
  * Selects effects of a specific group type for the target player.
  */
-export const selectEffectsByGroup = (G, target, groupType) => {
+export const selectEffectsByGroup = (
+  G: WizardDuelState,
+  target: PlayerID,
+  groupName: EffectGroupName
+): Effect[] => {
   return G.players[target].effects.filter((e) =>
-    effectsByGroup[groupType].includes(e.type)
+    effectsByGroup[groupName].includes(e.type)
   );
 };
 
 /**
  * Removes all effects belonging to a specific group type from the target player.
  */
-export const removeEffectsByGroup = (G, target, groupType) => {
+export const removeEffectsByGroup = (
+  G: WizardDuelState,
+  target: PlayerID,
+  groupName: EffectGroupName
+) => {
   G.players[target].effects = G.players[target].effects.filter(
-    (e) => !effectsByGroup[groupType].includes(e.type)
+    (e) => !effectsByGroup[groupName].includes(e.type)
   );
 };
 
@@ -75,7 +105,13 @@ export const removeEffectsByGroup = (G, target, groupType) => {
  * - This method is *not* removing the effect names from player arrays, for that use `removeEffects` instead.
  * - If there is no applicable effect to reverse (other than removal from the array), this method has no impact.
  */
-export const undoEffect = (G, target, { type, value = 0 }) => {
+export const undoEffect = (
+  G: WizardDuelState,
+  target: PlayerID,
+  effect: Effect
+) => {
+  const { type, value = 0 } = effect;
+
   switch (type) {
     case EffectType.buffAtk:
       G.players[target].atk -= value;
@@ -112,13 +148,13 @@ export const undoEffect = (G, target, { type, value = 0 }) => {
 /**
  * Evaluates whether an effect should be executed based on a given probability.
  */
-export const getChanceEffect = (chance) => {
+export const getChanceEffect = (chance: number): boolean => {
   return Math.random() < chance;
 };
 
 /**
  * Checks if an effect is unique.
  */
-export const isUnique = (effect) => {
+export const isUnique = (effect: Effect): boolean => {
   return effectsByGroup.unique.some((type) => type === effect.type);
 };

@@ -1,36 +1,54 @@
+import { Ctx, PlayerID } from 'boardgame.io';
+
 import {
-  getTarget,
-  getEffects,
-  hasEffect,
-  hasSameEffect,
-  removeEffects,
-  selectEffectsByGroup,
-  removeEffectsByGroup,
-  undoEffect,
-  getChanceEffect,
-  isUnique,
-} from './effectUtils';
-import {
-  EffectType,
+  Effect,
   EffectDuration,
   EffectGroupName,
+  EffectType,
   freeze as freezeEffect,
 } from '../../data/cardEffects';
 import { getDeckForLevel } from '../../data/deck';
+import { WizardDuelState } from '../game/game';
 import { shuffle } from '../game/gameUtils';
-import { levelFreezeRate } from '../level/level';
+import { levelRules } from '../level/level';
 import { PowerClass, getPowerConfigs } from '../power/power';
+import {
+  getChanceEffect,
+  getEffects,
+  getTarget,
+  hasEffect,
+  hasSameEffect,
+  isUnique,
+  removeEffects,
+  removeEffectsByGroup,
+  selectEffectsByGroup,
+  undoEffect,
+} from './effectUtils';
 
-const damage = (G, target, { value = 0 }, ctx) => {
+export interface EffectHandlerParams {
+  readonly G: WizardDuelState;
+  readonly ctx: Ctx;
+  readonly target: PlayerID;
+  readonly effect: Effect;
+}
+
+export interface EffectHandler {
+  (params: EffectHandlerParams): void | number;
+}
+
+// --- Effect Handlers ---
+
+const damage: EffectHandler = ({ G, ctx, target, effect }) => {
+  let { value = 0 } = effect;
   const player = target === '0' ? '1' : '0';
 
   // Trigger counter attack.
   if (hasEffect(G, target, EffectType.counterAttack)) {
-    G.players[player].hp = Math.max(
-      1,
-      G.players[player].hp -
-        getEffects(G, target, EffectType.counterAttack)[0].value
-    );
+    const e = getEffects(G, target, EffectType.counterAttack);
+    if (e && e.length === 1) {
+      const ctrAtkValue = e[0].value as number;
+      G.players[player].hp = Math.max(1, G.players[player].hp - ctrAtkValue);
+    }
   }
 
   // Calculate base damage: card damage + player's attack - target's defense.
@@ -62,7 +80,8 @@ const damage = (G, target, { value = 0 }, ctx) => {
     G.players[target].hp <= value &&
     hasEffect(G, target, EffectType.resurrect)
   ) {
-    G.players[target].hp = getEffects(G, target, EffectType.resurrect)[0].value;
+    G.players[target].hp = getEffects(G, target, EffectType.resurrect)[0]
+      .value as number;
     removeEffects(G, target, EffectType.resurrect);
     return value;
   }
@@ -77,7 +96,8 @@ const damage = (G, target, { value = 0 }, ctx) => {
   return value;
 };
 
-const heal = (G, target, { value = 0 }) => {
+const heal: EffectHandler = ({ G, target, effect }) => {
+  const { value = 0 } = effect;
   if (
     hasEffect(G, target, EffectType.poison) ||
     (target === '0' && sessionStorage.getItem('power') === PowerClass.cryo) // Cryo debuff
@@ -94,57 +114,61 @@ const heal = (G, target, { value = 0 }) => {
   );
 };
 
-const buffAtk = (G, target, { value = 0 }) => {
+const buffAtk: EffectHandler = ({ G, target, effect }) => {
+  const { value = 0 } = effect;
   G.players[target].atk += value;
 };
 
-const buffDef = (G, target, { value = 0 }) => {
+const buffDef: EffectHandler = ({ G, target, effect }) => {
+  const { value = 0 } = effect;
   G.players[target].def += value;
 };
 
-const debuffAtk = (G, target, { value = 0 }) => {
+const debuffAtk: EffectHandler = ({ G, target, effect }) => {
+  const { value = 0 } = effect;
   G.players[target].atk -= value;
 };
 
-const debuffDef = (G, target, { value = 0 }) => {
+const debuffDef: EffectHandler = ({ G, target, effect }) => {
+  const { value = 0 } = effect;
   G.players[target].def -= value;
 };
 
-const removeDebuff = (G, target) => {
+const removeDebuff: EffectHandler = ({ G, target }) => {
   const debuffs = selectEffectsByGroup(G, target, EffectGroupName.debuff);
 
   if (!debuffs || debuffs.length === 0) return;
 
-  debuffs.forEach((e) => {
+  debuffs.forEach((e: Effect) => {
     undoEffect(G, target, e);
   });
 
   removeEffectsByGroup(G, target, EffectGroupName.debuff);
 };
 
-const removeBuff = (G, target) => {
+const removeBuff: EffectHandler = ({ G, target }) => {
   const buffs = selectEffectsByGroup(G, target, EffectGroupName.buff);
 
   if (!buffs || buffs.length === 0) return;
 
-  buffs.forEach((e) => {
+  buffs.forEach((e: Effect) => {
     undoEffect(G, target, e);
   });
 
   removeEffectsByGroup(G, target, EffectGroupName.buff);
 };
 
-const doubleDmg = () => {};
+const doubleDmg: EffectHandler = () => {};
 
-const preventDmg = () => {};
+const preventDmg: EffectHandler = () => {};
 
-const resurrect = () => {};
+const resurrect: EffectHandler = () => {};
 
-const freeze = () => {};
+const freeze: EffectHandler = () => {};
 
-const aura = () => {};
+const aura: EffectHandler = () => {};
 
-const replaceHand = (G, target) => {
+const replaceHand: EffectHandler = ({ G, target }) => {
   const hand = G.players[target].hand;
   let skippedCurrent = false; // Skip the current `Sandstorm` card (once)
 
@@ -160,7 +184,9 @@ const replaceHand = (G, target) => {
       G.deck = shuffle([...getDeckForLevel(G.level)]);
     }
 
-    hand[i] = G.deck.pop();
+    const card = G.deck.pop();
+    if (!card) throw new Error('Tried to replace hand from an empty deck.');
+    hand[i] = card;
   }
 
   // Handle the edge case where deck becomes empty after playing `Sandstorm`
@@ -170,18 +196,16 @@ const replaceHand = (G, target) => {
   }
 };
 
-const swapHp = (G, target) => {
+const swapHp: EffectHandler = ({ G, target }) => {
   const opponent = target === '0' ? '1' : '0';
   const temp = G.players[target].hp;
   G.players[target].hp = G.players[opponent].hp;
   G.players[opponent].hp = temp;
 };
 
-const stealBuff = (G, target, effect, ctx) => {
+const stealBuff: EffectHandler = ({ G, ctx, target }) => {
   const opponentBuffs = selectEffectsByGroup(G, target, EffectGroupName.buff);
-  if (opponentBuffs.length === 0) {
-    return;
-  }
+  if (opponentBuffs.length === 0) return;
   const chosenBuff =
     opponentBuffs[Math.floor(Math.random() * opponentBuffs.length)];
 
@@ -202,30 +226,35 @@ const stealBuff = (G, target, effect, ctx) => {
     (e) => e.group === EffectGroupName.unique && e.type === chosenBuff.type
   );
   if (!uniqueEffectExists) {
-    effectHandlers[chosenBuff.type](G, player, { ...chosenBuff }, ctx);
+    effectHandlers[chosenBuff.type as EffectType]({
+      G,
+      ctx,
+      target: player,
+      effect: { ...chosenBuff },
+    });
     playerEffects.push({ ...chosenBuff });
   }
 };
 
-const showEnemyHand = (G, target, effect, ctx) => {
+const showEnemyHand: EffectHandler = ({ G, ctx }) => {
   if (ctx.currentPlayer === '0') {
     G.globalEffects.showEnemyHand = true;
   }
 };
 
-const lifesteal = (G, target, effect, ctx) => {
+const lifesteal: EffectHandler = ({ G, ctx, target, effect }) => {
   const player = target === '0' ? '1' : '0';
-  const value = damage(G, target, effect, ctx);
-  if (value > 0) {
-    heal(G, player, { value });
+  const value = damage({ G, ctx, target, effect });
+  if (typeof value === 'number' && value > 0) {
+    heal({ G, ctx, target: player, effect: { ...effect, value } });
   }
 };
 
-const counterAttack = () => {};
+const counterAttack: EffectHandler = () => {};
 
-const poison = () => {};
+const poison: EffectHandler = () => {};
 
-const effectHandlers = {
+const effectHandlers: Record<EffectType, EffectHandler> = {
   [EffectType.damage]: damage,
   [EffectType.heal]: heal,
   [EffectType.buffAtk]: buffAtk,
@@ -248,7 +277,7 @@ const effectHandlers = {
   [EffectType.poison]: poison,
 };
 
-export const applyEffect = (G, ctx, effect) => {
+export const applyEffect = (G: WizardDuelState, ctx: Ctx, effect: Effect) => {
   const handler = effectHandlers[effect.type];
   if (!handler) {
     console.error(`Invalid effect type: ${effect.type}`);
@@ -259,26 +288,34 @@ export const applyEffect = (G, ctx, effect) => {
 
   // If you are frozen, the card you play this turn has no effect.
   if (hasEffect(G, ctx.currentPlayer, EffectType.freeze)) return;
-  // If you already have a non-stackable effect, playing the same card will have no effect.
+
+  // If the effect is unique and already active, skip applying it.
   if (isUnique(effect) && hasEffect(G, target, effect.type)) return;
-  // If you already have an existing aura effect of the exact same kind, playing the same card will have no effect.
+
+  // Skip duplicate auras.
   if (
     effect.type === EffectType.aura &&
     hasSameEffect(G, ctx.currentPlayer, effect)
   )
     return;
 
-  handler(G, target, effect, ctx);
+  // Invoke the effect handler.
+  handler({ G, ctx, target, effect });
 
   if (effect.duration === EffectDuration.enduring) {
     G.players[target].effects.push(effect);
   }
 };
 
-const applyDamageLevelEffects = (G, target, damage, ctx) => {
+const applyDamageLevelEffects = (
+  G: WizardDuelState,
+  target: PlayerID,
+  damage: number,
+  ctx: Ctx
+): number => {
   switch (G.level) {
     case '3':
-      if (getChanceEffect(levelFreezeRate)) {
+      if (getChanceEffect(levelRules.freezeRate)) {
         G.players[target].effects.push(freezeEffect);
       }
       return damage;
