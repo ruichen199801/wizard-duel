@@ -1,4 +1,8 @@
-import { EffectType, EffectTarget, EffectGroup } from '../../data/cardEffects';
+import {
+  effectsByGroup,
+  EffectTarget,
+  EffectType,
+} from '../../data/cardEffects';
 
 /**
  * Returns the target player id of the card.
@@ -52,7 +56,7 @@ export const removeEffects = (G, target, effectType) => {
  */
 export const selectEffectsByGroup = (G, target, groupType) => {
   return G.players[target].effects.filter((e) =>
-    EffectGroup[groupType].includes(e.type)
+    effectsByGroup[groupType].includes(e.type)
   );
 };
 
@@ -61,7 +65,7 @@ export const selectEffectsByGroup = (G, target, groupType) => {
  */
 export const removeEffectsByGroup = (G, target, groupType) => {
   G.players[target].effects = G.players[target].effects.filter(
-    (e) => !EffectGroup[groupType].includes(e.type)
+    (e) => !effectsByGroup[groupType].includes(e.type)
   );
 };
 
@@ -116,5 +120,5 @@ export const getChanceEffect = (chance) => {
  * Checks if an effect is unique.
  */
 export const isUnique = (effect) => {
-  return EffectGroup.unique.some((type) => type === effect.type);
+  return effectsByGroup.unique.some((type) => type === effect.type);
 };

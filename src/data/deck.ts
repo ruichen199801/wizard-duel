@@ -1,40 +1,41 @@
+import { GameMode, PowerClass } from '../core/power/power';
 import {
+  Ambush,
+  Armor,
+  Aura,
+  Blessing,
+  Block,
+  Card,
+  Curse,
+  Dispel,
+  Enrage,
   Fireball1,
   Fireball2,
   Fireball3,
+  Flame,
   Frost1,
   Frost2,
   Frost3,
-  Thunder1,
-  Thunder2,
-  Thunder3,
   Heal1,
   Heal2,
   Heal3,
-  Blessing,
-  Armor,
-  Weaken,
-  Curse,
-  Purify,
-  Dispel,
-  Enrage,
-  Block,
-  Flame,
-  Resurrect,
-  Petrify,
-  Aura,
-  Sandstorm,
-  Wish1,
   Mutate,
-  Ambush,
-  Vision,
-  Tide,
-  Revenge,
+  Petrify,
   Poison,
+  Purify,
+  Resurrect,
+  Revenge,
+  Sandstorm,
+  Thunder1,
+  Thunder2,
+  Thunder3,
+  Tide,
+  Vision,
+  Weaken,
+  Wish1,
 } from './cards';
-import { PowerClass, GameMode } from '../core/power/power';
 
-const baseDeck = [
+const baseDeck: Card[] = [
   Fireball1,
   Fireball2,
   Fireball3,
@@ -57,7 +58,7 @@ const baseDeck = [
   Block,
 ];
 
-const levelDecks = {
+const levelDecks: Record<string, Card[]> = {
   1: [...baseDeck],
 
   2: [...baseDeck, Flame, Resurrect],
@@ -125,11 +126,13 @@ const levelDecks = {
   ],
 };
 
-export const getDeckForLevel = (level = '1') => {
-  const levelDeck = levelDecks[level] || [];
-  if (levelDeck.length < 10) {
-    throw new Error('Deck array length is less than 10.'); // Dev testing issue only
+export const getDeckForLevel = (level = '1'): Card[] => {
+  const levelDeck = levelDecks[level];
+  if (!levelDeck || levelDeck.length < 10) {
+    throw new Error(`Level ${level} deck has <10 cards.`); // Dev testing issue only
   }
+
+  // TODO - Make this type safe when power class is refactored to typescript
   if (
     sessionStorage.getItem('power') === PowerClass.cryo &&
     sessionStorage.getItem('mode') === GameMode.normal
@@ -138,5 +141,6 @@ export const getDeckForLevel = (level = '1') => {
   } else if (sessionStorage.getItem('power') === PowerClass.erebo) {
     return levelDeck.filter((card) => card.id !== Mutate.id); // Erebo effect
   }
+
   return [...levelDeck];
 };

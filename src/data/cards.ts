@@ -1,44 +1,53 @@
 import {
-  damage,
-  heal,
+  aura,
   buffAtk,
   buffDef,
+  counterAttack,
+  damage,
   debuffAtk,
   debuffDef,
-  removeDebuff,
-  removeBuff,
   doubleDmg,
-  preventDmg,
-  resurrect,
+  Effect,
   freeze,
-  aura,
-  replaceHand,
-  swapHp,
-  stealBuff,
-  showEnemyHand,
+  heal,
   lifesteal,
-  counterAttack,
   poison,
+  preventDmg,
+  removeBuff,
+  removeDebuff,
+  replaceHand,
+  resurrect,
+  showEnemyHand,
+  stealBuff,
+  swapHp,
 } from './cardEffects';
+
+export interface Card {
+  readonly id: string;
+
+  // Card name and text added only for logging purpose
+  readonly name: string;
+  readonly text: string;
+
+  readonly effects: Effect[];
+  readonly keywords: CardKeyword[];
+}
 
 /**
  * Defines keywords used by the frontend to execute logic based on card categories.
  */
-export const CardKeyword = {
+export enum CardKeyword {
   // Cards that deal direct damage to your opponent
-  damage: 'damage',
+  damage = 'damage',
 
   // Cards that heal or add additional HP
-  sustain: 'sustain',
+  sustain = 'sustain',
 
   // Cards that impact you or your opponent's active effects
-  effect: 'effect',
-};
+  effect = 'effect',
+}
 
-// READ-ONLY CARDS
-// Card name and text added here only for logging purpose
-
-export const Fireball1 = {
+export const Fireball1: Card = {
   id: '0',
   name: 'Fireball',
   text: 'Damage 3',
@@ -46,7 +55,7 @@ export const Fireball1 = {
   keywords: [CardKeyword.damage],
 };
 
-export const Fireball2 = {
+export const Fireball2: Card = {
   id: '1',
   name: 'Fireball+',
   text: 'Damage 6',
@@ -54,7 +63,7 @@ export const Fireball2 = {
   keywords: [CardKeyword.damage],
 };
 
-export const Fireball3 = {
+export const Fireball3: Card = {
   id: '2',
   name: 'Fireball++',
   text: 'Damage 9',
@@ -62,7 +71,7 @@ export const Fireball3 = {
   keywords: [CardKeyword.damage],
 };
 
-export const Frost1 = {
+export const Frost1: Card = {
   id: '3',
   name: 'Frost',
   text: 'Damage 4',
@@ -70,7 +79,7 @@ export const Frost1 = {
   keywords: [CardKeyword.damage],
 };
 
-export const Frost2 = {
+export const Frost2: Card = {
   id: '4',
   name: 'Frost+',
   text: 'Damage 7',
@@ -78,7 +87,7 @@ export const Frost2 = {
   keywords: [CardKeyword.damage],
 };
 
-export const Frost3 = {
+export const Frost3: Card = {
   id: '5',
   name: 'Frost++',
   text: 'Damage 10',
@@ -86,7 +95,7 @@ export const Frost3 = {
   keywords: [CardKeyword.damage],
 };
 
-export const Thunder1 = {
+export const Thunder1: Card = {
   id: '6',
   name: 'Thunder',
   text: 'Damage 8',
@@ -94,7 +103,7 @@ export const Thunder1 = {
   keywords: [CardKeyword.damage],
 };
 
-export const Thunder2 = {
+export const Thunder2: Card = {
   id: '7',
   name: 'Thunder+',
   text: 'Damage 12',
@@ -102,7 +111,7 @@ export const Thunder2 = {
   keywords: [CardKeyword.damage],
 };
 
-export const Thunder3 = {
+export const Thunder3: Card = {
   id: '8',
   name: 'Thunder++',
   text: 'Damage 16',
@@ -110,7 +119,7 @@ export const Thunder3 = {
   keywords: [CardKeyword.damage],
 };
 
-export const Heal1 = {
+export const Heal1: Card = {
   id: '9',
   name: 'Heal',
   text: '+5 HP',
@@ -118,7 +127,7 @@ export const Heal1 = {
   keywords: [CardKeyword.sustain],
 };
 
-export const Heal2 = {
+export const Heal2: Card = {
   id: '10',
   name: 'Heal+',
   text: '+10 HP',
@@ -126,7 +135,7 @@ export const Heal2 = {
   keywords: [CardKeyword.sustain],
 };
 
-export const Heal3 = {
+export const Heal3: Card = {
   id: '11',
   name: 'Heal++',
   text: '+15 HP',
@@ -134,7 +143,7 @@ export const Heal3 = {
   keywords: [CardKeyword.sustain],
 };
 
-export const Blessing = {
+export const Blessing: Card = {
   id: '12',
   name: 'Blessing',
   text: '+3 Attack',
@@ -142,7 +151,7 @@ export const Blessing = {
   keywords: [CardKeyword.effect],
 };
 
-export const Armor = {
+export const Armor: Card = {
   id: '13',
   name: 'Armor',
   text: '+3 Shield',
@@ -150,7 +159,7 @@ export const Armor = {
   keywords: [CardKeyword.effect],
 };
 
-export const Weaken = {
+export const Weaken: Card = {
   id: '14',
   name: 'Weaken',
   text: 'Enemy -3 Attack',
@@ -158,7 +167,7 @@ export const Weaken = {
   keywords: [CardKeyword.effect],
 };
 
-export const Curse = {
+export const Curse: Card = {
   id: '15',
   name: 'Curse',
   text: 'Enemy -3 Shield',
@@ -166,7 +175,7 @@ export const Curse = {
   keywords: [CardKeyword.effect],
 };
 
-export const Purify = {
+export const Purify: Card = {
   id: '16',
   name: 'Purify',
   text: 'Remove Debuff',
@@ -174,7 +183,7 @@ export const Purify = {
   keywords: [CardKeyword.effect],
 };
 
-export const Dispel = {
+export const Dispel: Card = {
   id: '17',
   name: 'Dispel',
   text: 'Remove Enemy Buff',
@@ -182,7 +191,7 @@ export const Dispel = {
   keywords: [CardKeyword.effect],
 };
 
-export const Enrage = {
+export const Enrage: Card = {
   id: '18',
   name: 'Enrage',
   text: 'Next Damage x2',
@@ -190,7 +199,7 @@ export const Enrage = {
   keywords: [CardKeyword.effect],
 };
 
-export const Block = {
+export const Block: Card = {
   id: '19',
   name: 'Block',
   text: 'Prevent Next Damage',
@@ -198,7 +207,7 @@ export const Block = {
   keywords: [CardKeyword.effect],
 };
 
-export const Flame = {
+export const Flame: Card = {
   id: '20',
   name: 'Flame',
   text: 'Damage 12 and +5 Attack',
@@ -206,7 +215,7 @@ export const Flame = {
   keywords: [CardKeyword.damage, CardKeyword.effect],
 };
 
-export const Resurrect = {
+export const Resurrect: Card = {
   id: '21',
   name: 'Resurrect',
   text: '+15 HP on Death',
@@ -214,7 +223,7 @@ export const Resurrect = {
   keywords: [CardKeyword.sustain, CardKeyword.effect],
 };
 
-export const Petrify = {
+export const Petrify: Card = {
   id: '22',
   name: 'Petrify',
   text: 'Freeze Enemy 1 Turn',
@@ -222,7 +231,7 @@ export const Petrify = {
   keywords: [CardKeyword.effect],
 };
 
-export const Aura = {
+export const Aura: Card = {
   id: '23',
   name: 'Aura',
   text: '+3 HP per Turn',
@@ -230,7 +239,7 @@ export const Aura = {
   keywords: [CardKeyword.sustain, CardKeyword.effect],
 };
 
-export const Sandstorm = {
+export const Sandstorm: Card = {
   id: '24',
   name: 'Sandstorm',
   text: 'Replace Hand',
@@ -238,7 +247,7 @@ export const Sandstorm = {
   keywords: [],
 };
 
-export const Wish1 = {
+export const Wish1: Card = {
   id: '25',
   name: 'Wish',
   text: 'Changes Effect Each Turn!',
@@ -246,7 +255,7 @@ export const Wish1 = {
   keywords: [],
 };
 
-export const Wish2 = {
+export const Wish2: Card = {
   id: '26',
   name: 'Wish',
   text: 'Remove Buff and Freeze 1 Turn',
@@ -254,7 +263,7 @@ export const Wish2 = {
   keywords: [CardKeyword.effect],
 };
 
-export const Wish3 = {
+export const Wish3: Card = {
   id: '27',
   name: 'Wish',
   text: '+10 Attack',
@@ -262,7 +271,7 @@ export const Wish3 = {
   keywords: [CardKeyword.effect],
 };
 
-export const Wish4 = {
+export const Wish4: Card = {
   id: '28',
   name: 'Wish',
   text: 'Remove Debuff and +15 HP',
@@ -270,7 +279,7 @@ export const Wish4 = {
   keywords: [CardKeyword.effect, CardKeyword.sustain],
 };
 
-export const Wish5 = {
+export const Wish5: Card = {
   id: '29',
   name: 'Wish',
   text: 'Damage 20',
@@ -278,7 +287,7 @@ export const Wish5 = {
   keywords: [CardKeyword.damage],
 };
 
-export const Mutate = {
+export const Mutate: Card = {
   id: '30',
   name: 'Mutate',
   text: 'Swap HP',
@@ -286,7 +295,7 @@ export const Mutate = {
   keywords: [],
 };
 
-export const Ambush = {
+export const Ambush: Card = {
   id: '31',
   name: 'Ambush',
   text: 'Steal 1 Buff',
@@ -294,7 +303,7 @@ export const Ambush = {
   keywords: [CardKeyword.effect],
 };
 
-export const Vision = {
+export const Vision: Card = {
   id: '32',
   name: 'Vision',
   text: 'Show Enemy Hand',
@@ -302,7 +311,7 @@ export const Vision = {
   keywords: [],
 };
 
-export const Tide = {
+export const Tide: Card = {
   id: '33',
   name: 'Tide',
   text: 'Damage 18 and + Same HP',
@@ -310,7 +319,7 @@ export const Tide = {
   keywords: [CardKeyword.damage, CardKeyword.sustain],
 };
 
-export const Revenge = {
+export const Revenge: Card = {
   id: '34',
   name: 'Revenge',
   text: 'Counter Attack 9',
@@ -318,7 +327,7 @@ export const Revenge = {
   keywords: [CardKeyword.effect],
 };
 
-export const Poison = {
+export const Poison: Card = {
   id: '35',
   name: 'Poison',
   text: "Enemy Can't Heal",

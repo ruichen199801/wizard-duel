@@ -1,43 +1,44 @@
-export const EffectType = {
-  damage: 'damage',
-  heal: 'heal',
-  buffAtk: 'buffAtk',
-  buffDef: 'buffDef',
-  debuffAtk: 'debuffAtk',
-  debuffDef: 'debuffDef',
-  removeBuff: 'removeBuff',
-  removeDebuff: 'removeDebuff',
-  doubleDmg: 'doubleDmg',
-  preventDmg: 'preventDmg',
-  resurrect: 'resurrect',
-  freeze: 'freeze',
-  aura: 'aura',
-  replaceHand: 'replaceHand',
-  swapHp: 'swapHp',
-  stealBuff: 'stealBuff',
-  showEnemyHand: 'showEnemyHand',
-  lifesteal: 'lifesteal',
-  counterAttack: 'counterAttack',
-  poison: 'poison',
-};
+export enum EffectType {
+  damage = 'damage',
+  heal = 'heal',
+  buffAtk = 'buffAtk',
+  buffDef = 'buffDef',
+  debuffAtk = 'debuffAtk',
+  debuffDef = 'debuffDef',
+  removeBuff = 'removeBuff',
+  removeDebuff = 'removeDebuff',
+  doubleDmg = 'doubleDmg',
+  preventDmg = 'preventDmg',
+  resurrect = 'resurrect',
+  freeze = 'freeze',
+  aura = 'aura',
+  replaceHand = 'replaceHand',
+  swapHp = 'swapHp',
+  stealBuff = 'stealBuff',
+  showEnemyHand = 'showEnemyHand',
+  lifesteal = 'lifesteal',
+  counterAttack = 'counterAttack',
+  poison = 'poison',
+}
 
-export const EffectDuration = {
-  instant: 'instant',
-  enduring: 'enduring',
-};
+export enum EffectDuration {
+  instant = 'instant',
+  enduring = 'enduring',
+}
 
-export const EffectTarget = {
-  self: 'self',
-  opponent: 'opponent',
-};
+export enum EffectTarget {
+  self = 'self',
+  opponent = 'opponent',
+}
 
-export const EffectGroupName = {
-  buff: 'buff',
-  debuff: 'debuff',
-  unique: 'unique',
-};
+export enum EffectGroupName {
+  buff = 'buff',
+  debuff = 'debuff',
+  unique = 'unique',
+}
 
-export const EffectGroup = {
+// TODO - Move this to effectUtils.ts as it's used there
+export const effectsByGroup: Record<EffectGroupName, EffectType[]> = {
   // Positive effects applied to the player.
   buff: [
     EffectType.buffAtk,
@@ -68,13 +69,26 @@ export const EffectGroup = {
   ],
 };
 
-// Only enduring effects have text and group (buff/debuff) field for logging purpose
+export interface Effect {
+  readonly type: EffectType;
+  readonly duration: EffectDuration;
+  readonly target: EffectTarget;
+  readonly value?: number;
+
+  // Only enduring effects have text and group (buff/debuff) field for logging purpose
+  readonly group?: EffectGroupName;
+  readonly text?: string;
+  readonly abbrevText?: string;
+
+  // Only aura effect has this field
+  readonly effect?: Effect;
+}
 
 /**
  * Deal damage to the opponent by value.
  * Damage = (card damage + player attack - opponent defense), modifiers applied afterward.
  */
-export const damage = (value) => {
+export const damage = (value: number): Effect => {
   return {
     type: EffectType.damage,
     duration: EffectDuration.instant,
@@ -86,7 +100,7 @@ export const damage = (value) => {
 /**
  * Increase your HP by value.
  */
-export const heal = (value) => {
+export const heal = (value: number): Effect => {
   return {
     type: EffectType.heal,
     duration: EffectDuration.instant,
@@ -98,7 +112,7 @@ export const heal = (value) => {
 /**
  * Increase your attack by value.
  */
-export const buffAtk = (value) => {
+export const buffAtk = (value: number): Effect => {
   return {
     type: EffectType.buffAtk,
     duration: EffectDuration.enduring,
@@ -113,7 +127,7 @@ export const buffAtk = (value) => {
 /**
  * Increase your defense by value.
  */
-export const buffDef = (value) => {
+export const buffDef = (value: number): Effect => {
   return {
     type: EffectType.buffDef,
     duration: EffectDuration.enduring,
@@ -128,7 +142,7 @@ export const buffDef = (value) => {
 /**
  * Decrease the opponent's attack by value.
  */
-export const debuffAtk = (value) => {
+export const debuffAtk = (value: number): Effect => {
   return {
     type: EffectType.debuffAtk,
     duration: EffectDuration.enduring,
@@ -143,7 +157,7 @@ export const debuffAtk = (value) => {
 /**
  * Decrease the opponent's defense by value.
  */
-export const debuffDef = (value) => {
+export const debuffDef = (value: number): Effect => {
   return {
     type: EffectType.debuffDef,
     duration: EffectDuration.enduring,
@@ -158,7 +172,7 @@ export const debuffDef = (value) => {
 /**
  * Remove all your debuffs.
  */
-export const removeDebuff = {
+export const removeDebuff: Effect = {
   type: EffectType.removeDebuff,
   duration: EffectDuration.instant,
   target: EffectTarget.self,
@@ -167,7 +181,7 @@ export const removeDebuff = {
 /**
  * Remove all the opponent's buffs.
  */
-export const removeBuff = {
+export const removeBuff: Effect = {
   type: EffectType.removeBuff,
   duration: EffectDuration.instant,
   target: EffectTarget.opponent,
@@ -176,7 +190,7 @@ export const removeBuff = {
 /**
  * Double your next card damage.
  */
-export const doubleDmg = {
+export const doubleDmg: Effect = {
   type: EffectType.doubleDmg,
   duration: EffectDuration.enduring,
   target: EffectTarget.self,
@@ -188,7 +202,7 @@ export const doubleDmg = {
 /**
  * Prevent next card damage from the opponent.
  */
-export const preventDmg = {
+export const preventDmg: Effect = {
   type: EffectType.preventDmg,
   duration: EffectDuration.enduring,
   target: EffectTarget.self,
@@ -200,7 +214,7 @@ export const preventDmg = {
 /**
  * Before receiving fatal card damage from the opponent, prevent it and set your HP to 15.
  */
-export const resurrect = (value) => {
+export const resurrect = (value: number): Effect => {
   return {
     type: EffectType.resurrect,
     duration: EffectDuration.enduring,
@@ -215,7 +229,7 @@ export const resurrect = (value) => {
 /**
  * Invalidate the opponent's next card. Triggered immediately during their next turn.
  */
-export const freeze = {
+export const freeze: Effect = {
   type: EffectType.freeze,
   duration: EffectDuration.enduring,
   target: EffectTarget.opponent,
@@ -227,7 +241,11 @@ export const freeze = {
 /**
  * Trigger a positive instant effect at the end of your turn.
  */
-export const aura = (effect, text, abbrevText) => {
+export const aura = (
+  effect: Effect,
+  text: string,
+  abbrevText: string
+): Effect => {
   return {
     type: EffectType.aura,
     duration: EffectDuration.enduring,
@@ -242,7 +260,7 @@ export const aura = (effect, text, abbrevText) => {
 /**
  * Replace your hand with new cards drawn from the deck.
  */
-export const replaceHand = {
+export const replaceHand: Effect = {
   type: EffectType.replaceHand,
   duration: EffectDuration.instant,
   target: EffectTarget.self,
@@ -251,7 +269,7 @@ export const replaceHand = {
 /**
  * Swap your current HP with your opponent's.
  */
-export const swapHp = {
+export const swapHp: Effect = {
   type: EffectType.swapHp,
   duration: EffectDuration.instant,
   target: EffectTarget.self,
@@ -260,7 +278,7 @@ export const swapHp = {
 /**
  * Removes a random buff effect from your opponent and applies it on you.
  */
-export const stealBuff = {
+export const stealBuff: Effect = {
   type: EffectType.stealBuff,
   duration: EffectDuration.instant,
   target: EffectTarget.opponent,
@@ -269,7 +287,7 @@ export const stealBuff = {
 /**
  * Display enemy's hand for the rest of the game.
  */
-export const showEnemyHand = {
+export const showEnemyHand: Effect = {
   type: EffectType.showEnemyHand,
   duration: EffectDuration.instant,
   target: EffectTarget.opponent,
@@ -278,7 +296,7 @@ export const showEnemyHand = {
 /**
  * Deal damage to the opponent and heal for the same amount.
  */
-export const lifesteal = (value) => {
+export const lifesteal = (value: number): Effect => {
   return {
     type: EffectType.lifesteal,
     duration: EffectDuration.instant,
@@ -292,7 +310,7 @@ export const lifesteal = (value) => {
  * This effect will be triggered whenever a damage card targeting the player is played,
  * regardless of whether any actual damage is dealt (e.g. miss/freeze/preventDamage/etc.)
  */
-export const counterAttack = (value) => {
+export const counterAttack = (value: number): Effect => {
   return {
     type: EffectType.counterAttack,
     duration: EffectDuration.enduring,
@@ -307,7 +325,7 @@ export const counterAttack = (value) => {
 /**
  * All healing effects applied to the opponent are invalidated.
  */
-export const poison = {
+export const poison: Effect = {
   type: EffectType.poison,
   duration: EffectDuration.enduring,
   target: EffectTarget.opponent,
