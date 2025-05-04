@@ -23,7 +23,7 @@ import {
 } from './cardEffects';
 
 export interface Card {
-  readonly id: string;
+  readonly id: CardId;
 
   // Card name and text added only for logging purpose
   readonly name: string;
@@ -47,8 +47,49 @@ export enum CardKeyword {
   effect = 'effect',
 }
 
+export enum CardId {
+  Fireball1 = '0',
+  Fireball2 = '1',
+  Fireball3 = '2',
+  Frost1 = '3',
+  Frost2 = '4',
+  Frost3 = '5',
+  Thunder1 = '6',
+  Thunder2 = '7',
+  Thunder3 = '8',
+  Heal1 = '9',
+  Heal2 = '10',
+  Heal3 = '11',
+  Blessing = '12',
+  Armor = '13',
+  Weaken = '14',
+  Curse = '15',
+  Purify = '16',
+  Dispel = '17',
+  Enrage = '18',
+  Block = '19',
+  Flame = '20',
+  Resurrect = '21',
+  Petrify = '22',
+  Aura = '23',
+  Sandstorm = '24',
+  Wish1 = '25',
+  Wish2 = '26',
+  Wish3 = '27',
+  Wish4 = '28',
+  Wish5 = '29',
+  Mutate = '30',
+  Ambush = '31',
+  Vision = '32',
+  Tide = '33',
+  Revenge = '34',
+  Poison = '35',
+}
+
+// --- Cards ---
+
 export const Fireball1: Card = {
-  id: '0',
+  id: CardId.Fireball1,
   name: 'Fireball',
   text: 'Damage 3',
   effects: [damage(3)],
@@ -56,7 +97,7 @@ export const Fireball1: Card = {
 };
 
 export const Fireball2: Card = {
-  id: '1',
+  id: CardId.Fireball2,
   name: 'Fireball+',
   text: 'Damage 6',
   effects: [damage(6)],
@@ -64,7 +105,7 @@ export const Fireball2: Card = {
 };
 
 export const Fireball3: Card = {
-  id: '2',
+  id: CardId.Fireball3,
   name: 'Fireball++',
   text: 'Damage 9',
   effects: [damage(9)],
@@ -72,7 +113,7 @@ export const Fireball3: Card = {
 };
 
 export const Frost1: Card = {
-  id: '3',
+  id: CardId.Frost1,
   name: 'Frost',
   text: 'Damage 4',
   effects: [damage(4)],
@@ -80,7 +121,7 @@ export const Frost1: Card = {
 };
 
 export const Frost2: Card = {
-  id: '4',
+  id: CardId.Frost2,
   name: 'Frost+',
   text: 'Damage 7',
   effects: [damage(7)],
@@ -88,7 +129,7 @@ export const Frost2: Card = {
 };
 
 export const Frost3: Card = {
-  id: '5',
+  id: CardId.Frost3,
   name: 'Frost++',
   text: 'Damage 10',
   effects: [damage(10)],
@@ -96,7 +137,7 @@ export const Frost3: Card = {
 };
 
 export const Thunder1: Card = {
-  id: '6',
+  id: CardId.Thunder1,
   name: 'Thunder',
   text: 'Damage 8',
   effects: [damage(8)],
@@ -104,7 +145,7 @@ export const Thunder1: Card = {
 };
 
 export const Thunder2: Card = {
-  id: '7',
+  id: CardId.Thunder2,
   name: 'Thunder+',
   text: 'Damage 12',
   effects: [damage(12)],
@@ -112,7 +153,7 @@ export const Thunder2: Card = {
 };
 
 export const Thunder3: Card = {
-  id: '8',
+  id: CardId.Thunder3,
   name: 'Thunder++',
   text: 'Damage 16',
   effects: [damage(16)],
@@ -120,7 +161,7 @@ export const Thunder3: Card = {
 };
 
 export const Heal1: Card = {
-  id: '9',
+  id: CardId.Heal1,
   name: 'Heal',
   text: '+5 HP',
   effects: [heal(5)],
@@ -128,7 +169,7 @@ export const Heal1: Card = {
 };
 
 export const Heal2: Card = {
-  id: '10',
+  id: CardId.Heal2,
   name: 'Heal+',
   text: '+10 HP',
   effects: [heal(10)],
@@ -136,7 +177,7 @@ export const Heal2: Card = {
 };
 
 export const Heal3: Card = {
-  id: '11',
+  id: CardId.Heal3,
   name: 'Heal++',
   text: '+15 HP',
   effects: [heal(15)],
@@ -144,7 +185,7 @@ export const Heal3: Card = {
 };
 
 export const Blessing: Card = {
-  id: '12',
+  id: CardId.Blessing,
   name: 'Blessing',
   text: '+3 Attack',
   effects: [buffAtk(3)],
@@ -152,7 +193,7 @@ export const Blessing: Card = {
 };
 
 export const Armor: Card = {
-  id: '13',
+  id: CardId.Armor,
   name: 'Armor',
   text: '+3 Shield',
   effects: [buffDef(3)],
@@ -160,7 +201,7 @@ export const Armor: Card = {
 };
 
 export const Weaken: Card = {
-  id: '14',
+  id: CardId.Weaken,
   name: 'Weaken',
   text: 'Enemy -3 Attack',
   effects: [debuffAtk(3)],
@@ -168,7 +209,7 @@ export const Weaken: Card = {
 };
 
 export const Curse: Card = {
-  id: '15',
+  id: CardId.Curse,
   name: 'Curse',
   text: 'Enemy -3 Shield',
   effects: [debuffDef(3)],
@@ -176,7 +217,7 @@ export const Curse: Card = {
 };
 
 export const Purify: Card = {
-  id: '16',
+  id: CardId.Purify,
   name: 'Purify',
   text: 'Remove Debuff',
   effects: [removeDebuff],
@@ -184,7 +225,7 @@ export const Purify: Card = {
 };
 
 export const Dispel: Card = {
-  id: '17',
+  id: CardId.Dispel,
   name: 'Dispel',
   text: 'Remove Enemy Buff',
   effects: [removeBuff],
@@ -192,7 +233,7 @@ export const Dispel: Card = {
 };
 
 export const Enrage: Card = {
-  id: '18',
+  id: CardId.Enrage,
   name: 'Enrage',
   text: 'Next Damage x2',
   effects: [doubleDmg],
@@ -200,7 +241,7 @@ export const Enrage: Card = {
 };
 
 export const Block: Card = {
-  id: '19',
+  id: CardId.Block,
   name: 'Block',
   text: 'Prevent Next Damage',
   effects: [preventDmg],
@@ -208,7 +249,7 @@ export const Block: Card = {
 };
 
 export const Flame: Card = {
-  id: '20',
+  id: CardId.Flame,
   name: 'Flame',
   text: 'Damage 12 and +5 Attack',
   effects: [damage(12), buffAtk(5)],
@@ -216,7 +257,7 @@ export const Flame: Card = {
 };
 
 export const Resurrect: Card = {
-  id: '21',
+  id: CardId.Resurrect,
   name: 'Resurrect',
   text: '+15 HP on Death',
   effects: [resurrect(15)],
@@ -224,7 +265,7 @@ export const Resurrect: Card = {
 };
 
 export const Petrify: Card = {
-  id: '22',
+  id: CardId.Petrify,
   name: 'Petrify',
   text: 'Freeze Enemy 1 Turn',
   effects: [freeze],
@@ -232,7 +273,7 @@ export const Petrify: Card = {
 };
 
 export const Aura: Card = {
-  id: '23',
+  id: CardId.Aura,
   name: 'Aura',
   text: '+3 HP per Turn',
   effects: [aura(heal(3), '+3 HP per Turn', '+3 HP per Turn')],
@@ -240,7 +281,7 @@ export const Aura: Card = {
 };
 
 export const Sandstorm: Card = {
-  id: '24',
+  id: CardId.Sandstorm,
   name: 'Sandstorm',
   text: 'Replace Hand',
   effects: [replaceHand],
@@ -248,7 +289,7 @@ export const Sandstorm: Card = {
 };
 
 export const Wish1: Card = {
-  id: '25',
+  id: CardId.Wish1,
   name: 'Wish',
   text: 'Changes Effect Each Turn!',
   effects: [],
@@ -256,7 +297,7 @@ export const Wish1: Card = {
 };
 
 export const Wish2: Card = {
-  id: '26',
+  id: CardId.Wish2,
   name: 'Wish',
   text: 'Remove Buff and Freeze 1 Turn',
   effects: [removeBuff, freeze],
@@ -264,7 +305,7 @@ export const Wish2: Card = {
 };
 
 export const Wish3: Card = {
-  id: '27',
+  id: CardId.Wish3,
   name: 'Wish',
   text: '+10 Attack',
   effects: [buffAtk(10)],
@@ -272,7 +313,7 @@ export const Wish3: Card = {
 };
 
 export const Wish4: Card = {
-  id: '28',
+  id: CardId.Wish4,
   name: 'Wish',
   text: 'Remove Debuff and +15 HP',
   effects: [removeDebuff, heal(15)],
@@ -280,7 +321,7 @@ export const Wish4: Card = {
 };
 
 export const Wish5: Card = {
-  id: '29',
+  id: CardId.Wish5,
   name: 'Wish',
   text: 'Damage 20',
   effects: [damage(20)],
@@ -288,7 +329,7 @@ export const Wish5: Card = {
 };
 
 export const Mutate: Card = {
-  id: '30',
+  id: CardId.Mutate,
   name: 'Mutate',
   text: 'Swap HP',
   effects: [swapHp],
@@ -296,7 +337,7 @@ export const Mutate: Card = {
 };
 
 export const Ambush: Card = {
-  id: '31',
+  id: CardId.Ambush,
   name: 'Ambush',
   text: 'Steal 1 Buff',
   effects: [stealBuff],
@@ -304,7 +345,7 @@ export const Ambush: Card = {
 };
 
 export const Vision: Card = {
-  id: '32',
+  id: CardId.Vision,
   name: 'Vision',
   text: 'Show Enemy Hand',
   effects: [showEnemyHand],
@@ -312,7 +353,7 @@ export const Vision: Card = {
 };
 
 export const Tide: Card = {
-  id: '33',
+  id: CardId.Tide,
   name: 'Tide',
   text: 'Damage 18 and + Same HP',
   effects: [lifesteal(18)],
@@ -320,7 +361,7 @@ export const Tide: Card = {
 };
 
 export const Revenge: Card = {
-  id: '34',
+  id: CardId.Revenge,
   name: 'Revenge',
   text: 'Counter Attack 9',
   effects: [counterAttack(9)],
@@ -328,7 +369,7 @@ export const Revenge: Card = {
 };
 
 export const Poison: Card = {
-  id: '35',
+  id: CardId.Poison,
   name: 'Poison',
   text: "Enemy Can't Heal",
   effects: [poison],

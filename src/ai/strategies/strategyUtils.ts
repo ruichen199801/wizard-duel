@@ -1,11 +1,18 @@
-// Purify, Wish4
-export const REMOVE_DEBUFF_CARDS = ['16', '28'];
+import { CardId } from '../../core/data/cards';
 
-// Dispel, Wish2, Ambush
-export const REMOVE_BUFF_CARDS = ['17', '26', '31'];
+export const REMOVE_DEBUFF_CARDS = [CardId.Purify, CardId.Wish4];
 
-// Flame, Resurrect, Aura, Wish3, Wish5, Tide, Revenge, Poison
-export const POWERFUL_CARDS = ['20', '21', '23', '27', '29', '33', '34', '35'];
+export const REMOVE_BUFF_CARDS = [CardId.Dispel, CardId.Wish2, CardId.Ambush];
 
-// Wish1, Vision
-export const USELESS_CARDS = ['25', '32'];
+export const POWERFUL_CARDS = [
+  CardId.Flame,
+  CardId.Resurrect,
+  CardId.Aura,
+  CardId.Wish3,
+  CardId.Wish5,
+  CardId.Tide,
+  CardId.Revenge,
+  CardId.Poison,
+];
+
+export const USELESS_CARDS = [CardId.Wish1, CardId.Vision];

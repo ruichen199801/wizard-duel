@@ -1,5 +1,5 @@
 import { EffectGroupName, EffectType } from '../../core/data/cardEffects';
-import { Card, CardKeyword } from '../../core/data/cards';
+import { Card, CardId, CardKeyword } from '../../core/data/cards';
 import { WizardDuelState } from '../../core/game/game';
 import { random } from './random';
 import {
@@ -24,11 +24,11 @@ export const resolveAction = (actions: Card[], G: WizardDuelState): Card => {
 
   // When HP diff is huge, resolve to random(Mutate) if any
   if (
-    actions.some((card) => card.id === '30') &&
+    actions.some((card) => card.id === CardId.Mutate) &&
     G.players[0].hp - G.players[1].hp >= 20
   ) {
     // console.log('Resolve to Mutate');
-    return actions.find((card) => card.id === '30')!;
+    return actions.find((card) => card.id === CardId.Mutate)!;
   }
 
   // When AI has multiple debuffs, resolve to random(removeDebuffCards) if any

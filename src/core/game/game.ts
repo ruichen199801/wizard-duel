@@ -1,7 +1,7 @@
 import { Game, Move, PlayerID } from 'boardgame.io';
 
 import { EffectType } from '../data/cardEffects';
-import { Card } from '../data/cards';
+import { Card, CardId } from '../data/cards';
 import { getDeckForLevel } from '../data/deck';
 import { p0, p1, Player } from '../data/player';
 import { applyEffect } from '../effect/effect';
@@ -63,7 +63,7 @@ const setupData = (): WizardDuelState => {
   return G;
 };
 
-const drawCard: Move<WizardDuelState> = ({ G, ctx }, cardId = '') => {
+const drawCard: Move<WizardDuelState> = ({ G, ctx }, cardId?: CardId) => {
   if (ctx.turn <= 2) return;
 
   executeStartOfTurnEffects(G, ctx);
@@ -73,7 +73,7 @@ const drawCard: Move<WizardDuelState> = ({ G, ctx }, cardId = '') => {
     throw new Error('Invalid move: cannot draw more cards.');
   }
 
-  if (cardId !== '') {
+  if (cardId) {
     // Select mode
     const card = getCardById(G.deck, cardId);
     if (!card) throw new Error(`Card with id ${cardId} not found in the deck.`);

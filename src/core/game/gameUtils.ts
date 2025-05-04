@@ -1,7 +1,15 @@
 import { Ctx } from 'boardgame.io';
 
 import { Effect, EffectType } from '../data/cardEffects';
-import { Card, CardKeyword, Wish2, Wish3, Wish4, Wish5 } from '../data/cards';
+import {
+  Card,
+  CardId,
+  CardKeyword,
+  Wish2,
+  Wish3,
+  Wish4,
+  Wish5,
+} from '../data/cards';
 import { Player } from '../data/player';
 import { applyEffect } from '../effect/effect';
 import { getEffects, hasEffect, undoEffect } from '../effect/effectUtils';
@@ -45,7 +53,7 @@ export const removeCard = (hand: Card[], index: number) => {
 /**
  * Get one copy of a card from a deck by id.
  */
-export const getCardById = (deck: Card[], cardId: string): Card => {
+export const getCardById = (deck: Card[], cardId: CardId): Card => {
   const card = deck.find((card) => card.id === cardId);
   if (!card) {
     throw new Error(`Card with id ${cardId} not found in the deck.`);
@@ -56,7 +64,7 @@ export const getCardById = (deck: Card[], cardId: string): Card => {
 /**
  * Remove one copy of a card from a deck by id.
  */
-export const removeCardById = (deck: Card[], cardId: string) => {
+export const removeCardById = (deck: Card[], cardId: CardId) => {
   const index = deck.findIndex((card) => card.id === cardId);
   if (index !== -1) {
     deck.splice(index, 1);

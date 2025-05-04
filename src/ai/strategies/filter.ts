@@ -1,6 +1,6 @@
 import { Ctx } from 'boardgame.io';
 import { EffectGroupName } from '../../core/data/cardEffects';
-import { Card, CardKeyword } from '../../core/data/cards';
+import { Card, CardId, CardKeyword } from '../../core/data/cards';
 import { getTarget, hasEffect, isUnique } from '../../core/effect/effectUtils';
 import { WizardDuelState } from '../../core/game/game';
 import { random } from './random';
@@ -29,7 +29,7 @@ const filters: Filter[] = [
   },
   {
     rule: (card, G, ctx) =>
-      card.id !== '30' || G.players[0].hp > G.players[1].hp,
+      card.id !== CardId.Mutate || G.players[0].hp > G.players[1].hp,
     reason: 'Filter Mutate when AI has higher or equal HP',
   },
   {
@@ -80,8 +80,8 @@ const onFilterEnd = (cardsBefore: Card[], cardsAfter: Card[]): FilterResult => {
     result = cardsAfter[0];
   } else if (cardsAfter.length === 0) {
     // Fallback to Sandstorm || random(original cards) when no cards left
-    result = cardsBefore.some((card) => card.id === '24')
-      ? cardsBefore.find((card) => card.id === '24')!
+    result = cardsBefore.some((card) => card.id === CardId.Sandstorm)
+      ? cardsBefore.find((card) => card.id === CardId.Sandstorm)!
       : random(cardsBefore);
   } else {
     // Continue filtering

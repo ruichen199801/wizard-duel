@@ -7,6 +7,7 @@ import {
   EffectType,
   freeze as freezeEffect,
 } from '../data/cardEffects';
+import { CardId } from '../data/cards';
 import { getDeckForLevel } from '../data/deck';
 import { WizardDuelState } from '../game/game';
 import { shuffle } from '../game/gameUtils';
@@ -174,7 +175,7 @@ const replaceHand: EffectHandler = ({ G, target }) => {
   let skippedCurrent = false; // Skip the current `Sandstorm` card (once)
 
   for (let i = 0; i < hand.length; i++) {
-    if (hand[i].id === '24') {
+    if (hand[i].id === CardId.Sandstorm) {
       if (!skippedCurrent) {
         skippedCurrent = true;
         continue;
