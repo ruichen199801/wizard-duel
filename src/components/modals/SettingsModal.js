@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Algorithm } from '../../ai/ai';
+import { Strategy } from '../../ai/ai';
 import { PRE_FINAL_LEVEL } from '../../core/level/level';
 import { click } from '../../utils/assets';
 import { exitToMenu, jumpToLevel, resetGame } from '../../utils/commonUtils';
@@ -16,8 +16,8 @@ const SettingsModal = ({
   setShowGameStats,
   showEffectStack,
   setShowEffectStack,
-  aiAlgorithm,
-  setAiAlgorithm,
+  aiStrategy,
+  setAiStrategy,
 }) => {
   const [headerClickCount, setHeaderClickCount] = useState(0);
   const showJumpLevelOption = headerClickCount >= 6;
@@ -40,8 +40,8 @@ const SettingsModal = ({
   };
 
   const handleAiDifficultyChange = () => {
-    setAiAlgorithm((prevState) =>
-      prevState === Algorithm.filter ? Algorithm.optimal : Algorithm.filter
+    setAiStrategy((prevState) =>
+      prevState === Strategy.filter ? Strategy.optimal : Strategy.filter
     );
   };
 
@@ -83,7 +83,7 @@ const SettingsModal = ({
                     className='btn btn-dark mb-1'
                     onClick={handleAiDifficultyChange}
                   >
-                    {aiAlgorithm === Algorithm.filter
+                    {aiStrategy === Strategy.filter
                       ? 'AI Difficulty: Normal'
                       : 'AI Difficulty: Hard'}
                   </button>

@@ -1,32 +1,30 @@
+import { Ctx } from 'boardgame.io';
 import { EffectGroupName } from '../../core/data/cardEffects';
-import { CardKeyword } from '../../core/data/cards';
+import { Card, CardKeyword } from '../../core/data/cards';
 import { getTarget, hasEffect, isUnique } from '../../core/effect/effectUtils';
-import { removeBuffCards, removeDebuffCards, uselessCards } from './algoUtils';
+import { WizardDuelState } from '../../core/game/game';
 import { random } from './random';
+import {
+  REMOVE_BUFF_CARDS,
+  REMOVE_DEBUFF_CARDS,
+  USELESS_CARDS,
+} from './strategyUtils';
 
-/**
- * Filters unwanted card play from AI's hand based on a chain of rules.
- * The rules are ranked by priority, more prioritized rules get evaluated first.
- * This function should be invoked before resolveAction().
- *
- * @returns A list of filtered cards.
- */
-export const filterActions = (cards, G, ctx) => {
-  let cardsBefore = cards;
-  for (const { rule } of filters) {
-    const [result, cardsAfter] = applyFilter(cardsBefore, rule, G, ctx);
-    if (result) {
-      // console.log(`Exit from filter rule: ${reason}`);
-      return [result];
-    }
-    cardsBefore = cardsAfter;
-  }
-  return cardsBefore;
-};
+type FilterRule = (card: Card, G: WizardDuelState, ctx: Ctx) => boolean;
 
-const filters = [
+interface Filter {
+  readonly rule: FilterRule;
+  readonly reason: string;
+}
+
+interface FilterResult {
+  readonly result: Card | null;
+  readonly cardsAfter: Card[];
+}
+
+const filters: Filter[] = [
   {
-    rule: (card, G, ctx) => !uselessCards.includes(card.id),
+    rule: (card, G, ctx) => !USELESS_CARDS.includes(card.id),
     reason: 'Filter useless cards',
   },
   {
@@ -36,13 +34,13 @@ const filters = [
   },
   {
     rule: (card, G, ctx) =>
-      !removeDebuffCards.includes(card.id) ||
+      !REMOVE_DEBUFF_CARDS.includes(card.id) ||
       G.players[1].effects.some((e) => e.group === EffectGroupName.debuff),
     reason: 'Filter cards to remove debuff when AI has no debuff',
   },
   {
     rule: (card, G, ctx) =>
-      !removeBuffCards.includes(card.id) ||
+      !REMOVE_BUFF_CARDS.includes(card.id) ||
       G.players[0].effects.some((e) => e.group === EffectGroupName.buff),
     reason: 'Filter cards to remove buff when player has no buff',
   },
@@ -64,13 +62,18 @@ const filters = [
   },
 ];
 
-const applyFilter = (cardsBefore, ruleFn, G, ctx) => {
+const applyFilter = (
+  cardsBefore: Card[],
+  ruleFn: FilterRule,
+  G: WizardDuelState,
+  ctx: Ctx
+): FilterResult => {
   const cardsAfter = cardsBefore.filter((card) => ruleFn(card, G, ctx));
   return onFilterEnd(cardsBefore, cardsAfter);
 };
 
-const onFilterEnd = (cardsBefore, cardsAfter) => {
-  let result; // Result after current filter
+const onFilterEnd = (cardsBefore: Card[], cardsAfter: Card[]): FilterResult => {
+  let result: Card | null; // Result after current filter
 
   if (cardsAfter.length === 1) {
     // Return the only action left and stop filtering
@@ -78,12 +81,36 @@ const onFilterEnd = (cardsBefore, cardsAfter) => {
   } else if (cardsAfter.length === 0) {
     // Fallback to Sandstorm || random(original cards) when no cards left
     result = cardsBefore.some((card) => card.id === '24')
-      ? cardsBefore.find((card) => card.id === '24')
+      ? cardsBefore.find((card) => card.id === '24') ?? null
       : random(cardsBefore);
   } else {
     // Continue filtering
     result = null;
   }
 
-  return [result, cardsAfter];
+  return { result, cardsAfter };
+};
+
+/**
+ * Filters unwanted card play from AI's hand based on a chain of rules.
+ * The rules are ranked by priority, more prioritized rules get evaluated first.
+ * This function should be invoked before resolveAction().
+ *
+ * @returns A list of filtered cards.
+ */
+export const filterActions = (
+  cards: Card[],
+  G: WizardDuelState,
+  ctx: Ctx
+): Card[] => {
+  let cardsBefore = cards;
+  for (const { rule } of filters) {
+    const { result, cardsAfter } = applyFilter(cardsBefore, rule, G, ctx);
+    if (result) {
+      // console.log(`Exit from filter rule: ${reason}`);
+      return [result];
+    }
+    cardsBefore = cardsAfter;
+  }
+  return cardsBefore;
 };

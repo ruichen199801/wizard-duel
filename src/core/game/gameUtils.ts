@@ -256,7 +256,7 @@ export const executeEndOfTurnEffects = (G: WizardDuelState, ctx: Ctx) => {
   if (hasEffect(G, ctx.currentPlayer, EffectType.aura)) {
     const auraEffects = getEffects(G, ctx.currentPlayer, EffectType.aura);
     auraEffects.forEach((aura: Effect) => {
-      applyEffect(G, ctx, aura.effect as Effect);
+      applyEffect(G, ctx, aura.effect!);
     });
   }
 };

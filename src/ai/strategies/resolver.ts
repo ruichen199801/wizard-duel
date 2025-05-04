@@ -1,7 +1,12 @@
 import { EffectGroupName, EffectType } from '../../core/data/cardEffects';
-import { CardKeyword } from '../../core/data/cards';
-import { powerfulCards, removeBuffCards, removeDebuffCards } from './algoUtils';
+import { Card, CardKeyword } from '../../core/data/cards';
+import { WizardDuelState } from '../../core/game/game';
 import { random } from './random';
+import {
+  POWERFUL_CARDS,
+  REMOVE_BUFF_CARDS,
+  REMOVE_DEBUFF_CARDS,
+} from './strategyUtils';
 
 /**
  * Resolves the card to play from a list of filtered actions.
@@ -10,7 +15,7 @@ import { random } from './random';
  *
  * @returns The resolved card object.
  */
-export const resolveAction = (actions, G) => {
+export const resolveAction = (actions: Card[], G: WizardDuelState): Card => {
   // When AI is frozen, resolve to random(cards)
   if (G.players[1].effects.some((e) => e.type === EffectType.freeze)) {
     // console.log('Resolve to random card when frozen');
@@ -23,27 +28,27 @@ export const resolveAction = (actions, G) => {
     G.players[0].hp - G.players[1].hp >= 20
   ) {
     // console.log('Resolve to Mutate');
-    return actions.find((card) => card.id === '30');
+    return actions.find((card) => card.id === '30')!;
   }
 
   // When AI has multiple debuffs, resolve to random(removeDebuffCards) if any
   if (
-    actions.some((card) => removeDebuffCards.includes(card.id)) &&
+    actions.some((card) => REMOVE_DEBUFF_CARDS.includes(card.id)) &&
     G.players[1].effects.filter((e) => e.group === EffectGroupName.debuff)
       .length >= 2
   ) {
     // console.log('Resolve to removing debuff');
-    return actions.find((card) => removeDebuffCards.includes(card.id));
+    return actions.find((card) => REMOVE_DEBUFF_CARDS.includes(card.id))!;
   }
 
   // When player has multiple buffs, resolve to random(removeBuffCards) if any
   if (
-    actions.some((card) => removeBuffCards.includes(card.id)) &&
+    actions.some((card) => REMOVE_BUFF_CARDS.includes(card.id)) &&
     G.players[0].effects.filter((e) => e.group === EffectGroupName.buff)
       .length >= 2
   ) {
     // console.log('Resolve to removing buff');
-    return actions.find((card) => removeBuffCards.includes(card.id));
+    return actions.find((card) => REMOVE_BUFF_CARDS.includes(card.id))!;
   }
 
   // When AI is low on HP and healing is not invalidated, resolve to random(CardKeyword.sustain) if any
@@ -53,7 +58,7 @@ export const resolveAction = (actions, G) => {
     G.players[1].hp <= Math.ceil(G.players[1].maxHp * 0.3)
   ) {
     // console.log('Resolve to healing cards');
-    return actions.find((card) => card.keywords.includes(CardKeyword.sustain));
+    return actions.find((card) => card.keywords.includes(CardKeyword.sustain))!;
   }
 
   // When AI has next damage x2 or high atk or player has low def or player is low on HP,
@@ -66,13 +71,13 @@ export const resolveAction = (actions, G) => {
       G.players[0].hp <= Math.ceil(G.players[0].maxHp * 0.3))
   ) {
     // console.log('Resolve to damage cards');
-    return actions.find((card) => card.keywords.includes(CardKeyword.damage));
+    return actions.find((card) => card.keywords.includes(CardKeyword.damage))!;
   }
 
   // Resolve to cards with powerful effects if any
-  if (actions.some((card) => powerfulCards.includes(card.id))) {
+  if (actions.some((card) => POWERFUL_CARDS.includes(card.id))) {
     // console.log('Resolve to powerful cards');
-    return actions.find((card) => powerfulCards.includes(card.id));
+    return actions.find((card) => POWERFUL_CARDS.includes(card.id))!;
   }
 
   // Resolve to random(original actions)

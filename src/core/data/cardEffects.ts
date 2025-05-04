@@ -39,7 +39,7 @@ export enum EffectGroupName {
 
 export const effectsByGroup: Record<EffectGroupName, EffectType[]> = {
   // Positive effects applied to the player.
-  buff: [
+  [EffectGroupName.buff]: [
     EffectType.buffAtk,
     EffectType.buffDef,
     EffectType.doubleDmg,
@@ -50,7 +50,7 @@ export const effectsByGroup: Record<EffectGroupName, EffectType[]> = {
   ],
 
   // Negative effects applied to the opponent.
-  debuff: [
+  [EffectGroupName.debuff]: [
     EffectType.debuffAtk,
     EffectType.debuffDef,
     EffectType.freeze,
@@ -58,7 +58,7 @@ export const effectsByGroup: Record<EffectGroupName, EffectType[]> = {
   ],
 
   // Only one effect of the same type can exist at a time. Can be either buff or debuff.
-  unique: [
+  [EffectGroupName.unique]: [
     EffectType.doubleDmg,
     EffectType.preventDmg,
     EffectType.resurrect,

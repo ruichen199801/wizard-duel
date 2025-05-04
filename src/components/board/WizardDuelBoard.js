@@ -7,7 +7,7 @@ import useLog from '../../hooks/useLog';
 import useMusicPlayer from '../../hooks/useMusicPlayer';
 import usePersistentState from '../../hooks/usePersistentState';
 
-import { AI, Algorithm } from '../../ai/ai';
+import { AI, Strategy } from '../../ai/ai';
 import { DrawMode } from '../../core/level/level';
 import {
   click,
@@ -61,9 +61,9 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
   const [showSelectCardModal, setShowSelectCardModal] = useState(false);
   const [selectableCardsToDraw, setSelectableCardsToDraw] = useState([]);
 
-  const [aiAlgorithm, setAiAlgorithm] = usePersistentState(
-    'aiAlgorithm',
-    Algorithm.filter
+  const [aiStrategy, setAiStrategy] = usePersistentState(
+    'aiStrategy',
+    Strategy.filter
   );
   const [showGameStats, setShowGameStats] = usePersistentState(
     'showGameStats',
@@ -149,7 +149,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
         await sleep(pauseInterval);
       }
 
-      const aiSelectedIndex = AI(aiAlgorithm)(G, ctx);
+      const aiSelectedIndex = AI(aiStrategy)(G, ctx);
       const aiSelectedCard = G.players[1].hand[aiSelectedIndex];
       setSelectedCardToPlay(aiSelectedCard);
 
@@ -351,8 +351,8 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
         setShowGameStats={setShowGameStats}
         showEffectStack={showEffectStack}
         setShowEffectStack={setShowEffectStack}
-        aiAlgorithm={aiAlgorithm}
-        setAiAlgorithm={setAiAlgorithm}
+        aiStrategy={aiStrategy}
+        setAiStrategy={setAiStrategy}
       />
       <HelpModal
         showHelpModal={showHelpModal}

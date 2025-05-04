@@ -25,16 +25,14 @@ import {
   undoEffect,
 } from './effectUtils';
 
-export interface EffectHandlerParams {
+interface EffectHandlerParams {
   readonly G: WizardDuelState;
   readonly ctx: Ctx;
   readonly target: PlayerID;
   readonly effect: Effect;
 }
 
-export interface EffectHandler {
-  (params: EffectHandlerParams): void | number;
-}
+type EffectHandler = (params: EffectHandlerParams) => void | number;
 
 // --- Effect Handlers ---
 
@@ -46,7 +44,7 @@ const damage: EffectHandler = ({ G, ctx, target, effect }) => {
   if (hasEffect(G, target, EffectType.counterAttack)) {
     const e = getEffects(G, target, EffectType.counterAttack);
     if (e && e.length === 1) {
-      const ctrAtkValue = e[0].value as number;
+      const ctrAtkValue = e[0].value!;
       G.players[player].hp = Math.max(1, G.players[player].hp - ctrAtkValue);
     }
   }
@@ -80,8 +78,11 @@ const damage: EffectHandler = ({ G, ctx, target, effect }) => {
     G.players[target].hp <= value &&
     hasEffect(G, target, EffectType.resurrect)
   ) {
-    G.players[target].hp = getEffects(G, target, EffectType.resurrect)[0]
-      .value as number;
+    G.players[target].hp = getEffects(
+      G,
+      target,
+      EffectType.resurrect
+    )[0].value!;
     removeEffects(G, target, EffectType.resurrect);
     return value;
   }
@@ -226,7 +227,7 @@ const stealBuff: EffectHandler = ({ G, ctx, target }) => {
     (e) => e.group === EffectGroupName.unique && e.type === chosenBuff.type
   );
   if (!uniqueEffectExists) {
-    effectHandlers[chosenBuff.type as EffectType]({
+    effectHandlers[chosenBuff.type]({
       G,
       ctx,
       target: player,
