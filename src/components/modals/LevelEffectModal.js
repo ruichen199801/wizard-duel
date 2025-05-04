@@ -58,13 +58,13 @@ const LevelEffectModal = ({
 
               <div className='w-80 mx-auto mt-2'>
                 <p>
-                  {instructions.intro}
-                  <b>{instructions.levelRule}</b>
-                  {instructions.outro}
+                  {instructions?.intro}
+                  <b>{instructions?.rule}</b>
+                  {instructions?.outro}
                 </p>
               </div>
 
-              {level === FINAL_LEVEL && (
+              {level === FINAL_LEVEL && finalLevelRule?.rule && (
                 <div className='w-80 mx-auto'>
                   <p>
                     {finalLevelRule.intro}
@@ -73,7 +73,7 @@ const LevelEffectModal = ({
                 </div>
               )}
 
-              {instructions.tips !== '' && (
+              {instructions?.tips && (
                 <div className='w-80 mx-auto'>
                   <p className='fst-italic text-muted'>{instructions.tips}</p>
                 </div>

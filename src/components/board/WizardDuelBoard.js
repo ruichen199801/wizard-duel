@@ -17,7 +17,7 @@ import {
   victory,
 } from '../../utils/assets';
 import { sleep } from '../../utils/commonUtils';
-import { VisibleTurnPhase, pauseInterval } from '../../utils/constants';
+import { PAUSE_INTERVAL, VisibleTurnPhase } from '../../utils/constants';
 import {
   getSelectableCardIds,
   resolveCardAudio,
@@ -97,7 +97,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
     }
 
     if (ctx.turn > 1) {
-      await sleep(pauseInterval); // Preview card duration
+      await sleep(PAUSE_INTERVAL); // Preview card duration
 
       // Turn 2 does not have draw phase, hence displaying updated turn number immediately
       if (ctx.turn === 2) {
@@ -106,7 +106,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
 
       setSelectedCardToPlay(null);
       setPlayerSelectedIndexToPlay(null);
-      await sleep(pauseInterval); // Interval between preview and draw
+      await sleep(PAUSE_INTERVAL); // Interval between preview and draw
     }
 
     // Delay displaying updated turn number until when a card is drawn
@@ -144,9 +144,9 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
     if (ctx.currentPlayer === '1' && G.players[1].hand.length === 5) {
       // Interval between draw and play
       if (ctx.turn === 2) {
-        await sleep(pauseInterval * 2); // x2 since AI does not draw in first turn
+        await sleep(PAUSE_INTERVAL * 2); // x2 since AI does not draw in first turn
       } else {
-        await sleep(pauseInterval);
+        await sleep(PAUSE_INTERVAL);
       }
 
       const aiSelectedIndex = AI(aiStrategy)(G, ctx);
@@ -170,7 +170,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
   const handleShowGameoverModal = async () => {
     if (ctx.gameover) {
       // Add a delay so that the modal does not pop up immediately after the end move
-      await sleep(pauseInterval);
+      await sleep(PAUSE_INTERVAL);
       if (ctx.gameover.winner !== null) {
         setWinner(ctx.gameover.winner);
       }

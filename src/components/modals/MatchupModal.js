@@ -2,9 +2,9 @@ import { FINAL_LEVEL } from '../../core/level/level';
 import useImageLoader from '../../hooks/useImageLoader';
 import { getAvatarForLevel } from '../../utils/assets';
 import {
-  avatarHeight,
-  avatarSmallScale,
-  avatarWidth,
+  AVATAR_HEIGHT,
+  AVATAR_SMALL_SCALE,
+  AVATAR_WIDTH,
 } from '../../utils/constants';
 import {
   getBattleInstructions,
@@ -18,13 +18,10 @@ const MatchupModal = ({
   setShowMatchupModal,
   playMusic,
   level,
-  scale = avatarSmallScale,
+  scale = AVATAR_SMALL_SCALE,
 }) => {
-  const finalLevelRule = getRuleByPower();
-
   const playerAvatar = getAvatarForLevel('0', level);
   const enemyAvatar = getAvatarForLevel('1', level);
-
   const { isLoading } = useImageLoader([playerAvatar, enemyAvatar], 300);
 
   if (!showMatchupModal) {
@@ -36,10 +33,11 @@ const MatchupModal = ({
     playMusic();
   };
 
-  const height = avatarHeight * scale;
-  const width = avatarWidth * scale;
+  const height = AVATAR_HEIGHT * scale;
+  const width = AVATAR_WIDTH * scale;
 
   const instructions = getBattleInstructions(level);
+  const finalLevelRule = getRuleByPower();
 
   return (
     <>
@@ -92,13 +90,13 @@ const MatchupModal = ({
 
                   <div className='w-80 mx-auto mt-2'>
                     <p>
-                      {instructions.intro}
-                      <b>{instructions.levelRule}</b>
-                      {instructions.outro}
+                      {instructions?.intro}
+                      <b>{instructions?.rule}</b>
+                      {instructions?.outro}
                     </p>
                   </div>
 
-                  {level === FINAL_LEVEL && (
+                  {level === FINAL_LEVEL && finalLevelRule?.rule && (
                     <div className='w-80 mx-auto'>
                       <p>
                         {finalLevelRule.intro}
@@ -107,7 +105,7 @@ const MatchupModal = ({
                     </div>
                   )}
 
-                  {instructions.tips !== '' && (
+                  {instructions?.tips && (
                     <div className='w-80 mx-auto'>
                       <p className='fst-italic text-muted'>
                         {instructions.tips}

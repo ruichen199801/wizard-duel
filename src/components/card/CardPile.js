@@ -1,9 +1,13 @@
-import { cardSmallScale, cardHeight, cardWidth } from '../../utils/constants';
 import { cardPile } from '../../utils/assets';
+import {
+  CARD_HEIGHT,
+  CARD_SMALL_SCALE,
+  CARD_WIDTH,
+} from '../../utils/constants';
 
-const CardPile = ({ scale = cardSmallScale }) => {
-  const height = cardHeight * scale;
-  const width = cardWidth * scale;
+const CardPile = ({ scale = CARD_SMALL_SCALE }) => {
+  const height = CARD_HEIGHT * scale;
+  const width = CARD_WIDTH * scale;
 
   return (
     <div className='d-flex justify-content-end align-items-center h-100'>

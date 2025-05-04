@@ -4,9 +4,9 @@ import useImageLoader from '../../hooks/useImageLoader';
 import { click, getAvatarForLevel } from '../../utils/assets';
 import { startLevel } from '../../utils/commonUtils';
 import {
-  avatarHeight,
-  avatarSmallScale,
-  avatarWidth,
+  AVATAR_HEIGHT,
+  AVATAR_SMALL_SCALE,
+  AVATAR_WIDTH,
 } from '../../utils/constants';
 import { powers } from '../../utils/scripts';
 
@@ -77,8 +77,8 @@ const SelectPowerModal = ({ showSelectPowerModal, playAudio }) => {
                         <img
                           src={getAvatarForLevel('1', power.level)}
                           alt={power.name}
-                          height={avatarHeight * avatarSmallScale}
-                          width={avatarWidth * avatarSmallScale}
+                          height={AVATAR_HEIGHT * AVATAR_SMALL_SCALE}
+                          width={AVATAR_WIDTH * AVATAR_SMALL_SCALE}
                         />
                         <p className='mt-2 fw-bold'>{power.name}</p>
                       </div>

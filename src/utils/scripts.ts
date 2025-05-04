@@ -1,6 +1,6 @@
 import { GameDifficulty, PowerClass } from '../core/power/power';
 
-const enemyNames = {
+const enemyNames: Record<string, string> = {
   1: 'Arden the Wise',
   2: 'G0B1N-X',
   3: 'Queen Shiro',
@@ -12,8 +12,8 @@ const enemyNames = {
 };
 const getEnemyName = (level = '1') => enemyNames[level];
 
-const battleStartCaptions = {
-  1: 'Level 1: The Citadel',
+const battleStartCaptions: Record<string, string> = {
+  1: 'Level 1: Golden Citadel',
   2: 'Level 2: Kilaura Volcano',
   3: 'Level 3: Mount Everfrost',
   4: 'Level 4: Desert Xibalda',
@@ -24,66 +24,65 @@ const battleStartCaptions = {
 };
 const getBattleStartCaption = (level = '1') => battleStartCaptions[level];
 
-const battleInstrutions = {
+interface BattleInstrutionProps {
+  readonly intro?: string;
+  readonly rule?: string;
+  readonly outro?: string;
+  readonly tips?: string;
+}
+
+const battleInstrutions: Record<string, BattleInstrutionProps> = {
   1: {
     intro: `You are a young wizard on a quest to challenge the greatest sorcerers. Your adventure begins at the Citadel to face Arden the Wise.`,
-    levelRule: ``,
-    outro: ``,
-    tips: ``,
   },
 
   2: {
     intro: `G0B1N-X is a goblin mage who LOVES playing with fire. `,
-    levelRule: `Both players get random copies of fire cards in their starting hand.`,
-    outro: ``,
-    tips: ``,
+    rule: `Both players get random copies of fire cards in their starting hand.`,
   },
 
   3: {
     intro: `Mount Everfrost is shrouded in an eternal winter caused by Queen Shiro's frost magic. `,
-    levelRule: `Damage cards may freeze the target (invalidate their next card).`,
-    outro: ``,
-    tips: ``,
+    rule: `Damage cards may freeze the target (invalidate their next card).`,
   },
 
   4: {
     intro: `In the heart of Xibalda, you meet Hassan Sarbah, master of ancient sand spells. Disrupted by the desert wind, `,
-    levelRule: `attacks will miss on certain turns.`,
-    outro: ``,
+    rule: `attacks will miss on certain turns.`,
     tips: `Red turn number means your attack will miss!`,
   },
 
   5: {
     intro: `Kai, a seasoned hunter, is one with the secrets of Whisperwood. `,
-    levelRule: `Every turn, you’ll pick between two cards `,
+    rule: `Every turn, you’ll pick between two cards `,
     outro: `to find your way through the forest.`,
-    tips: ``,
   },
 
   6: {
     intro: `Beneath the shimmering waves of Coral Bay, the tides shift in unpredictable ways. `,
-    levelRule: `Every 11 turns, all buffs and debuffs are washed away.`,
-    outro: ``,
+    rule: `Every 11 turns, all buffs and debuffs are washed away.`,
     tips: `Red turn number means effects will clear this turn!`,
   },
 
   7: {
     intro: `Zara Shadowbane rules the cursed Shadowland, draining the life of all who enter. `,
-    levelRule: `Non-damage cards cost 5 HP to play. HP can't drop below 1 in this way.`,
-    outro: ``,
-    tips: ``,
+    rule: `Non-damage cards cost 5 HP to play. HP can't drop below 1 in this way.`,
   },
 
   8: {
     intro: `Nedra plots to corrupt the world with dark magic. Defeat him in the final duel to save the world! `,
-    levelRule: ``,
-    outro: ``,
-    tips: ``,
   },
 };
 const getBattleInstructions = (level = '1') => battleInstrutions[level];
 
-const powers = [
+interface PowerProps {
+  readonly level: string;
+  readonly name: string;
+  readonly class: PowerClass;
+  readonly ruleText: Record<GameDifficulty, string>;
+}
+
+const powers: PowerProps[] = [
   {
     level: '2',
     name: 'Pyro',
@@ -157,17 +156,19 @@ const powers = [
   },
 ];
 
-const getRuleByPower = () => {
+const getRuleByPower = (): BattleInstrutionProps => {
   const power = powers.find(
     (power) => power.class === sessionStorage.getItem('power')
   );
-  const difficulty = sessionStorage.getItem('difficulty') || GameDifficulty.normal;
+  const difficulty =
+    (sessionStorage.getItem('difficulty') as GameDifficulty) ||
+    GameDifficulty.normal;
   return power
     ? {
         intro: `Embraced by the ${power.name} power, `,
         rule: `${power.ruleText[difficulty]}`,
       }
-    : ``;
+    : {};
 };
 
 export {

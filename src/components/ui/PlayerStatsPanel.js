@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { EffectType } from '../../core/data/cardEffects';
 import { getAvatarForLevel, icon } from '../../utils/assets';
 import {
-  avatarHeight,
-  avatarMediumScale,
-  avatarWidth,
+  AVATAR_HEIGHT,
+  AVATAR_MEDIUM_SCALE,
+  AVATAR_WIDTH,
 } from '../../utils/constants';
 import { getEnemyName } from '../../utils/scripts';
 
@@ -16,8 +16,8 @@ const PlayerStatsPanel = ({
 }) => {
   const [isStatsIconsHovered, setIsStatsIconsHovered] = useState(false);
 
-  const height = avatarHeight * avatarMediumScale;
-  const width = avatarWidth * avatarMediumScale;
+  const height = AVATAR_HEIGHT * AVATAR_MEDIUM_SCALE;
+  const width = AVATAR_WIDTH * AVATAR_MEDIUM_SCALE;
 
   const formatValueDisplay = (currentValue, maxValue) => {
     if (currentValue >= maxValue) {

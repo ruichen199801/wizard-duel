@@ -1,49 +1,51 @@
-export const VisibleTurnPhase = {
+// -- Client enums and constants --
+
+export enum VisibleTurnPhase {
   // The player has drawn a card but hasn't clicked to preview any yet.
   // The end-turn button shows "End Turn" and is disabled.
-  endTurnDisabled: 'end turn disabled',
+  endTurnDisabled = 'end turn disabled',
 
   // The player has previewed a card and can end their turn.
   // The end-turn button shows "End Turn" and is enabled.
-  endTurnEnabled: 'end turn enabled',
+  endTurnEnabled = 'end turn enabled',
 
   // The AI is taking its turn. Player cannot interact.
   // The end-turn button shows "Enemy Turn" and is disabled.
-  aiTurn: 'ai turn',
-};
+  aiTurn = 'ai turn',
+}
 
-export const CardType = {
+export enum CardType {
   // Required props: cardType, cardId, cardIndex, handleCardClick
-  front: 'front',
+  front = 'front',
 
   // Required props: cardType, playerId
-  back: 'back',
+  back = 'back',
 
   // Required props: cardType, cardId, scale
-  preview: 'preview',
+  preview = 'preview',
 
   // Required props: cardType, playerId
   // Optional props: scale
-  placeholder: 'placeholder',
-};
+  placeholder = 'placeholder',
+}
 
 // Animation target is separated from effect target, as animation is applied per card but a card can have multiple effects.
 // This enum can also be reused for level or game animations.
-export const AnimationTarget = {
-  enemy: 'enemy',
-  self: 'self',
-  both: 'both',
-  none: 'none',
-};
+export enum AnimationTarget {
+  enemy = 'enemy',
+  self = 'self',
+  both = 'both',
+  none = 'none',
+}
 
-export const pauseInterval = 1200;
+export const PAUSE_INTERVAL = 1200;
 
-export const cardHeight = 210;
-export const cardWidth = 150;
-export const cardSmallScale = 0.9;
-export const cardMediumScale = 1.25;
+export const CARD_HEIGHT = 210;
+export const CARD_WIDTH = 150;
+export const CARD_SMALL_SCALE = 0.9;
+export const CARD_MEDIUM_SCALE = 1.25;
 
-export const avatarHeight = 125;
-export const avatarWidth = 125;
-export const avatarSmallScale = 0.9;
-export const avatarMediumScale = 1.1;
+export const AVATAR_HEIGHT = 125;
+export const AVATAR_WIDTH = 125;
+export const AVATAR_SMALL_SCALE = 0.9;
+export const AVATAR_MEDIUM_SCALE = 1.1;

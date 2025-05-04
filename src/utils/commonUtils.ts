@@ -2,7 +2,7 @@
  * Pauses execution for a specified time.
  * Example: await sleep(2000);
  */
-export const sleep = (ms) => {
+export const sleep = (ms: number): Promise<void> => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
@@ -48,7 +48,7 @@ export const jumpToLevel = (level = '1') => {
   window.location.reload();
 };
 
-const setLevelTo = (level) => {
+const setLevelTo = (level: string) => {
   try {
     sessionStorage.setItem('level', level);
   } catch (e) {

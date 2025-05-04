@@ -1,5 +1,7 @@
+import { Ctx } from 'boardgame.io';
 import { EffectType } from '../core/data/cardEffects';
-import { CardKeyword } from '../core/data/cards';
+import { Card, CardId, CardKeyword } from '../core/data/cards';
+import { WizardDuelState } from '../core/game/game';
 import { PowerClass } from '../core/power/power';
 import { cardAudio, cleanse, defrost, miss, potion } from './assets';
 
@@ -11,7 +13,11 @@ import { cardAudio, cleanse, defrost, miss, potion } from './assets';
  *  4. If the played card has single self-healing effect and the current player has `poison` effect, play the `potion` audio.
  *  5. In all other cases, play the default audio associated with the card.
  */
-export const resolveCardAudio = (card, G, ctx) => {
+export const resolveCardAudio = (
+  card: Card,
+  G: WizardDuelState,
+  ctx: Ctx
+): string => {
   const hasFreezeEffect = G.players[ctx.currentPlayer].effects.some(
     (e) => e.type === EffectType.freeze
   );
@@ -55,7 +61,7 @@ export const resolveCardAudio = (card, G, ctx) => {
  *
  * This should only be invoked when `DrawMode.select` is enabled for current level.
  */
-export const getSelectableCardIds = (G) => {
+export const getSelectableCardIds = (G: WizardDuelState): CardId[] => {
   if (G.deck.length === 0) {
     throw new Error('Deck must have at least one card.');
   }

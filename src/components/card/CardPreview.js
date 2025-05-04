@@ -1,4 +1,4 @@
-import { CardType, cardMediumScale } from '../../utils/constants';
+import { CARD_MEDIUM_SCALE, CardType } from '../../utils/constants';
 import Card from './Card';
 
 const CardPreview = ({ selectedCard }) => {
@@ -8,13 +8,13 @@ const CardPreview = ({ selectedCard }) => {
         <Card
           cardType={CardType.placeholder}
           playerId='0'
-          scale={cardMediumScale}
+          scale={CARD_MEDIUM_SCALE}
         />
       ) : (
         <Card
           cardType={CardType.preview}
           cardId={selectedCard.id}
-          scale={cardMediumScale}
+          scale={CARD_MEDIUM_SCALE}
         />
       )}
     </div>
