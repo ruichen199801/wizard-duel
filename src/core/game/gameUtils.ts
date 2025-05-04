@@ -1,4 +1,4 @@
-import { AiEnumerate, Ctx } from 'boardgame.io';
+import { Ctx } from 'boardgame.io';
 
 import { Effect, EffectType } from '../data/cardEffects';
 import { Card, CardKeyword, Wish2, Wish3, Wish4, Wish5 } from '../data/cards';
@@ -114,17 +114,6 @@ export const onGameEnd = ({ G, ctx }: { G: WizardDuelState; ctx: Ctx }) => {
   } else {
     setPrevLevel();
   }
-};
-
-/**
- * Function used for AI simulation.
- */
-export const generateAIMoves = (G: WizardDuelState, ctx: Ctx): AiEnumerate => {
-  const moves: AiEnumerate = [];
-  G.players[ctx.currentPlayer].hand.forEach((card) => {
-    moves.push({ move: 'playCard', args: [card] });
-  });
-  return moves;
 };
 
 /**

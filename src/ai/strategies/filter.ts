@@ -81,7 +81,7 @@ const onFilterEnd = (cardsBefore: Card[], cardsAfter: Card[]): FilterResult => {
   } else if (cardsAfter.length === 0) {
     // Fallback to Sandstorm || random(original cards) when no cards left
     result = cardsBefore.some((card) => card.id === '24')
-      ? cardsBefore.find((card) => card.id === '24') ?? null
+      ? cardsBefore.find((card) => card.id === '24')!
       : random(cardsBefore);
   } else {
     // Continue filtering

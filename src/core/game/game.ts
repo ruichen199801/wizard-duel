@@ -13,7 +13,6 @@ import {
   executeEndOfTurnEffects,
   executeGlobalEndOfTurnEffects,
   executeStartOfTurnEffects,
-  generateAIMoves,
   getCardById,
   getCurrentLevel,
   isVictory,
@@ -132,9 +131,6 @@ export const WizardDuel: Game<WizardDuelState> = {
   },
 
   turn: {
-    // Call this manually via moves as a client workaround to have a delay interval between actions
-    // onBegin: drawCard,
-
     minMoves: 2,
     maxMoves: 2,
   },
@@ -142,12 +138,4 @@ export const WizardDuel: Game<WizardDuelState> = {
   endIf: isVictory,
 
   onEnd: onGameEnd,
-  // onEnd: ({ ctx }) => console.log(ctx.turn),
-
-  ai: {
-    // Remove drawCard from moves
-    // Uncomment onBegin: drawCard
-    // Change minMoves and maxMoves to 1
-    enumerate: generateAIMoves,
-  },
 };
