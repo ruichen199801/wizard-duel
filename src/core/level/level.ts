@@ -43,8 +43,8 @@ export const globalEffectsDefault: GlobalEffectProps = {
 };
 
 export interface LevelProps {
-  readonly playerStatsOverride?: Partial<PlayerStats>;
-  readonly enemyStatsOverride?: Partial<PlayerStats>;
+  readonly playerStatsOverride?: PlayerStats;
+  readonly enemyStatsOverride?: PlayerStats;
   readonly playerHandOverride?: Card[];
   readonly enemyHandOverride?: Card[];
   readonly playerEffectsOverride?: Effect[];

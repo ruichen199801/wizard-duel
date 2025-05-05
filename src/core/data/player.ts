@@ -2,16 +2,17 @@ import { PlayerID } from 'boardgame.io';
 import { Effect } from './cardEffects';
 import { Card } from './cards';
 
+// Optional for level override, but required as part of the Player interface
 export interface PlayerStats {
-  maxHp: number;
-  baseAtk: number;
-  baseDef: number;
-  hp: number;
-  atk: number;
-  def: number;
+  maxHp?: number;
+  baseAtk?: number;
+  baseDef?: number;
+  hp?: number;
+  atk?: number;
+  def?: number;
 }
 
-export interface Player extends PlayerStats {
+export interface Player extends Required<PlayerStats> {
   readonly name: string;
   readonly id: PlayerID; // '0': human, '1': ai
   hand: Card[];
