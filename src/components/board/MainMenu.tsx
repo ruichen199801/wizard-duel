@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { CardId } from '../../core/data/cards';
 import useAudioPlayer from '../../hooks/useAudioPlayer';
 import usePreloadAssets from '../../hooks/usePreloadAssets';
 import {
@@ -83,7 +84,9 @@ const MainMenu = () => {
       <CardGalleryModal
         showCardGallery={showCardGallery}
         setShowCardGallery={setShowCardGallery}
-        cardImages={cardFronts.filter((_, cardId) => cardId !== 25)} // Exclude Wish1 card
+        cardImages={cardFronts.filter(
+          (_, cardId) => cardId.toString() !== CardId.Wish1
+        )}
         playAudio={playAudio}
       />
     </div>
