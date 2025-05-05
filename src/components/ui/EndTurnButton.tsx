@@ -1,8 +1,8 @@
 import { VisibleTurnPhase } from '../../utils/constants';
 
 interface EndTurnButtonProps {
-  turnPhase: VisibleTurnPhase;
-  handleEndTurnButtonClick: () => void;
+  readonly turnPhase: VisibleTurnPhase;
+  readonly handleEndTurnButtonClick: () => void;
 }
 
 const EndTurnButton = ({

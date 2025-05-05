@@ -75,14 +75,14 @@ const battleInstrutions: Record<string, BattleInstrutionProps> = {
 };
 const getBattleInstructions = (level = '1') => battleInstrutions[level];
 
-interface PowerProps {
+interface PowerSelectionProps {
   readonly level: string;
   readonly name: string;
   readonly class: PowerClass;
   readonly ruleText: Record<GameDifficulty, string>;
 }
 
-const powers: PowerProps[] = [
+const powers: PowerSelectionProps[] = [
   {
     level: '2',
     name: 'Pyro',
