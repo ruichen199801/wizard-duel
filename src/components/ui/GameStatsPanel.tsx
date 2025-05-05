@@ -1,10 +1,21 @@
-import CardPile from '../card/CardPile';
+import { WizardDuelState } from '../../core/game/game';
 import { icon } from '../../utils/assets';
+import CardPile from '../card/CardPile';
 
-const GameStatsPanel = ({ G, visibleTurn, showGameStats }) => {
-  const shouldMiss = G.globalEffects.shouldMiss?.[visibleTurn - 1];
+interface GameStatsPanelProps {
+  readonly G: WizardDuelState;
+  readonly visibleTurn: number;
+  readonly showGameStats: boolean;
+}
+
+const GameStatsPanel = ({
+  G,
+  visibleTurn,
+  showGameStats,
+}: GameStatsPanelProps) => {
+  const shouldMiss = G.globalEffects.shouldMiss?.[visibleTurn - 1] ?? false;
   const shouldClearEffects =
-    G.globalEffects.shouldClearEffects?.[visibleTurn - 1];
+    G.globalEffects.shouldClearEffects?.[visibleTurn - 1] ?? false;
 
   // Highlight turn number for (mutually exclusive) level effects
   const getTurnHighlightStyle = () => {

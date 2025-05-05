@@ -1,4 +1,12 @@
-import { icon, click } from '../../utils/assets';
+import { click, icon } from '../../utils/assets';
+
+interface IconListProps {
+  readonly setShowLevelEffectModal: (show: boolean) => void;
+  readonly setShowLogModal: (show: boolean) => void;
+  readonly setShowSettingsModal: (show: boolean) => void;
+  readonly setShowHelpModal: (show: boolean) => void;
+  readonly playAudio: (audio: string) => void;
+}
 
 const IconList = ({
   setShowLevelEffectModal,
@@ -6,7 +14,7 @@ const IconList = ({
   setShowSettingsModal,
   setShowHelpModal,
   playAudio,
-}) => {
+}: IconListProps) => {
   const handleLevelEffectClick = () => {
     setShowLevelEffectModal(true);
     playAudio(click);
