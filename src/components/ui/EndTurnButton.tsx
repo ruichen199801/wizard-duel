@@ -1,7 +1,15 @@
 import { VisibleTurnPhase } from '../../utils/constants';
 
-const EndTurnButton = ({ turnPhase, handleEndTurnButtonClick }) => {
-  const buttonStyles = {
+interface EndTurnButtonProps {
+  turnPhase: VisibleTurnPhase;
+  handleEndTurnButtonClick: () => void;
+}
+
+const EndTurnButton = ({
+  turnPhase,
+  handleEndTurnButtonClick,
+}: EndTurnButtonProps) => {
+  const buttonStyles: Record<VisibleTurnPhase, string> = {
     [VisibleTurnPhase.endTurnDisabled]: 'btn-secondary',
     [VisibleTurnPhase.endTurnEnabled]: 'btn-dark',
     [VisibleTurnPhase.aiTurn]: 'btn-secondary',
