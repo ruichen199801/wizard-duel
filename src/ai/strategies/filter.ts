@@ -18,7 +18,7 @@ interface Filter {
 }
 
 interface FilterResult {
-  readonly result: Card | null;
+  readonly result?: Card;
   readonly cardsAfter: Card[];
 }
 
@@ -73,7 +73,7 @@ const applyFilter = (
 };
 
 const onFilterEnd = (cardsBefore: Card[], cardsAfter: Card[]): FilterResult => {
-  let result: Card | null; // Result after current filter
+  let result: Card | undefined; // Result after current filter
 
   if (cardsAfter.length === 1) {
     // Return the only action left and stop filtering
@@ -83,10 +83,8 @@ const onFilterEnd = (cardsBefore: Card[], cardsAfter: Card[]): FilterResult => {
     result = cardsBefore.some((card) => card.id === CardId.Sandstorm)
       ? cardsBefore.find((card) => card.id === CardId.Sandstorm)!
       : random(cardsBefore);
-  } else {
-    // Continue filtering
-    result = null;
   }
+  // Result undefined means continue filtering
 
   return { result, cardsAfter };
 };
@@ -105,7 +103,12 @@ export const filterActions = (
 ): Card[] => {
   let cardsBefore = cards;
   for (const { rule } of filters) {
-    const { result, cardsAfter } = applyFilter(cardsBefore, rule, G, ctx);
+    const { result, cardsAfter }: FilterResult = applyFilter(
+      cardsBefore,
+      rule,
+      G,
+      ctx
+    );
     if (result) {
       // console.log(`Exit from filter rule: ${reason}`);
       return [result];
