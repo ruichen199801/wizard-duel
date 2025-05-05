@@ -86,6 +86,10 @@ export enum CardId {
   Poison = '35',
 }
 
+export const getCardCount = () => {
+  return Object.keys(CardId).length;
+};
+
 // --- Cards ---
 
 export const Fireball1: Card = {

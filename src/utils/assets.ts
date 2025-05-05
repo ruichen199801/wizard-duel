@@ -1,5 +1,5 @@
 import { PlayerID } from 'boardgame.io';
-import { CardId } from '../core/data/cards';
+import { CardId, getCardCount } from '../core/data/cards';
 import { AnimationTarget } from './constants';
 
 const imgPrefix = 'images';
@@ -61,9 +61,8 @@ const cardPlaceholder = (playerId: PlayerID) =>
   `${cardPrefix}/placeholder/${playerId}.svg`;
 const cardPile = `${cardPrefix}/pile.svg`;
 
-const cardCount = 36; // Increment this when new cards are added
 const cardFronts = Array.from(
-  { length: cardCount },
+  { length: getCardCount() },
   (_, cardId) => `${cardPrefix}/front/${cardId}.svg`
 );
 
