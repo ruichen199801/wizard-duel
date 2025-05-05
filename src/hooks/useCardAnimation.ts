@@ -16,25 +16,17 @@ const useCardAnimation = (ctx: Ctx, G: WizardDuelState) => {
   const [showPlayerAnimation, setShowPlayerAnimation] = useState(false);
   const [showEnemyAnimation, setShowEnemyAnimation] = useState(false);
   const [cardAnimationData, setCardAnimationData] = useState<
-    Partial<AnimationProps>
-  >({});
+    AnimationProps | undefined
+  >();
 
   const handleShowCardAnimation = async (card: Card): Promise<void> => {
     const animationTarget = getAnimationTargetForCard(card.id);
     const animationData = getAnimationDataForCard(card.id);
 
-    if (
-      !animationTarget ||
-      !animationData ||
-      Object.keys(animationData).length === 0
-    ) {
-      return;
-    }
+    if (!animationTarget || !animationData) return;
 
     let shouldPlayAnimation = animateCardOnPlay(card, animationTarget);
-    if (!shouldPlayAnimation) {
-      return;
-    }
+    if (!shouldPlayAnimation) return;
 
     setCardAnimationData(animationData);
 
@@ -42,7 +34,7 @@ const useCardAnimation = (ctx: Ctx, G: WizardDuelState) => {
 
     setShowPlayerAnimation(false);
     setShowEnemyAnimation(false);
-    setCardAnimationData({});
+    setCardAnimationData(undefined);
   };
 
   /**

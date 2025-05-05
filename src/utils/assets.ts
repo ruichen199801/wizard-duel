@@ -79,6 +79,12 @@ const getNextCardsForLevel = (level = '1') => nextLevelCards[level];
 
 // ANIMATION FILES
 
+export interface AnimationProps {
+  readonly type: string;
+  readonly path: string;
+  readonly timeout: number;
+}
+
 enum Animation {
   fireball = 'fireball',
   freeze = 'freeze',
@@ -99,15 +105,6 @@ enum Animation {
   waterExplode = 'water-explode',
   bloodCrossStrike = 'blood-cross-strike',
   slimeSplash = 'slime-splash',
-}
-export interface AnimationProps {
-  readonly type: string;
-  readonly path: string;
-  readonly timeout: number;
-}
-interface CardAnimationProps {
-  readonly type?: string;
-  readonly target?: AnimationTarget;
 }
 
 const getAnimationPath = (type: string) => `${animationPrefix}/${type}.gif`;
@@ -144,7 +141,13 @@ const animationData: Record<Animation, AnimationProps> = {
   ),
   [Animation.slimeSplash]: createAnimationProps(Animation.slimeSplash, 500),
 };
-const cardAnimation: Record<CardId, CardAnimationProps> = {
+
+interface CardAnimationProps {
+  readonly type: string;
+  readonly target: AnimationTarget;
+}
+
+const cardAnimation: Record<CardId, CardAnimationProps | undefined> = {
   [CardId.Fireball1]: {
     type: Animation.fireball,
     target: AnimationTarget.enemy,
@@ -241,8 +244,8 @@ const cardAnimation: Record<CardId, CardAnimationProps> = {
     type: Animation.heal,
     target: AnimationTarget.self,
   },
-  [CardId.Sandstorm]: {},
-  [CardId.Wish1]: {},
+  [CardId.Sandstorm]: undefined,
+  [CardId.Wish1]: undefined,
   [CardId.Wish2]: {
     type: Animation.starBounce,
     target: AnimationTarget.enemy,
@@ -267,7 +270,7 @@ const cardAnimation: Record<CardId, CardAnimationProps> = {
     type: Animation.slimeStrike,
     target: AnimationTarget.enemy,
   },
-  [CardId.Vision]: {},
+  [CardId.Vision]: undefined,
   [CardId.Tide]: {
     type: Animation.waterExplode,
     target: AnimationTarget.enemy,
@@ -282,12 +285,12 @@ const cardAnimation: Record<CardId, CardAnimationProps> = {
   },
 };
 
-const getAnimationDataForCard = (cardId: CardId): AnimationProps =>
-  animationData[cardAnimation[cardId].type as Animation];
+const getAnimationDataForCard = (cardId: CardId): AnimationProps | undefined =>
+  animationData[cardAnimation[cardId]?.type as Animation];
 
 // Same animation can be reused to different targets, hence separating it from animationData object
-const getAnimationTargetForCard = (cardId: CardId): AnimationTarget =>
-  cardAnimation[cardId].target as AnimationTarget;
+const getAnimationTargetForCard = (cardId: CardId): AnimationTarget | undefined =>
+  cardAnimation[cardId]?.target as AnimationTarget;
 
 // AUDIO FILES
 
