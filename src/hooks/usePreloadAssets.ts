@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 
 const usePreloadAssets = (
-  imageArray,
-  animationArray,
-  audioArray,
-  musicArray
+  imageArray: string[],
+  animationArray: string[],
+  audioArray: string[],
+  musicArray: string[]
 ) => {
   useEffect(() => {
     imageArray.forEach((imageSrc) => {

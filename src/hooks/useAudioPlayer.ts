@@ -1,16 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const useAudioPlayer = () => {
-  const [audio, setAudio] = useState(null);
+  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
   const [isAudioMuted, setIsAudioMuted] = useState(() => {
-    return JSON.parse(sessionStorage.getItem('isAudioMuted')) || false;
+    const stored = sessionStorage.getItem('isAudioMuted');
+    return (stored ? JSON.parse(stored) : false) as boolean;
   });
 
   useEffect(() => {
     sessionStorage.setItem('isAudioMuted', JSON.stringify(isAudioMuted));
   }, [isAudioMuted]);
 
-  const playAudio = (src) => {
+  const playAudio = (src: string) => {
     let audioInstance = audio;
     if (!audioInstance) {
       audioInstance = new Audio(src);

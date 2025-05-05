@@ -1,20 +1,25 @@
+import { Ctx } from 'boardgame.io';
 import { useState } from 'react';
 import { EffectType } from '../core/data/cardEffects';
-import { CardKeyword } from '../core/data/cards';
+import { Card, CardKeyword } from '../core/data/cards';
+import { WizardDuelState } from '../core/game/game';
 import { PowerClass } from '../core/power/power';
 import {
+  AnimationProps,
   getAnimationDataForCard,
   getAnimationTargetForCard,
 } from '../utils/assets';
 import { sleep } from '../utils/commonUtils';
 import { AnimationTarget } from '../utils/constants';
 
-const useCardAnimation = (ctx, G) => {
+const useCardAnimation = (ctx: Ctx, G: WizardDuelState) => {
   const [showPlayerAnimation, setShowPlayerAnimation] = useState(false);
   const [showEnemyAnimation, setShowEnemyAnimation] = useState(false);
-  const [cardAnimationData, setCardAnimationData] = useState({});
+  const [cardAnimationData, setCardAnimationData] = useState<
+    Partial<AnimationProps>
+  >({});
 
-  const handleShowCardAnimation = async (card) => {
+  const handleShowCardAnimation = async (card: Card): Promise<void> => {
     const animationTarget = getAnimationTargetForCard(card.id);
     const animationData = getAnimationDataForCard(card.id);
 
@@ -52,7 +57,10 @@ const useCardAnimation = (ctx, G) => {
    *
    * Otherwise, play animation based on animationTarget value.
    */
-  const animateCardOnPlay = (card, animationTarget) => {
+  const animateCardOnPlay = (
+    card: Card,
+    animationTarget: AnimationTarget
+  ): boolean => {
     const hasFreezeEffect = G.players[ctx.currentPlayer].effects.some(
       (e) => e.type === EffectType.freeze
     );

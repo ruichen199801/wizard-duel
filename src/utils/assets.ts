@@ -100,7 +100,7 @@ enum Animation {
   bloodCrossStrike = 'blood-cross-strike',
   slimeSplash = 'slime-splash',
 }
-interface AnimationProps {
+export interface AnimationProps {
   readonly type: string;
   readonly path: string;
   readonly timeout: number;
