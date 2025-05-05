@@ -317,7 +317,7 @@ const applyDamageLevelEffects = (
 ): number => {
   switch (G.level) {
     case '3':
-      if (getChanceEffect(levelRules.freezeRate)) {
+      if (getChanceEffect(levelRules.freezeRate as number)) {
         G.players[target].effects.push(freezeEffect);
       }
       return damage;

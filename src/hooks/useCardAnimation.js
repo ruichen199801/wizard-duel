@@ -18,7 +18,11 @@ const useCardAnimation = (ctx, G) => {
     const animationTarget = getAnimationTargetForCard(card.id);
     const animationData = getAnimationDataForCard(card.id);
 
-    if (animationTarget == null || animationData == null) {
+    if (
+      !animationTarget ||
+      !animationData ||
+      Object.keys(animationData).length === 0
+    ) {
       return;
     }
 

@@ -14,7 +14,7 @@ export enum GameDifficulty {
 }
 
 // GameDifficulty agnostic contants
-const powerConfigs: Record<string, any> = {
+const powerConfigs: Record<string, number[] | number> = {
   pyroHandDistribution: [0.4, 0.4, 0.15, 0.04, 0.01],
   cryoFreezeRate: 0.4,
   psammoWishRate: 0.4,
@@ -23,7 +23,10 @@ const powerConfigs: Record<string, any> = {
 };
 
 // GameDifficulty dependent contants
-const powerConfigsByDifficulty: Record<GameDifficulty, Record<string, any>> = {
+const powerConfigsByDifficulty: Record<
+  GameDifficulty,
+  Record<string, number>
+> = {
   [GameDifficulty.normal]: {
     pyroMaxTurn: 40,
     psammoMissRate: 0.15,

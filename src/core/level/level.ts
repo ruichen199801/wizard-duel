@@ -1,10 +1,14 @@
+import { Effect } from '../data/cardEffects';
 import {
+  Card,
   Fireball1,
   Fireball2,
   Fireball3,
   Flame,
   Resurrect,
 } from '../data/cards';
+import { PlayerStats } from '../data/player';
+import { GlobalEffectProps } from '../game/game';
 import { PowerClass, getPowerConfigs } from '../power/power';
 import {
   generateAttackOutcomes,
@@ -25,7 +29,7 @@ export const maxTurn: number =
     ? getPowerConfigs().pyroMaxTurn // Pyro debuff
     : 50;
 
-export const levelRules: Record<string, any> = {
+export const levelRules: Record<string, number[] | number> = {
   fireHandDistribution: [0.2, 0.3, 0.4, 0.09, 0.01], // Level 2
   freezeRate: 0.4, // Level 3
   missRate: 0.5, // Level 4
@@ -33,23 +37,23 @@ export const levelRules: Record<string, any> = {
   loseHpAmount: 5, // Level 7
 };
 
-// TODO - Use default config to avoid boilerplate code and change any type
-export const levelConfigs: Record<string, any> = {
-  1: {
-    playerStatsOverride: {},
-    enemyStatsOverride: {},
+export const globalEffectsDefault: GlobalEffectProps = {
+  drawMode: DrawMode.draw,
+  showEnemyHand: false,
+};
 
-    playerHandOverride: [],
-    enemyHandOverride: [],
+export interface LevelProps {
+  readonly playerStatsOverride?: Partial<PlayerStats>;
+  readonly enemyStatsOverride?: Partial<PlayerStats>;
+  readonly playerHandOverride?: Card[];
+  readonly enemyHandOverride?: Card[];
+  readonly playerEffectsOverride?: Effect[];
+  readonly enemyEffectsOverride?: Effect[];
+  readonly globalEffectsOverride?: GlobalEffectProps;
+}
 
-    playerEffectsOverride: [],
-    enemyEffectsOverride: [],
-
-    globalEffects: {
-      drawMode: DrawMode.draw,
-      showEnemyHand: false,
-    },
-  },
+export const levelConfigs: Record<string, LevelProps> = {
+  1: {},
 
   2: {
     playerStatsOverride: {
@@ -63,22 +67,14 @@ export const levelConfigs: Record<string, any> = {
 
     playerHandOverride: randomPopulateHand(
       [Fireball1, Fireball2, Fireball3, Flame, Resurrect],
-      levelRules.fireHandDistribution,
+      levelRules.fireHandDistribution as number[],
       5
     ),
     enemyHandOverride: randomPopulateHand(
       [Fireball1, Fireball2, Fireball3, Flame, Resurrect],
-      levelRules.fireHandDistribution,
+      levelRules.fireHandDistribution as number[],
       5
     ),
-
-    playerEffectsOverride: [],
-    enemyEffectsOverride: [],
-
-    globalEffects: {
-      drawMode: DrawMode.draw,
-      showEnemyHand: false,
-    },
   },
 
   3: {
@@ -89,17 +85,6 @@ export const levelConfigs: Record<string, any> = {
     enemyStatsOverride: {
       maxHp: 55,
       hp: 55,
-    },
-
-    playerHandOverride: [],
-    enemyHandOverride: [],
-
-    playerEffectsOverride: [],
-    enemyEffectsOverride: [],
-
-    globalEffects: {
-      drawMode: DrawMode.draw,
-      showEnemyHand: false,
     },
   },
 
@@ -113,16 +98,11 @@ export const levelConfigs: Record<string, any> = {
       hp: 60,
     },
 
-    playerHandOverride: [],
-    enemyHandOverride: [],
-
-    playerEffectsOverride: [],
-    enemyEffectsOverride: [],
-
-    globalEffects: {
-      drawMode: DrawMode.draw,
-      showEnemyHand: false,
-      shouldMiss: generateAttackOutcomes(maxTurn, levelRules.missRate),
+    globalEffectsOverride: {
+      shouldMiss: generateAttackOutcomes(
+        maxTurn,
+        levelRules.missRate as number
+      ),
     },
   },
 
@@ -136,15 +116,8 @@ export const levelConfigs: Record<string, any> = {
       hp: 65,
     },
 
-    playerHandOverride: [],
-    enemyHandOverride: [],
-
-    playerEffectsOverride: [],
-    enemyEffectsOverride: [],
-
-    globalEffects: {
+    globalEffectsOverride: {
       drawMode: DrawMode.select,
-      showEnemyHand: false,
     },
   },
 
@@ -158,18 +131,10 @@ export const levelConfigs: Record<string, any> = {
       hp: 70,
     },
 
-    playerHandOverride: [],
-    enemyHandOverride: [],
-
-    playerEffectsOverride: [],
-    enemyEffectsOverride: [],
-
-    globalEffects: {
-      drawMode: DrawMode.draw,
-      showEnemyHand: false,
+    globalEffectsOverride: {
       shouldClearEffects: getClearEffectSchedule(
         maxTurn,
-        levelRules.clearEffectInterval
+        levelRules.clearEffectInterval as number
       ),
     },
   },
@@ -184,16 +149,8 @@ export const levelConfigs: Record<string, any> = {
       hp: 75,
     },
 
-    playerHandOverride: [],
-    enemyHandOverride: [],
-
-    playerEffectsOverride: [],
-    enemyEffectsOverride: [],
-
-    globalEffects: {
-      drawMode: DrawMode.draw,
-      showEnemyHand: false,
-      loseHpAmount: levelRules.loseHpAmount,
+    globalEffectsOverride: {
+      loseHpAmount: levelRules.loseHpAmount as number,
     },
   },
 
@@ -205,17 +162,6 @@ export const levelConfigs: Record<string, any> = {
     enemyStatsOverride: {
       maxHp: 80,
       hp: 80,
-    },
-
-    playerHandOverride: [],
-    enemyHandOverride: [],
-
-    playerEffectsOverride: [],
-    enemyEffectsOverride: [],
-
-    globalEffects: {
-      drawMode: DrawMode.draw,
-      showEnemyHand: false,
     },
   },
 };

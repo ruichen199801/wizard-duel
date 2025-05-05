@@ -10,10 +10,15 @@ import {
   Wish4,
   Wish5,
 } from '../data/cards';
-import { Player } from '../data/player';
+import { PlayerStats } from '../data/player';
 import { applyEffect } from '../effect/effect';
 import { getEffects, hasEffect, undoEffect } from '../effect/effectUtils';
-import { FINAL_LEVEL, levelConfigs, maxTurn } from '../level/level';
+import {
+  FINAL_LEVEL,
+  globalEffectsDefault,
+  levelConfigs,
+  maxTurn,
+} from '../level/level';
 import {
   applyEndOfTurnPowerEffects,
   applyPowerOverride,
@@ -187,33 +192,34 @@ export const applyLevelOverride = (G: WizardDuelState) => {
     playerEffectsOverride,
     enemyEffectsOverride,
 
-    globalEffects,
+    globalEffectsOverride,
   } = levelConfigs[G.level];
 
   for (const key in playerStatsOverride) {
     if (Object.prototype.hasOwnProperty.call(playerStatsOverride, key)) {
-      const k = key as keyof Player;
-      if (k !== 'id' && k !== 'name' && k in G.players[0]) {
-        G.players[0][k] = playerStatsOverride[k];
+      const k = key as keyof PlayerStats;
+      if (k in G.players[0]) {
+        G.players[0][k] = playerStatsOverride[k]!;
       }
     }
   }
   for (const key in enemyStatsOverride) {
     if (Object.prototype.hasOwnProperty.call(enemyStatsOverride, key)) {
-      const k = key as keyof Player;
-      if (k !== 'id' && k !== 'name' && k in G.players[1]) {
-        G.players[1][k] = enemyStatsOverride[k];
+      const k = key as keyof PlayerStats;
+      if (k in G.players[1]) {
+        G.players[1][k] = enemyStatsOverride[k]!;
       }
     }
   }
 
-  G.players[0].hand.push(...playerHandOverride);
-  G.players[1].hand.push(...enemyHandOverride);
+  if (playerHandOverride) G.players[0].hand.push(...playerHandOverride);
+  if (enemyHandOverride) G.players[1].hand.push(...enemyHandOverride);
 
-  G.players[0].effects.push(...playerEffectsOverride);
-  G.players[1].effects.push(...enemyEffectsOverride);
+  if (playerEffectsOverride)
+    G.players[0].effects.push(...playerEffectsOverride);
+  if (enemyEffectsOverride) G.players[1].effects.push(...enemyEffectsOverride);
 
-  G.globalEffects = { ...globalEffects };
+  G.globalEffects = { ...globalEffectsDefault, ...globalEffectsOverride };
 
   applyPowerOverride(G);
 };
