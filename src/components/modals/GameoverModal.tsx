@@ -1,6 +1,17 @@
+import { PlayerID } from 'boardgame.io';
 import { FINAL_LEVEL } from '../../core/level/level';
 import { click } from '../../utils/assetUtils';
 import { exitToMenu, resetGame, startLevel } from '../../utils/commonUtils';
+
+interface GameoverModalProps {
+  readonly showGameoverModal: boolean;
+  readonly setShowGameoverModal: (show: boolean) => void;
+  readonly setShowNextLevelModal: (show: boolean) => void;
+  readonly setShowSelectPowerModal: (show: boolean) => void;
+  readonly winner: PlayerID;
+  readonly playAudio: (audio: string) => void;
+  readonly level: string;
+}
 
 const GameoverModal = ({
   showGameoverModal,
@@ -10,12 +21,12 @@ const GameoverModal = ({
   winner,
   playAudio,
   level,
-}) => {
+}: GameoverModalProps) => {
   if (!showGameoverModal) {
     return null;
   }
 
-  const gameoverMessage = {
+  const gameoverMessage: Record<PlayerID, string> = {
     0: (() => {
       const currentLevelInt = parseInt(level);
       const finalLevelInt = parseInt(FINAL_LEVEL);
@@ -31,7 +42,7 @@ const GameoverModal = ({
     1: 'Defeated... better luck next time!',
   };
 
-  const gameoverTitle = {
+  const gameoverTitle: Record<PlayerID, string> = {
     0: 'Congratulations',
     1: 'Game Over',
   };
@@ -54,7 +65,7 @@ const GameoverModal = ({
         className='modal fade show d-block'
         data-bs-backdrop='static'
         data-bs-keyboard='false'
-        tabIndex='-1'
+        tabIndex={-1}
       >
         <div className='modal-dialog modal-dialog-centered'>
           <div className='modal-content bg-modal'>

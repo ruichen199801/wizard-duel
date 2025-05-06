@@ -1,12 +1,19 @@
 import useImageLoader from '../../hooks/useImageLoader';
 import { click } from '../../utils/assetUtils';
 
+interface CardGalleryModalProps {
+  readonly showCardGallery: boolean;
+  readonly setShowCardGallery: (show: boolean) => void;
+  readonly cardImages: string[];
+  readonly playAudio: (audio: string) => void;
+}
+
 const CardGalleryModal = ({
   showCardGallery,
   setShowCardGallery,
   cardImages,
   playAudio,
-}) => {
+}: CardGalleryModalProps) => {
   const { isLoading } = useImageLoader(cardImages, 1000);
 
   if (!showCardGallery) {
@@ -24,7 +31,7 @@ const CardGalleryModal = ({
         className='modal modal-lg fade show d-block'
         data-bs-backdrop='static'
         data-bs-keyboard='false'
-        tabIndex='-1'
+        tabIndex={-1}
       >
         <div className='modal-dialog modal-dialog-scrollable modal-dialog-centered'>
           <div className='modal-content bg-modal h-100'>

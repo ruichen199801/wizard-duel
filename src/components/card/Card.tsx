@@ -27,7 +27,7 @@ interface CardProps {
   readonly cardId?: CardId;
   readonly cardIndex?: number;
   readonly playerId?: PlayerID;
-  readonly handleCardClick?: (index: number) => void;
+  readonly handleCardClick?: (index: number) => Promise<void>;
   readonly scale?: number;
 }
 
@@ -54,7 +54,9 @@ const Card = ({
         height={height}
         width={width}
         onClick={() =>
-          handleCardClick && cardIndex && handleCardClick(cardIndex)
+          handleCardClick &&
+          cardIndex !== undefined &&
+          handleCardClick(cardIndex)
         }
       />
     ),

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-interface LogEntry {
+export interface LogEntry {
   readonly turn: number;
   readonly playerName: string;
   readonly cardName: string;

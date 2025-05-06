@@ -1,6 +1,16 @@
 import { click } from '../../utils/assetUtils';
 
-const HelpModal = ({ showHelpModal, setShowHelpModal, playAudio }) => {
+interface HelpModalProps {
+  readonly showHelpModal: boolean;
+  readonly setShowHelpModal: (show: boolean) => void;
+  readonly playAudio: (audio: string) => void;
+}
+
+const HelpModal = ({
+  showHelpModal,
+  setShowHelpModal,
+  playAudio,
+}: HelpModalProps) => {
   if (!showHelpModal) {
     return null;
   }
@@ -16,7 +26,7 @@ const HelpModal = ({ showHelpModal, setShowHelpModal, playAudio }) => {
         className='modal fade show d-block'
         data-bs-backdrop='static'
         data-bs-keyboard='false'
-        tabIndex='-1'
+        tabIndex={-1}
       >
         <div className='modal-dialog modal-dialog-scrollable modal-dialog-centered'>
           <div className='modal-content bg-modal h-50'>

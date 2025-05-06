@@ -1,6 +1,19 @@
+import { LogEntry } from '../../hooks/useLog';
 import { click } from '../../utils/assetUtils';
 
-const LogModal = ({ showLogModal, setShowLogModal, logEntries, playAudio }) => {
+interface LogModalProps {
+  readonly showLogModal: boolean;
+  readonly setShowLogModal: (show: boolean) => void;
+  readonly logEntries: LogEntry[];
+  readonly playAudio: (audio: string) => void;
+}
+
+const LogModal = ({
+  showLogModal,
+  setShowLogModal,
+  logEntries,
+  playAudio,
+}: LogModalProps) => {
   if (!showLogModal) {
     return null;
   }
@@ -16,7 +29,7 @@ const LogModal = ({ showLogModal, setShowLogModal, logEntries, playAudio }) => {
         className='modal fade show d-block'
         data-bs-backdrop='static'
         data-bs-keyboard='false'
-        tabIndex='-1'
+        tabIndex={-1}
       >
         <div className='modal-dialog modal-dialog-scrollable modal-dialog-centered'>
           <div className='modal-content bg-modal h-50'>
