@@ -1,5 +1,5 @@
 import { WizardDuelState } from '../../core/game/game';
-import { icon } from '../../utils/assets';
+import { icon } from '../../utils/assetUtils';
 import CardPile from '../card/CardPile';
 
 interface GameStatsPanelProps {

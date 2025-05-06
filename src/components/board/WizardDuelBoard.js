@@ -15,7 +15,7 @@ import {
   getLocationForLevel,
   getMusicForLevel,
   victory,
-} from '../../utils/assets';
+} from '../../utils/assetUtils';
 import { sleep } from '../../utils/commonUtils';
 import { PAUSE_INTERVAL, VisibleTurnPhase } from '../../utils/constants';
 import {

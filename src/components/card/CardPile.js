@@ -1,4 +1,4 @@
-import { cardPile } from '../../utils/assets';
+import { cardPile } from '../../utils/assetUtils';
 import {
   CARD_HEIGHT,
   CARD_SMALL_SCALE,

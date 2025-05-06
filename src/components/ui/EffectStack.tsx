@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Effect, EffectGroupName } from '../../core/data/cardEffects';
-import { icon } from '../../utils/assets';
+import { icon } from '../../utils/assetUtils';
 
 interface EffectStackProps {
   readonly opponentEffects: Effect[];

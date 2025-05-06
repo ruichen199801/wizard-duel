@@ -1,4 +1,4 @@
-import { getNextCardsForLevel } from '../../utils/assets';
+import { getNextCardsForLevel } from '../../utils/assetUtils';
 import { startLevel } from '../../utils/commonUtils';
 
 const NextLevelModal = ({ showNextLevelModal, level }) => {

@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { GameDifficulty } from '../../core/power/power';
 import useImageLoader from '../../hooks/useImageLoader';
-import { click, getAvatarForLevel } from '../../utils/assets';
+import { click, getAvatarForLevel } from '../../utils/assetUtils';
 import { startLevel } from '../../utils/commonUtils';
 import {
   AVATAR_HEIGHT,
   AVATAR_SMALL_SCALE,
   AVATAR_WIDTH,
 } from '../../utils/constants';
-import { powers } from '../../utils/scripts';
+import { powers } from '../../utils/scriptUtils';
 
 const SelectPowerModal = ({ showSelectPowerModal, playAudio }) => {
   const [selectedPowerClass, setSelectedPowerClass] = useState(null);

@@ -1,5 +1,5 @@
 import { FINAL_LEVEL } from '../../core/level/level';
-import { click } from '../../utils/assets';
+import { click } from '../../utils/assetUtils';
 import { exitToMenu, resetGame, startLevel } from '../../utils/commonUtils';
 
 const GameoverModal = ({

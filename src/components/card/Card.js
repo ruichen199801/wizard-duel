@@ -1,4 +1,4 @@
-import { cardBack, cardFront, cardPlaceholder } from '../../utils/assets';
+import { cardBack, cardFront, cardPlaceholder } from '../../utils/assetUtils';
 import {
   CARD_HEIGHT,
   CARD_SMALL_SCALE,

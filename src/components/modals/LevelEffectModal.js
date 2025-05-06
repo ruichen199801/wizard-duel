@@ -1,10 +1,10 @@
 import { FINAL_LEVEL } from '../../core/level/level';
-import { click, getLocationForLevel } from '../../utils/assets';
+import { click, getLocationForLevel } from '../../utils/assetUtils';
 import {
   getBattleInstructions,
   getBattleStartCaption,
   getRuleByPower,
-} from '../../utils/scripts';
+} from '../../utils/scriptUtils';
 
 const LevelEffectModal = ({
   showLevelEffectModal,

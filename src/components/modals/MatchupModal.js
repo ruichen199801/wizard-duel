@@ -1,6 +1,6 @@
 import { FINAL_LEVEL } from '../../core/level/level';
 import useImageLoader from '../../hooks/useImageLoader';
-import { getAvatarForLevel } from '../../utils/assets';
+import { getAvatarForLevel } from '../../utils/assetUtils';
 import {
   AVATAR_HEIGHT,
   AVATAR_SMALL_SCALE,
@@ -11,7 +11,7 @@ import {
   getBattleStartCaption,
   getEnemyName,
   getRuleByPower,
-} from '../../utils/scripts';
+} from '../../utils/scriptUtils';
 
 const MatchupModal = ({
   showMatchupModal,

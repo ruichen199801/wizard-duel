@@ -1,4 +1,4 @@
-import { click, icon } from '../../utils/assets';
+import { click, icon } from '../../utils/assetUtils';
 
 interface IconListProps {
   readonly setShowLevelEffectModal: (show: boolean) => void;

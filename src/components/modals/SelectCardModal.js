@@ -1,4 +1,4 @@
-import { cardFront } from '../../utils/assets';
+import { cardFront } from '../../utils/assetUtils';
 
 const SelectCardModal = ({
   cardIdList,

@@ -9,7 +9,7 @@ import {
   click,
   IMAGES,
   MUSIC,
-} from '../../utils/assets';
+} from '../../utils/assetUtils';
 import CardGalleryModal from '../modals/CardGalleryModal';
 import HelpModal from '../modals/HelpModal';
 

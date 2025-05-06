@@ -3,7 +3,7 @@ import { EffectType } from '../core/data/cardEffects';
 import { Card, CardId, CardKeyword } from '../core/data/cards';
 import { WizardDuelState } from '../core/game/game';
 import { PowerClass } from '../core/power/power';
-import { cardAudio, cleanse, defrost, miss, potion } from './assets';
+import { cardAudio, cleanse, defrost, miss, potion } from './assetUtils';
 
 /**
  * Returns the corresponding audio path when a card is played.

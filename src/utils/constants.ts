@@ -1,4 +1,5 @@
 // -- Client enums and constants --
+// TODO: Colocate constants with their respective components and remove this file.
 
 export enum VisibleTurnPhase {
   // The player has drawn a card but hasn't clicked to preview any yet.

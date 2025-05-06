@@ -8,7 +8,7 @@ import {
   AnimationProps,
   getAnimationDataForCard,
   getAnimationTargetForCard,
-} from '../utils/assets';
+} from '../utils/assetUtils';
 import { sleep } from '../utils/commonUtils';
 import { AnimationTarget } from '../utils/constants';
 
