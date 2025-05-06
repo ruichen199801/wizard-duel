@@ -197,7 +197,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
     handleShowGameoverModal();
   }, [ctx.gameover]);
 
-  const handleCardClick = async (index) => {
+  const handleCardClick = (index) => {
     if (turnPhase !== VisibleTurnPhase.aiTurn) {
       setSelectedCardToPlay(G.players[0].hand[index]);
       setPlayerSelectedIndexToPlay(index);

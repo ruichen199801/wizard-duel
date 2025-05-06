@@ -27,7 +27,7 @@ interface CardProps {
   readonly cardId?: CardId;
   readonly cardIndex?: number;
   readonly playerId?: PlayerID;
-  readonly handleCardClick?: (index: number) => Promise<void>;
+  readonly handleCardClick?: (index: number) => void;
   readonly scale?: number;
 }
 

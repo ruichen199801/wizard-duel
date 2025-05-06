@@ -4,7 +4,7 @@ import Card, { CardType } from './Card';
 interface PlayerHandProps {
   readonly player: Player;
   readonly showEnemyHand: boolean;
-  readonly handleCardClick?: (index: number) => Promise<void>;
+  readonly handleCardClick?: (index: number) => void;
 }
 
 const PlayerHand = ({
