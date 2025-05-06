@@ -29,8 +29,9 @@ export const maxTurn: number =
     ? getPowerConfigs().pyroMaxTurn // Pyro debuff
     : 50;
 
-export const levelRules: Record<string, number[] | number> = {
-  fireHandDistribution: [0.2, 0.3, 0.4, 0.09, 0.01], // Level 2
+const FIRE_HAND_DISTRIBUTION = [0.2, 0.3, 0.4, 0.09, 0.01]; // Level 2
+
+export const levelRules: Record<string, number> = {
   freezeRate: 0.4, // Level 3
   missRate: 0.5, // Level 4
   clearEffectInterval: 11, // Level 6
@@ -67,12 +68,12 @@ export const levelConfigs: Record<string, LevelProps> = {
 
     playerHandOverride: randomPopulateHand(
       [Fireball1, Fireball2, Fireball3, Flame, Resurrect],
-      levelRules.fireHandDistribution as number[],
+      FIRE_HAND_DISTRIBUTION,
       5
     ),
     enemyHandOverride: randomPopulateHand(
       [Fireball1, Fireball2, Fireball3, Flame, Resurrect],
-      levelRules.fireHandDistribution as number[],
+      FIRE_HAND_DISTRIBUTION,
       5
     ),
   },
@@ -99,10 +100,7 @@ export const levelConfigs: Record<string, LevelProps> = {
     },
 
     globalEffectsOverride: {
-      shouldMiss: generateAttackOutcomes(
-        maxTurn,
-        levelRules.missRate as number
-      ),
+      shouldMiss: generateAttackOutcomes(maxTurn, levelRules.missRate),
     },
   },
 
@@ -134,7 +132,7 @@ export const levelConfigs: Record<string, LevelProps> = {
     globalEffectsOverride: {
       shouldClearEffects: getClearEffectSchedule(
         maxTurn,
-        levelRules.clearEffectInterval as number
+        levelRules.clearEffectInterval
       ),
     },
   },
@@ -150,7 +148,7 @@ export const levelConfigs: Record<string, LevelProps> = {
     },
 
     globalEffectsOverride: {
-      loseHpAmount: levelRules.loseHpAmount as number,
+      loseHpAmount: levelRules.loseHpAmount,
     },
   },
 

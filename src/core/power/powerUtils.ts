@@ -21,9 +21,9 @@ import {
   generateAttackOutcomes,
   randomPopulateHand,
 } from '../level/levelUtils';
-import { PowerClass, getPowerConfigs } from './power';
+import { getPowerConfigs, PowerClass, PYRO_HAND_DISTRIBUTION } from './power';
 
-const powerConfig: Record<string, any> = getPowerConfigs();
+const powerConfig: Record<string, number> = getPowerConfigs();
 
 /**
  * Apply overrides to G based on the selected power class when the game initializes.
@@ -128,7 +128,7 @@ const applyRandomFireHand = (G: WizardDuelState, ctx: Ctx) => {
   if (ctx.currentPlayer === '1') return;
   const newHand = randomPopulateHand(
     [Fireball1, Fireball2, Fireball3, Flame, Resurrect],
-    powerConfig.pyroHandDistribution,
+    PYRO_HAND_DISTRIBUTION,
     4
   );
   G.players[0].hand = newHand;

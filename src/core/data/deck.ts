@@ -133,7 +133,6 @@ export const getDeckForLevel = (level = '1'): Card[] => {
     throw new Error(`Level ${level} deck has <10 cards.`); // Dev testing issue only
   }
 
-  // TODO - Make this type safe when power class is refactored to typescript
   if (
     sessionStorage.getItem('power') === PowerClass.cryo &&
     sessionStorage.getItem('difficulty') === GameDifficulty.normal

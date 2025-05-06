@@ -13,9 +13,10 @@ export enum GameDifficulty {
   hard = 'hard',
 }
 
+export const PYRO_HAND_DISTRIBUTION = [0.4, 0.4, 0.15, 0.04, 0.01];
+
 // GameDifficulty agnostic contants
-const powerConfigs: Record<string, number[] | number> = {
-  pyroHandDistribution: [0.4, 0.4, 0.15, 0.04, 0.01],
+const powerConfigs: Record<string, number> = {
   cryoFreezeRate: 0.4,
   psammoWishRate: 0.4,
   hydroBuffRate: 0.5,
@@ -43,7 +44,7 @@ const powerConfigsByDifficulty: Record<
   },
 };
 
-export const getPowerConfigs = (): Record<string, any> => {
+export const getPowerConfigs = (): Record<string, number> => {
   const difficulty =
     (sessionStorage.getItem('difficulty') as GameDifficulty) ||
     GameDifficulty.normal;
