@@ -13,13 +13,21 @@ import {
   AVATAR_WIDTH,
 } from '../ui/PlayerStatsPanel';
 
+interface MatchupModalProps {
+  readonly showMatchupModal: boolean;
+  readonly setShowMatchupModal: React.Dispatch<React.SetStateAction<boolean>>;
+  readonly playMusic: () => void;
+  readonly level: string;
+  readonly scale?: number;
+}
+
 const MatchupModal = ({
   showMatchupModal,
   setShowMatchupModal,
   playMusic,
   level,
   scale = AVATAR_SMALL_SCALE,
-}) => {
+}: MatchupModalProps) => {
   const playerAvatar = getAvatarForLevel('0', level);
   const enemyAvatar = getAvatarForLevel('1', level);
   const { isLoading } = useImageLoader([playerAvatar, enemyAvatar], 300);
@@ -44,7 +52,7 @@ const MatchupModal = ({
       <div
         className='modal fade show d-block'
         data-bs-keyboard='false'
-        tabIndex='-1'
+        tabIndex={-1}
         onClick={handleMatchupClose} // Close modal when clicking anywhere
       >
         <div className='modal-dialog modal-dialog-centered'>

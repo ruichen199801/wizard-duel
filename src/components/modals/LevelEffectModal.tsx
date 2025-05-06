@@ -6,12 +6,21 @@ import {
   getRuleByPower,
 } from '../../utils/scriptUtils';
 
+interface LevelEffectModalProps {
+  readonly showLevelEffectModal: boolean;
+  readonly setShowLevelEffectModal: React.Dispatch<
+    React.SetStateAction<boolean>
+  >;
+  readonly playAudio: (audio: string) => void;
+  readonly level: string;
+}
+
 const LevelEffectModal = ({
   showLevelEffectModal,
   setShowLevelEffectModal,
   playAudio,
   level,
-}) => {
+}: LevelEffectModalProps) => {
   if (!showLevelEffectModal) {
     return null;
   }
@@ -30,7 +39,7 @@ const LevelEffectModal = ({
         className='modal fade show d-block'
         data-bs-backdrop='static'
         data-bs-keyboard='false'
-        tabIndex='-1'
+        tabIndex={-1}
       >
         <div className='modal-dialog modal-dialog-scrollable modal-dialog-centered'>
           <div className='modal-content bg-modal'>
