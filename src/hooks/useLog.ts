@@ -10,13 +10,7 @@ export interface LogEntry {
 const useLog = () => {
   const [logEntries, setLogEntries] = useState<LogEntry[]>([]);
 
-  const addLogEntry = (
-    turn: number,
-    playerName: string,
-    cardName: string,
-    cardText: string
-  ) => {
-    const entry: LogEntry = { turn, playerName, cardName, cardText };
+  const addLogEntry = (entry: LogEntry) => {
     setLogEntries((prevEntries) => [...prevEntries, entry]);
   };
 

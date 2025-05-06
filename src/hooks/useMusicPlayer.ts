@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const useMusicPlayer = (src: string) => {
-  const [music, setMusic] = useState<HTMLAudioElement | null>(null);
+  const [music, setMusic] = useState<HTMLAudioElement | undefined>();
   const [isMusicMuted, setIsMusicMuted] = useState(() => {
     const stored = sessionStorage.getItem('isMusicMuted');
     return (stored ? JSON.parse(stored) : false) as boolean;

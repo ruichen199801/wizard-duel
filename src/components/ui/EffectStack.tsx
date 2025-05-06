@@ -23,6 +23,10 @@ const EffectStack = ({
     useState(false);
   const [isEnemyCompactFxHovered, setIsEnemyCompactFxHovered] = useState(false);
 
+  if (!showEffectStack) {
+    return null;
+  }
+
   // Sort by group first (buff then debuff), then name (group same non-unique effects together)
   const sortEffects = (effects: Effect[]): Effect[] => {
     return effects.sort((a, b) => {
@@ -106,28 +110,26 @@ const EffectStack = ({
     count === 1 ? text : `${text} + ${count - 1} More`;
 
   return (
-    showEffectStack && (
-      <div className='d-flex flex-column h-100 justify-content-between'>
-        <div
-          className='fxstack-mb'
-          onMouseEnter={() => setIsEnemyCompactFxHovered(true)}
-          onMouseLeave={() => setIsEnemyCompactFxHovered(false)}
-        >
-          {isCompactDisplay && !isEnemyCompactFxHovered
-            ? renderCompactFxStack([...opponentEffects])
-            : renderFxStack([...opponentEffects])}
-        </div>
-        <div
-          className='fxstack-mt'
-          onMouseEnter={() => setIsPlayerCompactFxHovered(true)}
-          onMouseLeave={() => setIsPlayerCompactFxHovered(false)}
-        >
-          {isCompactDisplay && !isPlayerCompactFxHovered
-            ? renderCompactFxStack([...playerEffects])
-            : renderFxStack([...playerEffects])}
-        </div>
+    <div className='d-flex flex-column h-100 justify-content-between'>
+      <div
+        className='fxstack-mb'
+        onMouseEnter={() => setIsEnemyCompactFxHovered(true)}
+        onMouseLeave={() => setIsEnemyCompactFxHovered(false)}
+      >
+        {isCompactDisplay && !isEnemyCompactFxHovered
+          ? renderCompactFxStack([...opponentEffects])
+          : renderFxStack([...opponentEffects])}
       </div>
-    )
+      <div
+        className='fxstack-mt'
+        onMouseEnter={() => setIsPlayerCompactFxHovered(true)}
+        onMouseLeave={() => setIsPlayerCompactFxHovered(false)}
+      >
+        {isCompactDisplay && !isPlayerCompactFxHovered
+          ? renderCompactFxStack([...playerEffects])
+          : renderFxStack([...playerEffects])}
+      </div>
+    </div>
   );
 };
 

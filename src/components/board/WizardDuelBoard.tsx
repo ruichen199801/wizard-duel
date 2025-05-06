@@ -1,3 +1,5 @@
+import { PlayerID } from 'boardgame.io';
+import { BoardProps } from 'boardgame.io/dist/types/packages/react';
 import { useEffect, useState } from 'react';
 
 import useAudioPlayer from '../../hooks/useAudioPlayer';
@@ -8,6 +10,8 @@ import useMusicPlayer from '../../hooks/useMusicPlayer';
 import usePersistentState from '../../hooks/usePersistentState';
 
 import { AI, Strategy } from '../../ai/ai';
+import { Card, CardId } from '../../core/data/cards';
+import { WizardDuelState } from '../../core/game/game';
 import { DrawMode } from '../../core/level/level';
 import {
   click,
@@ -41,15 +45,21 @@ import PlayerStatsPanel from '../ui/PlayerStatsPanel';
 
 export const PAUSE_INTERVAL = 1200;
 
-const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
+interface WizardDuelProps extends BoardProps<WizardDuelState> {}
+
+const WizardDuelBoard = ({ ctx, G, moves, events, reset }: WizardDuelProps) => {
   // Initialize Bootstrap tooltips
   useBsTooltip();
 
-  const [selectedCardToPlay, setSelectedCardToPlay] = useState(null);
-  const [playerSelectedIndexToPlay, setPlayerSelectedIndexToPlay] =
-    useState(null);
+  const [selectedCardToPlay, setSelectedCardToPlay] = useState<
+    Card | undefined
+  >();
+  const [playerSelectedIndexToPlay, setPlayerSelectedIndexToPlay] = useState<
+    number | undefined
+  >();
   const [turnPhase, setTurnPhase] = useState(VisibleTurnPhase.endTurnDisabled);
-  const [winner, setWinner] = useState(null);
+  const [winner, setWinner] = useState<PlayerID | undefined>();
+
   const [showGameoverModal, setShowGameoverModal] = useState(false);
   const [showNextLevelModal, setShowNextLevelModal] = useState(false);
   const [showSelectPowerModal, setShowSelectPowerModal] = useState(false);
@@ -60,7 +70,9 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
   const [showMatchupModal, setShowMatchupModal] = useState(true);
 
   const [showSelectCardModal, setShowSelectCardModal] = useState(false);
-  const [selectableCardsToDraw, setSelectableCardsToDraw] = useState([]);
+  const [selectableCardIdsToDraw, setSelectableCardIdsToDraw] = useState<
+    CardId[]
+  >([]);
 
   const [aiStrategy, setAiStrategy] = usePersistentState(
     'aiStrategy',
@@ -75,6 +87,8 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
     true
   );
 
+  const [visibleCurrentTurn, setVisibleCurrentTurn] = useState(0);
+
   const { logEntries, addLogEntry } = useLog();
   const { playAudio, toggleAudioMute, isAudioMuted } = useAudioPlayer();
   const { playMusic, pauseMusic, toggleMusic, isMusicMuted } = useMusicPlayer(
@@ -85,10 +99,9 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
     showPlayerAnimation,
     showEnemyAnimation,
     handleShowCardAnimation,
-  } = useCardAnimation(ctx, G);
-  const [visibleCurrentTurn, setVisibleCurrentTurn] = useState(0);
+  } = useCardAnimation(G, ctx);
 
-  const playCardAudio = (card) => {
+  const playCardAudio = (card: Card) => {
     playAudio(resolveCardAudio(card, G, ctx));
   };
 
@@ -105,8 +118,8 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
         setVisibleCurrentTurn((prevTurn) => prevTurn + 1);
       }
 
-      setSelectedCardToPlay(null);
-      setPlayerSelectedIndexToPlay(null);
+      setSelectedCardToPlay(undefined);
+      setPlayerSelectedIndexToPlay(undefined);
       await sleep(PAUSE_INTERVAL); // Interval between preview and draw
     }
 
@@ -120,7 +133,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
       ctx.currentPlayer === '0' &&
       G.globalEffects.drawMode === DrawMode.select
     ) {
-      setSelectableCardsToDraw(getSelectableCardIds(G));
+      setSelectableCardIdsToDraw(getSelectableCardIds(G));
       setShowSelectCardModal(true);
     } else {
       moves.drawCard();
@@ -131,9 +144,9 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
     }
   };
 
-  const handleSelectCard = (cardId) => {
+  const handleSelectCard = (cardId: CardId) => {
     setShowSelectCardModal(false);
-    setSelectableCardsToDraw([]);
+    setSelectableCardIdsToDraw([]);
     moves.drawCard(cardId);
   };
 
@@ -159,12 +172,12 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
 
       handleShowCardAnimation(aiSelectedCard);
 
-      addLogEntry(
-        ctx.turn,
-        G.players[1].name,
-        aiSelectedCard.name,
-        aiSelectedCard.text
-      );
+      addLogEntry({
+        turn: ctx.turn,
+        playerName: G.players[1].name,
+        cardName: aiSelectedCard.name,
+        cardText: aiSelectedCard.text,
+      });
     }
   };
 
@@ -172,17 +185,13 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
     if (ctx.gameover) {
       // Add a delay so that the modal does not pop up immediately after the end move
       await sleep(PAUSE_INTERVAL);
-      if (ctx.gameover.winner !== null) {
+      if (ctx.gameover.winner) {
         setWinner(ctx.gameover.winner);
       }
       setShowGameoverModal(true);
       pauseMusic();
       playAudio(ctx.gameover.winner === '0' ? victory : defeat);
     }
-    // Not needed if game restart is implemented via a full page reload
-    // else {
-    //   setShowGameoverModal(false);
-    // }
   };
 
   useEffect(() => {
@@ -197,7 +206,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
     handleShowGameoverModal();
   }, [ctx.gameover]);
 
-  const handleCardClick = (index) => {
+  const handleCardClick = (index: number) => {
     if (turnPhase !== VisibleTurnPhase.aiTurn) {
       setSelectedCardToPlay(G.players[0].hand[index]);
       setPlayerSelectedIndexToPlay(index);
@@ -209,17 +218,19 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
 
   const handleEndTurnButtonClick = () => {
     if (turnPhase === VisibleTurnPhase.endTurnEnabled) {
-      moves.playCard(playerSelectedIndexToPlay);
-      playCardAudio(selectedCardToPlay);
+      if (playerSelectedIndexToPlay !== undefined && selectedCardToPlay) {
+        moves.playCard(playerSelectedIndexToPlay);
 
-      handleShowCardAnimation(selectedCardToPlay);
+        playCardAudio(selectedCardToPlay);
+        handleShowCardAnimation(selectedCardToPlay);
 
-      addLogEntry(
-        ctx.turn,
-        G.players[0].name,
-        G.players[0].hand[playerSelectedIndexToPlay].name,
-        G.players[0].hand[playerSelectedIndexToPlay].text
-      );
+        addLogEntry({
+          turn: ctx.turn,
+          playerName: G.players[0].name,
+          cardName: G.players[0].hand[playerSelectedIndexToPlay].name,
+          cardText: G.players[0].hand[playerSelectedIndexToPlay].text,
+        });
+      }
 
       setTurnPhase(VisibleTurnPhase.aiTurn);
     }
@@ -228,7 +239,11 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
   return (
     <div
       className='container-fluid vh-100 d-flex flex-column p-2 bg-board'
-      style={{ '--bg-image': `url(/${getLocationForLevel(G.level)})` }}
+      style={
+        {
+          '--bg-image': `url(/${getLocationForLevel(G.level)})`,
+        } as React.CSSProperties
+      }
     >
       <div className='row'>
         <div className='col-3'>
@@ -243,7 +258,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
         <div className='col-6'>
           <PlayerHand
             player={G.players[1]}
-            showEnemyHand={G.globalEffects.showEnemyHand}
+            showEnemyHand={G.globalEffects?.showEnemyHand ?? false}
           />
         </div>
 
@@ -292,7 +307,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
         <div className='col-6'>
           <PlayerHand
             player={G.players[0]}
-            showEnemyHand={G.globalEffects.showEnemyHand}
+            showEnemyHand={G.globalEffects?.showEnemyHand ?? false}
             handleCardClick={handleCardClick}
           />
         </div>
@@ -361,7 +376,7 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
         playAudio={playAudio}
       />
       <SelectCardModal
-        cardIdList={selectableCardsToDraw}
+        cardIdList={selectableCardIdsToDraw}
         handleSelectCard={handleSelectCard}
         showSelectCardModal={showSelectCardModal}
       />

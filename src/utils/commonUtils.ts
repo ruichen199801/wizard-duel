@@ -25,7 +25,7 @@ export const resetGame = () => {
 
 /**
  * Triggers a reload to start a particular level.
- * The level number is set on game end in `gameUtils.js`.
+ * The level number is set on game end in `gameUtils`.
  */
 export const startLevel = () => {
   window.location.reload();

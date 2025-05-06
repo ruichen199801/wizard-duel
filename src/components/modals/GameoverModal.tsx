@@ -10,7 +10,7 @@ interface GameoverModalProps {
   readonly setShowSelectPowerModal: React.Dispatch<
     React.SetStateAction<boolean>
   >;
-  readonly winner: PlayerID;
+  readonly winner?: PlayerID;
   readonly playAudio: (audio: string) => void;
   readonly level: string;
 }
@@ -24,7 +24,7 @@ const GameoverModal = ({
   playAudio,
   level,
 }: GameoverModalProps) => {
-  if (!showGameoverModal) {
+  if (!showGameoverModal || !winner) {
     return null;
   }
 

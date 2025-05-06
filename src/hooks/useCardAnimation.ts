@@ -12,14 +12,14 @@ import {
 } from '../utils/assetUtils';
 import { sleep } from '../utils/commonUtils';
 
-const useCardAnimation = (ctx: Ctx, G: WizardDuelState) => {
+const useCardAnimation = (G: WizardDuelState, ctx: Ctx) => {
   const [showPlayerAnimation, setShowPlayerAnimation] = useState(false);
   const [showEnemyAnimation, setShowEnemyAnimation] = useState(false);
   const [cardAnimationData, setCardAnimationData] = useState<
     AnimationProps | undefined
   >();
 
-  const handleShowCardAnimation = async (card: Card): Promise<void> => {
+  const handleShowCardAnimation = async (card: Card) => {
     const animationTarget = getAnimationTargetForCard(card.id);
     const animationData = getAnimationDataForCard(card.id);
 

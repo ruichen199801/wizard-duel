@@ -15,9 +15,9 @@ export const AVATAR_MEDIUM_SCALE = 1.1;
 
 interface PlayerStatsPanelProps {
   readonly player: Player;
-  readonly level: string;
+  readonly level?: string;
   readonly showCardAnimation: boolean;
-  readonly cardAnimationData: AnimationProps;
+  readonly cardAnimationData?: AnimationProps;
 }
 
 const PlayerStatsPanel = ({
