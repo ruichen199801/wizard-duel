@@ -1,31 +1,43 @@
 import { useState } from 'react';
-import { GameDifficulty } from '../../core/power/power';
+import { GameDifficulty, PowerClass } from '../../core/power/power';
 import useImageLoader from '../../hooks/useImageLoader';
 import { click, getAvatarForLevel } from '../../utils/assetUtils';
 import { startLevel } from '../../utils/commonUtils';
-import { powers } from '../../utils/scriptUtils';
+import { powers, PowerSelectionProps } from '../../utils/scriptUtils';
 import {
   AVATAR_HEIGHT,
   AVATAR_SMALL_SCALE,
   AVATAR_WIDTH,
 } from '../ui/PlayerStatsPanel';
 
-const SelectPowerModal = ({ showSelectPowerModal, playAudio }) => {
-  const [selectedPowerClass, setSelectedPowerClass] = useState(null);
+interface SelectPowerModalProps {
+  readonly showSelectPowerModal: boolean;
+  readonly playAudio: (audio: string) => void;
+}
 
-  const avatars = [powers.map((power) => getAvatarForLevel(power.level))];
+const SelectPowerModal = ({
+  showSelectPowerModal,
+  playAudio,
+}: SelectPowerModalProps) => {
+  const [selectedPowerClass, setSelectedPowerClass] = useState<
+    PowerClass | undefined
+  >();
+
+  const avatars: string[] = powers.map((power) =>
+    getAvatarForLevel('1', power.level)
+  );
   const { isLoading } = useImageLoader(avatars, 300);
 
   if (!showSelectPowerModal) {
     return null;
   }
 
-  const handleSelectPower = (power) => {
+  const handleSelectPower = (power: PowerSelectionProps) => {
     setSelectedPowerClass(power.class);
     playAudio(click);
   };
 
-  const handleNextLevel = (difficulty) => {
+  const handleNextLevel = (difficulty: GameDifficulty) => {
     if (selectedPowerClass) {
       sessionStorage.setItem('power', selectedPowerClass);
       sessionStorage.setItem('difficulty', difficulty);
@@ -39,7 +51,7 @@ const SelectPowerModal = ({ showSelectPowerModal, playAudio }) => {
         className='modal modal-lg fade show d-block'
         data-bs-backdrop='static'
         data-bs-keyboard='false'
-        tabIndex='-1'
+        tabIndex={-1}
       >
         <div className='modal-dialog modal-dialog-centered'>
           <div className='modal-content bg-modal'>

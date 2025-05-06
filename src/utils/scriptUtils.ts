@@ -75,7 +75,7 @@ const battleInstrutions: Record<string, BattleInstrutionProps> = {
 };
 const getBattleInstructions = (level = '1') => battleInstrutions[level];
 
-interface PowerSelectionProps {
+export interface PowerSelectionProps {
   readonly level: string;
   readonly name: string;
   readonly class: PowerClass;

@@ -1,7 +1,12 @@
 import { getNextCardsForLevel } from '../../utils/assetUtils';
 import { startLevel } from '../../utils/commonUtils';
 
-const NextLevelModal = ({ showNextLevelModal, level }) => {
+interface NextLevelModalProps {
+  readonly showNextLevelModal: boolean;
+  readonly level: string;
+}
+
+const NextLevelModal = ({ showNextLevelModal, level }: NextLevelModalProps) => {
   if (!showNextLevelModal) {
     return null;
   }
@@ -14,7 +19,7 @@ const NextLevelModal = ({ showNextLevelModal, level }) => {
         className='modal fade show d-block'
         data-bs-backdrop='static'
         data-bs-keyboard='false'
-        tabIndex='-1'
+        tabIndex={-1}
       >
         <div className='modal-dialog modal-dialog-centered'>
           <div className='modal-content bg-modal'>

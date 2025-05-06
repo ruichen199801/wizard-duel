@@ -1,10 +1,17 @@
+import { CardId } from '../../core/data/cards';
 import { cardFront } from '../../utils/assetUtils';
+
+interface SelectCardModalProps {
+  readonly cardIdList: CardId[];
+  readonly handleSelectCard: (cardId: CardId) => void;
+  readonly showSelectCardModal: boolean;
+}
 
 const SelectCardModal = ({
   cardIdList,
   handleSelectCard,
   showSelectCardModal,
-}) => {
+}: SelectCardModalProps) => {
   if (!showSelectCardModal) {
     return null;
   }
@@ -15,7 +22,7 @@ const SelectCardModal = ({
         className='modal fade show d-block'
         data-bs-backdrop='static'
         data-bs-keyboard='false'
-        tabIndex='-1'
+        tabIndex={-1}
       >
         <div className='modal-dialog modal-dialog-centered'>
           <div className='modal-content bg-modal'>
