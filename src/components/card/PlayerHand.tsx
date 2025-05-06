@@ -1,7 +1,17 @@
-import Card from './Card';
-import { CardType } from '../../utils/constants';
+import { Player } from '../../core/data/player';
+import Card, { CardType } from './Card';
 
-const PlayerHand = ({ player, showEnemyHand, handleCardClick }) => {
+interface PlayerHandProps {
+  readonly player: Player;
+  readonly showEnemyHand: boolean;
+  readonly handleCardClick?: (index: number) => void;
+}
+
+const PlayerHand = ({
+  player,
+  showEnemyHand,
+  handleCardClick,
+}: PlayerHandProps) => {
   return (
     <div className='d-flex justify-content-center'>
       {player.hand.map((card, index) => (

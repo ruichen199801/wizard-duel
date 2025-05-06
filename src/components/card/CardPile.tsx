@@ -1,11 +1,11 @@
 import { cardPile } from '../../utils/assetUtils';
-import {
-  CARD_HEIGHT,
-  CARD_SMALL_SCALE,
-  CARD_WIDTH,
-} from '../../utils/constants';
+import { CARD_HEIGHT, CARD_SMALL_SCALE, CARD_WIDTH } from './Card';
 
-const CardPile = ({ scale = CARD_SMALL_SCALE }) => {
+interface CardPileProps {
+  readonly scale?: number;
+}
+
+const CardPile = ({ scale = CARD_SMALL_SCALE }: CardPileProps) => {
   const height = CARD_HEIGHT * scale;
   const width = CARD_WIDTH * scale;
 

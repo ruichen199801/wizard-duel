@@ -15,21 +15,6 @@ export enum VisibleTurnPhase {
   aiTurn = 'ai turn',
 }
 
-export enum CardType {
-  // Required props: cardType, cardId, cardIndex, handleCardClick
-  front = 'front',
-
-  // Required props: cardType, playerId
-  back = 'back',
-
-  // Required props: cardType, cardId, scale
-  preview = 'preview',
-
-  // Required props: cardType, playerId
-  // Optional props: scale
-  placeholder = 'placeholder',
-}
-
 // Animation target is separated from effect target, as animation is applied per card but a card can have multiple effects.
 // This enum can also be reused for level or game animations.
 export enum AnimationTarget {
@@ -40,11 +25,6 @@ export enum AnimationTarget {
 }
 
 export const PAUSE_INTERVAL = 1200;
-
-export const CARD_HEIGHT = 210;
-export const CARD_WIDTH = 150;
-export const CARD_SMALL_SCALE = 0.9;
-export const CARD_MEDIUM_SCALE = 1.25;
 
 export const AVATAR_HEIGHT = 125;
 export const AVATAR_WIDTH = 125;
