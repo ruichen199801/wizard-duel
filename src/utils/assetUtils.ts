@@ -1,6 +1,5 @@
 import { PlayerID } from 'boardgame.io';
 import { CardId, getCardCount } from '../core/data/cards';
-import { AnimationTarget } from './constants';
 
 const imgPrefix = 'images';
 const avatarPrefix = `${imgPrefix}/avatars`;
@@ -83,6 +82,15 @@ export interface AnimationProps {
   readonly type: string;
   readonly path: string;
   readonly timeout: number;
+}
+
+// Animation target is separated from effect target, as animation is applied per card but a card can have multiple effects.
+// This enum can also be reused for level or game animations.
+export enum AnimationTarget {
+  enemy = 'enemy',
+  self = 'self',
+  both = 'both',
+  none = 'none',
 }
 
 enum Animation {

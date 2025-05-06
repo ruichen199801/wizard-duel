@@ -15,15 +15,6 @@ export enum VisibleTurnPhase {
   aiTurn = 'ai turn',
 }
 
-// Animation target is separated from effect target, as animation is applied per card but a card can have multiple effects.
-// This enum can also be reused for level or game animations.
-export enum AnimationTarget {
-  enemy = 'enemy',
-  self = 'self',
-  both = 'both',
-  none = 'none',
-}
-
 export const PAUSE_INTERVAL = 1200;
 
 export const AVATAR_HEIGHT = 125;

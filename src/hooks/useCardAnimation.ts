@@ -6,11 +6,11 @@ import { WizardDuelState } from '../core/game/game';
 import { PowerClass } from '../core/power/power';
 import {
   AnimationProps,
+  AnimationTarget,
   getAnimationDataForCard,
   getAnimationTargetForCard,
 } from '../utils/assetUtils';
 import { sleep } from '../utils/commonUtils';
-import { AnimationTarget } from '../utils/constants';
 
 const useCardAnimation = (ctx: Ctx, G: WizardDuelState) => {
   const [showPlayerAnimation, setShowPlayerAnimation] = useState(false);

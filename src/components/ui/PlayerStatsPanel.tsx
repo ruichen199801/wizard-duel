@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { EffectType } from '../../core/data/cardEffects';
-import { getAvatarForLevel, icon } from '../../utils/assetUtils';
+import { Player } from '../../core/data/player';
+import {
+  AnimationProps,
+  getAvatarForLevel,
+  icon,
+} from '../../utils/assetUtils';
 import {
   AVATAR_HEIGHT,
   AVATAR_MEDIUM_SCALE,
@@ -8,18 +13,28 @@ import {
 } from '../../utils/constants';
 import { getEnemyName } from '../../utils/scriptUtils';
 
+interface PlayerStatsPanelProps {
+  readonly player: Player;
+  readonly level: string;
+  readonly showCardAnimation: boolean;
+  readonly cardAnimationData: AnimationProps;
+}
+
 const PlayerStatsPanel = ({
   player,
   level,
   showCardAnimation,
   cardAnimationData,
-}) => {
+}: PlayerStatsPanelProps) => {
   const [isStatsIconsHovered, setIsStatsIconsHovered] = useState(false);
 
   const height = AVATAR_HEIGHT * AVATAR_MEDIUM_SCALE;
   const width = AVATAR_WIDTH * AVATAR_MEDIUM_SCALE;
 
-  const formatValueDisplay = (currentValue, maxValue) => {
+  const formatValueDisplay = (
+    currentValue: number,
+    maxValue: number
+  ): string => {
     if (currentValue >= maxValue) {
       return `${currentValue} (+${currentValue - maxValue})`;
     } else {
@@ -50,11 +65,11 @@ const PlayerStatsPanel = ({
           )}
 
           {/* Animation overlay for card effect */}
-          {showCardAnimation && (
+          {showCardAnimation && cardAnimationData && (
             <img
-              src={cardAnimationData?.path}
-              alt={cardAnimationData?.type}
-              className={`vfx-${cardAnimationData?.type}`}
+              src={cardAnimationData.path}
+              alt={cardAnimationData.type}
+              className={`vfx-${cardAnimationData.type}`}
             />
           )}
         </div>
