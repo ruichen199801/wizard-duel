@@ -3,12 +3,12 @@ import { GameDifficulty } from '../../core/power/power';
 import useImageLoader from '../../hooks/useImageLoader';
 import { click, getAvatarForLevel } from '../../utils/assetUtils';
 import { startLevel } from '../../utils/commonUtils';
+import { powers } from '../../utils/scriptUtils';
 import {
   AVATAR_HEIGHT,
   AVATAR_SMALL_SCALE,
   AVATAR_WIDTH,
-} from '../../utils/constants';
-import { powers } from '../../utils/scriptUtils';
+} from '../ui/PlayerStatsPanel';
 
 const SelectPowerModal = ({ showSelectPowerModal, playAudio }) => {
   const [selectedPowerClass, setSelectedPowerClass] = useState(null);

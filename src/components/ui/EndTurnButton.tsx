@@ -1,4 +1,16 @@
-import { VisibleTurnPhase } from '../../utils/constants';
+export enum VisibleTurnPhase {
+  // The player has drawn a card but hasn't clicked to preview any yet.
+  // The end-turn button shows "End Turn" and is disabled.
+  endTurnDisabled = 'end turn disabled',
+
+  // The player has previewed a card and can end their turn.
+  // The end-turn button shows "End Turn" and is enabled.
+  endTurnEnabled = 'end turn enabled',
+
+  // The AI is taking its turn. Player cannot interact.
+  // The end-turn button shows "Enemy Turn" and is disabled.
+  aiTurn = 'ai turn',
+}
 
 interface EndTurnButtonProps {
   readonly turnPhase: VisibleTurnPhase;

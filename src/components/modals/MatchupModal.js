@@ -2,16 +2,16 @@ import { FINAL_LEVEL } from '../../core/level/level';
 import useImageLoader from '../../hooks/useImageLoader';
 import { getAvatarForLevel } from '../../utils/assetUtils';
 import {
-  AVATAR_HEIGHT,
-  AVATAR_SMALL_SCALE,
-  AVATAR_WIDTH,
-} from '../../utils/constants';
-import {
   getBattleInstructions,
   getBattleStartCaption,
   getEnemyName,
   getRuleByPower,
 } from '../../utils/scriptUtils';
+import {
+  AVATAR_HEIGHT,
+  AVATAR_SMALL_SCALE,
+  AVATAR_WIDTH,
+} from '../ui/PlayerStatsPanel';
 
 const MatchupModal = ({
   showMatchupModal,

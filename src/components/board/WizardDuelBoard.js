@@ -17,7 +17,6 @@ import {
   victory,
 } from '../../utils/assetUtils';
 import { sleep } from '../../utils/commonUtils';
-import { PAUSE_INTERVAL, VisibleTurnPhase } from '../../utils/constants';
 import {
   getSelectableCardIds,
   resolveCardAudio,
@@ -35,10 +34,12 @@ import SelectCardModal from '../modals/SelectCardModal';
 import SelectPowerModal from '../modals/SelectPowerModal';
 import SettingsModal from '../modals/SettingsModal';
 import EffectStack from '../ui/EffectStack';
-import EndTurnButton from '../ui/EndTurnButton';
+import EndTurnButton, { VisibleTurnPhase } from '../ui/EndTurnButton';
 import GameStatsPanel from '../ui/GameStatsPanel';
 import IconList from '../ui/IconList';
 import PlayerStatsPanel from '../ui/PlayerStatsPanel';
+
+export const PAUSE_INTERVAL = 1200;
 
 const WizardDuelBoard = ({ ctx, G, moves, events, reset }) => {
   // Initialize Bootstrap tooltips

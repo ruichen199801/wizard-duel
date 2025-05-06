@@ -6,12 +6,12 @@ import {
   getAvatarForLevel,
   icon,
 } from '../../utils/assetUtils';
-import {
-  AVATAR_HEIGHT,
-  AVATAR_MEDIUM_SCALE,
-  AVATAR_WIDTH,
-} from '../../utils/constants';
 import { getEnemyName } from '../../utils/scriptUtils';
+
+export const AVATAR_HEIGHT = 125;
+export const AVATAR_WIDTH = 125;
+export const AVATAR_SMALL_SCALE = 0.9;
+export const AVATAR_MEDIUM_SCALE = 1.1;
 
 interface PlayerStatsPanelProps {
   readonly player: Player;
