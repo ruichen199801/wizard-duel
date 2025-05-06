@@ -5,7 +5,7 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "strict": true,
-    "allowJs": true,
+    "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "noEmit": true,
