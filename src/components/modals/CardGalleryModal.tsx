@@ -3,7 +3,7 @@ import { click } from '../../utils/assetUtils';
 
 interface CardGalleryModalProps {
   readonly showCardGallery: boolean;
-  readonly setShowCardGallery: (show: boolean) => void;
+  readonly setShowCardGallery: React.Dispatch<React.SetStateAction<boolean>>;
   readonly cardImages: string[];
   readonly playAudio: (audio: string) => void;
 }

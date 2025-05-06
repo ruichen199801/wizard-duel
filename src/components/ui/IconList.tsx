@@ -1,10 +1,12 @@
 import { click, icon } from '../../utils/assetUtils';
 
 interface IconListProps {
-  readonly setShowLevelEffectModal: (show: boolean) => void;
-  readonly setShowLogModal: (show: boolean) => void;
-  readonly setShowSettingsModal: (show: boolean) => void;
-  readonly setShowHelpModal: (show: boolean) => void;
+  readonly setShowLevelEffectModal: React.Dispatch<
+    React.SetStateAction<boolean>
+  >;
+  readonly setShowLogModal: React.Dispatch<React.SetStateAction<boolean>>;
+  readonly setShowSettingsModal: React.Dispatch<React.SetStateAction<boolean>>;
+  readonly setShowHelpModal: React.Dispatch<React.SetStateAction<boolean>>;
   readonly playAudio: (audio: string) => void;
 }
 

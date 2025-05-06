@@ -4,6 +4,22 @@ import { PRE_FINAL_LEVEL } from '../../core/level/level';
 import { click } from '../../utils/assetUtils';
 import { exitToMenu, jumpToLevel, resetGame } from '../../utils/commonUtils';
 
+interface SettingsModalProps {
+  readonly showSettingsModal: boolean;
+  readonly setShowSettingsModal: React.Dispatch<React.SetStateAction<boolean>>;
+  readonly playAudio: (audio: string) => void;
+  readonly toggleAudioMute: () => void;
+  readonly isAudioMuted: boolean;
+  readonly toggleMusic: () => void;
+  readonly isMusicMuted: boolean;
+  readonly showGameStats: boolean;
+  readonly setShowGameStats: React.Dispatch<React.SetStateAction<boolean>>;
+  readonly showEffectStack: boolean;
+  readonly setShowEffectStack: React.Dispatch<React.SetStateAction<boolean>>;
+  readonly aiStrategy: Strategy;
+  readonly setAiStrategy: React.Dispatch<React.SetStateAction<Strategy>>;
+}
+
 const SettingsModal = ({
   showSettingsModal,
   setShowSettingsModal,
@@ -18,7 +34,7 @@ const SettingsModal = ({
   setShowEffectStack,
   aiStrategy,
   setAiStrategy,
-}) => {
+}: SettingsModalProps) => {
   const [headerClickCount, setHeaderClickCount] = useState(0);
   const showJumpLevelOption = headerClickCount >= 6;
 
@@ -55,7 +71,7 @@ const SettingsModal = ({
         className='modal modal-sm fade show d-block'
         data-bs-backdrop='static'
         data-bs-keyboard='false'
-        tabIndex='-1'
+        tabIndex={-1}
       >
         <div className='modal-dialog modal-dialog-centered'>
           <div className='modal-content bg-modal'>

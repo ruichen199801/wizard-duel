@@ -3,7 +3,7 @@ import { click } from '../../utils/assetUtils';
 
 interface LogModalProps {
   readonly showLogModal: boolean;
-  readonly setShowLogModal: (show: boolean) => void;
+  readonly setShowLogModal: React.Dispatch<React.SetStateAction<boolean>>;
   readonly logEntries: LogEntry[];
   readonly playAudio: (audio: string) => void;
 }

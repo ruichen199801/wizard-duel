@@ -2,7 +2,7 @@ import { click } from '../../utils/assetUtils';
 
 interface HelpModalProps {
   readonly showHelpModal: boolean;
-  readonly setShowHelpModal: (show: boolean) => void;
+  readonly setShowHelpModal: React.Dispatch<React.SetStateAction<boolean>>;
   readonly playAudio: (audio: string) => void;
 }
 

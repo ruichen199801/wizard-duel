@@ -5,9 +5,11 @@ import { exitToMenu, resetGame, startLevel } from '../../utils/commonUtils';
 
 interface GameoverModalProps {
   readonly showGameoverModal: boolean;
-  readonly setShowGameoverModal: (show: boolean) => void;
-  readonly setShowNextLevelModal: (show: boolean) => void;
-  readonly setShowSelectPowerModal: (show: boolean) => void;
+  readonly setShowGameoverModal: React.Dispatch<React.SetStateAction<boolean>>;
+  readonly setShowNextLevelModal: React.Dispatch<React.SetStateAction<boolean>>;
+  readonly setShowSelectPowerModal: React.Dispatch<
+    React.SetStateAction<boolean>
+  >;
   readonly winner: PlayerID;
   readonly playAudio: (audio: string) => void;
   readonly level: string;
