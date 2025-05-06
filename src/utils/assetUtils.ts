@@ -78,21 +78,6 @@ const getNextCardsForLevel = (level = '1') => nextLevelCards[level];
 
 // ANIMATION FILES
 
-export interface AnimationProps {
-  readonly type: string;
-  readonly path: string;
-  readonly timeout: number;
-}
-
-// Animation target is separated from effect target, as animation is applied per card but a card can have multiple effects.
-// This enum can also be reused for level or game animations.
-export enum AnimationTarget {
-  enemy = 'enemy',
-  self = 'self',
-  both = 'both',
-  none = 'none',
-}
-
 enum Animation {
   fireball = 'fireball',
   freeze = 'freeze',
@@ -113,6 +98,12 @@ enum Animation {
   waterExplode = 'water-explode',
   bloodCrossStrike = 'blood-cross-strike',
   slimeSplash = 'slime-splash',
+}
+
+export interface AnimationProps {
+  readonly type: Animation;
+  readonly path: string;
+  readonly timeout: number;
 }
 
 const getAnimationPath = (type: string) => `${animationPrefix}/${type}.gif`;
@@ -150,8 +141,17 @@ const animationData: Record<Animation, AnimationProps> = {
   [Animation.slimeSplash]: createAnimationProps(Animation.slimeSplash, 500),
 };
 
+// Animation target is separated from effect target, as animation is applied per card but a card can have multiple effects.
+// This enum can also be reused for level or game animations.
+export enum AnimationTarget {
+  enemy = 'enemy',
+  self = 'self',
+  both = 'both',
+  none = 'none',
+}
+
 interface CardAnimationProps {
-  readonly type: string;
+  readonly type: Animation;
   readonly target: AnimationTarget;
 }
 
