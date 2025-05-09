@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Effect, EffectGroupName } from '../../core/models';
-import { icon } from '../../utils';
+
+import { Effect, EffectGroupName } from '@core/models';
+import { icon } from '@utils';
 
 export interface EffectStackProps {
   readonly opponentEffects: Effect[];

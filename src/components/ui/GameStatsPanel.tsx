@@ -1,6 +1,6 @@
-import { WizardDuelState } from '../../core/game';
-import { icon } from '../../utils';
-import { CardPile } from '../card/CardPile';
+import { CardPile } from '@components/card';
+import { WizardDuelState } from '@core/game';
+import { icon } from '@utils';
 
 export interface GameStatsPanelProps {
   readonly G: WizardDuelState;

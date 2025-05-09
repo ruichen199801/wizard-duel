@@ -1,11 +1,11 @@
-import { FINAL_LEVEL } from '../../core/level';
+import { FINAL_LEVEL } from '@core/level';
 import {
   click,
   getBattleInstructions,
   getBattleStartCaption,
   getLocationForLevel,
   getRuleByPower,
-} from '../../utils';
+} from '@utils';
 
 export interface LevelEffectModalProps {
   readonly showLevelEffectModal: boolean;

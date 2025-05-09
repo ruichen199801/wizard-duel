@@ -1,18 +1,19 @@
 import { useState } from 'react';
-import { GameDifficulty, PowerClass } from '../../core/power';
-import { useImageLoader } from '../../hooks';
+
+import {
+  AVATAR_HEIGHT,
+  AVATAR_SMALL_SCALE,
+  AVATAR_WIDTH,
+} from '@components/ui';
+import { GameDifficulty, PowerClass } from '@core/power';
+import { useImageLoader } from '@hooks';
 import {
   click,
   getAvatarForLevel,
   powers,
   PowerSelectionProps,
   startLevel,
-} from '../../utils';
-import {
-  AVATAR_HEIGHT,
-  AVATAR_SMALL_SCALE,
-  AVATAR_WIDTH,
-} from '../ui/PlayerStatsPanel';
+} from '@utils';
 
 export interface SelectPowerModalProps {
   readonly showSelectPowerModal: boolean;

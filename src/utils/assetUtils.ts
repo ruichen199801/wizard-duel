@@ -1,5 +1,5 @@
 import { PlayerID } from 'boardgame.io';
-import { CardId, getCardCount } from '../core/models';
+import { CardId, getCardCount } from '@core/models';
 
 const imgPrefix = 'images';
 const avatarPrefix = `${imgPrefix}/avatars`;

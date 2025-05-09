@@ -1,11 +1,11 @@
-import { WizardDuelState } from '../../core/game';
+import { WizardDuelState } from '@core/game';
 import {
   Card,
   CardId,
   CardKeyword,
   EffectGroupName,
   EffectType,
-} from '../../core/models';
+} from '@core/models';
 import { random } from './random';
 import {
   POWERFUL_CARDS,

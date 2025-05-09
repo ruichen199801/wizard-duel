@@ -1,11 +1,7 @@
 import { useState } from 'react';
-import { EffectType, Player } from '../../core/models';
-import {
-  AnimationProps,
-  getAvatarForLevel,
-  getEnemyName,
-  icon,
-} from '../../utils';
+
+import { EffectType, Player } from '@core/models';
+import { AnimationProps, getAvatarForLevel, getEnemyName, icon } from '@utils';
 
 export const AVATAR_HEIGHT = 125;
 export const AVATAR_WIDTH = 125;

@@ -18,12 +18,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject",
     "docs": "typedoc",
-    "deps": "madge -c src/exports.ts"
+    "deps": "madge -c src/exports.ts --ts-config tsconfig.json"
   },
   "eslintConfig": {
     "extends": [
@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@craco/craco": "^7.1.0",
     "@types/bootstrap": "^5.2.10",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",

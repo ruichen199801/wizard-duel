@@ -1,12 +1,12 @@
 import { Game, Move, PlayerID } from 'boardgame.io';
 
-import { applyEffect } from '../effect/effect';
-import { hasEffect, removeEffects } from '../effect/effectUtils';
-import { DrawMode } from '../level/level';
-import { EffectType } from '../models/cardEffects';
-import { Card, CardId } from '../models/cards';
-import { getDeckForLevel } from '../models/deck';
-import { p0, p1, Player } from '../models/player';
+import { applyEffect } from '@core/effect/effect';
+import { hasEffect, removeEffects } from '@core/effect/effectUtils';
+import { DrawMode } from '@core/level/level';
+import { EffectType } from '@core/models/cardEffects';
+import { Card, CardId } from '@core/models/cards';
+import { getDeckForLevel } from '@core/models/deck';
+import { p0, p1, Player } from '@core/models/player';
 import {
   applyLevelOverride,
   dealCards,

@@ -1,17 +1,17 @@
-import { FINAL_LEVEL } from '../../core/level';
-import { useImageLoader } from '../../hooks';
+import {
+  AVATAR_HEIGHT,
+  AVATAR_SMALL_SCALE,
+  AVATAR_WIDTH,
+} from '@components/ui';
+import { FINAL_LEVEL } from '@core/level';
+import { useImageLoader } from '@hooks';
 import {
   getAvatarForLevel,
   getBattleInstructions,
   getBattleStartCaption,
   getEnemyName,
   getRuleByPower,
-} from '../../utils';
-import {
-  AVATAR_HEIGHT,
-  AVATAR_SMALL_SCALE,
-  AVATAR_WIDTH,
-} from '../ui/PlayerStatsPanel';
+} from '@utils';
 
 export interface MatchupModalProps {
   readonly showMatchupModal: boolean;

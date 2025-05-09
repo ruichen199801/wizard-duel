@@ -1,7 +1,8 @@
 import { Ctx } from 'boardgame.io';
-import { WizardDuelState } from '../core/game';
-import { Card, CardId, CardKeyword, EffectType } from '../core/models';
-import { PowerClass } from '../core/power';
+
+import { WizardDuelState } from '@core/game';
+import { Card, CardId, CardKeyword, EffectType } from '@core/models';
+import { PowerClass } from '@core/power';
 import { cardAudio, cleanse, defrost, miss, potion } from './assetUtils';
 
 /**

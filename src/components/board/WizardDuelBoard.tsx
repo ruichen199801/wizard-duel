@@ -2,10 +2,10 @@ import { PlayerID } from 'boardgame.io';
 import { BoardProps } from 'boardgame.io/dist/types/packages/react';
 import { useEffect, useState } from 'react';
 
-import { AI, Strategy } from '../../ai';
-import { WizardDuelState } from '../../core/game';
-import { DrawMode } from '../../core/level';
-import { Card, CardId } from '../../core/models';
+import { AI, Strategy } from '@ai';
+import { WizardDuelState } from '@core/game';
+import { DrawMode } from '@core/level';
+import { Card, CardId } from '@core/models';
 import {
   useAudioPlayer,
   useBsTooltip,
@@ -13,7 +13,7 @@ import {
   useLog,
   useMusicPlayer,
   usePersistentState,
-} from '../../hooks';
+} from '@hooks';
 import {
   click,
   defeat,
@@ -23,9 +23,9 @@ import {
   resolveCardAudio,
   sleep,
   victory,
-} from '../../utils';
+} from '@utils';
 
-import { CardPreview, PlayerHand } from '../card';
+import { CardPreview, PlayerHand } from '@components/card';
 import {
   GameoverModal,
   HelpModal,
@@ -36,7 +36,7 @@ import {
   SelectCardModal,
   SelectPowerModal,
   SettingsModal,
-} from '../modals';
+} from '@components/modals';
 import {
   EffectStack,
   EndTurnButton,
@@ -44,7 +44,7 @@ import {
   IconList,
   PlayerStatsPanel,
   VisibleTurnPhase,
-} from '../ui';
+} from '@components/ui';
 
 export const PAUSE_INTERVAL = 1200;
 

@@ -1,4 +1,4 @@
-import { GameDifficulty, PowerClass } from '../core/power';
+import { GameDifficulty, PowerClass } from '@core/power';
 
 const enemyNames: Record<string, string> = {
   1: 'Arden the Wise',

@@ -1,15 +1,16 @@
 import { Ctx } from 'boardgame.io';
 import { useState } from 'react';
-import { WizardDuelState } from '../core/game';
-import { Card, CardKeyword, EffectType } from '../core/models';
-import { PowerClass } from '../core/power';
+
+import { WizardDuelState } from '@core/game';
+import { Card, CardKeyword, EffectType } from '@core/models';
+import { PowerClass } from '@core/power';
 import {
   AnimationProps,
   AnimationTarget,
   getAnimationDataForCard,
   getAnimationTargetForCard,
   sleep,
-} from '../utils';
+} from '@utils';
 
 export const useCardAnimation = (G: WizardDuelState, ctx: Ctx) => {
   const [showPlayerAnimation, setShowPlayerAnimation] = useState(false);

@@ -1,4 +1,4 @@
-import { click, icon } from '../../utils';
+import { click, icon } from '@utils';
 
 export interface IconListProps {
   readonly setShowLevelEffectModal: React.Dispatch<

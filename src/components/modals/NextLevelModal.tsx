@@ -1,4 +1,4 @@
-import { getNextCardsForLevel, startLevel } from '../../utils';
+import { getNextCardsForLevel, startLevel } from '@utils';
 
 export interface NextLevelModalProps {
   readonly showNextLevelModal: boolean;

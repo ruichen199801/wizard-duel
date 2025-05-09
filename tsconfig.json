@@ -6,6 +6,24 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "noEmit": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@ai": [
+        "ai"
+      ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@core/*": [
+        "core/*"
+      ],
+      "@hooks": [
+        "hooks"
+      ],
+      "@utils": [
+        "utils"
+      ],
+    }
   },
   "include": [
     "src/**/*"

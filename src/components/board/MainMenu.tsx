@@ -1,15 +1,9 @@
 import { useState } from 'react';
-import { CardId } from '../../core/models';
-import { useAudioPlayer, usePreloadAssets } from '../../hooks';
-import {
-  ANIMATION,
-  AUDIO,
-  cardFronts,
-  click,
-  IMAGES,
-  MUSIC,
-} from '../../utils';
-import { CardGalleryModal, HelpModal } from '../modals';
+
+import { CardGalleryModal, HelpModal } from '@components/modals';
+import { CardId } from '@core/models';
+import { useAudioPlayer, usePreloadAssets } from '@hooks';
+import { ANIMATION, AUDIO, cardFronts, click, IMAGES, MUSIC } from '@utils';
 
 /**
  * @group Components

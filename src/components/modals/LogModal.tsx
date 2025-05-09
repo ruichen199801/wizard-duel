@@ -1,5 +1,5 @@
-import { LogEntry } from '../../hooks';
-import { click } from '../../utils';
+import { LogEntry } from '@hooks';
+import { click } from '@utils';
 
 export interface LogModalProps {
   readonly showLogModal: boolean;

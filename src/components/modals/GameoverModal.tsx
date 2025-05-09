@@ -1,6 +1,7 @@
 import { PlayerID } from 'boardgame.io';
-import { FINAL_LEVEL } from '../../core/level';
-import { click, exitToMenu, resetGame, startLevel } from '../../utils';
+
+import { FINAL_LEVEL } from '@core/level';
+import { click, exitToMenu, resetGame, startLevel } from '@utils';
 
 export interface GameoverModalProps {
   readonly showGameoverModal: boolean;

@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Strategy } from '../../ai';
-import { PRE_FINAL_LEVEL } from '../../core/level';
-import { click, exitToMenu, jumpToLevel, resetGame } from '../../utils';
+
+import { Strategy } from '@ai';
+import { PRE_FINAL_LEVEL } from '@core/level';
+import { click, exitToMenu, jumpToLevel, resetGame } from '@utils';
 
 export interface SettingsModalProps {
   readonly showSettingsModal: boolean;

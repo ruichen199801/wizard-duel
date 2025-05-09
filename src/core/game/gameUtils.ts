@@ -1,14 +1,14 @@
 import { Ctx } from 'boardgame.io';
 
-import { applyEffect } from '../effect/effect';
-import { getEffects, hasEffect, undoEffect } from '../effect/effectUtils';
+import { applyEffect } from '@core/effect/effect';
+import { getEffects, hasEffect, undoEffect } from '@core/effect/effectUtils';
 import {
   FINAL_LEVEL,
   globalEffectsDefault,
   levelConfigs,
   maxTurn,
-} from '../level/level';
-import { Effect, EffectType } from '../models/cardEffects';
+} from '@core/level/level';
+import { Effect, EffectType } from '@core/models/cardEffects';
 import {
   Card,
   CardId,
@@ -17,13 +17,13 @@ import {
   Wish3,
   Wish4,
   Wish5,
-} from '../models/cards';
-import { PlayerStats } from '../models/player';
+} from '@core/models/cards';
+import { PlayerStats } from '@core/models/player';
 import {
   applyEndOfTurnPowerEffects,
   applyPowerOverride,
   applyStartOfTurnPowerEffects,
-} from '../power/powerUtils';
+} from '@core/power/powerUtils';
 import { WizardDuelState } from './game';
 
 /**

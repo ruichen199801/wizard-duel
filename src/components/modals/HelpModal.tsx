@@ -1,4 +1,4 @@
-import { click } from '../../utils';
+import { click } from '@utils';
 
 export interface HelpModalProps {
   readonly showHelpModal: boolean;

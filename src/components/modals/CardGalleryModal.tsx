@@ -1,5 +1,5 @@
-import { useImageLoader } from '../../hooks';
-import { click } from '../../utils';
+import { useImageLoader } from '@hooks';
+import { click } from '@utils';
 
 export interface CardGalleryModalProps {
   readonly showCardGallery: boolean;

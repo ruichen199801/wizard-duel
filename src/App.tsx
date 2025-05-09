@@ -2,8 +2,9 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Client } from 'boardgame.io/react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { MainMenu, WizardDuelBoard } from './components/board';
-import { WizardDuel } from './core/game';
+
+import { MainMenu, WizardDuelBoard } from '@components/board';
+import { WizardDuel } from '@core/game';
 
 const WizardDuelClient = Client({
   game: WizardDuel,

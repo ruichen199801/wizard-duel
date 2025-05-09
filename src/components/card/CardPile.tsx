@@ -1,4 +1,4 @@
-import { cardPile } from '../../utils';
+import { cardPile } from '@utils';
 import { CARD_HEIGHT, CARD_SMALL_SCALE, CARD_WIDTH } from './CardView';
 
 export interface CardPileProps {

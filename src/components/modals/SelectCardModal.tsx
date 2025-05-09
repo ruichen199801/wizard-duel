@@ -1,5 +1,5 @@
-import { CardId } from '../../core/models';
-import { cardFront } from '../../utils';
+import { CardId } from '@core/models';
+import { cardFront } from '@utils';
 
 export interface SelectCardModalProps {
   readonly cardIdList: CardId[];
