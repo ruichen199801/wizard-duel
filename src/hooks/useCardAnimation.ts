@@ -7,6 +7,7 @@ import { PowerClass } from '@core/power';
 import {
   AnimationProps,
   AnimationTarget,
+  CacheKey,
   getAnimationDataForCard,
   getAnimationTargetForCard,
   sleep,
@@ -77,7 +78,7 @@ export const useCardAnimation = (G: WizardDuelState, ctx: Ctx) => {
       (isUniqueHealCard && hasPoisonEffect) ||
       (ctx.currentPlayer === '0' &&
         isUniqueHealCard &&
-        sessionStorage.getItem('power') === PowerClass.cryo)
+        sessionStorage.getItem(CacheKey.power) === PowerClass.cryo)
     ) {
       return false;
     }

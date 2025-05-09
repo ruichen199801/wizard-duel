@@ -7,6 +7,7 @@ import { WizardDuelState } from '@core/game';
 import { DrawMode } from '@core/level';
 import { Card, CardId } from '@core/models';
 import {
+  StatefulCacheKey,
   useAudioPlayer,
   useBsTooltip,
   useCardAnimation,
@@ -87,15 +88,15 @@ export const WizardDuelBoard = ({
   >([]);
 
   const [aiStrategy, setAiStrategy] = usePersistentState(
-    'aiStrategy',
+    StatefulCacheKey.aiStrategy,
     Strategy.filter
   );
   const [showGameStats, setShowGameStats] = usePersistentState(
-    'showGameStats',
+    StatefulCacheKey.showGameStats,
     true
   );
   const [showEffectStack, setShowEffectStack] = usePersistentState(
-    'showEffectStack',
+    StatefulCacheKey.showEffectStack,
     true
   );
 

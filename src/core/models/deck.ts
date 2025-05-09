@@ -1,4 +1,5 @@
 import { GameDifficulty, PowerClass } from '@core/power/power';
+import { CacheKey } from '@utils';
 import {
   Ambush,
   Armor,
@@ -134,11 +135,11 @@ export const getDeckForLevel = (level = '1'): Card[] => {
   }
 
   if (
-    sessionStorage.getItem('power') === PowerClass.cryo &&
-    sessionStorage.getItem('difficulty') === GameDifficulty.normal
+    sessionStorage.getItem(CacheKey.power) === PowerClass.cryo &&
+    sessionStorage.getItem(CacheKey.difficulty) === GameDifficulty.normal
   ) {
     return [...levelDeck, Frost1, Frost1, Frost2, Frost2, Frost3, Frost3]; // Cryo effect
-  } else if (sessionStorage.getItem('power') === PowerClass.erebo) {
+  } else if (sessionStorage.getItem(CacheKey.power) === PowerClass.erebo) {
     return levelDeck.filter((card) => card.id !== CardId.Mutate); // Erebo effect
   }
 

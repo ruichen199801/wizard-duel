@@ -8,6 +8,7 @@ import {
 import { GameDifficulty, PowerClass } from '@core/power';
 import { useImageLoader } from '@hooks';
 import {
+  CacheKey,
   click,
   getAvatarForLevel,
   powers,
@@ -47,8 +48,8 @@ export const SelectPowerModal = ({
 
   const handleNextLevel = (difficulty: GameDifficulty) => {
     if (selectedPowerClass) {
-      sessionStorage.setItem('power', selectedPowerClass);
-      sessionStorage.setItem('difficulty', difficulty);
+      sessionStorage.setItem(CacheKey.power, selectedPowerClass);
+      sessionStorage.setItem(CacheKey.difficulty, difficulty);
       startLevel();
     }
   };

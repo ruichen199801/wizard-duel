@@ -1,4 +1,5 @@
 import { GameDifficulty, PowerClass } from '@core/power';
+import { CacheKey } from '@utils';
 
 const enemyNames: Record<string, string> = {
   1: 'Arden the Wise',
@@ -158,10 +159,10 @@ const powers: PowerSelectionProps[] = [
 
 const getRuleByPower = (): BattleInstrutionProps => {
   const power = powers.find(
-    (power) => power.class === sessionStorage.getItem('power')
+    (power) => power.class === sessionStorage.getItem(CacheKey.power)
   );
   const difficulty =
-    (sessionStorage.getItem('difficulty') as GameDifficulty) ||
+    (sessionStorage.getItem(CacheKey.difficulty) as GameDifficulty) ||
     GameDifficulty.normal;
   return power
     ? {

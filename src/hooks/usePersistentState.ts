@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
 
+export enum StatefulCacheKey {
+  aiStrategy = 'aiStrategy',
+  showGameStats = 'showGameStats',
+  showEffectStack = 'showEffectStack',
+}
+
 /**
  * Custom hook to manage state and sync it with sessionStorage.
  * This can be used to track setting changes except for audio and music, which are handled in their own hooks.

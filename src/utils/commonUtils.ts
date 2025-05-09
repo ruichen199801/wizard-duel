@@ -1,4 +1,19 @@
 /**
+ * Enum to keep sessionStorage operations safe.
+ * This should only be used when there is need to persist data across multiple games.
+ */
+export enum CacheKey {
+  // Game related
+  level = 'level',
+  power = 'power', // Final level only
+  difficulty = 'difficulty', // Final level only
+
+  // User settings related
+  isAudioMuted = 'isAudioMuted',
+  isMusicMuted = 'isMusicMuted',
+}
+
+/**
  * Pauses execution for a specified time.
  * Example: await sleep(2000);
  */
@@ -34,10 +49,10 @@ export const startLevel = () => {
 /**
  * Clear game configs (AI and display settings will still persist).
  */
-const clearSession = () => {
-  sessionStorage.removeItem('level');
-  sessionStorage.removeItem('power');
-  sessionStorage.removeItem('difficulty');
+export const clearSession = () => {
+  sessionStorage.removeItem(CacheKey.level);
+  sessionStorage.removeItem(CacheKey.power);
+  sessionStorage.removeItem(CacheKey.difficulty);
 };
 
 /**
@@ -50,7 +65,7 @@ export const jumpToLevel = (level = '1') => {
 
 const setLevelTo = (level: string) => {
   try {
-    sessionStorage.setItem('level', level);
+    sessionStorage.setItem(CacheKey.level, level);
   } catch (e) {
     console.error('Error saving to sessionStorage:', e);
   }

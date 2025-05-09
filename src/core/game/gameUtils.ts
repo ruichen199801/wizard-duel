@@ -24,6 +24,7 @@ import {
   applyPowerOverride,
   applyStartOfTurnPowerEffects,
 } from '@core/power/powerUtils';
+import { CacheKey, clearSession } from '@utils';
 import { WizardDuelState } from './game';
 
 /**
@@ -134,7 +135,7 @@ export const onGameEnd = ({ G, ctx }: { G: WizardDuelState; ctx: Ctx }) => {
  */
 export const getCurrentLevel = (): string => {
   try {
-    return sessionStorage.getItem('level') || '1';
+    return sessionStorage.getItem(CacheKey.level) || '1';
   } catch (e) {
     console.error('Error parsing sessionStorage data:', e);
     return '1';
@@ -151,9 +152,9 @@ export const setPrevLevel = () => {
       return;
     }
     const prevLevel = parseInt(currentLevel, 10) - 1;
-    sessionStorage.setItem('level', prevLevel.toString());
-    sessionStorage.removeItem('power');
-    sessionStorage.removeItem('difficulty');
+    sessionStorage.setItem(CacheKey.level, prevLevel.toString());
+    sessionStorage.removeItem(CacheKey.power);
+    sessionStorage.removeItem(CacheKey.difficulty);
   } catch (e) {
     console.error('Error saving to sessionStorage:', e);
   }
@@ -166,13 +167,11 @@ export const setNextLevel = () => {
   try {
     const currentLevel = getCurrentLevel();
     if (currentLevel === FINAL_LEVEL) {
-      sessionStorage.removeItem('level');
-      sessionStorage.removeItem('power');
-      sessionStorage.removeItem('difficulty');
+      clearSession();
       return;
     }
     const nextLevel = parseInt(currentLevel, 10) + 1;
-    sessionStorage.setItem('level', nextLevel.toString());
+    sessionStorage.setItem(CacheKey.level, nextLevel.toString());
   } catch (e) {
     console.error('Error saving to sessionStorage:', e);
   }

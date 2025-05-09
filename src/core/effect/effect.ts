@@ -13,6 +13,7 @@ import {
 import { CardId } from '@core/models/cards';
 import { getDeckForLevel } from '@core/models/deck';
 import { PowerClass, getPowerConfigs } from '@core/power/power';
+import { CacheKey } from '@utils';
 import {
   getChanceEffect,
   getEffects,
@@ -91,7 +92,10 @@ const damage: EffectHandler = ({ G, ctx, target, effect }) => {
   // Apply the final damage to the target's HP.
   G.players[target].hp -= value;
 
-  if (target === '1' && sessionStorage.getItem('power') === PowerClass.erebo) {
+  if (
+    target === '1' &&
+    sessionStorage.getItem(CacheKey.power) === PowerClass.erebo
+  ) {
     G.players[target].maxHp -= value; // Erebo buff
   }
 
@@ -102,7 +106,8 @@ const heal: EffectHandler = ({ G, target, effect }) => {
   const { value = 0 } = effect;
   if (
     hasEffect(G, target, EffectType.poison) ||
-    (target === '0' && sessionStorage.getItem('power') === PowerClass.cryo) // Cryo debuff
+    (target === '0' &&
+      sessionStorage.getItem(CacheKey.power) === PowerClass.cryo) // Cryo debuff
   ) {
     return;
   }
@@ -328,7 +333,7 @@ const applyDamageLevelEffects = (
     case '8':
       if (
         target === '1' &&
-        sessionStorage.getItem('power') === PowerClass.cryo
+        sessionStorage.getItem(CacheKey.power) === PowerClass.cryo
       ) {
         if (getChanceEffect(getPowerConfigs().cryoFreezeRate)) {
           G.players[target].effects.push(freezeEffect); // Cryo buff

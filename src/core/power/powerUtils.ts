@@ -26,6 +26,7 @@ import {
   Wish4,
   Wish5,
 } from '@core/models/cards';
+import { CacheKey } from '@utils';
 import { getPowerConfigs, PowerClass, PYRO_HAND_DISTRIBUTION } from './power';
 
 const powerConfig: Record<string, number> = getPowerConfigs();
@@ -35,7 +36,7 @@ const powerConfig: Record<string, number> = getPowerConfigs();
  */
 const applyPowerOverride = (G: WizardDuelState) => {
   if (G.level !== FINAL_LEVEL) return;
-  const powerClass = sessionStorage.getItem('power');
+  const powerClass = sessionStorage.getItem(CacheKey.power);
   switch (powerClass) {
     // Psammo debuff
     case PowerClass.psammo:
@@ -79,7 +80,7 @@ const applyPowerOverride = (G: WizardDuelState) => {
  */
 const applyStartOfTurnPowerEffects = (G: WizardDuelState, ctx: Ctx) => {
   if (G.level !== FINAL_LEVEL) return;
-  const powerClass = sessionStorage.getItem('power');
+  const powerClass = sessionStorage.getItem(CacheKey.power);
   switch (powerClass) {
     // Psammo buff
     case PowerClass.psammo:
@@ -95,7 +96,7 @@ const applyStartOfTurnPowerEffects = (G: WizardDuelState, ctx: Ctx) => {
  */
 const applyEndOfTurnPowerEffects = (G: WizardDuelState, ctx: Ctx) => {
   if (G.level !== FINAL_LEVEL) return;
-  const powerClass = sessionStorage.getItem('power');
+  const powerClass = sessionStorage.getItem(CacheKey.power);
   switch (powerClass) {
     // Pyro buff
     case PowerClass.pyro:
