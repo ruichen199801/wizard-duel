@@ -1,16 +1,13 @@
-import { Player } from '@core/models';
-import { CardType, CardView } from './CardView';
+import { Player } from '../../core/data/player';
+import Card, { CardType } from './Card';
 
-export interface PlayerHandProps {
+interface PlayerHandProps {
   readonly player: Player;
   readonly showEnemyHand: boolean;
   readonly handleCardClick?: (index: number) => void;
 }
 
-/**
- * @group Components
- */
-export const PlayerHand = ({
+const PlayerHand = ({
   player,
   showEnemyHand,
   handleCardClick,
@@ -20,17 +17,19 @@ export const PlayerHand = ({
       {player.hand.map((card, index) => (
         <div key={index} className='me-2'>
           {showEnemyHand || player.id === '0' ? (
-            <CardView
+            <Card
               cardType={CardType.front}
               cardId={card.id}
               cardIndex={index}
               handleCardClick={handleCardClick}
             />
           ) : (
-            <CardView cardType={CardType.back} playerId='1' />
+            <Card cardType={CardType.back} playerId='1' />
           )}
         </div>
       ))}
     </div>
   );
 };
+
+export default PlayerHand;

@@ -1,15 +1,14 @@
-import { CacheKey } from '@utils';
 import { useEffect, useState } from 'react';
 
-export const useAudioPlayer = () => {
+const useAudioPlayer = () => {
   const [audio, setAudio] = useState<HTMLAudioElement | undefined>();
   const [isAudioMuted, setIsAudioMuted] = useState(() => {
-    const stored = sessionStorage.getItem(CacheKey.isAudioMuted);
+    const stored = sessionStorage.getItem('isAudioMuted');
     return (stored ? JSON.parse(stored) : false) as boolean;
   });
 
   useEffect(() => {
-    sessionStorage.setItem(CacheKey.isAudioMuted, JSON.stringify(isAudioMuted));
+    sessionStorage.setItem('isAudioMuted', JSON.stringify(isAudioMuted));
   }, [isAudioMuted]);
 
   const playAudio = (src: string) => {
@@ -36,3 +35,5 @@ export const useAudioPlayer = () => {
 
   return { playAudio, toggleAudioMute, isAudioMuted };
 };
+
+export default useAudioPlayer;

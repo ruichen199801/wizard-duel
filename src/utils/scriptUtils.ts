@@ -1,5 +1,4 @@
-import { GameDifficulty, PowerClass } from '@core/power';
-import { CacheKey } from '@utils';
+import { GameDifficulty, PowerClass } from '../core/power/power';
 
 const enemyNames: Record<string, string> = {
   1: 'Arden the Wise',
@@ -25,7 +24,7 @@ const battleStartCaptions: Record<string, string> = {
 };
 const getBattleStartCaption = (level = '1') => battleStartCaptions[level];
 
-export interface BattleInstrutionProps {
+interface BattleInstrutionProps {
   readonly intro?: string;
   readonly rule?: string;
   readonly outro?: string;
@@ -159,10 +158,10 @@ const powers: PowerSelectionProps[] = [
 
 const getRuleByPower = (): BattleInstrutionProps => {
   const power = powers.find(
-    (power) => power.class === sessionStorage.getItem(CacheKey.power)
+    (power) => power.class === sessionStorage.getItem('power')
   );
   const difficulty =
-    (sessionStorage.getItem(CacheKey.difficulty) as GameDifficulty) ||
+    (sessionStorage.getItem('difficulty') as GameDifficulty) ||
     GameDifficulty.normal;
   return power
     ? {

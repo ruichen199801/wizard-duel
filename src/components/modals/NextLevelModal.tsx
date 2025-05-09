@@ -1,17 +1,12 @@
-import { getNextCardsForLevel, startLevel } from '@utils';
+import { getNextCardsForLevel } from '../../utils/assetUtils';
+import { startLevel } from '../../utils/commonUtils';
 
-export interface NextLevelModalProps {
+interface NextLevelModalProps {
   readonly showNextLevelModal: boolean;
   readonly level: string;
 }
 
-/**
- * @group Components
- */
-export const NextLevelModal = ({
-  showNextLevelModal,
-  level,
-}: NextLevelModalProps) => {
+const NextLevelModal = ({ showNextLevelModal, level }: NextLevelModalProps) => {
   if (!showNextLevelModal) {
     return null;
   }
@@ -63,3 +58,5 @@ export const NextLevelModal = ({
     </>
   );
 };
+
+export default NextLevelModal;

@@ -1,16 +1,10 @@
 import { useEffect, useState } from 'react';
 
-export enum StatefulCacheKey {
-  aiStrategy = 'aiStrategy',
-  showGameStats = 'showGameStats',
-  showEffectStack = 'showEffectStack',
-}
-
 /**
  * Custom hook to manage state and sync it with sessionStorage.
  * This can be used to track setting changes except for audio and music, which are handled in their own hooks.
  */
-export const usePersistentState = <T>(
+const usePersistentState = <T>(
   key: string,
   defaultValue: T
 ): [T, React.Dispatch<React.SetStateAction<T>>] => {
@@ -25,3 +19,5 @@ export const usePersistentState = <T>(
 
   return [state, setState];
 };
+
+export default usePersistentState;

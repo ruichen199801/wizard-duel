@@ -1,10 +1,10 @@
 import { useState } from 'react';
+import { Strategy } from '../../ai/ai';
+import { PRE_FINAL_LEVEL } from '../../core/level/level';
+import { click } from '../../utils/assetUtils';
+import { exitToMenu, jumpToLevel, resetGame } from '../../utils/commonUtils';
 
-import { Strategy } from '@ai';
-import { PRE_FINAL_LEVEL } from '@core/level';
-import { click, exitToMenu, jumpToLevel, resetGame } from '@utils';
-
-export interface SettingsModalProps {
+interface SettingsModalProps {
   readonly showSettingsModal: boolean;
   readonly setShowSettingsModal: React.Dispatch<React.SetStateAction<boolean>>;
   readonly playAudio: (audio: string) => void;
@@ -20,10 +20,7 @@ export interface SettingsModalProps {
   readonly setAiStrategy: React.Dispatch<React.SetStateAction<Strategy>>;
 }
 
-/**
- * @group Components
- */
-export const SettingsModal = ({
+const SettingsModal = ({
   showSettingsModal,
   setShowSettingsModal,
   playAudio,
@@ -187,3 +184,5 @@ export const SettingsModal = ({
     </>
   );
 };
+
+export default SettingsModal;

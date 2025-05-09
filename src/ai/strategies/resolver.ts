@@ -1,11 +1,6 @@
-import {
-  Card,
-  CardId,
-  CardKeyword,
-  EffectGroupName,
-  EffectType,
-  WizardDuelState,
-} from '@core/models';
+import { EffectGroupName, EffectType } from '../../core/data/cardEffects';
+import { Card, CardId, CardKeyword } from '../../core/data/cards';
+import { WizardDuelState } from '../../core/game/game';
 import { random } from './random';
 import {
   POWERFUL_CARDS,

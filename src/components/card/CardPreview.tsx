@@ -1,29 +1,28 @@
-import { Card } from '@core/models';
-import { CARD_MEDIUM_SCALE, CardType, CardView } from './CardView';
+import { Card as CardData } from '../../core/data/cards';
+import Card, { CARD_MEDIUM_SCALE, CardType } from './Card';
 
-export interface CardPreviewProps {
-  readonly selectedCard?: Card;
+interface CardPreviewProps {
+  readonly selectedCard?: CardData;
   readonly scale?: number;
 }
 
-/**
- * @group Components
- */
-export const CardPreview = ({
+const CardPreview = ({
   selectedCard,
   scale = CARD_MEDIUM_SCALE,
 }: CardPreviewProps) => {
   return (
     <div className='d-flex justify-content-center align-items-center h-100'>
       {selectedCard ? (
-        <CardView
+        <Card
           cardType={CardType.preview}
           cardId={selectedCard.id}
           scale={scale}
         />
       ) : (
-        <CardView cardType={CardType.placeholder} playerId='0' scale={scale} />
+        <Card cardType={CardType.placeholder} playerId='0' scale={scale} />
       )}
     </div>
   );
 };
+
+export default CardPreview;

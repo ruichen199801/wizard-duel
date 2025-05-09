@@ -1,18 +1,18 @@
 import { Ctx } from 'boardgame.io';
 import { useState } from 'react';
-
-import { Card, CardKeyword, EffectType, WizardDuelState } from '@core/models';
-import { PowerClass } from '@core/power';
+import { EffectType } from '../core/data/cardEffects';
+import { Card, CardKeyword } from '../core/data/cards';
+import { WizardDuelState } from '../core/game/game';
+import { PowerClass } from '../core/power/power';
 import {
   AnimationProps,
   AnimationTarget,
-  CacheKey,
   getAnimationDataForCard,
   getAnimationTargetForCard,
-  sleep,
-} from '@utils';
+} from '../utils/assetUtils';
+import { sleep } from '../utils/commonUtils';
 
-export const useCardAnimation = (G: WizardDuelState, ctx: Ctx) => {
+const useCardAnimation = (G: WizardDuelState, ctx: Ctx) => {
   const [showPlayerAnimation, setShowPlayerAnimation] = useState(false);
   const [showEnemyAnimation, setShowEnemyAnimation] = useState(false);
   const [cardAnimationData, setCardAnimationData] = useState<
@@ -77,7 +77,7 @@ export const useCardAnimation = (G: WizardDuelState, ctx: Ctx) => {
       (isUniqueHealCard && hasPoisonEffect) ||
       (ctx.currentPlayer === '0' &&
         isUniqueHealCard &&
-        sessionStorage.getItem(CacheKey.power) === PowerClass.cryo)
+        sessionStorage.getItem('power') === PowerClass.cryo)
     ) {
       return false;
     }
@@ -112,3 +112,5 @@ export const useCardAnimation = (G: WizardDuelState, ctx: Ctx) => {
     handleShowCardAnimation,
   };
 };
+
+export default useCardAnimation;

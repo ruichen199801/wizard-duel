@@ -1,9 +1,9 @@
 import { PlayerID } from 'boardgame.io';
+import { FINAL_LEVEL } from '../../core/level/level';
+import { click } from '../../utils/assetUtils';
+import { exitToMenu, resetGame, startLevel } from '../../utils/commonUtils';
 
-import { FINAL_LEVEL } from '@core/level';
-import { click, exitToMenu, resetGame, startLevel } from '@utils';
-
-export interface GameoverModalProps {
+interface GameoverModalProps {
   readonly showGameoverModal: boolean;
   readonly setShowGameoverModal: React.Dispatch<React.SetStateAction<boolean>>;
   readonly setShowNextLevelModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,10 +15,7 @@ export interface GameoverModalProps {
   readonly level: string;
 }
 
-/**
- * @group Components
- */
-export const GameoverModal = ({
+const GameoverModal = ({
   showGameoverModal,
   setShowGameoverModal,
   setShowNextLevelModal,
@@ -154,3 +151,5 @@ export const GameoverModal = ({
     </>
   );
 };
+
+export default GameoverModal;

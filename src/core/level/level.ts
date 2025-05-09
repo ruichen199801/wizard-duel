@@ -1,4 +1,4 @@
-import { Effect } from '@core/models/cardEffects';
+import { Effect } from '../data/cardEffects';
 import {
   Card,
   Fireball1,
@@ -6,22 +6,26 @@ import {
   Fireball3,
   Flame,
   Resurrect,
-} from '@core/models/cards';
-import { PlayerStats } from '@core/models/player';
-import { DrawMode, GlobalEffectProps } from '@core/models/shared';
-import { PowerClass, getPowerConfigs } from '@core/power/power';
-import { CacheKey } from '@utils';
+} from '../data/cards';
+import { PlayerStats } from '../data/player';
+import { GlobalEffectProps } from '../game/game';
+import { PowerClass, getPowerConfigs } from '../power/power';
 import {
   generateAttackOutcomes,
   getClearEffectSchedule,
   randomPopulateHand,
 } from './levelUtils';
 
+export enum DrawMode {
+  draw = 'draw',
+  select = 'select',
+}
+
 export const FINAL_LEVEL = '8';
 export const PRE_FINAL_LEVEL = '7';
 
 export const maxTurn: number =
-  sessionStorage.getItem(CacheKey.power) === PowerClass.pyro
+  sessionStorage.getItem('power') === PowerClass.pyro
     ? getPowerConfigs().pyroMaxTurn // Pyro debuff
     : 50;
 

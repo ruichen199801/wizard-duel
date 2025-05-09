@@ -1,18 +1,6 @@
 import { Ctx } from 'boardgame.io';
 
-import { applyEffect } from '@core/effect/effect';
-import { getChanceEffect, hasSameEffect } from '@core/effect/effectUtils';
-import { FINAL_LEVEL, maxTurn } from '@core/level/level';
-import {
-  generateAttackOutcomes,
-  randomPopulateHand,
-} from '@core/level/levelUtils';
-import {
-  buffAtk,
-  buffDef,
-  doubleDmg,
-  preventDmg,
-} from '@core/models/cardEffects';
+import { buffAtk, buffDef, doubleDmg, preventDmg } from '../data/cardEffects';
 import {
   Fireball1,
   Fireball2,
@@ -24,9 +12,15 @@ import {
   Wish3,
   Wish4,
   Wish5,
-} from '@core/models/cards';
-import { DrawMode, WizardDuelState } from '@core/models/shared';
-import { CacheKey } from '@utils';
+} from '../data/cards';
+import { applyEffect } from '../effect/effect';
+import { getChanceEffect, hasSameEffect } from '../effect/effectUtils';
+import { WizardDuelState } from '../game/game';
+import { DrawMode, FINAL_LEVEL, maxTurn } from '../level/level';
+import {
+  generateAttackOutcomes,
+  randomPopulateHand,
+} from '../level/levelUtils';
 import { getPowerConfigs, PowerClass, PYRO_HAND_DISTRIBUTION } from './power';
 
 const powerConfig: Record<string, number> = getPowerConfigs();
@@ -36,7 +30,7 @@ const powerConfig: Record<string, number> = getPowerConfigs();
  */
 const applyPowerOverride = (G: WizardDuelState) => {
   if (G.level !== FINAL_LEVEL) return;
-  const powerClass = sessionStorage.getItem(CacheKey.power);
+  const powerClass = sessionStorage.getItem('power');
   switch (powerClass) {
     // Psammo debuff
     case PowerClass.psammo:
@@ -80,7 +74,7 @@ const applyPowerOverride = (G: WizardDuelState) => {
  */
 const applyStartOfTurnPowerEffects = (G: WizardDuelState, ctx: Ctx) => {
   if (G.level !== FINAL_LEVEL) return;
-  const powerClass = sessionStorage.getItem(CacheKey.power);
+  const powerClass = sessionStorage.getItem('power');
   switch (powerClass) {
     // Psammo buff
     case PowerClass.psammo:
@@ -96,7 +90,7 @@ const applyStartOfTurnPowerEffects = (G: WizardDuelState, ctx: Ctx) => {
  */
 const applyEndOfTurnPowerEffects = (G: WizardDuelState, ctx: Ctx) => {
   if (G.level !== FINAL_LEVEL) return;
-  const powerClass = sessionStorage.getItem(CacheKey.power);
+  const powerClass = sessionStorage.getItem('power');
   switch (powerClass) {
     // Pyro buff
     case PowerClass.pyro:

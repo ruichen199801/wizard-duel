@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export const usePreloadAssets = (
+const usePreloadAssets = (
   imageArray: string[],
   animationArray: string[],
   audioArray: string[],
@@ -30,3 +30,5 @@ export const usePreloadAssets = (
     });
   }, []);
 };
+
+export default usePreloadAssets;

@@ -1,5 +1,5 @@
 import { PlayerID } from 'boardgame.io';
-import { CardId, getCardCount } from '@core/models';
+import { CardId, getCardCount } from '../core/data/cards';
 
 const imgPrefix = 'images';
 const avatarPrefix = `${imgPrefix}/avatars`;
@@ -78,7 +78,7 @@ const getNextCardsForLevel = (level = '1') => nextLevelCards[level];
 
 // ANIMATION FILES
 
-export enum Animation {
+enum Animation {
   fireball = 'fireball',
   freeze = 'freeze',
   thunder = 'thunder',
@@ -297,9 +297,7 @@ const getAnimationDataForCard = (cardId: CardId): AnimationProps | undefined =>
   animationData[cardAnimation[cardId]?.type as Animation];
 
 // Same animation can be reused to different targets, hence separating it from animationData object
-const getAnimationTargetForCard = (
-  cardId: CardId
-): AnimationTarget | undefined =>
+const getAnimationTargetForCard = (cardId: CardId): AnimationTarget | undefined =>
   cardAnimation[cardId]?.target as AnimationTarget;
 
 // AUDIO FILES

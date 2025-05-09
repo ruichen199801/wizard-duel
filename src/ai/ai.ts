@@ -1,7 +1,9 @@
 import { Ctx } from 'boardgame.io';
-
-import { Card, WizardDuelState } from '@core/models';
-import { filterActions, random, resolveAction } from './strategies';
+import { Card } from '../core/data/cards';
+import { WizardDuelState } from '../core/game/game';
+import { filterActions } from './strategies/filter';
+import { random } from './strategies/random';
+import { resolveAction } from './strategies/resolver';
 
 export enum Strategy {
   // AI makes random moves.

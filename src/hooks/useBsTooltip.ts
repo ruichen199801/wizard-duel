@@ -1,7 +1,7 @@
-import { Tooltip } from 'bootstrap';
 import { useEffect } from 'react';
+import { Tooltip } from 'bootstrap';
 
-export const useBsTooltip = () => {
+const useBsTooltip = () => {
   useEffect(() => {
     const tooltipTriggerList = document.querySelectorAll(
       '[data-bs-toggle="tooltip"]'
@@ -11,3 +11,5 @@ export const useBsTooltip = () => {
     });
   }, []);
 };
+
+export default useBsTooltip;

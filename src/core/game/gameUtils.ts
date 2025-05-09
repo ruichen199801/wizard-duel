@@ -1,14 +1,6 @@
 import { Ctx } from 'boardgame.io';
 
-import { applyEffect } from '@core/effect/effect';
-import { getEffects, hasEffect, undoEffect } from '@core/effect/effectUtils';
-import {
-  FINAL_LEVEL,
-  globalEffectsDefault,
-  levelConfigs,
-  maxTurn,
-} from '@core/level/level';
-import { Effect, EffectType } from '@core/models/cardEffects';
+import { Effect, EffectType } from '../data/cardEffects';
 import {
   Card,
   CardId,
@@ -17,15 +9,35 @@ import {
   Wish3,
   Wish4,
   Wish5,
-} from '@core/models/cards';
-import { PlayerStats } from '@core/models/player';
+} from '../data/cards';
+import { PlayerStats } from '../data/player';
+import { applyEffect } from '../effect/effect';
+import { getEffects, hasEffect, undoEffect } from '../effect/effectUtils';
+import {
+  FINAL_LEVEL,
+  globalEffectsDefault,
+  levelConfigs,
+  maxTurn,
+} from '../level/level';
 import {
   applyEndOfTurnPowerEffects,
   applyPowerOverride,
   applyStartOfTurnPowerEffects,
-} from '@core/power/powerUtils';
-import { CacheKey, clearSession } from '@utils';
-import { WizardDuelState } from '@core/models/shared';
+} from '../power/powerUtils';
+import { WizardDuelState } from './game';
+
+/**
+ * Shuffle a deck of cards using Fisher-Yates algorithm.
+ */
+export const shuffle = (deck: Card[]): Card[] => {
+  for (let i = deck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = deck[i];
+    deck[i] = deck[j];
+    deck[j] = temp;
+  }
+  return deck;
+};
 
 /**
  * Deal cards to a player's hand until it contains 5 cards.
@@ -122,7 +134,7 @@ export const onGameEnd = ({ G, ctx }: { G: WizardDuelState; ctx: Ctx }) => {
  */
 export const getCurrentLevel = (): string => {
   try {
-    return sessionStorage.getItem(CacheKey.level) || '1';
+    return sessionStorage.getItem('level') || '1';
   } catch (e) {
     console.error('Error parsing sessionStorage data:', e);
     return '1';
@@ -139,9 +151,9 @@ export const setPrevLevel = () => {
       return;
     }
     const prevLevel = parseInt(currentLevel, 10) - 1;
-    sessionStorage.setItem(CacheKey.level, prevLevel.toString());
-    sessionStorage.removeItem(CacheKey.power);
-    sessionStorage.removeItem(CacheKey.difficulty);
+    sessionStorage.setItem('level', prevLevel.toString());
+    sessionStorage.removeItem('power');
+    sessionStorage.removeItem('difficulty');
   } catch (e) {
     console.error('Error saving to sessionStorage:', e);
   }
@@ -154,11 +166,13 @@ export const setNextLevel = () => {
   try {
     const currentLevel = getCurrentLevel();
     if (currentLevel === FINAL_LEVEL) {
-      clearSession();
+      sessionStorage.removeItem('level');
+      sessionStorage.removeItem('power');
+      sessionStorage.removeItem('difficulty');
       return;
     }
     const nextLevel = parseInt(currentLevel, 10) + 1;
-    sessionStorage.setItem(CacheKey.level, nextLevel.toString());
+    sessionStorage.setItem('level', nextLevel.toString());
   } catch (e) {
     console.error('Error saving to sessionStorage:', e);
   }

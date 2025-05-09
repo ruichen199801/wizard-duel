@@ -1,30 +1,21 @@
 import { useState } from 'react';
-
+import { GameDifficulty, PowerClass } from '../../core/power/power';
+import useImageLoader from '../../hooks/useImageLoader';
+import { click, getAvatarForLevel } from '../../utils/assetUtils';
+import { startLevel } from '../../utils/commonUtils';
+import { powers, PowerSelectionProps } from '../../utils/scriptUtils';
 import {
   AVATAR_HEIGHT,
   AVATAR_SMALL_SCALE,
   AVATAR_WIDTH,
-} from '@components/ui';
-import { GameDifficulty, PowerClass } from '@core/power';
-import { useImageLoader } from '@hooks';
-import {
-  CacheKey,
-  click,
-  getAvatarForLevel,
-  powers,
-  PowerSelectionProps,
-  startLevel,
-} from '@utils';
+} from '../ui/PlayerStatsPanel';
 
-export interface SelectPowerModalProps {
+interface SelectPowerModalProps {
   readonly showSelectPowerModal: boolean;
   readonly playAudio: (audio: string) => void;
 }
 
-/**
- * @group Components
- */
-export const SelectPowerModal = ({
+const SelectPowerModal = ({
   showSelectPowerModal,
   playAudio,
 }: SelectPowerModalProps) => {
@@ -48,8 +39,8 @@ export const SelectPowerModal = ({
 
   const handleNextLevel = (difficulty: GameDifficulty) => {
     if (selectedPowerClass) {
-      sessionStorage.setItem(CacheKey.power, selectedPowerClass);
-      sessionStorage.setItem(CacheKey.difficulty, difficulty);
+      sessionStorage.setItem('power', selectedPowerClass);
+      sessionStorage.setItem('difficulty', difficulty);
       startLevel();
     }
   };
@@ -135,3 +126,5 @@ export const SelectPowerModal = ({
     </>
   );
 };
+
+export default SelectPowerModal;

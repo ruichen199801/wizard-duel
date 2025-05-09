@@ -1,5 +1,3 @@
-import { CacheKey } from '@utils';
-
 export enum PowerClass {
   pyro = 'pyro',
   cryo = 'cryo',
@@ -48,7 +46,7 @@ const powerConfigsByDifficulty: Record<
 
 export const getPowerConfigs = (): Record<string, number> => {
   const difficulty =
-    (sessionStorage.getItem(CacheKey.difficulty) as GameDifficulty) ||
+    (sessionStorage.getItem('difficulty') as GameDifficulty) ||
     GameDifficulty.normal;
 
   return {

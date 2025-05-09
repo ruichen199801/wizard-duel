@@ -1,14 +1,19 @@
 import { useState } from 'react';
+import { CardId } from '../../core/data/cards';
+import useAudioPlayer from '../../hooks/useAudioPlayer';
+import usePreloadAssets from '../../hooks/usePreloadAssets';
+import {
+  ANIMATION,
+  AUDIO,
+  cardFronts,
+  click,
+  IMAGES,
+  MUSIC,
+} from '../../utils/assetUtils';
+import CardGalleryModal from '../modals/CardGalleryModal';
+import HelpModal from '../modals/HelpModal';
 
-import { CardGalleryModal, HelpModal } from '@components/modals';
-import { CardId } from '@core/models';
-import { useAudioPlayer, usePreloadAssets } from '@hooks';
-import { ANIMATION, AUDIO, cardFronts, click, IMAGES, MUSIC } from '@utils';
-
-/**
- * @group Components
- */
-export const MainMenu = () => {
+const MainMenu = () => {
   // Preload to use cache and reduce latency
   usePreloadAssets(IMAGES, ANIMATION, AUDIO, MUSIC);
 
@@ -87,3 +92,5 @@ export const MainMenu = () => {
     </div>
   );
 };
+
+export default MainMenu;

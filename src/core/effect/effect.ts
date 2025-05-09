@@ -1,18 +1,18 @@
 import { Ctx, PlayerID } from 'boardgame.io';
 
-import { levelRules } from '@core/level/level';
 import {
   Effect,
   EffectDuration,
   EffectGroupName,
   EffectType,
   freeze as freezeEffect,
-} from '@core/models/cardEffects';
-import { CardId } from '@core/models/cards';
-import { getDeckForLevel } from '@core/models/deck';
-import { WizardDuelState } from '@core/models/shared';
-import { PowerClass, getPowerConfigs } from '@core/power/power';
-import { CacheKey } from '@utils';
+} from '../data/cardEffects';
+import { CardId } from '../data/cards';
+import { getDeckForLevel } from '../data/deck';
+import { WizardDuelState } from '../game/game';
+import { shuffle } from '../game/gameUtils';
+import { levelRules } from '../level/level';
+import { PowerClass, getPowerConfigs } from '../power/power';
 import {
   getChanceEffect,
   getEffects,
@@ -25,7 +25,6 @@ import {
   selectEffectsByGroup,
   undoEffect,
 } from './effectUtils';
-import { shuffle } from '@core/utils';
 
 interface EffectHandlerParams {
   readonly G: WizardDuelState;
@@ -92,10 +91,7 @@ const damage: EffectHandler = ({ G, ctx, target, effect }) => {
   // Apply the final damage to the target's HP.
   G.players[target].hp -= value;
 
-  if (
-    target === '1' &&
-    sessionStorage.getItem(CacheKey.power) === PowerClass.erebo
-  ) {
+  if (target === '1' && sessionStorage.getItem('power') === PowerClass.erebo) {
     G.players[target].maxHp -= value; // Erebo buff
   }
 
@@ -106,8 +102,7 @@ const heal: EffectHandler = ({ G, target, effect }) => {
   const { value = 0 } = effect;
   if (
     hasEffect(G, target, EffectType.poison) ||
-    (target === '0' &&
-      sessionStorage.getItem(CacheKey.power) === PowerClass.cryo) // Cryo debuff
+    (target === '0' && sessionStorage.getItem('power') === PowerClass.cryo) // Cryo debuff
   ) {
     return;
   }
@@ -333,7 +328,7 @@ const applyDamageLevelEffects = (
     case '8':
       if (
         target === '1' &&
-        sessionStorage.getItem(CacheKey.power) === PowerClass.cryo
+        sessionStorage.getItem('power') === PowerClass.cryo
       ) {
         if (getChanceEffect(getPowerConfigs().cryoFreezeRate)) {
           G.players[target].effects.push(freezeEffect); // Cryo buff

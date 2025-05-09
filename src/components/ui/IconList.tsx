@@ -1,6 +1,6 @@
-import { click, icon } from '@utils';
+import { click, icon } from '../../utils/assetUtils';
 
-export interface IconListProps {
+interface IconListProps {
   readonly setShowLevelEffectModal: React.Dispatch<
     React.SetStateAction<boolean>
   >;
@@ -10,10 +10,7 @@ export interface IconListProps {
   readonly playAudio: (audio: string) => void;
 }
 
-/**
- * @group Components
- */
-export const IconList = ({
+const IconList = ({
   setShowLevelEffectModal,
   setShowLogModal,
   setShowSettingsModal,
@@ -88,3 +85,5 @@ export const IconList = ({
     </div>
   );
 };
+
+export default IconList;

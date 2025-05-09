@@ -1,13 +1,12 @@
-import { FINAL_LEVEL } from '@core/level';
+import { FINAL_LEVEL } from '../../core/level/level';
+import { click, getLocationForLevel } from '../../utils/assetUtils';
 import {
-  click,
   getBattleInstructions,
   getBattleStartCaption,
-  getLocationForLevel,
   getRuleByPower,
-} from '@utils';
+} from '../../utils/scriptUtils';
 
-export interface LevelEffectModalProps {
+interface LevelEffectModalProps {
   readonly showLevelEffectModal: boolean;
   readonly setShowLevelEffectModal: React.Dispatch<
     React.SetStateAction<boolean>
@@ -16,10 +15,7 @@ export interface LevelEffectModalProps {
   readonly level: string;
 }
 
-/**
- * @group Components
- */
-export const LevelEffectModal = ({
+const LevelEffectModal = ({
   showLevelEffectModal,
   setShowLevelEffectModal,
   playAudio,
@@ -99,3 +95,5 @@ export const LevelEffectModal = ({
     </>
   );
 };
+
+export default LevelEffectModal;

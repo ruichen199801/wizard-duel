@@ -1,8 +1,7 @@
 import { PlayerID } from 'boardgame.io';
 import { JSX } from 'react';
-
-import { CardId } from '@core/models';
-import { cardBack, cardFront, cardPlaceholder } from '@utils';
+import { CardId } from '../../core/data/cards';
+import { cardBack, cardFront, cardPlaceholder } from '../../utils/assetUtils';
 
 export const CARD_HEIGHT = 210;
 export const CARD_WIDTH = 150;
@@ -23,7 +22,7 @@ export enum CardType {
   placeholder = 'placeholder',
 }
 
-export interface CardProps {
+interface CardProps {
   readonly cardType: CardType;
   readonly cardId?: CardId;
   readonly cardIndex?: number;
@@ -32,10 +31,7 @@ export interface CardProps {
   readonly scale?: number;
 }
 
-/**
- * @group Components
- */
-export const CardView = ({
+const Card = ({
   cardType,
   cardId,
   cardIndex,
@@ -85,3 +81,5 @@ export const CardView = ({
 
   return <div>{cardContent[cardType]}</div>;
 };
+
+export default Card;

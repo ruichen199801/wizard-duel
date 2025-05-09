@@ -1,10 +1,9 @@
-import { CacheKey } from '@utils';
 import { useEffect, useState } from 'react';
 
-export const useMusicPlayer = (src: string) => {
+const useMusicPlayer = (src: string) => {
   const [music, setMusic] = useState<HTMLAudioElement | undefined>();
   const [isMusicMuted, setIsMusicMuted] = useState(() => {
-    const stored = sessionStorage.getItem(CacheKey.isMusicMuted);
+    const stored = sessionStorage.getItem('isMusicMuted');
     return (stored ? JSON.parse(stored) : false) as boolean;
   });
 
@@ -17,7 +16,7 @@ export const useMusicPlayer = (src: string) => {
   }, []);
 
   useEffect(() => {
-    sessionStorage.setItem(CacheKey.isMusicMuted, JSON.stringify(isMusicMuted));
+    sessionStorage.setItem('isMusicMuted', JSON.stringify(isMusicMuted));
   }, [isMusicMuted]);
 
   const playMusic = () => {
@@ -49,3 +48,5 @@ export const useMusicPlayer = (src: string) => {
 
   return { playMusic, pauseMusic, toggleMusic, isMusicMuted };
 };
+
+export default useMusicPlayer;

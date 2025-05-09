@@ -8,8 +8,6 @@ This is a single-player, turn-based card game. You are a young wizard in a magic
 
 Try it out yourself at [Wizard Duel](https://wizard-duel-ten.vercel.app/).
 
-📘 [Component Docs](https://ruichen199801.github.io/wizard-duel/)
-
 ## Built with
 
 - React

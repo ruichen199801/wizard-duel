@@ -1,14 +1,8 @@
 import { Ctx } from 'boardgame.io';
-
-import {
-  Card,
-  CardId,
-  CardKeyword,
-  EffectType,
-  WizardDuelState,
-} from '@core/models';
-import { PowerClass } from '@core/power';
-import { CacheKey } from '@utils';
+import { EffectType } from '../core/data/cardEffects';
+import { Card, CardId, CardKeyword } from '../core/data/cards';
+import { WizardDuelState } from '../core/game/game';
+import { PowerClass } from '../core/power/power';
 import { cardAudio, cleanse, defrost, miss, potion } from './assetUtils';
 
 /**
@@ -52,7 +46,7 @@ export const resolveCardAudio = (
     (isUniqueHealCard && hasPoisonEffect) ||
     (ctx.currentPlayer === '0' &&
       isUniqueHealCard &&
-      sessionStorage.getItem(CacheKey.power) === PowerClass.cryo)
+      sessionStorage.getItem('power') === PowerClass.cryo)
   ) {
     return potion;
   } else {

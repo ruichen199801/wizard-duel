@@ -7,7 +7,7 @@ export interface LogEntry {
   readonly cardText: string;
 }
 
-export const useLog = () => {
+const useLog = () => {
   const [logEntries, setLogEntries] = useState<LogEntry[]>([]);
 
   const addLogEntry = (entry: LogEntry) => {
@@ -16,3 +16,5 @@ export const useLog = () => {
 
   return { logEntries, addLogEntry };
 };
+
+export default useLog;

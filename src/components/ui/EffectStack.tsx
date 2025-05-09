@@ -1,18 +1,14 @@
 import { useState } from 'react';
+import { Effect, EffectGroupName } from '../../core/data/cardEffects';
+import { icon } from '../../utils/assetUtils';
 
-import { Effect, EffectGroupName } from '@core/models';
-import { icon } from '@utils';
-
-export interface EffectStackProps {
+interface EffectStackProps {
   readonly opponentEffects: Effect[];
   readonly playerEffects: Effect[];
   readonly showEffectStack: boolean;
 }
 
-/**
- * @group Components
- */
-export const EffectStack = ({
+const EffectStack = ({
   opponentEffects,
   playerEffects,
   showEffectStack,
@@ -136,3 +132,5 @@ export const EffectStack = ({
     </div>
   );
 };
+
+export default EffectStack;

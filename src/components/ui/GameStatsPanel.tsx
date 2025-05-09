@@ -1,17 +1,14 @@
-import { CardPile } from '@components/card';
-import { WizardDuelState } from '@core/models';
-import { icon } from '@utils';
+import { WizardDuelState } from '../../core/game/game';
+import { icon } from '../../utils/assetUtils';
+import CardPile from '../card/CardPile';
 
-export interface GameStatsPanelProps {
+interface GameStatsPanelProps {
   readonly G: WizardDuelState;
   readonly visibleTurn: number;
   readonly showGameStats: boolean;
 }
 
-/**
- * @group Components
- */
-export const GameStatsPanel = ({
+const GameStatsPanel = ({
   G,
   visibleTurn,
   showGameStats,
@@ -77,3 +74,5 @@ export const GameStatsPanel = ({
     </div>
   );
 };
+
+export default GameStatsPanel;

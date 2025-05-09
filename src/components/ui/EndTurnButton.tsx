@@ -12,15 +12,12 @@ export enum VisibleTurnPhase {
   aiTurn = 'ai turn',
 }
 
-export interface EndTurnButtonProps {
+interface EndTurnButtonProps {
   readonly turnPhase: VisibleTurnPhase;
   readonly handleEndTurnButtonClick: () => void;
 }
 
-/**
- * @group Components
- */
-export const EndTurnButton = ({
+const EndTurnButton = ({
   turnPhase,
   handleEndTurnButtonClick,
 }: EndTurnButtonProps) => {
@@ -42,3 +39,5 @@ export const EndTurnButton = ({
     </div>
   );
 };
+
+export default EndTurnButton;
