@@ -1,6 +1,5 @@
 import { PlayerID } from 'boardgame.io';
 
-import { WizardDuelState } from '@core/game/game';
 import {
   Effect,
   EffectGroupName,
@@ -8,6 +7,7 @@ import {
   EffectTarget,
   EffectType,
 } from '@core/models/cardEffects';
+import { WizardDuelState } from '@core/models/shared';
 
 /**
  * Returns the target player id of the card.

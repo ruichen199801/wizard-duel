@@ -1,10 +1,10 @@
-import { WizardDuelState } from '@core/game';
 import {
   Card,
   CardId,
   CardKeyword,
   EffectGroupName,
   EffectType,
+  WizardDuelState,
 } from '@core/models';
 import { random } from './random';
 import {

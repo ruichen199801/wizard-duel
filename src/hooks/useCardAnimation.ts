@@ -1,8 +1,7 @@
 import { Ctx } from 'boardgame.io';
 import { useState } from 'react';
 
-import { WizardDuelState } from '@core/game';
-import { Card, CardKeyword, EffectType } from '@core/models';
+import { Card, CardKeyword, EffectType, WizardDuelState } from '@core/models';
 import { PowerClass } from '@core/power';
 import {
   AnimationProps,

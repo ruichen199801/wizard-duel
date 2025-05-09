@@ -1,7 +1,6 @@
 import { Ctx } from 'boardgame.io';
 
-import { WizardDuelState } from '@core/game';
-import { Card } from '@core/models';
+import { Card, WizardDuelState } from '@core/models';
 import { filterActions, random, resolveAction } from './strategies';
 
 export enum Strategy {

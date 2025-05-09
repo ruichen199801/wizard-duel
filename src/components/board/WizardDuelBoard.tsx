@@ -3,9 +3,7 @@ import { BoardProps } from 'boardgame.io/dist/types/packages/react';
 import { useEffect, useState } from 'react';
 
 import { AI, Strategy } from '@ai';
-import { WizardDuelState } from '@core/game';
-import { DrawMode } from '@core/level';
-import { Card, CardId } from '@core/models';
+import { Card, CardId, DrawMode, WizardDuelState } from '@core/models';
 import {
   StatefulCacheKey,
   useAudioPlayer,

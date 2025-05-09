@@ -1,4 +1,3 @@
-import { GlobalEffectProps } from '@core/game/game';
 import { Effect } from '@core/models/cardEffects';
 import {
   Card,
@@ -9,6 +8,7 @@ import {
   Resurrect,
 } from '@core/models/cards';
 import { PlayerStats } from '@core/models/player';
+import { DrawMode, GlobalEffectProps } from '@core/models/shared';
 import { PowerClass, getPowerConfigs } from '@core/power/power';
 import { CacheKey } from '@utils';
 import {
@@ -16,11 +16,6 @@ import {
   getClearEffectSchedule,
   randomPopulateHand,
 } from './levelUtils';
-
-export enum DrawMode {
-  draw = 'draw',
-  select = 'select',
-}
 
 export const FINAL_LEVEL = '8';
 export const PRE_FINAL_LEVEL = '7';

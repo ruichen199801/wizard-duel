@@ -1,7 +1,5 @@
 import { Ctx, PlayerID } from 'boardgame.io';
 
-import { WizardDuelState } from '@core/game/game';
-import { shuffle } from '@core/game/gameUtils';
 import { levelRules } from '@core/level/level';
 import {
   Effect,
@@ -12,6 +10,7 @@ import {
 } from '@core/models/cardEffects';
 import { CardId } from '@core/models/cards';
 import { getDeckForLevel } from '@core/models/deck';
+import { WizardDuelState } from '@core/models/shared';
 import { PowerClass, getPowerConfigs } from '@core/power/power';
 import { CacheKey } from '@utils';
 import {
@@ -26,6 +25,7 @@ import {
   selectEffectsByGroup,
   undoEffect,
 } from './effectUtils';
+import { shuffle } from '@core/utils';
 
 interface EffectHandlerParams {
   readonly G: WizardDuelState;

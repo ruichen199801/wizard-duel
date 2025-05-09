@@ -25,20 +25,7 @@ import {
   applyStartOfTurnPowerEffects,
 } from '@core/power/powerUtils';
 import { CacheKey, clearSession } from '@utils';
-import { WizardDuelState } from './game';
-
-/**
- * Shuffle a deck of cards using Fisher-Yates algorithm.
- */
-export const shuffle = (deck: Card[]): Card[] => {
-  for (let i = deck.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const temp = deck[i];
-    deck[i] = deck[j];
-    deck[j] = temp;
-  }
-  return deck;
-};
+import { WizardDuelState } from '@core/models/shared';
 
 /**
  * Deal cards to a player's hand until it contains 5 cards.

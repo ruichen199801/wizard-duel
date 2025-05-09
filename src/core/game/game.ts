@@ -1,12 +1,13 @@
-import { Game, Move, PlayerID } from 'boardgame.io';
+import { Game, Move } from 'boardgame.io';
 
 import { applyEffect } from '@core/effect/effect';
 import { hasEffect, removeEffects } from '@core/effect/effectUtils';
-import { DrawMode } from '@core/level/level';
 import { EffectType } from '@core/models/cardEffects';
-import { Card, CardId } from '@core/models/cards';
+import { CardId } from '@core/models/cards';
 import { getDeckForLevel } from '@core/models/deck';
-import { p0, p1, Player } from '@core/models/player';
+import { p0, p1 } from '@core/models/player';
+import { WizardDuelState } from '@core/models/shared';
+import { shuffle } from '@core/utils';
 import {
   applyLevelOverride,
   dealCards,
@@ -20,27 +21,7 @@ import {
   onGameEnd,
   removeCard,
   removeCardById,
-  shuffle,
 } from './gameUtils';
-
-export interface GlobalEffectProps {
-  // Level-related effects
-  drawMode?: DrawMode;
-  showEnemyHand?: boolean;
-  shouldMiss?: boolean[];
-  shouldClearEffects?: boolean[];
-  loseHpAmount?: number;
-
-  // Power-related effects
-  shouldPlayerMiss?: boolean[];
-}
-
-export interface WizardDuelState {
-  readonly players: Record<PlayerID, Player>;
-  readonly level: string;
-  deck: Card[];
-  globalEffects: GlobalEffectProps;
-}
 
 const setupData = (): WizardDuelState => {
   const level = getCurrentLevel();

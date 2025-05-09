@@ -2,8 +2,7 @@ import { Ctx } from 'boardgame.io';
 
 import { applyEffect } from '@core/effect/effect';
 import { getChanceEffect, hasSameEffect } from '@core/effect/effectUtils';
-import { WizardDuelState } from '@core/game/game';
-import { DrawMode, FINAL_LEVEL, maxTurn } from '@core/level/level';
+import { FINAL_LEVEL, maxTurn } from '@core/level/level';
 import {
   generateAttackOutcomes,
   randomPopulateHand,
@@ -26,6 +25,7 @@ import {
   Wish4,
   Wish5,
 } from '@core/models/cards';
+import { DrawMode, WizardDuelState } from '@core/models/shared';
 import { CacheKey } from '@utils';
 import { getPowerConfigs, PowerClass, PYRO_HAND_DISTRIBUTION } from './power';
 

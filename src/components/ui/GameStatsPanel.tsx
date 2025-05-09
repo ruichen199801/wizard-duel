@@ -1,5 +1,5 @@
 import { CardPile } from '@components/card';
-import { WizardDuelState } from '@core/game';
+import { WizardDuelState } from '@core/models';
 import { icon } from '@utils';
 
 export interface GameStatsPanelProps {

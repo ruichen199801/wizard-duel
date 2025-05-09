@@ -1,8 +1,13 @@
 import { Ctx } from 'boardgame.io';
 
 import { getTarget, hasEffect, isUnique } from '@core/effect';
-import { WizardDuelState } from '@core/game';
-import { Card, CardId, CardKeyword, EffectGroupName } from '@core/models';
+import {
+  Card,
+  CardId,
+  CardKeyword,
+  EffectGroupName,
+  WizardDuelState,
+} from '@core/models';
 import { random } from './random';
 import {
   REMOVE_BUFF_CARDS,
