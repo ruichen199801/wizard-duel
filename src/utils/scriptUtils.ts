@@ -1,4 +1,4 @@
-import { GameDifficulty, PowerClass } from '../core/power/power';
+import { GameDifficulty, PowerClass } from '../core/power';
 
 const enemyNames: Record<string, string> = {
   1: 'Arden the Wise',
@@ -24,7 +24,7 @@ const battleStartCaptions: Record<string, string> = {
 };
 const getBattleStartCaption = (level = '1') => battleStartCaptions[level];
 
-interface BattleInstrutionProps {
+export interface BattleInstrutionProps {
   readonly intro?: string;
   readonly rule?: string;
   readonly outro?: string;

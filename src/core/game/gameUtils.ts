@@ -1,16 +1,5 @@
 import { Ctx } from 'boardgame.io';
 
-import { Effect, EffectType } from '../data/cardEffects';
-import {
-  Card,
-  CardId,
-  CardKeyword,
-  Wish2,
-  Wish3,
-  Wish4,
-  Wish5,
-} from '../data/cards';
-import { PlayerStats } from '../data/player';
 import { applyEffect } from '../effect/effect';
 import { getEffects, hasEffect, undoEffect } from '../effect/effectUtils';
 import {
@@ -19,6 +8,17 @@ import {
   levelConfigs,
   maxTurn,
 } from '../level/level';
+import { Effect, EffectType } from '../models/cardEffects';
+import {
+  Card,
+  CardId,
+  CardKeyword,
+  Wish2,
+  Wish3,
+  Wish4,
+  Wish5,
+} from '../models/cards';
+import { PlayerStats } from '../models/player';
 import {
   applyEndOfTurnPowerEffects,
   applyPowerOverride,

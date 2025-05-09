@@ -1,14 +1,17 @@
-import useImageLoader from '../../hooks/useImageLoader';
-import { click } from '../../utils/assetUtils';
+import { useImageLoader } from '../../hooks';
+import { click } from '../../utils';
 
-interface CardGalleryModalProps {
+export interface CardGalleryModalProps {
   readonly showCardGallery: boolean;
   readonly setShowCardGallery: React.Dispatch<React.SetStateAction<boolean>>;
   readonly cardImages: string[];
   readonly playAudio: (audio: string) => void;
 }
 
-const CardGalleryModal = ({
+/**
+ * @group Components
+ */
+export const CardGalleryModal = ({
   showCardGallery,
   setShowCardGallery,
   cardImages,
@@ -79,5 +82,3 @@ const CardGalleryModal = ({
     </>
   );
 };
-
-export default CardGalleryModal;

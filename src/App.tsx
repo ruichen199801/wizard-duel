@@ -2,9 +2,8 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Client } from 'boardgame.io/react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import MainMenu from './components/board/MainMenu';
-import WizardDuelBoard from './components/board/WizardDuelBoard';
-import { WizardDuel } from './core/game/game';
+import { MainMenu, WizardDuelBoard } from './components/board';
+import { WizardDuel } from './core/game';
 
 const WizardDuelClient = Client({
   game: WizardDuel,
@@ -12,7 +11,7 @@ const WizardDuelClient = Client({
   debug: { collapseOnLoad: true, hideToggleButton: true }, // Set to false for enabling debug panel
 });
 
-const App = () => {
+export const App = () => {
   return (
     <>
       <BrowserRouter>
@@ -29,5 +28,3 @@ const App = () => {
     </>
   );
 };
-
-export default App;

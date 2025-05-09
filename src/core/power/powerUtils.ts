@@ -1,6 +1,14 @@
 import { Ctx } from 'boardgame.io';
 
-import { buffAtk, buffDef, doubleDmg, preventDmg } from '../data/cardEffects';
+import { applyEffect } from '../effect/effect';
+import { getChanceEffect, hasSameEffect } from '../effect/effectUtils';
+import { WizardDuelState } from '../game/game';
+import { DrawMode, FINAL_LEVEL, maxTurn } from '../level/level';
+import {
+  generateAttackOutcomes,
+  randomPopulateHand,
+} from '../level/levelUtils';
+import { buffAtk, buffDef, doubleDmg, preventDmg } from '../models/cardEffects';
 import {
   Fireball1,
   Fireball2,
@@ -12,15 +20,7 @@ import {
   Wish3,
   Wish4,
   Wish5,
-} from '../data/cards';
-import { applyEffect } from '../effect/effect';
-import { getChanceEffect, hasSameEffect } from '../effect/effectUtils';
-import { WizardDuelState } from '../game/game';
-import { DrawMode, FINAL_LEVEL, maxTurn } from '../level/level';
-import {
-  generateAttackOutcomes,
-  randomPopulateHand,
-} from '../level/levelUtils';
+} from '../models/cards';
 import { getPowerConfigs, PowerClass, PYRO_HAND_DISTRIBUTION } from './power';
 
 const powerConfig: Record<string, number> = getPowerConfigs();

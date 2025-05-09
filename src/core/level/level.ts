@@ -1,4 +1,5 @@
-import { Effect } from '../data/cardEffects';
+import { GlobalEffectProps } from '../game/game';
+import { Effect } from '../models/cardEffects';
 import {
   Card,
   Fireball1,
@@ -6,9 +7,8 @@ import {
   Fireball3,
   Flame,
   Resurrect,
-} from '../data/cards';
-import { PlayerStats } from '../data/player';
-import { GlobalEffectProps } from '../game/game';
+} from '../models/cards';
+import { PlayerStats } from '../models/player';
 import { PowerClass, getPowerConfigs } from '../power/power';
 import {
   generateAttackOutcomes,

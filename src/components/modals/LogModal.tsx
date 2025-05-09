@@ -1,14 +1,17 @@
-import { LogEntry } from '../../hooks/useLog';
-import { click } from '../../utils/assetUtils';
+import { LogEntry } from '../../hooks';
+import { click } from '../../utils';
 
-interface LogModalProps {
+export interface LogModalProps {
   readonly showLogModal: boolean;
   readonly setShowLogModal: React.Dispatch<React.SetStateAction<boolean>>;
   readonly logEntries: LogEntry[];
   readonly playAudio: (audio: string) => void;
 }
 
-const LogModal = ({
+/**
+ * @group Components
+ */
+export const LogModal = ({
   showLogModal,
   setShowLogModal,
   logEntries,
@@ -63,5 +66,3 @@ const LogModal = ({
     </>
   );
 };
-
-export default LogModal;

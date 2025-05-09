@@ -1,26 +1,28 @@
 import { useState } from 'react';
-import { EffectType } from '../../core/data/cardEffects';
-import { Player } from '../../core/data/player';
+import { EffectType, Player } from '../../core/models';
 import {
   AnimationProps,
   getAvatarForLevel,
+  getEnemyName,
   icon,
-} from '../../utils/assetUtils';
-import { getEnemyName } from '../../utils/scriptUtils';
+} from '../../utils';
 
 export const AVATAR_HEIGHT = 125;
 export const AVATAR_WIDTH = 125;
 export const AVATAR_SMALL_SCALE = 0.9;
 export const AVATAR_MEDIUM_SCALE = 1.1;
 
-interface PlayerStatsPanelProps {
+export interface PlayerStatsPanelProps {
   readonly player: Player;
   readonly level?: string;
   readonly showCardAnimation: boolean;
   readonly cardAnimationData?: AnimationProps;
 }
 
-const PlayerStatsPanel = ({
+/**
+ * @group Components
+ */
+export const PlayerStatsPanel = ({
   player,
   level,
   showCardAnimation,
@@ -118,5 +120,3 @@ const PlayerStatsPanel = ({
     </div>
   );
 };
-
-export default PlayerStatsPanel;

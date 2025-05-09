@@ -1,19 +1,19 @@
-import { FINAL_LEVEL } from '../../core/level/level';
-import useImageLoader from '../../hooks/useImageLoader';
-import { getAvatarForLevel } from '../../utils/assetUtils';
+import { FINAL_LEVEL } from '../../core/level';
+import { useImageLoader } from '../../hooks';
 import {
+  getAvatarForLevel,
   getBattleInstructions,
   getBattleStartCaption,
   getEnemyName,
   getRuleByPower,
-} from '../../utils/scriptUtils';
+} from '../../utils';
 import {
   AVATAR_HEIGHT,
   AVATAR_SMALL_SCALE,
   AVATAR_WIDTH,
 } from '../ui/PlayerStatsPanel';
 
-interface MatchupModalProps {
+export interface MatchupModalProps {
   readonly showMatchupModal: boolean;
   readonly setShowMatchupModal: React.Dispatch<React.SetStateAction<boolean>>;
   readonly playMusic: () => void;
@@ -21,7 +21,10 @@ interface MatchupModalProps {
   readonly scale?: number;
 }
 
-const MatchupModal = ({
+/**
+ * @group Components
+ */
+export const MatchupModal = ({
   showMatchupModal,
   setShowMatchupModal,
   playMusic,
@@ -136,5 +139,3 @@ const MatchupModal = ({
     </>
   );
 };
-
-export default MatchupModal;

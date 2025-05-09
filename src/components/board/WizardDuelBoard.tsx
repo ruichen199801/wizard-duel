@@ -2,52 +2,64 @@ import { PlayerID } from 'boardgame.io';
 import { BoardProps } from 'boardgame.io/dist/types/packages/react';
 import { useEffect, useState } from 'react';
 
-import useAudioPlayer from '../../hooks/useAudioPlayer';
-import useBsTooltip from '../../hooks/useBsTooltip';
-import useCardAnimation from '../../hooks/useCardAnimation';
-import useLog from '../../hooks/useLog';
-import useMusicPlayer from '../../hooks/useMusicPlayer';
-import usePersistentState from '../../hooks/usePersistentState';
-
-import { AI, Strategy } from '../../ai/ai';
-import { Card, CardId } from '../../core/data/cards';
-import { WizardDuelState } from '../../core/game/game';
-import { DrawMode } from '../../core/level/level';
+import { AI, Strategy } from '../../ai';
+import { WizardDuelState } from '../../core/game';
+import { DrawMode } from '../../core/level';
+import { Card, CardId } from '../../core/models';
+import {
+  useAudioPlayer,
+  useBsTooltip,
+  useCardAnimation,
+  useLog,
+  useMusicPlayer,
+  usePersistentState,
+} from '../../hooks';
 import {
   click,
   defeat,
   getLocationForLevel,
   getMusicForLevel,
-  victory,
-} from '../../utils/assetUtils';
-import { sleep } from '../../utils/commonUtils';
-import {
   getSelectableCardIds,
   resolveCardAudio,
-} from '../../utils/presentationUtils';
+  sleep,
+  victory,
+} from '../../utils';
 
-import CardPreview from '../card/CardPreview';
-import PlayerHand from '../card/PlayerHand';
-import GameoverModal from '../modals/GameoverModal';
-import HelpModal from '../modals/HelpModal';
-import LevelEffectModal from '../modals/LevelEffectModal';
-import LogModal from '../modals/LogModal';
-import MatchupModal from '../modals/MatchupModal';
-import NextLevelModal from '../modals/NextLevelModal';
-import SelectCardModal from '../modals/SelectCardModal';
-import SelectPowerModal from '../modals/SelectPowerModal';
-import SettingsModal from '../modals/SettingsModal';
-import EffectStack from '../ui/EffectStack';
-import EndTurnButton, { VisibleTurnPhase } from '../ui/EndTurnButton';
-import GameStatsPanel from '../ui/GameStatsPanel';
-import IconList from '../ui/IconList';
-import PlayerStatsPanel from '../ui/PlayerStatsPanel';
+import { CardPreview, PlayerHand } from '../card';
+import {
+  GameoverModal,
+  HelpModal,
+  LevelEffectModal,
+  LogModal,
+  MatchupModal,
+  NextLevelModal,
+  SelectCardModal,
+  SelectPowerModal,
+  SettingsModal,
+} from '../modals';
+import {
+  EffectStack,
+  EndTurnButton,
+  GameStatsPanel,
+  IconList,
+  PlayerStatsPanel,
+  VisibleTurnPhase,
+} from '../ui';
 
 export const PAUSE_INTERVAL = 1200;
 
-interface WizardDuelProps extends BoardProps<WizardDuelState> {}
+export interface WizardDuelProps extends BoardProps<WizardDuelState> {}
 
-const WizardDuelBoard = ({ ctx, G, moves, events, reset }: WizardDuelProps) => {
+/**
+ * @group Components
+ */
+export const WizardDuelBoard = ({
+  ctx,
+  G,
+  moves,
+  events,
+  reset,
+}: WizardDuelProps) => {
   // Initialize Bootstrap tooltips
   useBsTooltip();
 
@@ -383,5 +395,3 @@ const WizardDuelBoard = ({ ctx, G, moves, events, reset }: WizardDuelProps) => {
     </div>
   );
 };
-
-export default WizardDuelBoard;

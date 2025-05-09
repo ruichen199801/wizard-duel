@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
  * the spinner works intermittently, especially when you run `npm start` locally then immediately open the modal in an Incognito tab.
  * However, it should still provide a better user experience by setting clear expectations of a loading phase (when it works).
  */
-const useImageLoader = (images: string[] = [], delay: number) => {
+export const useImageLoader = (images: string[] = [], delay: number) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -21,5 +21,3 @@ const useImageLoader = (images: string[] = [], delay: number) => {
 
   return { isLoading };
 };
-
-export default useImageLoader;

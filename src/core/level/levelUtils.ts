@@ -1,4 +1,4 @@
-import { Card } from '../data/cards';
+import { Card } from '../models/cards';
 
 /**
  * Randomly populate a player's hand with cards from a list of options and probabilities.

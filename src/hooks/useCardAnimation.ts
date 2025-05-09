@@ -1,18 +1,17 @@
 import { Ctx } from 'boardgame.io';
 import { useState } from 'react';
-import { EffectType } from '../core/data/cardEffects';
-import { Card, CardKeyword } from '../core/data/cards';
-import { WizardDuelState } from '../core/game/game';
-import { PowerClass } from '../core/power/power';
+import { WizardDuelState } from '../core/game';
+import { Card, CardKeyword, EffectType } from '../core/models';
+import { PowerClass } from '../core/power';
 import {
   AnimationProps,
   AnimationTarget,
   getAnimationDataForCard,
   getAnimationTargetForCard,
-} from '../utils/assetUtils';
-import { sleep } from '../utils/commonUtils';
+  sleep,
+} from '../utils';
 
-const useCardAnimation = (G: WizardDuelState, ctx: Ctx) => {
+export const useCardAnimation = (G: WizardDuelState, ctx: Ctx) => {
   const [showPlayerAnimation, setShowPlayerAnimation] = useState(false);
   const [showEnemyAnimation, setShowEnemyAnimation] = useState(false);
   const [cardAnimationData, setCardAnimationData] = useState<
@@ -112,5 +111,3 @@ const useCardAnimation = (G: WizardDuelState, ctx: Ctx) => {
     handleShowCardAnimation,
   };
 };
-
-export default useCardAnimation;

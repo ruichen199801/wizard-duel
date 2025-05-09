@@ -1,17 +1,17 @@
 import { Ctx, PlayerID } from 'boardgame.io';
 
+import { WizardDuelState } from '../game/game';
+import { shuffle } from '../game/gameUtils';
+import { levelRules } from '../level/level';
 import {
   Effect,
   EffectDuration,
   EffectGroupName,
   EffectType,
   freeze as freezeEffect,
-} from '../data/cardEffects';
-import { CardId } from '../data/cards';
-import { getDeckForLevel } from '../data/deck';
-import { WizardDuelState } from '../game/game';
-import { shuffle } from '../game/gameUtils';
-import { levelRules } from '../level/level';
+} from '../models/cardEffects';
+import { CardId } from '../models/cards';
+import { getDeckForLevel } from '../models/deck';
 import { PowerClass, getPowerConfigs } from '../power/power';
 import {
   getChanceEffect,

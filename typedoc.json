@@ -1,0 +1,7 @@
+{
+    "entryPoints": [
+        "src/exports.ts"
+    ],
+    "out": "docs",
+    "readme": "none",
+}

@@ -1,11 +1,14 @@
-import { cardPile } from '../../utils/assetUtils';
-import { CARD_HEIGHT, CARD_SMALL_SCALE, CARD_WIDTH } from './Card';
+import { cardPile } from '../../utils';
+import { CARD_HEIGHT, CARD_SMALL_SCALE, CARD_WIDTH } from './CardView';
 
-interface CardPileProps {
+export interface CardPileProps {
   readonly scale?: number;
 }
 
-const CardPile = ({ scale = CARD_SMALL_SCALE }: CardPileProps) => {
+/**
+ * @group Components
+ */
+export const CardPile = ({ scale = CARD_SMALL_SCALE }: CardPileProps) => {
   const height = CARD_HEIGHT * scale;
   const width = CARD_WIDTH * scale;
 
@@ -23,5 +26,3 @@ const CardPile = ({ scale = CARD_SMALL_SCALE }: CardPileProps) => {
     </div>
   );
 };
-
-export default CardPile;

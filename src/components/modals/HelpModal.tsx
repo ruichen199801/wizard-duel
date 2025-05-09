@@ -1,12 +1,15 @@
-import { click } from '../../utils/assetUtils';
+import { click } from '../../utils';
 
-interface HelpModalProps {
+export interface HelpModalProps {
   readonly showHelpModal: boolean;
   readonly setShowHelpModal: React.Dispatch<React.SetStateAction<boolean>>;
   readonly playAudio: (audio: string) => void;
 }
 
-const HelpModal = ({
+/**
+ * @group Components
+ */
+export const HelpModal = ({
   showHelpModal,
   setShowHelpModal,
   playAudio,
@@ -77,5 +80,3 @@ const HelpModal = ({
     </>
   );
 };
-
-export default HelpModal;

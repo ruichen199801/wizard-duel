@@ -1,8 +1,7 @@
 import { Ctx } from 'boardgame.io';
-import { EffectGroupName } from '../../core/data/cardEffects';
-import { Card, CardId, CardKeyword } from '../../core/data/cards';
-import { getTarget, hasEffect, isUnique } from '../../core/effect/effectUtils';
-import { WizardDuelState } from '../../core/game/game';
+import { getTarget, hasEffect, isUnique } from '../../core/effect';
+import { WizardDuelState } from '../../core/game';
+import { Card, CardId, CardKeyword, EffectGroupName } from '../../core/models';
 import { random } from './random';
 import {
   REMOVE_BUFF_CARDS,

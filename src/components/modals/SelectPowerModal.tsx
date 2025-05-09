@@ -1,21 +1,28 @@
 import { useState } from 'react';
-import { GameDifficulty, PowerClass } from '../../core/power/power';
-import useImageLoader from '../../hooks/useImageLoader';
-import { click, getAvatarForLevel } from '../../utils/assetUtils';
-import { startLevel } from '../../utils/commonUtils';
-import { powers, PowerSelectionProps } from '../../utils/scriptUtils';
+import { GameDifficulty, PowerClass } from '../../core/power';
+import { useImageLoader } from '../../hooks';
+import {
+  click,
+  getAvatarForLevel,
+  powers,
+  PowerSelectionProps,
+  startLevel,
+} from '../../utils';
 import {
   AVATAR_HEIGHT,
   AVATAR_SMALL_SCALE,
   AVATAR_WIDTH,
 } from '../ui/PlayerStatsPanel';
 
-interface SelectPowerModalProps {
+export interface SelectPowerModalProps {
   readonly showSelectPowerModal: boolean;
   readonly playAudio: (audio: string) => void;
 }
 
-const SelectPowerModal = ({
+/**
+ * @group Components
+ */
+export const SelectPowerModal = ({
   showSelectPowerModal,
   playAudio,
 }: SelectPowerModalProps) => {
@@ -126,5 +133,3 @@ const SelectPowerModal = ({
     </>
   );
 };
-
-export default SelectPowerModal;

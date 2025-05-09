@@ -1,12 +1,12 @@
 import { PlayerID } from 'boardgame.io';
+import { WizardDuelState } from '../game/game';
 import {
   Effect,
   EffectGroupName,
   effectsByGroup,
   EffectTarget,
   EffectType,
-} from '../data/cardEffects';
-import { WizardDuelState } from '../game/game';
+} from '../models/cardEffects';
 
 /**
  * Returns the target player id of the card.

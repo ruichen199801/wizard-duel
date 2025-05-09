@@ -1,13 +1,16 @@
-import { CardId } from '../../core/data/cards';
-import { cardFront } from '../../utils/assetUtils';
+import { CardId } from '../../core/models';
+import { cardFront } from '../../utils';
 
-interface SelectCardModalProps {
+export interface SelectCardModalProps {
   readonly cardIdList: CardId[];
   readonly handleSelectCard: (cardId: CardId) => void;
   readonly showSelectCardModal: boolean;
 }
 
-const SelectCardModal = ({
+/**
+ * @group Components
+ */
+export const SelectCardModal = ({
   cardIdList,
   handleSelectCard,
   showSelectCardModal,
@@ -52,5 +55,3 @@ const SelectCardModal = ({
     </>
   );
 };
-
-export default SelectCardModal;
