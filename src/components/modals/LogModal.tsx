@@ -8,7 +8,7 @@ interface LogModalProps {
   readonly playAudio: (audio: string) => void;
 }
 
-const LogModal = ({
+export const LogModal = ({
   showLogModal,
   setShowLogModal,
   logEntries,
@@ -63,5 +63,3 @@ const LogModal = ({
     </>
   );
 };
-
-export default LogModal;

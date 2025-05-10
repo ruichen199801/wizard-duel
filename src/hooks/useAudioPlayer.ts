@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const useAudioPlayer = () => {
+export const useAudioPlayer = () => {
   const [audio, setAudio] = useState<HTMLAudioElement | undefined>();
   const [isAudioMuted, setIsAudioMuted] = useState(() => {
     const stored = sessionStorage.getItem('isAudioMuted');
@@ -35,5 +35,3 @@ const useAudioPlayer = () => {
 
   return { playAudio, toggleAudioMute, isAudioMuted };
 };
-
-export default useAudioPlayer;

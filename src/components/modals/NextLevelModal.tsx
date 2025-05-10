@@ -6,7 +6,7 @@ interface NextLevelModalProps {
   readonly level: string;
 }
 
-const NextLevelModal = ({ showNextLevelModal, level }: NextLevelModalProps) => {
+export const NextLevelModal = ({ showNextLevelModal, level }: NextLevelModalProps) => {
   if (!showNextLevelModal) {
     return null;
   }
@@ -58,5 +58,3 @@ const NextLevelModal = ({ showNextLevelModal, level }: NextLevelModalProps) => {
     </>
   );
 };
-
-export default NextLevelModal;

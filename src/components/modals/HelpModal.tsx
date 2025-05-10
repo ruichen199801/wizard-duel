@@ -6,7 +6,7 @@ interface HelpModalProps {
   readonly playAudio: (audio: string) => void;
 }
 
-const HelpModal = ({
+export const HelpModal = ({
   showHelpModal,
   setShowHelpModal,
   playAudio,
@@ -77,5 +77,3 @@ const HelpModal = ({
     </>
   );
 };
-
-export default HelpModal;

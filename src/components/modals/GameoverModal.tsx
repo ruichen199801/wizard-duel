@@ -15,7 +15,7 @@ interface GameoverModalProps {
   readonly level: string;
 }
 
-const GameoverModal = ({
+export const GameoverModal = ({
   showGameoverModal,
   setShowGameoverModal,
   setShowNextLevelModal,
@@ -151,5 +151,3 @@ const GameoverModal = ({
     </>
   );
 };
-
-export default GameoverModal;

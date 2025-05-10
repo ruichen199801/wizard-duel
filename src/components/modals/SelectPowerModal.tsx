@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { GameDifficulty, PowerClass } from '../../core/power/power';
-import useImageLoader from '../../hooks/useImageLoader';
+import { useImageLoader } from '../../hooks/useImageLoader';
 import { click, getAvatarForLevel } from '../../utils/assetUtils';
 import { startLevel } from '../../utils/commonUtils';
 import { powers, PowerSelectionProps } from '../../utils/scriptUtils';
@@ -15,7 +15,7 @@ interface SelectPowerModalProps {
   readonly playAudio: (audio: string) => void;
 }
 
-const SelectPowerModal = ({
+export const SelectPowerModal = ({
   showSelectPowerModal,
   playAudio,
 }: SelectPowerModalProps) => {
@@ -126,5 +126,3 @@ const SelectPowerModal = ({
     </>
   );
 };
-
-export default SelectPowerModal;

@@ -20,7 +20,7 @@ interface SettingsModalProps {
   readonly setAiStrategy: React.Dispatch<React.SetStateAction<Strategy>>;
 }
 
-const SettingsModal = ({
+export const SettingsModal = ({
   showSettingsModal,
   setShowSettingsModal,
   playAudio,
@@ -184,5 +184,3 @@ const SettingsModal = ({
     </>
   );
 };
-
-export default SettingsModal;

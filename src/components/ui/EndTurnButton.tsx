@@ -17,7 +17,7 @@ interface EndTurnButtonProps {
   readonly handleEndTurnButtonClick: () => void;
 }
 
-const EndTurnButton = ({
+export const EndTurnButton = ({
   turnPhase,
   handleEndTurnButtonClick,
 }: EndTurnButtonProps) => {
@@ -39,5 +39,3 @@ const EndTurnButton = ({
     </div>
   );
 };
-
-export default EndTurnButton;

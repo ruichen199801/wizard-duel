@@ -1,5 +1,5 @@
 import { Player } from '../../core/data/player';
-import CardView, { CardType } from './CardView';
+import { CardType, CardView } from './CardView';
 
 interface PlayerHandProps {
   readonly player: Player;
@@ -7,7 +7,7 @@ interface PlayerHandProps {
   readonly handleCardClick?: (index: number) => void;
 }
 
-const PlayerHand = ({
+export const PlayerHand = ({
   player,
   showEnemyHand,
   handleCardClick,
@@ -31,5 +31,3 @@ const PlayerHand = ({
     </div>
   );
 };
-
-export default PlayerHand;

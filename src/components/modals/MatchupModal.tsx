@@ -1,5 +1,5 @@
 import { FINAL_LEVEL } from '../../core/level/level';
-import useImageLoader from '../../hooks/useImageLoader';
+import { useImageLoader } from '../../hooks/useImageLoader';
 import { getAvatarForLevel } from '../../utils/assetUtils';
 import {
   getBattleInstructions,
@@ -21,7 +21,7 @@ interface MatchupModalProps {
   readonly scale?: number;
 }
 
-const MatchupModal = ({
+export const MatchupModal = ({
   showMatchupModal,
   setShowMatchupModal,
   playMusic,
@@ -136,5 +136,3 @@ const MatchupModal = ({
     </>
   );
 };
-
-export default MatchupModal;

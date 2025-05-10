@@ -15,7 +15,7 @@ interface LevelEffectModalProps {
   readonly level: string;
 }
 
-const LevelEffectModal = ({
+export const LevelEffectModal = ({
   showLevelEffectModal,
   setShowLevelEffectModal,
   playAudio,
@@ -95,5 +95,3 @@ const LevelEffectModal = ({
     </>
   );
 };
-
-export default LevelEffectModal;

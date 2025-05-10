@@ -10,7 +10,7 @@ interface IconListProps {
   readonly playAudio: (audio: string) => void;
 }
 
-const IconList = ({
+export const IconList = ({
   setShowLevelEffectModal,
   setShowLogModal,
   setShowSettingsModal,
@@ -85,5 +85,3 @@ const IconList = ({
     </div>
   );
 };
-
-export default IconList;

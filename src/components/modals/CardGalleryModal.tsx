@@ -1,4 +1,4 @@
-import useImageLoader from '../../hooks/useImageLoader';
+import { useImageLoader } from '../../hooks/useImageLoader';
 import { click } from '../../utils/assetUtils';
 
 interface CardGalleryModalProps {
@@ -8,7 +8,7 @@ interface CardGalleryModalProps {
   readonly playAudio: (audio: string) => void;
 }
 
-const CardGalleryModal = ({
+export const CardGalleryModal = ({
   showCardGallery,
   setShowCardGallery,
   cardImages,
@@ -79,5 +79,3 @@ const CardGalleryModal = ({
     </>
   );
 };
-
-export default CardGalleryModal;

@@ -1,12 +1,12 @@
 import { Card } from '../../core/data/cards';
-import CardView, { CARD_MEDIUM_SCALE, CardType } from './CardView';
+import { CARD_MEDIUM_SCALE, CardType, CardView } from './CardView';
 
 interface CardPreviewProps {
   readonly selectedCard?: Card;
   readonly scale?: number;
 }
 
-const CardPreview = ({
+export const CardPreview = ({
   selectedCard,
   scale = CARD_MEDIUM_SCALE,
 }: CardPreviewProps) => {
@@ -24,5 +24,3 @@ const CardPreview = ({
     </div>
   );
 };
-
-export default CardPreview;

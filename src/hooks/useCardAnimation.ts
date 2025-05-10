@@ -12,7 +12,7 @@ import {
 } from '../utils/assetUtils';
 import { sleep } from '../utils/commonUtils';
 
-const useCardAnimation = (G: WizardDuelState, ctx: Ctx) => {
+export const useCardAnimation = (G: WizardDuelState, ctx: Ctx) => {
   const [showPlayerAnimation, setShowPlayerAnimation] = useState(false);
   const [showEnemyAnimation, setShowEnemyAnimation] = useState(false);
   const [cardAnimationData, setCardAnimationData] = useState<
@@ -112,5 +112,3 @@ const useCardAnimation = (G: WizardDuelState, ctx: Ctx) => {
     handleShowCardAnimation,
   };
 };
-
-export default useCardAnimation;

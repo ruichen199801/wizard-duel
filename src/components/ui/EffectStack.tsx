@@ -8,7 +8,7 @@ interface EffectStackProps {
   readonly showEffectStack: boolean;
 }
 
-const EffectStack = ({
+export const EffectStack = ({
   opponentEffects,
   playerEffects,
   showEffectStack,
@@ -132,5 +132,3 @@ const EffectStack = ({
     </div>
   );
 };
-
-export default EffectStack;

@@ -5,7 +5,7 @@ interface CardPileProps {
   readonly scale?: number;
 }
 
-const CardPile = ({ scale = CARD_SMALL_SCALE }: CardPileProps) => {
+export const CardPile = ({ scale = CARD_SMALL_SCALE }: CardPileProps) => {
   const height = CARD_HEIGHT * scale;
   const width = CARD_WIDTH * scale;
 
@@ -23,5 +23,3 @@ const CardPile = ({ scale = CARD_SMALL_SCALE }: CardPileProps) => {
     </div>
   );
 };
-
-export default CardPile;

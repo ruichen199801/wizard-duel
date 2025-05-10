@@ -7,7 +7,7 @@ interface SelectCardModalProps {
   readonly showSelectCardModal: boolean;
 }
 
-const SelectCardModal = ({
+export const SelectCardModal = ({
   cardIdList,
   handleSelectCard,
   showSelectCardModal,
@@ -52,5 +52,3 @@ const SelectCardModal = ({
     </>
   );
 };
-
-export default SelectCardModal;

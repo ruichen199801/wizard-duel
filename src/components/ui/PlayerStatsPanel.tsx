@@ -20,7 +20,7 @@ interface PlayerStatsPanelProps {
   readonly cardAnimationData?: AnimationProps;
 }
 
-const PlayerStatsPanel = ({
+export const PlayerStatsPanel = ({
   player,
   level,
   showCardAnimation,
@@ -118,5 +118,3 @@ const PlayerStatsPanel = ({
     </div>
   );
 };
-
-export default PlayerStatsPanel;
