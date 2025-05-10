@@ -11,6 +11,7 @@
     "@vercel/speed-insights": "^1.2.0",
     "boardgame.io": "^0.50.2",
     "bootstrap": "^5.3.3",
+    "madge": "^7.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.1",
@@ -21,7 +22,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "circular": "madge --circular src/index.tsx",
+    "graph": "madge --extensions ts,tsx --image graph.svg src"
   },
   "eslintConfig": {
     "extends": [
