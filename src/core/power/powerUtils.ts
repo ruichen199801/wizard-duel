@@ -1,6 +1,11 @@
 import { Ctx } from 'boardgame.io';
 
-import { buffAtk, buffDef, doubleDmg, preventDmg } from '../data/cardEffects';
+import {
+  buffAtk,
+  buffDef,
+  doubleDmg,
+  preventDmg,
+} from '../../model/cardEffects';
 import {
   Fireball1,
   Fireball2,
@@ -12,11 +17,11 @@ import {
   Wish3,
   Wish4,
   Wish5,
-} from '../data/cards';
+} from '../../model/cards';
+import { DrawMode, WizardDuelState } from '../../model/shared';
 import { applyEffect } from '../effect/effect';
 import { getChanceEffect, hasSameEffect } from '../effect/effectUtils';
-import { WizardDuelState } from '../game/game';
-import { DrawMode, FINAL_LEVEL, maxTurn } from '../level/level';
+import { FINAL_LEVEL, maxTurn } from '../level/level';
 import {
   generateAttackOutcomes,
   randomPopulateHand,

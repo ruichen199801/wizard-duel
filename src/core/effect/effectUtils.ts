@@ -5,8 +5,8 @@ import {
   effectsByGroup,
   EffectTarget,
   EffectType,
-} from '../data/cardEffects';
-import { WizardDuelState } from '../game/game';
+} from '../../model/cardEffects';
+import { WizardDuelState } from '../../model/shared';
 
 /**
  * Returns the target player id of the card.

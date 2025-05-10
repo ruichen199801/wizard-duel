@@ -1,6 +1,6 @@
 import { PlayerID } from 'boardgame.io';
 import { JSX } from 'react';
-import { CardId } from '../../core/data/cards';
+import { CardId } from '../../model/cards';
 import { cardBack, cardFront, cardPlaceholder } from '../../utils/assetUtils';
 
 export const CARD_HEIGHT = 210;

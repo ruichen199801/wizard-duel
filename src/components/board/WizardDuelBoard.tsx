@@ -10,9 +10,8 @@ import { useMusicPlayer } from '../../hooks/useMusicPlayer';
 import { usePersistentState } from '../../hooks/usePersistentState';
 
 import { AI, Strategy } from '../../ai/ai';
-import { Card, CardId } from '../../core/data/cards';
-import { WizardDuelState } from '../../core/game/game';
-import { DrawMode } from '../../core/level/level';
+import { Card, CardId } from '../../model/cards';
+import { DrawMode, WizardDuelState } from '../../model/shared';
 import {
   click,
   defeat,

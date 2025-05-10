@@ -1,6 +1,6 @@
 import { Ctx } from 'boardgame.io';
 
-import { Effect, EffectType } from '../data/cardEffects';
+import { Effect, EffectType } from '../../model/cardEffects';
 import {
   Card,
   CardId,
@@ -9,8 +9,9 @@ import {
   Wish3,
   Wish4,
   Wish5,
-} from '../data/cards';
-import { PlayerStats } from '../data/player';
+} from '../../model/cards';
+import { PlayerStats } from '../../model/player';
+import { WizardDuelState } from '../../model/shared';
 import { applyEffect } from '../effect/effect';
 import { getEffects, hasEffect, undoEffect } from '../effect/effectUtils';
 import {
@@ -24,20 +25,6 @@ import {
   applyPowerOverride,
   applyStartOfTurnPowerEffects,
 } from '../power/powerUtils';
-import { WizardDuelState } from './game';
-
-/**
- * Shuffle a deck of cards using Fisher-Yates algorithm.
- */
-export const shuffle = (deck: Card[]): Card[] => {
-  for (let i = deck.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const temp = deck[i];
-    deck[i] = deck[j];
-    deck[j] = temp;
-  }
-  return deck;
-};
 
 /**
  * Deal cards to a player's hand until it contains 5 cards.

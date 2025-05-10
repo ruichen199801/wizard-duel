@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { EffectType } from '../../core/data/cardEffects';
-import { Player } from '../../core/data/player';
+import { EffectType } from '../../model/cardEffects';
+import { Player } from '../../model/player';
 import {
   AnimationProps,
   getAvatarForLevel,

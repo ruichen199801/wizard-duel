@@ -1,4 +1,4 @@
-import { CardId } from '../../core/data/cards';
+import { CardId } from '../../model/cards';
 
 export const REMOVE_DEBUFF_CARDS = [CardId.Purify, CardId.Wish4];
 

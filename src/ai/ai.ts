@@ -1,6 +1,6 @@
 import { Ctx } from 'boardgame.io';
-import { Card } from '../core/data/cards';
-import { WizardDuelState } from '../core/game/game';
+import { Card } from '../model/cards';
+import { WizardDuelState } from '../model/shared';
 import { filterActions } from './strategies/filter';
 import { random } from './strategies/random';
 import { resolveAction } from './strategies/resolver';

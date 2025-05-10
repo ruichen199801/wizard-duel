@@ -1,4 +1,4 @@
-import { Player } from '../../core/data/player';
+import { Player } from '../../model/player';
 import { CardType, CardView } from './CardView';
 
 interface PlayerHandProps {

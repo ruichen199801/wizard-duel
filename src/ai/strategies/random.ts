@@ -1,4 +1,4 @@
-import { Card } from '../../core/data/cards';
+import { Card } from '../../model/cards';
 
 /**
  * Selects a random card.

@@ -1,4 +1,4 @@
-import { CardId } from '../../core/data/cards';
+import { CardId } from '../../model/cards';
 import { cardFront } from '../../utils/assetUtils';
 
 interface SelectCardModalProps {

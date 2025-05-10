@@ -1,4 +1,4 @@
-import { Card } from '../../core/data/cards';
+import { Card } from '../../model/cards';
 import { CARD_MEDIUM_SCALE, CardType, CardView } from './CardView';
 
 interface CardPreviewProps {

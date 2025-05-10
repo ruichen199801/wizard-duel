@@ -1,9 +1,9 @@
 import { Ctx } from 'boardgame.io';
 import { useState } from 'react';
-import { EffectType } from '../core/data/cardEffects';
-import { Card, CardKeyword } from '../core/data/cards';
-import { WizardDuelState } from '../core/game/game';
 import { PowerClass } from '../core/power/power';
+import { EffectType } from '../model/cardEffects';
+import { Card, CardKeyword } from '../model/cards';
+import { WizardDuelState } from '../model/shared';
 import {
   AnimationProps,
   AnimationTarget,

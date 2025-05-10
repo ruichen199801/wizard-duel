@@ -1,4 +1,4 @@
-import { WizardDuelState } from '../../core/game/game';
+import { WizardDuelState } from '../../model/shared';
 import { icon } from '../../utils/assetUtils';
 import { CardPile } from '../card/CardPile';
 

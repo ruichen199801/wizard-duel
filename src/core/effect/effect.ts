@@ -6,11 +6,11 @@ import {
   EffectGroupName,
   EffectType,
   freeze as freezeEffect,
-} from '../data/cardEffects';
-import { CardId } from '../data/cards';
-import { getDeckForLevel } from '../data/deck';
-import { WizardDuelState } from '../game/game';
-import { shuffle } from '../game/gameUtils';
+} from '../../model/cardEffects';
+import { CardId } from '../../model/cards';
+import { getDeckForLevel } from '../../model/deck';
+import { WizardDuelState } from '../../model/shared';
+import { shuffle } from '../../utils/commonUtils';
 import { levelRules } from '../level/level';
 import { PowerClass, getPowerConfigs } from '../power/power';
 import {

@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { CardId } from '../../core/data/cards';
 import { useAudioPlayer } from '../../hooks/useAudioPlayer';
 import { usePreloadAssets } from '../../hooks/usePreloadAssets';
+import { CardId } from '../../model/cards';
 import {
   ANIMATION,
   AUDIO,

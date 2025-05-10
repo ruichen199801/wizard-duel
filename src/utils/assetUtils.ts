@@ -1,5 +1,5 @@
 import { PlayerID } from 'boardgame.io';
-import { CardId, getCardCount } from '../core/data/cards';
+import { CardId, getCardCount } from '../model/cards';
 
 const imgPrefix = 'images';
 const avatarPrefix = `${imgPrefix}/avatars`;
@@ -297,7 +297,9 @@ const getAnimationDataForCard = (cardId: CardId): AnimationProps | undefined =>
   animationData[cardAnimation[cardId]?.type as Animation];
 
 // Same animation can be reused to different targets, hence separating it from animationData object
-const getAnimationTargetForCard = (cardId: CardId): AnimationTarget | undefined =>
+const getAnimationTargetForCard = (
+  cardId: CardId
+): AnimationTarget | undefined =>
   cardAnimation[cardId]?.target as AnimationTarget;
 
 // AUDIO FILES
@@ -400,37 +402,33 @@ const AUDIO = [
 const MUSIC = [...Object.values(musicPaths)];
 
 export {
-  // IMAGES FILES
-  getAvatarForLevel,
-  getLocationForLevel,
-  getNextCardsForLevel,
-  icon,
-  cardFront,
+  ANIMATION,
+  AUDIO,
+  // AUDIO FILES
+  cardAudio,
   cardBack,
-  cardPlaceholder,
-  cardPile,
+  cardFront,
   cardFronts,
-
+  cardPile,
+  cardPlaceholder,
+  cleanse,
+  click,
+  defeat,
+  defrost,
   // ANIMATION FILES
   getAnimationDataForCard,
   getAnimationTargetForCard,
-
-  // AUDIO FILES
-  cardAudio,
-  click,
-  victory,
-  defeat,
-  miss,
-  defrost,
-  cleanse,
-  potion,
-
+  // IMAGES FILES
+  getAvatarForLevel,
+  getLocationForLevel,
   // MUSIC FILES
   getMusicForLevel,
-
+  getNextCardsForLevel,
+  icon,
   // ALL FILES FOR PRELOAD
   IMAGES,
-  ANIMATION,
-  AUDIO,
+  miss,
   MUSIC,
+  potion,
+  victory,
 };

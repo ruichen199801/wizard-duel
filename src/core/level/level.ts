@@ -1,4 +1,4 @@
-import { Effect } from '../data/cardEffects';
+import { Effect } from '../../model/cardEffects';
 import {
   Card,
   Fireball1,
@@ -6,20 +6,15 @@ import {
   Fireball3,
   Flame,
   Resurrect,
-} from '../data/cards';
-import { PlayerStats } from '../data/player';
-import { GlobalEffectProps } from '../game/game';
+} from '../../model/cards';
+import { PlayerStats } from '../../model/player';
+import { DrawMode, GlobalEffectProps } from '../../model/shared';
 import { PowerClass, getPowerConfigs } from '../power/power';
 import {
   generateAttackOutcomes,
   getClearEffectSchedule,
   randomPopulateHand,
 } from './levelUtils';
-
-export enum DrawMode {
-  draw = 'draw',
-  select = 'select',
-}
 
 export const FINAL_LEVEL = '8';
 export const PRE_FINAL_LEVEL = '7';
