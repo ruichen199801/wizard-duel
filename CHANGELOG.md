@@ -1,3 +1,7 @@
+# 🚀 Release v1.1 (2025-5-9)
+
+Migrate project to TypeScript.
+
 # 🚀 Release v1.0 (2025-4-13)
 
 Stable release with minor game balance tweaks and font improvements from the previous version.
