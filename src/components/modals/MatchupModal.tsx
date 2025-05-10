@@ -1,0 +1,138 @@
+import { FINAL_LEVEL } from '../../core/level/level';
+import { useImageLoader } from '../../hooks/useImageLoader';
+import { getAvatarForLevel } from '../../utils/assetUtils';
+import {
+  getBattleInstructions,
+  getBattleStartCaption,
+  getEnemyName,
+  getRuleByPower,
+} from '../../utils/scriptUtils';
+import {
+  AVATAR_HEIGHT,
+  AVATAR_SMALL_SCALE,
+  AVATAR_WIDTH,
+} from '../ui/PlayerStatsPanel';
+
+interface MatchupModalProps {
+  readonly showMatchupModal: boolean;
+  readonly setShowMatchupModal: React.Dispatch<React.SetStateAction<boolean>>;
+  readonly playMusic: () => void;
+  readonly level: string;
+  readonly scale?: number;
+}
+
+export const MatchupModal = ({
+  showMatchupModal,
+  setShowMatchupModal,
+  playMusic,
+  level,
+  scale = AVATAR_SMALL_SCALE,
+}: MatchupModalProps) => {
+  const playerAvatar = getAvatarForLevel('0', level);
+  const enemyAvatar = getAvatarForLevel('1', level);
+  const { isLoading } = useImageLoader([playerAvatar, enemyAvatar], 300);
+
+  if (!showMatchupModal) {
+    return null;
+  }
+
+  const handleMatchupClose = () => {
+    setShowMatchupModal(false);
+    playMusic();
+  };
+
+  const height = AVATAR_HEIGHT * scale;
+  const width = AVATAR_WIDTH * scale;
+
+  const instructions = getBattleInstructions(level);
+  const finalLevelRule = getRuleByPower();
+
+  return (
+    <>
+      <div
+        className='modal fade show d-block'
+        data-bs-keyboard='false'
+        tabIndex={-1}
+        onClick={handleMatchupClose} // Close modal when clicking anywhere
+      >
+        <div className='modal-dialog modal-dialog-centered'>
+          <div className='modal-content bg-modal'>
+            <div className='modal-header border-0'>
+              <h4 className='modal-title w-100 text-center font-bold'>
+                {getBattleStartCaption(level)}
+              </h4>
+            </div>
+
+            <div className='modal-body'>
+              {isLoading ? (
+                <div className='d-flex justify-content-center align-items-center'>
+                  <div className='spinner-border' role='status'>
+                    <span className='visually-hidden'>Loading...</span>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <div className='d-flex justify-content-evenly align-items-center'>
+                    <div className='text-center'>
+                      <img
+                        src={playerAvatar}
+                        alt='avatar'
+                        height={height}
+                        width={width}
+                      />
+                      <p className='mt-2 fw-bold'>You</p>
+                    </div>
+
+                    <h5 className='mb-5'>VS</h5>
+
+                    <div className='text-center'>
+                      <img
+                        src={enemyAvatar}
+                        alt='avatar'
+                        height={height}
+                        width={width}
+                      />
+                      <p className='mt-2 fw-bold'>{getEnemyName(level)}</p>
+                    </div>
+                  </div>
+
+                  <div className='w-80 mx-auto mt-2'>
+                    <p>
+                      {instructions?.intro}
+                      <b>{instructions?.rule}</b>
+                      {instructions?.outro}
+                    </p>
+                  </div>
+
+                  {level === FINAL_LEVEL && finalLevelRule?.rule && (
+                    <div className='w-80 mx-auto'>
+                      <p>
+                        {finalLevelRule.intro}
+                        <b>{finalLevelRule.rule}</b>
+                      </p>
+                    </div>
+                  )}
+
+                  {instructions?.tips && (
+                    <div className='w-80 mx-auto'>
+                      <p className='fst-italic text-muted'>
+                        {instructions.tips}
+                      </p>
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+
+            <div className='modal-footer border-0 justify-content-end'>
+              <button type='button' className='btn btn-dark'>
+                Continue
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className='modal-backdrop fade show'></div>
+    </>
+  );
+};
