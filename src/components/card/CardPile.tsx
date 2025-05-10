@@ -1,5 +1,5 @@
 import { cardPile } from '../../utils/assetUtils';
-import { CARD_HEIGHT, CARD_SMALL_SCALE, CARD_WIDTH } from './Card';
+import { CARD_HEIGHT, CARD_SMALL_SCALE, CARD_WIDTH } from './CardView';
 
 interface CardPileProps {
   readonly scale?: number;

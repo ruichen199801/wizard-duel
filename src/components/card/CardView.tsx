@@ -31,7 +31,7 @@ interface CardProps {
   readonly scale?: number;
 }
 
-const Card = ({
+const CardView = ({
   cardType,
   cardId,
   cardIndex,
@@ -82,4 +82,4 @@ const Card = ({
   return <div>{cardContent[cardType]}</div>;
 };
 
-export default Card;
+export default CardView;

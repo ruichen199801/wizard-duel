@@ -1,5 +1,5 @@
 import { Player } from '../../core/data/player';
-import Card, { CardType } from './Card';
+import CardView, { CardType } from './CardView';
 
 interface PlayerHandProps {
   readonly player: Player;
@@ -17,14 +17,14 @@ const PlayerHand = ({
       {player.hand.map((card, index) => (
         <div key={index} className='me-2'>
           {showEnemyHand || player.id === '0' ? (
-            <Card
+            <CardView
               cardType={CardType.front}
               cardId={card.id}
               cardIndex={index}
               handleCardClick={handleCardClick}
             />
           ) : (
-            <Card cardType={CardType.back} playerId='1' />
+            <CardView cardType={CardType.back} playerId='1' />
           )}
         </div>
       ))}
