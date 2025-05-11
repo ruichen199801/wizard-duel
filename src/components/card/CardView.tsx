@@ -22,7 +22,7 @@ export enum CardType {
   placeholder = 'placeholder',
 }
 
-interface CardProps {
+interface CardViewProps {
   readonly cardType: CardType;
   readonly cardId?: CardId;
   readonly cardIndex?: number;
@@ -38,7 +38,7 @@ export const CardView = ({
   playerId,
   handleCardClick,
   scale = CARD_SMALL_SCALE,
-}: CardProps) => {
+}: CardViewProps) => {
   const frontImg = cardId && cardFront(cardId);
   const backImg = playerId && cardBack(playerId);
   const placeholderImg = playerId && cardPlaceholder(playerId);
@@ -51,6 +51,7 @@ export const CardView = ({
       <img
         src={frontImg}
         alt='card front'
+        data-testid='card-front'
         height={height}
         width={width}
         onClick={() =>
@@ -62,17 +63,30 @@ export const CardView = ({
     ),
 
     [CardType.back]: (
-      <img src={backImg} alt='card back' height={height} width={width} />
+      <img
+        src={backImg}
+        alt='card back'
+        data-testid='card-back'
+        height={height}
+        width={width}
+      />
     ),
 
     [CardType.preview]: (
-      <img src={frontImg} alt='card preview' height={height} width={width} />
+      <img
+        src={frontImg}
+        alt='card preview'
+        data-testid='card-preview'
+        height={height}
+        width={width}
+      />
     ),
 
     [CardType.placeholder]: (
       <img
         src={placeholderImg}
         alt='card placeholder'
+        data-testid='card-placeholder'
         height={height}
         width={width}
       />
