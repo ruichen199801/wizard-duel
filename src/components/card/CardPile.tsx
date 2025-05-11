@@ -14,6 +14,7 @@ export const CardPile = ({ scale = CARD_SMALL_SCALE }: CardPileProps) => {
       <img
         src={cardPile}
         alt='card pile'
+        data-testid='card-pile'
         height={height}
         width={width}
         data-bs-toggle='tooltip'
