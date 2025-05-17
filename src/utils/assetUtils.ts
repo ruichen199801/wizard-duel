@@ -78,7 +78,7 @@ const getNextCardsForLevel = (level = '1') => nextLevelCards[level];
 
 // ANIMATION FILES
 
-enum Animation {
+export enum Animation {
   fireball = 'fireball',
   freeze = 'freeze',
   thunder = 'thunder',

@@ -1,15 +1,15 @@
 import { render, screen } from '@testing-library/react';
 import { Fireball1 } from '../../model/cards';
-import { p0, p1 } from '../../model/player';
+import { p0, p1, Player } from '../../model/player';
 import { PlayerHand } from './PlayerHand';
 
 describe('PlayerHand', () => {
-  const mockP0 = {
+  const mockP0: Player = {
     ...p0,
     hand: [Fireball1, Fireball1],
   };
 
-  const mockP1 = {
+  const mockP1: Player = {
     ...p1,
     hand: [Fireball1, Fireball1],
   };

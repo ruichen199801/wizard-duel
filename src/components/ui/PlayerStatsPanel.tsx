@@ -77,6 +77,7 @@ export const PlayerStatsPanel = ({
         {/* Player stats (hp, atk, def) */}
         <div
           className='d-flex flex-column'
+          data-testid='stats-container'
           onMouseEnter={() => setIsStatsIconsHovered(true)}
           onMouseLeave={() => setIsStatsIconsHovered(false)}
         >
