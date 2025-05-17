@@ -6,8 +6,8 @@ jest.mock('../../utils/assetUtils', () => ({
   cardPile: 'mock-card-pile.png',
 }));
 
-describe('CardPile component', () => {
-  it('renders card pile image with default scale', () => {
+describe('CardPile', () => {
+  it('renders card pile image', () => {
     render(<CardPile />);
 
     const imgElement = screen.getByTestId('card-pile');

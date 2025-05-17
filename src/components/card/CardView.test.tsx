@@ -11,8 +11,9 @@ jest.mock('../../utils/assetUtils', () => ({
   ),
 }));
 
-describe('CardView component', () => {
+describe('CardView', () => {
   const cardId = CardId.Fireball1;
+  const cardIndex = 1;
 
   it('renders front card and triggers click handler', () => {
     const handleClick = jest.fn();
@@ -20,17 +21,17 @@ describe('CardView component', () => {
       <CardView
         cardType={CardType.front}
         cardId={cardId}
-        cardIndex={1}
+        cardIndex={cardIndex}
         handleCardClick={handleClick}
       />
     );
     fireEvent.click(screen.getByTestId('card-front'));
-    expect(handleClick).toHaveBeenCalledWith(1);
+    expect(handleClick).toHaveBeenCalledWith(cardIndex);
   });
 
   it('renders front card and does not throw when no handler is passed', () => {
     render(
-      <CardView cardType={CardType.front} cardId={cardId} cardIndex={1} />
+      <CardView cardType={CardType.front} cardId={cardId} cardIndex={cardIndex} />
     );
     expect(() => {
       fireEvent.click(screen.getByTestId('card-front'));
