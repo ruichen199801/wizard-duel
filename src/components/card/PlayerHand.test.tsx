@@ -3,7 +3,7 @@ import { Fireball1 } from '../../model/cards';
 import { p0, p1 } from '../../model/player';
 import { PlayerHand } from './PlayerHand';
 
-describe('PlayerHand component', () => {
+describe('PlayerHand', () => {
   const mockP0 = {
     ...p0,
     hand: [Fireball1, Fireball1],

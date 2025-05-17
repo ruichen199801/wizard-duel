@@ -21,7 +21,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --watchAll",
+    "test": "react-scripts test --coverage --watchAll",
     "eject": "react-scripts eject",
     "clean": "rm -rf node_modules package-lock.json",
     "reinstall": "npm run clean && npm install",
