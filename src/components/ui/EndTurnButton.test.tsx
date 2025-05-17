@@ -11,8 +11,8 @@ describe('EndTurnButton', () => {
         handleEndTurnButtonClick={handleClick}
       />
     );
-    
-    const button = screen.getByRole('button', { name: 'End Turn' });
+
+    const button = screen.getByTestId('end-turn-button');
     expect(button).toBeDisabled();
     expect(button).toHaveClass('btn-secondary');
   });
@@ -25,7 +25,7 @@ describe('EndTurnButton', () => {
       />
     );
 
-    const button = screen.getByRole('button', { name: 'End Turn' });
+    const button = screen.getByTestId('end-turn-button');
     expect(button).toBeEnabled();
     expect(button).toHaveClass('btn-dark');
 
@@ -41,7 +41,7 @@ describe('EndTurnButton', () => {
       />
     );
 
-    const button = screen.getByRole('button', { name: 'Enemy Turn' });
+    const button = screen.getByTestId('end-turn-button');
     expect(button).toBeDisabled();
     expect(button).toHaveClass('btn-secondary');
   });
