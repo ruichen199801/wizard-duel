@@ -151,14 +151,32 @@ export const SettingsModal = ({
                   <button
                     type='button'
                     className='btn btn-dark mb-1'
-                    onClick={resetGame}
+                    // TODO: Replace with Bootstrap confirm modal for better UX
+                    onClick={() => {
+                      if (
+                        window.confirm(
+                          'Are you sure you want to reset your entire run?'
+                        )
+                      ) {
+                        resetGame();
+                      }
+                    }}
                   >
                     Reset Entire Run
                   </button>
                   <button
                     type='button'
                     className='btn btn-dark'
-                    onClick={exitToMenu}
+                    // TODO: Replace with Bootstrap confirm modal for better UX
+                    onClick={() => {
+                      if (
+                        window.confirm(
+                          'Are you sure you want to exit to the title screen? This will also reset your current run.'
+                        )
+                      ) {
+                        exitToMenu();
+                      }
+                    }}
                   >
                     Exit to Title
                   </button>
