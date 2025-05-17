@@ -24,7 +24,7 @@ export const GameoverModal = ({
   playAudio,
   level,
 }: GameoverModalProps) => {
-  if (!showGameoverModal || !winner) {
+  if (!showGameoverModal) {
     return null;
   }
 
@@ -73,13 +73,14 @@ export const GameoverModal = ({
           <div className='modal-content bg-modal'>
             <div className='modal-header border-0'>
               <h3 className='modal-title w-100 text-center font-bold'>
-                {gameoverTitle[winner] || 'Game Over'}
+                {winner !== undefined ? gameoverTitle[winner] : 'Game Over'}
               </h3>
             </div>
             <div className='modal-body'>
               <p className='ms-2 mb-4 gameover-text'>
-                {gameoverMessage[winner] ||
-                  'Time runs out, the duel ends in a draw.'}
+                {winner !== undefined
+                  ? gameoverMessage[winner]
+                  : 'Time runs out, the duel ends in a draw.'}
               </p>
 
               {level === FINAL_LEVEL && winner === '0' && (
