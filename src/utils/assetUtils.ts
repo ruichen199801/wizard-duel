@@ -54,7 +54,7 @@ const icon: Record<string, string> = {
   deck: `${imgPrefix}/icons/deck.svg`,
 };
 
-const cardFront = (cardId: CardId) => `${cardPrefix}/front/${cardId}.svg`;
+const cardFront = (cardId: CardId) => `${cardPrefix}/front/${cardId}.png`;
 const cardBack = (playerId: PlayerID) => `${cardPrefix}/back/${playerId}.svg`;
 const cardPlaceholder = (playerId: PlayerID) =>
   `${cardPrefix}/placeholder/${playerId}.svg`;
@@ -62,7 +62,7 @@ const cardPile = `${cardPrefix}/pile.svg`;
 
 const cardFronts = Array.from(
   { length: getCardCount() },
-  (_, cardId) => `${cardPrefix}/front/${cardId}.svg`
+  (_, cardId) => `${cardPrefix}/front/${cardId}.png`
 );
 
 const nextLevelCards: Record<string, string[]> = {
@@ -402,33 +402,37 @@ const AUDIO = [
 const MUSIC = [...Object.values(musicPaths)];
 
 export {
-  ANIMATION,
-  AUDIO,
-  // AUDIO FILES
-  cardAudio,
-  cardBack,
-  cardFront,
-  cardFronts,
-  cardPile,
-  cardPlaceholder,
-  cleanse,
-  click,
-  defeat,
-  defrost,
-  // ANIMATION FILES
-  getAnimationDataForCard,
-  getAnimationTargetForCard,
   // IMAGES FILES
   getAvatarForLevel,
   getLocationForLevel,
-  // MUSIC FILES
-  getMusicForLevel,
   getNextCardsForLevel,
   icon,
+  cardFront,
+  cardBack,
+  cardPlaceholder,
+  cardPile,
+  cardFronts,
+
+  // ANIMATION FILES
+  getAnimationDataForCard,
+  getAnimationTargetForCard,
+
+  // AUDIO FILES
+  cardAudio,
+  click,
+  victory,
+  defeat,
+  miss,
+  defrost,
+  cleanse,
+  potion,
+
+  // MUSIC FILES
+  getMusicForLevel,
+
   // ALL FILES FOR PRELOAD
   IMAGES,
-  miss,
+  ANIMATION,
+  AUDIO,
   MUSIC,
-  potion,
-  victory,
 };
