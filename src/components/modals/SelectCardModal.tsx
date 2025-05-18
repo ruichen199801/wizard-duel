@@ -1,5 +1,6 @@
 import { CardId } from '../../model/cards';
 import { cardFront } from '../../utils/assetUtils';
+import { CARD_HEIGHT, CARD_WIDTH } from '../card/CardView';
 
 interface SelectCardModalProps {
   readonly cardIdList: CardId[];
@@ -39,7 +40,8 @@ export const SelectCardModal = ({
                     key={index}
                     src={cardFront(cardId)}
                     alt='card front'
-                    className='img-fluid'
+                    height={CARD_HEIGHT}
+                    width={CARD_WIDTH}
                     onClick={() => handleSelectCard(cardId)}
                   />
                 ))}

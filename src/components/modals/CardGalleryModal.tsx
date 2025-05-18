@@ -1,5 +1,6 @@
 import { useImageLoader } from '../../hooks/useImageLoader';
 import { click } from '../../utils/assetUtils';
+import { CARD_HEIGHT, CARD_SMALL_SCALE, CARD_WIDTH } from '../card/CardView';
 
 interface CardGalleryModalProps {
   readonly showCardGallery: boolean;
@@ -63,8 +64,8 @@ export const CardGalleryModal = ({
                         <img
                           src={image}
                           alt='card front'
-                          className='img-fluid'
-                          loading='lazy'
+                          height={CARD_HEIGHT * CARD_SMALL_SCALE}
+                          width={CARD_WIDTH * CARD_SMALL_SCALE}
                         />
                       </div>
                     ))}

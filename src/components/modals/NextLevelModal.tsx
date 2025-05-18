@@ -1,12 +1,16 @@
 import { getNextCardsForLevel } from '../../utils/assetUtils';
 import { startLevel } from '../../utils/commonUtils';
+import { CARD_HEIGHT, CARD_WIDTH } from '../card/CardView';
 
 interface NextLevelModalProps {
   readonly showNextLevelModal: boolean;
   readonly level: string;
 }
 
-export const NextLevelModal = ({ showNextLevelModal, level }: NextLevelModalProps) => {
+export const NextLevelModal = ({
+  showNextLevelModal,
+  level,
+}: NextLevelModalProps) => {
   if (!showNextLevelModal) {
     return null;
   }
@@ -36,7 +40,8 @@ export const NextLevelModal = ({ showNextLevelModal, level }: NextLevelModalProp
                     key={index}
                     src={image}
                     alt='card front'
-                    className='img-fluid'
+                    height={CARD_HEIGHT}
+                    width={CARD_WIDTH}
                   />
                 ))}
               </div>
