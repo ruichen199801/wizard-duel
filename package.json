@@ -24,6 +24,7 @@
     "test": "react-scripts test --coverage --watchAll",
     "eject": "react-scripts eject",
     "clean": "rm -rf node_modules package-lock.json",
+    "lint": "eslint src --ext .ts,.tsx",
     "reinstall": "npm run clean && npm install",
     "circular": "madge --circular src/index.tsx",
     "graph": "madge --extensions ts,tsx --exclude '\\.test\\.' --image graph.svg src"
@@ -56,6 +57,7 @@
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@types/react-router-dom": "^5.3.3",
+    "eslint": "^8.57.1",
     "typescript": "^4.9.5"
   }
 }
