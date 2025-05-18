@@ -1,21 +1,30 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { PlayerID } from 'boardgame.io';
 import { CardId } from '../../model/cards';
-import { CardType, CardView } from './CardView';
+import {
+  CARD_HEIGHT,
+  CARD_SMALL_SCALE,
+  CARD_WIDTH,
+  CardType,
+  CardView,
+} from './CardView';
 
 jest.mock('../../utils/assetUtils', () => ({
-  cardFront: jest.fn((id: CardId) => `/mock/front/${id}`),
-  cardBack: jest.fn((playerId: PlayerID) => `/mock/back/${playerId}`),
+  cardFront: jest.fn((cardId: CardId) => `/mock/front/${cardId}.png`),
+  cardBack: jest.fn((playerId: PlayerID) => `/mock/back/${playerId}.png`),
   cardPlaceholder: jest.fn(
-    (playerId: PlayerID) => `/mock/placeholder/${playerId}`
+    (playerId: PlayerID) => `/mock/placeholder/${playerId}.png`
   ),
 }));
+
+const height = `${CARD_HEIGHT * CARD_SMALL_SCALE}`;
+const width = `${CARD_WIDTH * CARD_SMALL_SCALE}`;
 
 describe('CardView', () => {
   const cardId = CardId.Fireball1;
   const cardIndex = 1;
 
-  it('renders front card and triggers click handler', () => {
+  it('renders front card with default size and triggers click handler', () => {
     const handleClick = jest.fn();
     render(
       <CardView
@@ -25,13 +34,23 @@ describe('CardView', () => {
         handleCardClick={handleClick}
       />
     );
-    fireEvent.click(screen.getByTestId('card-front'));
+    const frontCard = screen.getByTestId('card-front');
+
+    expect(frontCard).toBeInTheDocument();
+    expect(frontCard).toHaveAttribute('height', height);
+    expect(frontCard).toHaveAttribute('width', width);
+
+    fireEvent.click(frontCard);
     expect(handleClick).toHaveBeenCalledWith(cardIndex);
   });
 
   it('renders front card and does not throw when no handler is passed', () => {
     render(
-      <CardView cardType={CardType.front} cardId={cardId} cardIndex={cardIndex} />
+      <CardView
+        cardType={CardType.front}
+        cardId={cardId}
+        cardIndex={cardIndex}
+      />
     );
     expect(() => {
       fireEvent.click(screen.getByTestId('card-front'));

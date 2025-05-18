@@ -7,15 +7,15 @@ jest.mock('../../utils/assetUtils', () => ({
 }));
 
 describe('CardPile', () => {
-  it('renders card pile image', () => {
+  it('renders card pile with default size', () => {
     render(<CardPile />);
 
-    const imgElement = screen.getByTestId('card-pile');
+    const cardPile = screen.getByTestId('card-pile');
     const height = `${CARD_HEIGHT * CARD_SMALL_SCALE}`;
     const width = `${CARD_WIDTH * CARD_SMALL_SCALE}`;
 
-    expect(imgElement).toHaveAttribute('src', 'mock-card-pile.png');
-    expect(imgElement).toHaveAttribute('height', height);
-    expect(imgElement).toHaveAttribute('width', width);
+    expect(cardPile).toHaveAttribute('src', 'mock-card-pile.png');
+    expect(cardPile).toHaveAttribute('height', height);
+    expect(cardPile).toHaveAttribute('width', width);
   });
 });
