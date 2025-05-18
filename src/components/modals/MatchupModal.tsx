@@ -1,5 +1,4 @@
 import { FINAL_LEVEL } from '../../core/level/level';
-import { useImageLoader } from '../../hooks/useImageLoader';
 import { getAvatarForLevel } from '../../utils/assetUtils';
 import {
   getBattleInstructions,
@@ -30,7 +29,6 @@ export const MatchupModal = ({
 }: MatchupModalProps) => {
   const playerAvatar = getAvatarForLevel('0', level);
   const enemyAvatar = getAvatarForLevel('1', level);
-  const { isLoading } = useImageLoader([playerAvatar, enemyAvatar], 300);
 
   if (!showMatchupModal) {
     return null;
@@ -64,13 +62,7 @@ export const MatchupModal = ({
             </div>
 
             <div className='modal-body'>
-              {isLoading ? (
-                <div className='d-flex justify-content-center align-items-center'>
-                  <div className='spinner-border' role='status'>
-                    <span className='visually-hidden'>Loading...</span>
-                  </div>
-                </div>
-              ) : (
+              {
                 <>
                   <div className='d-flex justify-content-evenly align-items-center'>
                     <div className='text-center'>
@@ -121,7 +113,7 @@ export const MatchupModal = ({
                     </div>
                   )}
                 </>
-              )}
+              }
             </div>
 
             <div className='modal-footer border-0 justify-content-end'>

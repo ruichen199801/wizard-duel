@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { GameDifficulty, PowerClass } from '../../core/power/power';
-import { useImageLoader } from '../../hooks/useImageLoader';
 import { click, getAvatarForLevel } from '../../utils/assetUtils';
 import { startLevel } from '../../utils/commonUtils';
 import { powers, PowerSelectionProps } from '../../utils/scriptUtils';
@@ -22,11 +21,6 @@ export const SelectPowerModal = ({
   const [selectedPowerClass, setSelectedPowerClass] = useState<
     PowerClass | undefined
   >();
-
-  const avatars: string[] = powers.map((power) =>
-    getAvatarForLevel('1', power.level)
-  );
-  const { isLoading } = useImageLoader(avatars, 300);
 
   if (!showSelectPowerModal) {
     return null;
@@ -62,13 +56,7 @@ export const SelectPowerModal = ({
             </div>
 
             <div className='modal-body'>
-              {isLoading ? (
-                <div className='d-flex justify-content-center align-items-center'>
-                  <div className='spinner-border' role='status'>
-                    <span className='visually-hidden'>Loading...</span>
-                  </div>
-                </div>
-              ) : (
+              {
                 <>
                   <p className='pwr-text pb-3'>
                     Take a power from a past opponent to use in the upcoming
@@ -97,7 +85,7 @@ export const SelectPowerModal = ({
                     ))}
                   </div>
                 </>
-              )}
+              }
             </div>
 
             <div className='modal-footer border-0 justify-content-end'>
