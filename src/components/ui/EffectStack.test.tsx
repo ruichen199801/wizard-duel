@@ -33,14 +33,14 @@ const getManyEffects = (e: Effect, times: number): Effect[] =>
 
 describe('EffectStack', () => {
   it('does not render when showEffectStack is false', () => {
-    const { container } = render(
+    render(
       <EffectStack
         opponentEffects={[opponentEffect]}
         playerEffects={[playerEffect]}
         showEffectStack={false}
       />
     );
-    expect(container.firstChild).toBeNull();
+    expect(screen.queryByTestId('fxstack-container')).not.toBeInTheDocument();
   });
 
   it('renders full effects when total effects <= 11', () => {

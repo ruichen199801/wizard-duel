@@ -110,7 +110,10 @@ export const EffectStack = ({
     count === 1 ? text : `${text} + ${count - 1} More`;
 
   return (
-    <div className='d-flex flex-column h-100 justify-content-between'>
+    <div
+      className='d-flex flex-column h-100 justify-content-between'
+      data-testid='fxstack-container'
+    >
       <div
         className='fxstack-mb'
         onMouseEnter={() => setIsEnemyCompactFxHovered(true)}
