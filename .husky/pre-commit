@@ -1,0 +1,8 @@
+echo "Running tests..."
+npm test || exit 1
+
+echo "Linting..."
+npm run lint || exit 1
+
+echo "Checking for circular dependencies..."
+npm run circular || exit 1
