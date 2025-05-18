@@ -12,29 +12,29 @@ const musicPrefix = 'music';
 // IMAGES FILES
 
 const avatarPaths: Record<string, string> = {
-  0: `${avatarPrefix}/player.svg`,
-  1: `${avatarPrefix}/wise-scholar.svg`,
-  2: `${avatarPrefix}/wild-firemancer.svg`,
-  3: `${avatarPrefix}/ice-queen.svg`,
-  4: `${avatarPrefix}/traveling-merchant.svg`,
-  5: `${avatarPrefix}/forest-ranger.svg`,
-  6: `${avatarPrefix}/murloc-oracle.svg`,
-  7: `${avatarPrefix}/crimson-witch.svg`,
-  8: `${avatarPrefix}/dark-knight.svg`,
+  0: `${avatarPrefix}/player.png`,
+  1: `${avatarPrefix}/wise-scholar.png`,
+  2: `${avatarPrefix}/wild-firemancer.png`,
+  3: `${avatarPrefix}/ice-queen.png`,
+  4: `${avatarPrefix}/traveling-merchant.png`,
+  5: `${avatarPrefix}/forest-ranger.png`,
+  6: `${avatarPrefix}/murloc-oracle.png`,
+  7: `${avatarPrefix}/crimson-witch.png`,
+  8: `${avatarPrefix}/dark-knight.png`,
 };
 const getAvatarForLevel = (playerId: PlayerID, level = '1') => {
   return playerId === '0' ? avatarPaths[0] : avatarPaths[level];
 };
 
 const locationPaths: Record<string, string> = {
-  1: `${locationPrefix}/city.svg`,
-  2: `${locationPrefix}/volcano.svg`,
-  3: `${locationPrefix}/snow-mountain.svg`,
-  4: `${locationPrefix}/desert.svg`,
-  5: `${locationPrefix}/forest.svg`,
-  6: `${locationPrefix}/ocean.svg`,
-  7: `${locationPrefix}/marsh.svg`,
-  8: `${locationPrefix}/castle.svg`,
+  1: `${locationPrefix}/city.png`,
+  2: `${locationPrefix}/volcano.png`,
+  3: `${locationPrefix}/snow-mountain.png`,
+  4: `${locationPrefix}/desert.png`,
+  5: `${locationPrefix}/forest.png`,
+  6: `${locationPrefix}/ocean.png`,
+  7: `${locationPrefix}/marsh.png`,
+  8: `${locationPrefix}/castle.png`,
 };
 const getLocationForLevel = (level = '1') => locationPaths[level];
 
@@ -55,10 +55,10 @@ const icon: Record<string, string> = {
 };
 
 const cardFront = (cardId: CardId) => `${cardPrefix}/front/${cardId}.png`;
-const cardBack = (playerId: PlayerID) => `${cardPrefix}/back/${playerId}.svg`;
+const cardBack = (playerId: PlayerID) => `${cardPrefix}/back/${playerId}.png`;
 const cardPlaceholder = (playerId: PlayerID) =>
-  `${cardPrefix}/placeholder/${playerId}.svg`;
-const cardPile = `${cardPrefix}/pile.svg`;
+  `${cardPrefix}/placeholder/${playerId}.png`;
+const cardPile = `${cardPrefix}/pile.png`;
 
 const cardFronts = Array.from(
   { length: getCardCount() },
@@ -374,10 +374,10 @@ const IMAGES = [
   ...Object.values(locationPaths),
   ...Object.values(icon),
   ...cardFronts,
-  `${cardPrefix}/back/0.svg`,
-  `${cardPrefix}/back/1.svg`,
-  `${cardPrefix}/placeholder/0.svg`,
-  `${cardPrefix}/placeholder/1.svg`,
+  `${cardPrefix}/back/0.png`,
+  `${cardPrefix}/back/1.png`,
+  `${cardPrefix}/placeholder/0.png`,
+  `${cardPrefix}/placeholder/1.png`,
   cardPile,
 ];
 const ANIMATION = Object.values(animationData).map((data) => data.path);
