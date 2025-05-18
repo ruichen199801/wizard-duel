@@ -26,7 +26,7 @@
     "clean": "rm -rf node_modules package-lock.json",
     "reinstall": "npm run clean && npm install",
     "circular": "madge --circular src/index.tsx",
-    "graph": "madge --extensions ts,tsx --image graph.svg src"
+    "graph": "madge --extensions ts,tsx --exclude '\\.test\\.' --image graph.svg src"
   },
   "eslintConfig": {
     "extends": [
