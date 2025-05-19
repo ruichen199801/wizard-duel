@@ -374,6 +374,7 @@ export const WizardDuelBoard = ({
         setShowEffectStack={setShowEffectStack}
         aiStrategy={aiStrategy}
         setAiStrategy={setAiStrategy}
+        level={G.level}
       />
       <HelpModal
         showHelpModal={showHelpModal}

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Strategy } from '../../ai/ai';
-import { PRE_FINAL_LEVEL } from '../../core/level/level';
+import { FINAL_LEVEL, PRE_FINAL_LEVEL } from '../../core/level/level';
 import { click } from '../../utils/assetUtils';
 import { exitToMenu, jumpToLevel, resetGame } from '../../utils/commonUtils';
 import { Modal } from './Modal';
@@ -19,6 +19,7 @@ interface SettingsModalProps {
   readonly setShowEffectStack: React.Dispatch<React.SetStateAction<boolean>>;
   readonly aiStrategy: Strategy;
   readonly setAiStrategy: React.Dispatch<React.SetStateAction<Strategy>>;
+  readonly level: string;
 }
 
 export const SettingsModal = ({
@@ -35,9 +36,11 @@ export const SettingsModal = ({
   setShowEffectStack,
   aiStrategy,
   setAiStrategy,
+  level,
 }: SettingsModalProps) => {
   const [headerClickCount, setHeaderClickCount] = useState(0);
-  const showJumpLevelOption = headerClickCount >= 6;
+  const showJumpLevelOption =
+    headerClickCount >= 6 && level !== PRE_FINAL_LEVEL && level !== FINAL_LEVEL;
 
   const handleSettingsClose = () => {
     setShowSettingsModal(false);
