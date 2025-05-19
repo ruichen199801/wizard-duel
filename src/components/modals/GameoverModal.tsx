@@ -85,7 +85,7 @@ export const GameoverModal = ({
 
               {level === FINAL_LEVEL && winner === '0' && (
                 <p className='ms-2 mb-4 gameover-text fst-italic text-muted'>
-                  CHEAT CODE: Open Settings menu and click the header 6 times to
+                  Cheat code: open settings menu and click the header 6 times to
                   skip early levels.
                 </p>
               )}
