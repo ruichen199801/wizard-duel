@@ -4,10 +4,14 @@ interface ModalProps {
   readonly title: string;
   readonly isOpen: boolean;
   readonly children: ReactNode;
+
   readonly onClose?: () => void;
+  readonly onBackdropClick?: () => void;
+
   readonly scrollable?: boolean;
   readonly modalSizeClass?: string;
   readonly heightClass?: string;
+
   readonly footer?: ReactNode;
   readonly customHeader?: ReactNode;
 }
@@ -17,6 +21,7 @@ export const Modal = ({
   isOpen,
   children,
   onClose,
+  onBackdropClick,
   scrollable = false,
   modalSizeClass = '',
   heightClass = '',
@@ -32,6 +37,7 @@ export const Modal = ({
         data-bs-backdrop='static'
         data-bs-keyboard='false'
         tabIndex={-1}
+        onClick={onBackdropClick}
       >
         <div
           className={`modal-dialog modal-dialog-centered ${
