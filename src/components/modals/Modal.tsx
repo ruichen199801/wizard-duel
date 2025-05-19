@@ -3,8 +3,8 @@ import { ReactNode } from 'react';
 interface ModalProps {
   readonly title: string;
   readonly isOpen: boolean;
-  readonly onClose: () => void;
   readonly children: ReactNode;
+  readonly onClose?: () => void;
   readonly footer?: ReactNode;
   readonly scrollable?: boolean;
   readonly modalSizeClass?: string;
@@ -14,8 +14,8 @@ interface ModalProps {
 export const Modal = ({
   title,
   isOpen,
-  onClose,
   children,
+  onClose,
   footer,
   scrollable = false,
   modalSizeClass = '',
@@ -41,13 +41,15 @@ export const Modal = ({
               <h4 className='modal-title w-100 text-center font-bold'>
                 {title}
               </h4>
-              <button
-                type='button'
-                className='btn-close'
-                data-bs-dismiss='modal'
-                aria-label='Close'
-                onClick={onClose}
-              ></button>
+              {onClose && (
+                <button
+                  type='button'
+                  className='btn-close'
+                  data-bs-dismiss='modal'
+                  aria-label='Close'
+                  onClick={onClose}
+                ></button>
+              )}
             </div>
 
             <div className='modal-body'>{children}</div>
