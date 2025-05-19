@@ -1,5 +1,5 @@
 import { click } from '../../utils/assetUtils';
-import { BaseModal } from './BaseModal';
+import { Modal } from './Modal';
 
 interface HelpModalProps {
   readonly showHelpModal: boolean;
@@ -18,7 +18,7 @@ export const HelpModal = ({
   };
 
   return (
-    <BaseModal
+    <Modal
       title='Game Rules'
       isOpen={showHelpModal}
       onClose={handleHelpClose}
@@ -46,6 +46,6 @@ export const HelpModal = ({
           shield) × any modifiers.
         </li>
       </ol>
-    </BaseModal>
+    </Modal>
   );
 };

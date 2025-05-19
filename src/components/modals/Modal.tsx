@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-interface BaseModalProps {
+interface ModalProps {
   readonly title: string;
   readonly isOpen: boolean;
   readonly onClose: () => void;
@@ -10,7 +10,7 @@ interface BaseModalProps {
   readonly heightClass?: string;
 }
 
-export const BaseModal = ({
+export const Modal = ({
   title,
   isOpen,
   onClose,
@@ -18,7 +18,7 @@ export const BaseModal = ({
   footer,
   modalSizeClass = '',
   heightClass = '',
-}: BaseModalProps) => {
+}: ModalProps) => {
   if (!isOpen) return null;
 
   return (

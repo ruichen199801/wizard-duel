@@ -1,6 +1,6 @@
 import { click } from '../../utils/assetUtils';
 import { CARD_HEIGHT, CARD_SMALL_SCALE, CARD_WIDTH } from '../card/CardView';
-import { BaseModal } from './BaseModal';
+import { Modal } from './Modal';
 
 interface CardGalleryModalProps {
   readonly showCardGallery: boolean;
@@ -21,7 +21,7 @@ export const CardGalleryModal = ({
   };
 
   return (
-    <BaseModal
+    <Modal
       title='Card Gallery'
       isOpen={showCardGallery}
       onClose={handleCardGalleryClose}
@@ -44,6 +44,6 @@ export const CardGalleryModal = ({
           </div>
         </div>
       }
-    </BaseModal>
+    </Modal>
   );
 };
