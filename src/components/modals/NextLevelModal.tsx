@@ -19,11 +19,9 @@ export const NextLevelModal = ({
       title='New Cards Unlocked'
       isOpen={showNextLevelModal}
       footer={
-        <>
-          <button type='button' className='btn btn-dark' onClick={startLevel}>
-            Next Level
-          </button>
-        </>
+        <button type='button' className='btn btn-dark' onClick={startLevel}>
+          Next Level
+        </button>
       }
     >
       <div className='d-flex justify-content-center gap-5 my-3'>

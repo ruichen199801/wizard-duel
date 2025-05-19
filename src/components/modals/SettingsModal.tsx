@@ -72,14 +72,12 @@ export const SettingsModal = ({
       onClose={handleSettingsClose}
       modalSizeClass='modal-sm'
       customHeader={
-        <>
-          <h4
-            className='modal-title w-100 text-center font-bold ms-3'
-            onClick={handleHeaderClick}
-          >
-            Settings
-          </h4>
-        </>
+        <h4
+          className='modal-title w-100 text-center font-bold ms-3'
+          onClick={handleHeaderClick}
+        >
+          Settings
+        </h4>
       }
     >
       <div className='d-flex flex-column align-items-center'>
