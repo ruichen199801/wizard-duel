@@ -67,7 +67,6 @@ export const SettingsModal = ({
 
   return (
     <Modal
-      title='Settings'
       isOpen={showSettingsModal}
       onClose={handleSettingsClose}
       modalSizeClass='modal-sm'

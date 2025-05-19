@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 interface ModalProps {
-  readonly title: string;
+  readonly title?: string; // either title or customHeader should be provided
   readonly isOpen: boolean;
   readonly children: ReactNode;
 
@@ -12,8 +12,8 @@ interface ModalProps {
   readonly modalSizeClass?: string;
   readonly heightClass?: string;
 
-  readonly footer?: ReactNode;
   readonly customHeader?: ReactNode;
+  readonly footer?: ReactNode;
 }
 
 export const Modal = ({
@@ -25,8 +25,8 @@ export const Modal = ({
   scrollable = false,
   modalSizeClass = '',
   heightClass = '',
-  footer,
   customHeader,
+  footer,
 }: ModalProps) => {
   if (!isOpen) return null;
 
