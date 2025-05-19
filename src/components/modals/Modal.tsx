@@ -9,6 +9,7 @@ interface ModalProps {
   readonly modalSizeClass?: string;
   readonly heightClass?: string;
   readonly footer?: ReactNode;
+  readonly customHeader?: ReactNode;
 }
 
 export const Modal = ({
@@ -20,6 +21,7 @@ export const Modal = ({
   modalSizeClass = '',
   heightClass = '',
   footer,
+  customHeader,
 }: ModalProps) => {
   if (!isOpen) return null;
 
@@ -38,9 +40,14 @@ export const Modal = ({
         >
           <div className={`modal-content bg-modal ${heightClass}`}>
             <div className='modal-header border-0'>
-              <h4 className='modal-title w-100 text-center font-bold'>
-                {title}
-              </h4>
+              {customHeader ? (
+                customHeader
+              ) : (
+                <h4 className='modal-title w-100 text-center font-bold'>
+                  {title}
+                </h4>
+              )}
+
               {onClose && (
                 <button
                   type='button'
