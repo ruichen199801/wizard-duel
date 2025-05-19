@@ -33,8 +33,8 @@ export const SelectCardModal = ({
               </h4>
             </div>
 
-            <div className='modal-body my-3'>
-              <div className='d-flex justify-content-center gap-5'>
+            <div className='modal-body'>
+              <div className='d-flex justify-content-center gap-5 my-3'>
                 {cardIdList.map((cardId, index) => (
                   <img
                     key={index}

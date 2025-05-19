@@ -25,6 +25,7 @@ export const CardGalleryModal = ({
       title='Card Gallery'
       isOpen={showCardGallery}
       onClose={handleCardGalleryClose}
+      scrollable={true}
       modalSizeClass='modal-lg'
       heightClass='h-100'
     >

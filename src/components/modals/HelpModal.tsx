@@ -22,6 +22,7 @@ export const HelpModal = ({
       title='Game Rules'
       isOpen={showHelpModal}
       onClose={handleHelpClose}
+      scrollable={true}
       heightClass='h-50'
     >
       <ol>

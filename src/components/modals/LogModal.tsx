@@ -25,6 +25,7 @@ export const LogModal = ({
       title='Battle Log'
       isOpen={showLogModal}
       onClose={handleLogClose}
+      scrollable={true}
       heightClass='h-50'
     >
       <ul className='list-group list-group-flush'>

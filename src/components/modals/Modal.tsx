@@ -6,6 +6,7 @@ interface ModalProps {
   readonly onClose: () => void;
   readonly children: ReactNode;
   readonly footer?: ReactNode;
+  readonly scrollable?: boolean;
   readonly modalSizeClass?: string;
   readonly heightClass?: string;
 }
@@ -16,6 +17,7 @@ export const Modal = ({
   onClose,
   children,
   footer,
+  scrollable = false,
   modalSizeClass = '',
   heightClass = '',
 }: ModalProps) => {
@@ -29,7 +31,11 @@ export const Modal = ({
         data-bs-keyboard='false'
         tabIndex={-1}
       >
-        <div className='modal-dialog modal-dialog-scrollable modal-dialog-centered'>
+        <div
+          className={`modal-dialog modal-dialog-centered ${
+            scrollable ? 'modal-dialog-scrollable' : ''
+          }`}
+        >
           <div className={`modal-content bg-modal ${heightClass}`}>
             <div className='modal-header border-0'>
               <h4 className='modal-title w-100 text-center font-bold'>
