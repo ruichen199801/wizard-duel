@@ -5,10 +5,10 @@ interface ModalProps {
   readonly isOpen: boolean;
   readonly children: ReactNode;
   readonly onClose?: () => void;
-  readonly footer?: ReactNode;
   readonly scrollable?: boolean;
   readonly modalSizeClass?: string;
   readonly heightClass?: string;
+  readonly footer?: ReactNode;
 }
 
 export const Modal = ({
@@ -16,10 +16,10 @@ export const Modal = ({
   isOpen,
   children,
   onClose,
-  footer,
   scrollable = false,
   modalSizeClass = '',
   heightClass = '',
+  footer,
 }: ModalProps) => {
   if (!isOpen) return null;
 
