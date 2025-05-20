@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { HelpModal } from './HelpModal';
 
 jest.mock('../../utils/assetUtils', () => ({
-  click: 'click-audio.mp3',
+  click: 'click.mp3',
 }));
 
 describe('HelpModal', () => {
@@ -48,6 +48,6 @@ describe('HelpModal', () => {
     fireEvent.click(screen.getByRole('button', { name: /close/i }));
 
     expect(setShowHelpModal).toHaveBeenCalledWith(false);
-    expect(playAudio).toHaveBeenCalledWith('click-audio.mp3');
+    expect(playAudio).toHaveBeenCalledWith('click.mp3');
   });
 });

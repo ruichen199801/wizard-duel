@@ -15,4 +15,5 @@ beforeAll(() => {
 
 beforeEach(() => {
   jest.clearAllMocks();
+  sessionStorage.clear();
 });

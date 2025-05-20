@@ -74,6 +74,7 @@ export const SelectPowerModal = ({
             {powers.map((power) => (
               <div
                 key={power.class}
+                data-testid={`pwr-${power.class}`}
                 className={`pwr-li text-center p-2 rounded ${
                   selectedPowerClass === power.class
                     ? `border pwr-border-${power.class} shadow`
