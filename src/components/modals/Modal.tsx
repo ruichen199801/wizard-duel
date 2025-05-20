@@ -34,6 +34,7 @@ export const Modal = ({
     <>
       <div
         className={`modal ${modalSizeClass} fade show d-block`}
+        data-testid='modal'
         data-bs-backdrop='static'
         data-bs-keyboard='false'
         tabIndex={-1}
@@ -43,9 +44,13 @@ export const Modal = ({
           className={`modal-dialog modal-dialog-centered ${
             scrollable ? 'modal-dialog-scrollable' : ''
           }`}
+          data-testid='modal-dialog'
         >
-          <div className={`modal-content bg-modal ${heightClass}`}>
-            <div className='modal-header border-0'>
+          <div
+            className={`modal-content bg-modal ${heightClass}`}
+            data-testid='modal-content'
+          >
+            <div className='modal-header border-0' data-testid='modal-header'>
               {customHeader ? (
                 customHeader
               ) : (
@@ -65,17 +70,25 @@ export const Modal = ({
               )}
             </div>
 
-            <div className='modal-body'>{children}</div>
+            <div className='modal-body' data-testid='modal-body'>
+              {children}
+            </div>
 
             {footer && (
-              <div className='modal-footer border-0 justify-content-end'>
+              <div
+                className='modal-footer border-0 justify-content-end'
+                data-testid='modal-footer'
+              >
                 {footer}
               </div>
             )}
           </div>
         </div>
       </div>
-      <div className='modal-backdrop fade show'></div>
+      <div
+        className='modal-backdrop fade show'
+        data-testid='modal-backdrop'
+      ></div>
     </>
   );
 };
