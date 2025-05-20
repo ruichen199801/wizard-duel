@@ -3,7 +3,7 @@ import { click } from '../../utils/assetUtils';
 import { IconList } from './IconList';
 
 describe('IconList', () => {
-  test('triggers modals and plays audio on icon click', () => {
+  it('triggers modals and plays audio on icon click', () => {
     const setShowLevelEffectModal = jest.fn();
     const setShowLogModal = jest.fn();
     const setShowSettingsModal = jest.fn();

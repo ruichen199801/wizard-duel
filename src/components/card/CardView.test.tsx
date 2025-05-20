@@ -1,5 +1,4 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { PlayerID } from 'boardgame.io';
 import { CardId } from '../../model/cards';
 import {
   CARD_HEIGHT,
@@ -10,11 +9,9 @@ import {
 } from './CardView';
 
 jest.mock('../../utils/assetUtils', () => ({
-  cardFront: jest.fn((cardId: CardId) => `/mock/front/${cardId}.png`),
-  cardBack: jest.fn((playerId: PlayerID) => `/mock/back/${playerId}.png`),
-  cardPlaceholder: jest.fn(
-    (playerId: PlayerID) => `/mock/placeholder/${playerId}.png`
-  ),
+  cardFront: jest.fn(),
+  cardBack: jest.fn(),
+  cardPlaceholder: jest.fn(),
 }));
 
 const height = `${CARD_HEIGHT * CARD_SMALL_SCALE}`;
