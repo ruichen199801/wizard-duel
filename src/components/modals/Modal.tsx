@@ -50,7 +50,7 @@ export const Modal = ({
             className={`modal-content bg-modal ${heightClass}`}
             data-testid='modal-content'
           >
-            <div className='modal-header border-0' data-testid='modal-header'>
+            <div className='modal-header border-0'>
               {customHeader ? (
                 customHeader
               ) : (

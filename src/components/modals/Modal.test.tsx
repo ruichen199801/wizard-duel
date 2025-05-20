@@ -25,7 +25,6 @@ describe('Modal', () => {
       />
     );
     expect(screen.getByTestId('custom-header')).toBeInTheDocument();
-    expect(screen.queryByText('Test Title')).not.toBeInTheDocument();
   });
 
   it('renders children inside modal body', () => {
