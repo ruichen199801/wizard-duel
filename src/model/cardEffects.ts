@@ -58,6 +58,8 @@ export const effectsByGroup: Record<EffectGroupName, EffectType[]> = {
   ],
 
   // Only one effect of the same type can exist at a time. Can be either buff or debuff.
+  // NOTE: This enum isn't set in card effects. ALWAYS USE isUnique() to check uniqueness
+  // instead of accessing the group field directly.
   [EffectGroupName.unique]: [
     EffectType.doubleDmg,
     EffectType.preventDmg,

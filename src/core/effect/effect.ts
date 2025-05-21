@@ -225,7 +225,7 @@ const stealBuff: EffectHandler = ({ G, ctx, target }) => {
   const player = target === '0' ? '1' : '0';
   const playerEffects = G.players[player].effects;
   const uniqueEffectExists = playerEffects.some(
-    (e) => e.group === EffectGroupName.unique && e.type === chosenBuff.type
+    (e) => isUnique(e) && e.type === chosenBuff.type
   );
   if (!uniqueEffectExists) {
     effectHandlers[chosenBuff.type]({

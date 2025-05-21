@@ -1,10 +1,25 @@
 import { Ctx } from 'boardgame.io';
 import {
+  buffAtk,
+  buffDef,
+  counterAttack,
   damage,
+  debuffAtk,
+  debuffDef,
   doubleDmg,
+  heal,
+  lifesteal,
+  poison,
   preventDmg,
+  removeBuff,
+  removeDebuff,
+  replaceHand,
   resurrect,
+  showEnemyHand,
+  stealBuff,
+  swapHp,
 } from '../../model/cardEffects';
+import { Fireball1, Fireball2, Sandstorm } from '../../model/cards';
 import { p0, p1 } from '../../model/player';
 import { WizardDuelState } from '../../model/shared';
 import { PowerClass } from '../power/power';
@@ -39,20 +54,16 @@ describe('applyEffect', () => {
   });
 
   describe('damage handler', () => {
-    it('applies normal damage', () => {
-      // attacker = 0, target = 1
+    it('applies normal damage, current p0', () => {
       G.players[0].atk = 5;
       G.players[1].def = 1;
       G.players[1].hp = 30;
 
       applyEffect(G, ctx, damage(3));
-
-      // 3 + 5 - 1 = 7
-      expect(G.players[1].hp).toBe(23);
+      expect(G.players[1].hp).toBe(23); // 3 + 5 - 1 = 7
     });
 
-    it('applies double damage when doubleDmg is active', () => {
-      // attacker = 0, target = 1
+    it('applies double damage, current p0', () => {
       G.players[0].atk = 5;
       G.players[1].def = 1;
       G.players[1].hp = 30;
@@ -60,64 +71,326 @@ describe('applyEffect', () => {
 
       applyEffect(G, ctx, damage(6));
 
-      // (6 + 5 - 1) * 2 = 20
-      expect(G.players[1].hp).toBe(10);
+      expect(G.players[1].hp).toBe(10); // (6 + 5 - 1) * 2 = 20
       expect(G.players[0].effects).toHaveLength(0);
     });
 
-    it('prevents damage if target has preventDmg effect', () => {
-      // attacker = 0, target = 1
+    it('prevents damage, current p0', () => {
       G.players[1].hp = 30;
       G.players[1].effects.push(preventDmg);
 
       applyEffect(G, ctx, damage(3));
 
-      // No damage taken
-      expect(G.players[1].hp).toBe(30);
+      expect(G.players[1].hp).toBe(30); // No damage taken
       expect(G.players[1].effects).toHaveLength(0);
     });
 
-    it('resurrects when taking fatal damage', () => {
-      // attacker = 0, target = 1
+    it('resurrects when taking fatal damage, current p0', () => {
       G.players[1].hp = 5;
       G.players[1].effects.push(resurrect(15));
 
       applyEffect(G, ctx, damage(16));
 
-      // Resurrects to 15 HP
-      expect(G.players[1].hp).toBe(15);
+      expect(G.players[1].hp).toBe(15); // Target resurrects to 15 HP
       expect(G.players[1].effects).toHaveLength(0);
     });
 
-    it('applies Erebo buff in final level', () => {
-      // attacker = 0, target = 1
+    it('triggers counter attack when damaged, current p0', () => {
+      G.players[0].hp = 30;
+      G.players[1].hp = 30;
+      G.players[1].effects.push(counterAttack(9));
+
+      applyEffect(G, ctx, damage(5));
+
+      expect(G.players[0].hp).toBe(21); // 30 - 9
+      expect(G.players[1].hp).toBe(25); // 30 - 5
+      expect(G.players[1].effects).toHaveLength(1);
+    });
+
+    it('applies Erebo buff in final level, current p0', () => {
       G.players[1].hp = 30;
       G.players[1].maxHp = 30;
       sessionStorage.setItem('power', PowerClass.erebo);
 
       applyEffect(G, ctx, damage(9));
 
-      // Reduce both hp and maxHp
-      expect(G.players[1].hp).toBe(21);
+      expect(G.players[1].hp).toBe(21); // Reduce both hp and maxHp
       expect(G.players[1].maxHp).toBe(21);
     });
 
-    it('does not apply damage when missed in level 4', () => {
-      // attacker = 0, target = 1
+    it('does not apply damage when missed in level 4, current p0', () => {
       const mutatedG = { ...G, level: '4' }; // level is read-only field
       G.globalEffects.shouldMiss = [true];
       G.players[1].hp = 30;
 
       applyEffect(mutatedG, ctx, damage(9));
+      expect(G.players[1].hp).toBe(30); // No damage taken
+    });
+  });
 
-      // No damage taken
-      expect(G.players[1].hp).toBe(30);
+  describe('heal handler', () => {
+    it('heals target, current p0', () => {
+      G.players[0].hp = 15;
+      G.players[0].maxHp = 30;
+
+      applyEffect(G, ctx, heal(10));
+      expect(G.players[0].hp).toBe(25);
     });
 
-    // TODO: applies Cyro buff in final level
+    it('heals target to maxHp, current p0', () => {
+      G.players[0].hp = 25;
+      G.players[0].maxHp = 30;
 
-    // TODO: adds freeze effect when freezed in level 3
+      applyEffect(G, ctx, heal(10));
+      expect(G.players[0].hp).toBe(30);
+    });
 
-    // TODO: triggers counter attack when damaged
+    it('does not heal when target has Poison, current p0', () => {
+      G.players[0].hp = 15;
+      G.players[0].maxHp = 30;
+      G.players[0].effects.push(poison);
+
+      applyEffect(G, ctx, heal(10));
+      expect(G.players[0].hp).toBe(15);
+    });
+
+    it('does not heal when Cyro is active, current p0', () => {
+      G.players[0].hp = 15;
+      G.players[0].maxHp = 30;
+      sessionStorage.setItem('power', PowerClass.cryo);
+
+      applyEffect(G, ctx, heal(10));
+      expect(G.players[0].hp).toBe(15);
+    });
+
+    it('does not heal when maxHp < hp, current p0', () => {
+      G.players[0].hp = 30;
+      G.players[0].maxHp = 15;
+
+      applyEffect(G, ctx, heal(10));
+      expect(G.players[0].hp).toBe(30);
+    });
+  });
+
+  describe('buffAtk handler', () => {
+    it('buffs self attack, current p0', () => {
+      G.players[0].atk = 0;
+      applyEffect(G, ctx, buffAtk(3));
+      expect(G.players[0].atk).toBe(3);
+    });
+
+    it('buffs self attack, current p1', () => {
+      ctx.currentPlayer = '1';
+      G.players[1].atk = 0;
+      applyEffect(G, ctx, buffAtk(3));
+      expect(G.players[1].atk).toBe(3);
+    });
+  });
+
+  describe('buffDef handler', () => {
+    it('buffs self shield, current p0', () => {
+      G.players[0].def = 0;
+      applyEffect(G, ctx, buffDef(3));
+      expect(G.players[0].def).toBe(3);
+    });
+
+    it('buffs self shield, current p1', () => {
+      ctx.currentPlayer = '1';
+      G.players[1].def = 0;
+      applyEffect(G, ctx, buffDef(3));
+      expect(G.players[1].def).toBe(3);
+    });
+  });
+
+  describe('debuffAtk handler', () => {
+    it('debuffs enemy attack, current p0', () => {
+      G.players[1].atk = 5;
+      applyEffect(G, ctx, debuffAtk(3));
+      expect(G.players[1].atk).toBe(2);
+    });
+
+    it('debuffs enemy attack, current p1', () => {
+      ctx.currentPlayer = '1';
+      G.players[0].atk = 5;
+      applyEffect(G, ctx, debuffAtk(3));
+      expect(G.players[0].atk).toBe(2);
+    });
+  });
+
+  describe('debuffDef handler', () => {
+    it('debuffs enemy shield, current p0', () => {
+      G.players[1].def = 0;
+      applyEffect(G, ctx, debuffDef(3));
+      expect(G.players[1].def).toBe(-3);
+    });
+
+    it('debuffs enemy shield, current p1', () => {
+      ctx.currentPlayer = '1';
+      G.players[0].def = 0;
+      applyEffect(G, ctx, debuffDef(3));
+      expect(G.players[0].def).toBe(-3);
+    });
+  });
+
+  describe('removeDebuff handler', () => {
+    it('removes self debuffs, current p0', () => {
+      G.players[0].effects = [debuffAtk(3), debuffDef(3)];
+      expect(G.players[0].effects).toHaveLength(2);
+
+      applyEffect(G, ctx, removeDebuff);
+      expect(G.players[0].effects).toHaveLength(0);
+    });
+
+    it('removes self debuffs, current p1', () => {
+      ctx.currentPlayer = '1';
+      G.players[1].effects = [debuffAtk(3), debuffDef(3)];
+      expect(G.players[1].effects).toHaveLength(2);
+
+      applyEffect(G, ctx, removeDebuff);
+      expect(G.players[1].effects).toHaveLength(0);
+    });
+  });
+
+  describe('removeBuff handler', () => {
+    it('removes enemy buffs, current p0', () => {
+      G.players[1].effects = [buffAtk(3), buffDef(3)];
+      expect(G.players[1].effects).toHaveLength(2);
+
+      applyEffect(G, ctx, removeBuff);
+      expect(G.players[1].effects).toHaveLength(0);
+    });
+
+    it('removes enemy buffs, current p1', () => {
+      ctx.currentPlayer = '1';
+      G.players[0].effects = [buffAtk(3), buffDef(3)];
+      expect(G.players[0].effects).toHaveLength(2);
+
+      applyEffect(G, ctx, removeBuff);
+      expect(G.players[0].effects).toHaveLength(0);
+    });
+  });
+
+  describe('replaceHand handler', () => {
+    it('replaces hand, current p0', () => {
+      G.players[0].hand = [
+        Fireball1,
+        Fireball1,
+        Fireball1,
+        Fireball1,
+        Fireball1,
+      ];
+      G.deck = [
+        Fireball2,
+        Fireball2,
+        Fireball2,
+        Fireball2,
+        Fireball2,
+        Fireball2,
+      ];
+      applyEffect(G, ctx, replaceHand);
+
+      expect(G.players[0].hand).toHaveLength(5);
+      expect(G.deck).toHaveLength(1); // 6 - 5
+      expect(G.players[0].hand).not.toContain(Fireball1);
+      expect(G.players[0].hand).toContain(Fireball2);
+    });
+
+    it('replaces hand with empty deck, current p0', () => {
+      G.players[0].hand = [
+        Fireball1,
+        Fireball1,
+        Fireball1,
+        Fireball1,
+        Fireball1,
+      ];
+      applyEffect(G, ctx, replaceHand);
+
+      expect(G.players[0].hand).toHaveLength(5);
+      expect(G.deck).not.toHaveLength(0);
+    });
+
+    it('replaces hand with Sandstorm, current p0', () => {
+      G.players[0].hand = [
+        Fireball1,
+        Fireball1,
+        Fireball1,
+        Fireball1,
+        Sandstorm,
+      ];
+      G.deck = [
+        Fireball2,
+        Fireball2,
+        Fireball2,
+        Fireball2,
+        Fireball2,
+        Fireball2,
+      ];
+      applyEffect(G, ctx, replaceHand);
+
+      expect(G.players[0].hand).toHaveLength(5);
+      expect(G.deck).toHaveLength(2); // 6 - 4
+      expect(G.players[0].hand).not.toContain(Fireball1);
+      expect(G.players[0].hand).toContain(Fireball2);
+      expect(G.players[0].hand).toContain(Sandstorm);
+    });
+  });
+
+  describe('swapHp handler', () => {
+    it('swaps hp, current p0', () => {
+      G.players[0].hp = 5;
+      G.players[0].maxHp = 45;
+      G.players[1].hp = 30;
+      G.players[1].maxHp = 50;
+
+      applyEffect(G, ctx, swapHp);
+
+      expect(G.players[0].hp).toBe(30);
+      expect(G.players[0].maxHp).toBe(45);
+      expect(G.players[1].hp).toBe(5);
+      expect(G.players[1].maxHp).toBe(50);
+    });
+  });
+
+  describe('stealBuff handler', () => {
+    it('steals a different buff, current p0', () => {
+      G.players[1].effects = [buffAtk(3), buffAtk(3), buffDef(3)];
+      applyEffect(G, ctx, stealBuff);
+
+      expect(G.players[0].effects).toHaveLength(1);
+      expect(G.players[1].effects).toHaveLength(2);
+    });
+
+    it('steals a duplicate unique buff, current p0', () => {
+      G.players[0].effects = [preventDmg];
+      G.players[1].effects = [preventDmg];
+      applyEffect(G, ctx, stealBuff);
+
+      expect(G.players[0].effects).toHaveLength(1);
+      expect(G.players[1].effects).toHaveLength(0);
+    });
+  });
+
+  describe('showEnemyHand handler', () => {
+    it('shows enemy hand, current p0', () => {
+      G.globalEffects.showEnemyHand = false;
+      applyEffect(G, ctx, showEnemyHand);
+      expect(G.globalEffects.showEnemyHand).toBe(true);
+    });
+  });
+
+  describe('lifesteal handler', () => {
+    it('applies damage and heal correctly, current p0', () => {
+      G.players[0].hp = 15;
+      G.players[0].maxHp = 45;
+      G.players[0].atk = 2;
+      G.players[1].hp = 30;
+      G.players[1].def = 0;
+
+      applyEffect(G, ctx, lifesteal(18));
+
+      // Damage = 18 + 2 - 0 = 20
+      expect(G.players[0].hp).toBe(35);
+      expect(G.players[1].hp).toBe(10);
+    });
   });
 });
