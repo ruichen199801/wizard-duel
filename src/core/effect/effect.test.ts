@@ -1,5 +1,6 @@
 import { Ctx } from 'boardgame.io';
 import {
+  aura,
   buffAtk,
   buffDef,
   counterAttack,
@@ -7,6 +8,7 @@ import {
   debuffAtk,
   debuffDef,
   doubleDmg,
+  freeze,
   heal,
   lifesteal,
   poison,
@@ -391,6 +393,41 @@ describe('applyEffect', () => {
       // Damage = 18 + 2 - 0 = 20
       expect(G.players[0].hp).toBe(35);
       expect(G.players[1].hp).toBe(10);
+    });
+  });
+
+  describe('general', () => {
+    it('does not apply effect when frozen, current p0', () => {
+      G.players[1].hp = 30;
+      G.players[0].effects.push(freeze);
+      applyEffect(G, ctx, damage(9));
+      expect(G.players[1].hp).toBe(30);
+    });
+
+    it('does not apply duplicate unique effect, current p0', () => {
+      G.players[0].effects = [doubleDmg];
+      applyEffect(G, ctx, doubleDmg);
+      expect(G.players[0].effects).toHaveLength(1);
+    });
+
+    it('does not apply duplicate aura effect, current p0', () => {
+      const auraEffect = aura(heal(3), '+3 HP per Turn', '+3 HP per Turn');
+      G.players[0].effects = [auraEffect];
+      applyEffect(G, ctx, auraEffect);
+      expect(G.players[0].effects).toHaveLength(1);
+    });
+
+    it('applies different aura effect, current p0', () => {
+      const auraEffect1 = aura(heal(3), '+3 HP per Turn', '+3 HP per Turn');
+      const auraEffect2 = aura(heal(6), '+6 HP per Turn', '+6 HP per Turn');
+      G.players[0].effects = [auraEffect1];
+      applyEffect(G, ctx, auraEffect2);
+      expect(G.players[0].effects).toHaveLength(2);
+    });
+
+    it('mutates effect array for enduring effect, current p0', () => {
+      applyEffect(G, ctx, freeze);
+      expect(G.players[1].effects).toContain(freeze);
     });
   });
 });
