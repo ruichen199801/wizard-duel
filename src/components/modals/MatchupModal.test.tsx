@@ -1,17 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { FINAL_LEVEL } from '../../core/level/level';
-import { getAvatarForLevel } from '../../utils/assetUtils';
-import {
-  getBattleInstructions,
-  getBattleStartCaption,
-  getEnemyName,
-  getRuleByPower,
-} from '../../utils/scriptUtils';
 import { MatchupModal } from './MatchupModal';
 
-jest.mock('../../utils/assetUtils');
-jest.mock('../../utils/scriptUtils');
-
+// Mock data
 const battleInstructions = {
   intro:
     'In the heart of Xibalda, you meet Hassan Sarbah, master of ancient sand spells. Disrupted by the desert wind, ',
@@ -24,13 +15,16 @@ const powerRules = {
   rule: 'you may gain a random buff at the end of your turns, but enemy has +3 Attack/+3 Shield permanently.',
 };
 
-beforeEach(() => {
-  jest.mocked(getAvatarForLevel).mockReturnValue('avatar.png');
-  jest.mocked(getBattleInstructions).mockReturnValue(battleInstructions);
-  jest.mocked(getBattleStartCaption).mockReturnValue(battleStartCaption);
-  jest.mocked(getEnemyName).mockReturnValue('Enemy');
-  jest.mocked(getRuleByPower).mockReturnValue(powerRules);
-});
+// Mock utils
+jest.mock('../../utils/assetUtils', () => ({
+  getAvatarForLevel: () => 'avatar.png',
+}));
+jest.mock('../../utils/scriptUtils', () => ({
+  getBattleInstructions: () => battleInstructions,
+  getBattleStartCaption: () => battleStartCaption,
+  getEnemyName: () => 'Enemy',
+  getRuleByPower: () => powerRules,
+}));
 
 describe('MatchupModal', () => {
   const playMusic = jest.fn();

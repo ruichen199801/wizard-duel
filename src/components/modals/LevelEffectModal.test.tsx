@@ -1,20 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { FINAL_LEVEL } from '../../core/level/level';
-import { getLocationForLevel } from '../../utils/assetUtils';
-import {
-  getBattleInstructions,
-  getBattleStartCaption,
-  getRuleByPower,
-} from '../../utils/scriptUtils';
 import { LevelEffectModal } from './LevelEffectModal';
 
-jest.mock('../../utils/assetUtils', () => ({
-  click: 'click.mp3',
-  getLocationForLevel: jest.fn(),
-}));
-jest.mock('../../utils/scriptUtils');
-
-const location = 'location.png';
+// Mock data
 const battleInstructions = {
   intro:
     'In the heart of Xibalda, you meet Hassan Sarbah, master of ancient sand spells. Disrupted by the desert wind, ',
@@ -27,12 +15,16 @@ const powerRules = {
   rule: 'you may gain a random buff at the end of your turns, but enemy has +3 Attack/+3 Shield permanently.',
 };
 
-beforeEach(() => {
-  jest.mocked(getLocationForLevel).mockReturnValue(location);
-  jest.mocked(getBattleInstructions).mockReturnValue(battleInstructions);
-  jest.mocked(getBattleStartCaption).mockReturnValue(battleStartCaption);
-  jest.mocked(getRuleByPower).mockReturnValue(powerRules);
-});
+// Mock utils
+jest.mock('../../utils/assetUtils', () => ({
+  click: 'click.mp3',
+  getLocationForLevel: () => 'location.png',
+}));
+jest.mock('../../utils/scriptUtils', () => ({
+  getBattleInstructions: () => battleInstructions,
+  getBattleStartCaption: () => battleStartCaption,
+  getRuleByPower: () => powerRules,
+}));
 
 describe('LevelEffectModal', () => {
   const playAudio = jest.fn();
