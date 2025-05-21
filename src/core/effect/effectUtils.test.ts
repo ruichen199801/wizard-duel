@@ -1,4 +1,3 @@
-import { Ctx } from 'boardgame.io';
 import {
   aura,
   buffAtk,
@@ -29,7 +28,6 @@ import {
 
 describe('effectUtils', () => {
   let G: WizardDuelState;
-  let ctx: Ctx;
 
   beforeEach(() => {
     G = {
@@ -40,17 +38,6 @@ describe('effectUtils', () => {
       deck: [],
       level: '1',
       globalEffects: {},
-    };
-
-    ctx = {
-      currentPlayer: '0',
-      turn: 1,
-      gameover: undefined,
-      phase: 'default',
-      playOrder: ['0', '1'],
-      playOrderPos: 0,
-      numPlayers: 2,
-      activePlayers: {},
     };
   });
 
