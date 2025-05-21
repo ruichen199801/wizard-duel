@@ -59,7 +59,7 @@ export const MatchupModal = ({
             <div className='text-center'>
               <img
                 src={playerAvatar}
-                alt='avatar'
+                alt='player-avatar'
                 height={height}
                 width={width}
               />
@@ -71,7 +71,7 @@ export const MatchupModal = ({
             <div className='text-center'>
               <img
                 src={enemyAvatar}
-                alt='avatar'
+                alt='enemy-avatar'
                 height={height}
                 width={width}
               />

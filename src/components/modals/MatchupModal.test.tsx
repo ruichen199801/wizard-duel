@@ -1,20 +1,17 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { FINAL_LEVEL } from '../../core/level/level';
-import { getLocationForLevel } from '../../utils/assetUtils';
+import { getAvatarForLevel } from '../../utils/assetUtils';
 import {
   getBattleInstructions,
   getBattleStartCaption,
+  getEnemyName,
   getRuleByPower,
 } from '../../utils/scriptUtils';
-import { LevelEffectModal } from './LevelEffectModal';
+import { MatchupModal } from './MatchupModal';
 
-jest.mock('../../utils/assetUtils', () => ({
-  click: 'click.mp3',
-  getLocationForLevel: jest.fn(),
-}));
+jest.mock('../../utils/assetUtils');
 jest.mock('../../utils/scriptUtils');
 
-const location = 'location.png';
 const battleInstructions = {
   intro:
     'In the heart of Xibalda, you meet Hassan Sarbah, master of ancient sand spells. Disrupted by the desert wind, ',
@@ -28,30 +25,40 @@ const powerRules = {
 };
 
 beforeEach(() => {
-  jest.mocked(getLocationForLevel).mockReturnValue(location);
+  jest.mocked(getAvatarForLevel).mockReturnValue('avatar.png');
   jest.mocked(getBattleInstructions).mockReturnValue(battleInstructions);
   jest.mocked(getBattleStartCaption).mockReturnValue(battleStartCaption);
+  jest.mocked(getEnemyName).mockReturnValue('Enemy');
   jest.mocked(getRuleByPower).mockReturnValue(powerRules);
 });
 
-describe('LevelEffectModal', () => {
-  const playAudio = jest.fn();
-  const setShowLevelEffectModal = jest.fn();
+describe('MatchupModal', () => {
+  const playMusic = jest.fn();
+  const setShowMatchupModal = jest.fn();
 
   const defaultProps = {
-    showLevelEffectModal: true,
-    setShowLevelEffectModal,
-    playAudio,
+    showMatchupModal: true,
+    setShowMatchupModal,
+    playMusic,
     level: '4',
   };
 
-  it('renders modal with level instructions', () => {
-    render(<LevelEffectModal {...defaultProps} />);
+  it('renders avatars, names, and battle instructions', () => {
+    render(<MatchupModal {...defaultProps} />);
 
     expect(screen.getByText(battleStartCaption)).toBeInTheDocument();
-    expect(screen.getByAltText('location')).toHaveAttribute(
+
+    expect(screen.getByText('You')).toBeInTheDocument();
+    expect(screen.getByText('VS')).toBeInTheDocument();
+    expect(screen.getByText('Enemy')).toBeInTheDocument();
+
+    expect(screen.getByAltText('player-avatar')).toHaveAttribute(
       'src',
-      'location.png'
+      'avatar.png'
+    );
+    expect(screen.getByAltText('enemy-avatar')).toHaveAttribute(
+      'src',
+      'avatar.png'
     );
 
     expect(screen.getByText(/In the heart of Xibalda/i)).toBeInTheDocument();
@@ -67,21 +74,24 @@ describe('LevelEffectModal', () => {
     ).not.toBeInTheDocument();
   });
 
-  it('calls playAudio and closes modal on close', () => {
-    render(<LevelEffectModal {...defaultProps} />);
-
-    const closeButton = screen.getByRole('button', { name: /close/i });
-    fireEvent.click(closeButton);
-
-    expect(setShowLevelEffectModal).toHaveBeenCalledWith(false);
-    expect(playAudio).toHaveBeenCalledWith('click.mp3');
-  });
-
-  it('shows power rules when level is FINAL_LEVEL', () => {
-    render(<LevelEffectModal {...defaultProps} level={FINAL_LEVEL} />);
+  it('renders final level rule if level is FINAL_LEVEL', () => {
+    render(<MatchupModal {...defaultProps} level={FINAL_LEVEL} />);
 
     expect(
       screen.getByText(/Embraced by the Hydro power/i)
     ).toBeInTheDocument();
+  });
+
+  it('calls playMusic and closes modal on close', () => {
+    render(<MatchupModal {...defaultProps} />);
+
+    fireEvent.click(screen.getByText('Continue'));
+
+    expect(
+      screen.getByRole('button', { name: 'Continue' })
+    ).toBeInTheDocument();
+
+    expect(setShowMatchupModal).toHaveBeenCalledWith(false);
+    expect(playMusic).toHaveBeenCalled();
   });
 });
