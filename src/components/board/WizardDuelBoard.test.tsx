@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { BoardProps } from 'boardgame.io/dist/types/packages/react';
 import { Fireball1 } from '../../model/cards';
 import { p0, p1 } from '../../model/player';
@@ -203,5 +203,13 @@ describe('WizardDuelBoard', () => {
     expect(screen.getByTestId('IconList')).toBeInTheDocument();
     expect(screen.getByTestId('PlayerStatsPanel-0')).toBeInTheDocument();
     expect(screen.getByTestId('PlayerStatsPanel-1')).toBeInTheDocument();
+  });
+
+  it('calls drawCard on mount', async () => {
+    render(<WizardDuelBoard {...(baseProps as BoardProps<WizardDuelState>)} />);
+
+    await waitFor(() => {
+      expect(baseProps.moves?.drawCard).toHaveBeenCalled();
+    });
   });
 });
