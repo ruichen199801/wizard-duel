@@ -2,10 +2,6 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { CardId } from '../../model/cards';
 import { SelectCardModal } from './SelectCardModal';
 
-jest.mock('../../utils/assetUtils', () => ({
-  cardFront: jest.fn(),
-}));
-
 describe('SelectCardModal', () => {
   const cardIdList = [CardId.Fireball1, CardId.Frost1];
   const handleSelectCard = jest.fn();

@@ -6,7 +6,7 @@ import { SelectPowerModal } from './SelectPowerModal';
 
 jest.mock('../../utils/assetUtils', () => ({
   click: 'click.mp3',
-  getAvatarForLevel: jest.fn(() => 'avatar.png'),
+  getAvatarForLevel: () => 'avatar.png',
 }));
 
 jest.mock('../../utils/commonUtils', () => ({

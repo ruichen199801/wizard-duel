@@ -10,10 +10,6 @@ jest.mock('../../utils/commonUtils', () => ({
   resetGame: jest.fn(),
 }));
 
-jest.mock('../../utils/assetUtils', () => ({
-  click: 'click.mp3',
-}));
-
 describe('SettingsModal', () => {
   const playAudio = jest.fn();
   const toggleAudioMute = jest.fn();
