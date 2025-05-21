@@ -4,18 +4,6 @@ import { p0, p1 } from '../../model/player';
 import { WizardDuelState } from '../../model/shared';
 import { GameStatsPanel } from './GameStatsPanel';
 
-jest.mock('../card/CardPile', () => ({
-  CardPile: () => <div data-testid='card-pile' />,
-}));
-
-jest.mock('../../utils/assetUtils', () => ({
-  icon: {
-    level: '/mock/level.png',
-    turn: '/mock/turn.png',
-    deck: '/mock/deck.png',
-  },
-}));
-
 const mockLevel = '1';
 const mockTurn = 2;
 const mockG: WizardDuelState = {
@@ -27,7 +15,6 @@ const mockG: WizardDuelState = {
   level: mockLevel,
   globalEffects: {},
 };
-const mockDeckCount = mockG.deck.length;
 
 describe('GameStatsPanel', () => {
   it('always renders CardPile', () => {
@@ -58,7 +45,7 @@ describe('GameStatsPanel', () => {
     expect(screen.getByText(mockTurn)).toBeInTheDocument();
 
     expect(screen.getByAltText('deck')).toBeInTheDocument();
-    expect(screen.getByText(mockDeckCount)).toBeInTheDocument();
+    expect(screen.getByText(mockG.deck.length)).toBeInTheDocument();
   });
 
   it('applies text-danger class when shouldMiss is true', () => {

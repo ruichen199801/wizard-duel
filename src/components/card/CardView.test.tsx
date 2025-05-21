@@ -9,9 +9,9 @@ import {
 } from './CardView';
 
 jest.mock('../../utils/assetUtils', () => ({
-  cardFront: jest.fn(),
-  cardBack: jest.fn(),
-  cardPlaceholder: jest.fn(),
+  cardFront: () => 'card-front.png',
+  cardBack: () => 'card-back.png',
+  cardPlaceholder: () => 'card-placeholder.png',
 }));
 
 const height = `${CARD_HEIGHT * CARD_SMALL_SCALE}`;
@@ -34,6 +34,7 @@ describe('CardView', () => {
     const frontCard = screen.getByTestId('card-front');
 
     expect(frontCard).toBeInTheDocument();
+    expect(frontCard).toHaveAttribute('src', 'card-front.png');
     expect(frontCard).toHaveAttribute('height', height);
     expect(frontCard).toHaveAttribute('width', width);
 
@@ -56,16 +57,25 @@ describe('CardView', () => {
 
   it('renders back card', () => {
     render(<CardView cardType={CardType.back} playerId={'1'} />);
-    expect(screen.getByTestId('card-back')).toBeInTheDocument();
+
+    const backCard = screen.getByTestId('card-back');
+    expect(backCard).toBeInTheDocument();
+    expect(backCard).toHaveAttribute('src', 'card-back.png');
   });
 
   it('renders preview card', () => {
     render(<CardView cardType={CardType.preview} cardId={cardId} />);
-    expect(screen.getByTestId('card-preview')).toBeInTheDocument();
+
+    const previewCard = screen.getByTestId('card-preview');
+    expect(previewCard).toBeInTheDocument();
+    expect(previewCard).toHaveAttribute('src', 'card-front.png');
   });
 
   it('renders placeholder card', () => {
     render(<CardView cardType={CardType.placeholder} playerId={'0'} />);
-    expect(screen.getByTestId('card-placeholder')).toBeInTheDocument();
+
+    const placeholderCard = screen.getByTestId('card-placeholder');
+    expect(placeholderCard).toBeInTheDocument();
+    expect(placeholderCard).toHaveAttribute('src', 'card-placeholder.png');
   });
 });

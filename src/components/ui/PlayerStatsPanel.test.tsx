@@ -4,17 +4,6 @@ import { Player } from '../../model/player';
 import { Animation, AnimationProps } from '../../utils/assetUtils';
 import { PlayerStatsPanel } from './PlayerStatsPanel';
 
-jest.mock('../../utils/assetUtils', () => ({
-  getAvatarForLevel: jest.fn(() => '/mock/avatar.png'),
-  icon: {
-    hp: '/mock/hp.png',
-    atk: '/mock/atk.png',
-    def: '/mock/def.png',
-    ice: '/mock/ice.png',
-  },
-  Animation: { fireball: 'fireball' },
-}));
-
 const mockPlayer: Player = {
   id: '0',
   name: 'Player',
@@ -76,7 +65,7 @@ describe('PlayerStatsPanel', () => {
   it('conditionally renders animation overlay', () => {
     const mockAnimation: AnimationProps = {
       type: Animation.fireball,
-      path: '/mock/fireball.gif',
+      path: 'fireball.gif',
       timeout: 500,
     };
 
