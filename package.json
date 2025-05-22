@@ -21,7 +21,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --watchAll=false",
+    "test": "react-scripts test --watchAll=false --onlyChanged",
     "eject": "react-scripts eject",
     "clean": "rm -rf node_modules package-lock.json",
     "lint": "eslint src --ext .ts,.tsx",
