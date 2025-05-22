@@ -1,3 +1,11 @@
+# 🚀 Release v1.2 (2025-5-22)
+
+🌟 Project improvements:
+
+- Add unit and end-to-end tests, automated via GitHub Actions
+- Optimized asset size significantly
+- Code refactoring
+
 # 🚀 Release v1.1 (2025-5-9)
 
 Migrate project to TypeScript.
