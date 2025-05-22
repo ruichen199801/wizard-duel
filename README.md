@@ -1,5 +1,7 @@
 # Wizard Duel
 
+[![CI](https://github.com/ruichen199801/wizard-duel/actions/workflows/ci.yml/badge.svg)](https://github.com/ruichen199801/wizard-duel/actions/workflows/ci.yml)
+
 <img src=".github/game-screenshot.png" alt="game screenshot" width="500">
 
 ## About the Game
@@ -8,13 +10,13 @@ This is a single-player, turn-based card game. You are a young wizard in a magic
 
 Try it out yourself at [Wizard Duel](https://wizard-duel-ten.vercel.app/).
 
+📘 [Component Docs](https://ruichen199801.github.io/wizard-duel/)
+
 ## Built with
 
 - React
 - Bootstrap
 - [boardgame.io](https://boardgame.io/)
-
-📘 [Component Docs](https://ruichen199801.github.io/wizard-duel/)
 
 ## Run it Locally
 
