@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { GameDifficulty, PowerClass } from '../../core/power/power';
-import { useImageLoader } from '../../hooks/useImageLoader';
 import { click, getAvatarForLevel } from '../../utils/assetUtils';
 import { startLevel } from '../../utils/commonUtils';
 import { powers, PowerSelectionProps } from '../../utils/scriptUtils';
@@ -9,6 +8,7 @@ import {
   AVATAR_SMALL_SCALE,
   AVATAR_WIDTH,
 } from '../ui/PlayerStatsPanel';
+import { Modal } from './Modal';
 
 interface SelectPowerModalProps {
   readonly showSelectPowerModal: boolean;
@@ -22,15 +22,6 @@ export const SelectPowerModal = ({
   const [selectedPowerClass, setSelectedPowerClass] = useState<
     PowerClass | undefined
   >();
-
-  const avatars: string[] = powers.map((power) =>
-    getAvatarForLevel('1', power.level)
-  );
-  const { isLoading } = useImageLoader(avatars, 300);
-
-  if (!showSelectPowerModal) {
-    return null;
-  }
 
   const handleSelectPower = (power: PowerSelectionProps) => {
     setSelectedPowerClass(power.class);
@@ -46,83 +37,63 @@ export const SelectPowerModal = ({
   };
 
   return (
-    <>
-      <div
-        className='modal modal-lg fade show d-block'
-        data-bs-backdrop='static'
-        data-bs-keyboard='false'
-        tabIndex={-1}
-      >
-        <div className='modal-dialog modal-dialog-centered'>
-          <div className='modal-content bg-modal'>
-            <div className='modal-header border-0'>
-              <h4 className='modal-title w-100 text-center font-bold'>
-                Pick Your Power
-              </h4>
-            </div>
+    <Modal
+      title='Pick Your Power'
+      isOpen={showSelectPowerModal}
+      modalSizeClass='modal-lg'
+      footer={
+        <>
+          <button
+            type='button'
+            className='btn btn-dark'
+            onClick={() => handleNextLevel(GameDifficulty.normal)}
+            disabled={!selectedPowerClass}
+          >
+            Next Level: Normal
+          </button>
 
-            <div className='modal-body'>
-              {isLoading ? (
-                <div className='d-flex justify-content-center align-items-center'>
-                  <div className='spinner-border' role='status'>
-                    <span className='visually-hidden'>Loading...</span>
-                  </div>
-                </div>
-              ) : (
-                <>
-                  <p className='pwr-text pb-3'>
-                    Take a power from a past opponent to use in the upcoming
-                    boss fight, <b>but at a cost!</b>
-                  </p>
+          <button
+            type='button'
+            className='btn btn-dark'
+            onClick={() => handleNextLevel(GameDifficulty.hard)}
+            disabled={!selectedPowerClass}
+          >
+            Next Level: Hard
+          </button>
+        </>
+      }
+    >
+      {
+        <>
+          <p className='pwr-text pb-3'>
+            Take a power from a past opponent to use in the upcoming boss fight,{' '}
+            <b>but at a cost!</b>
+          </p>
 
-                  <div className='d-flex justify-content-center'>
-                    {powers.map((power) => (
-                      <div
-                        key={power.class}
-                        className={`pwr-li text-center p-2 rounded ${
-                          selectedPowerClass === power.class
-                            ? `border pwr-border-${power.class} shadow`
-                            : ''
-                        }`}
-                        onClick={() => handleSelectPower(power)}
-                      >
-                        <img
-                          src={getAvatarForLevel('1', power.level)}
-                          alt={power.name}
-                          height={AVATAR_HEIGHT * AVATAR_SMALL_SCALE}
-                          width={AVATAR_WIDTH * AVATAR_SMALL_SCALE}
-                        />
-                        <p className='mt-2 fw-bold'>{power.name}</p>
-                      </div>
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
-
-            <div className='modal-footer border-0 justify-content-end'>
-              <button
-                type='button'
-                className='btn btn-dark'
-                onClick={() => handleNextLevel(GameDifficulty.normal)}
-                disabled={!selectedPowerClass}
+          <div className='d-flex justify-content-center'>
+            {powers.map((power) => (
+              <div
+                key={power.class}
+                data-testid={`pwr-${power.class}`}
+                className={`pwr-li text-center p-2 rounded ${
+                  selectedPowerClass === power.class
+                    ? `border pwr-border-${power.class} shadow`
+                    : ''
+                }`}
+                onClick={() => handleSelectPower(power)}
               >
-                Next Level: Normal
-              </button>
-
-              <button
-                type='button'
-                className='btn btn-dark'
-                onClick={() => handleNextLevel(GameDifficulty.hard)}
-                disabled={!selectedPowerClass}
-              >
-                Next Level: Hard
-              </button>
-            </div>
+                <img
+                  src={getAvatarForLevel('1', power.level)}
+                  alt={power.name}
+                  height={AVATAR_HEIGHT * AVATAR_SMALL_SCALE}
+                  width={AVATAR_WIDTH * AVATAR_SMALL_SCALE}
+                />
+                <p className='mt-2 fw-bold'>{power.name}</p>
+              </div>
+            ))}
           </div>
-        </div>
-      </div>
-      <div className='modal-backdrop fade show'></div>
-    </>
+        </>
+      }
+    </Modal>
   );
 };

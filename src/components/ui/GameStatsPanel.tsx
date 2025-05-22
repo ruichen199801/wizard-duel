@@ -8,7 +8,7 @@ interface GameStatsPanelProps {
   readonly showGameStats: boolean;
 }
 
-const GameStatsPanel = ({
+export const GameStatsPanel = ({
   G,
   visibleTurn,
   showGameStats,
@@ -74,5 +74,3 @@ const GameStatsPanel = ({
     </div>
   );
 };
-
-export default GameStatsPanel;

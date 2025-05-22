@@ -31,6 +31,7 @@ export const EndTurnButton = ({
     <div className='d-flex justify-content-end m-2'>
       <button
         className={`btn btn-lg ${buttonStyles[turnPhase]}`}
+        data-testid='end-turn-button'
         onClick={handleEndTurnButtonClick}
         disabled={turnPhase !== VisibleTurnPhase.endTurnEnabled}
       >

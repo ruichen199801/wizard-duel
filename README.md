@@ -1,5 +1,8 @@
 # Wizard Duel
 
+[![CI](https://github.com/ruichen199801/wizard-duel/actions/workflows/ci.yml/badge.svg)](https://github.com/ruichen199801/wizard-duel/actions/workflows/ci.yml)
+[![Component Docs](https://img.shields.io/badge/TypeDoc-React+TS-blue)](https://ruichen199801.github.io/wizard-duel/)
+
 <img src=".github/game-screenshot.png" alt="game screenshot" width="500">
 
 ## About the Game
@@ -7,8 +10,6 @@
 This is a single-player, turn-based card game. You are a young wizard in a magical showdown against powerful enemies. Play your cards wisely to outwit your opponent and reduce their health to zero to win the game.
 
 Try it out yourself at [Wizard Duel](https://wizard-duel-ten.vercel.app/).
-
-📘 [Component Docs](https://ruichen199801.github.io/wizard-duel/)
 
 ## Built with
 

@@ -73,12 +73,13 @@ const nextLevelCards: Record<string, string[]> = {
   5: [cardFront(CardId.Vision), cardFront(CardId.Tide)],
   6: [cardFront(CardId.Revenge), cardFront(CardId.Poison)],
   7: [],
+  8: [],
 };
 const getNextCardsForLevel = (level = '1') => nextLevelCards[level];
 
 // ANIMATION FILES
 
-enum Animation {
+export enum Animation {
   fireball = 'fireball',
   freeze = 'freeze',
   thunder = 'thunder',

@@ -5,15 +5,15 @@
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
+    "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "boardgame.io": "^0.50.2",
     "bootstrap": "^5.3.3",
     "madge": "^7.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "react-router-dom": "^6.23.1",
     "react-scripts": "^5.0.1",
     "web-vitals": "^2.1.4"
@@ -21,10 +21,16 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll=false --onlyChanged",
+    "e2e-test": "playwright test",
+    "e2e-test:ui": "playwright test --ui --headed",
     "eject": "react-scripts eject",
+    "clean": "rm -rf node_modules package-lock.json",
+    "lint": "eslint src --ext .ts,.tsx",
+    "reinstall": "npm run clean && npm install",
     "circular": "madge --circular src/index.tsx",
-    "graph": "madge --extensions ts,tsx --image graph.svg src"
+    "graph": "madge --extensions ts,tsx --exclude '\\.test\\.' --image graph.svg src",
+    "prepare": "husky"
   },
   "eslintConfig": {
     "extends": [
@@ -49,10 +55,15 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@playwright/test": "^1.52.0",
     "@types/bootstrap": "^5.2.10",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.15.21",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@types/react-router-dom": "^5.3.3",
+    "eslint": "^8.57.1",
+    "husky": "^9.1.7",
     "typescript": "^4.9.5"
   }
 }

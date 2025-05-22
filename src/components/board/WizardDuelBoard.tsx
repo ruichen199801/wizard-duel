@@ -38,7 +38,7 @@ import { SelectPowerModal } from '../modals/SelectPowerModal';
 import { SettingsModal } from '../modals/SettingsModal';
 import { EffectStack } from '../ui/EffectStack';
 import { EndTurnButton, VisibleTurnPhase } from '../ui/EndTurnButton';
-import GameStatsPanel from '../ui/GameStatsPanel';
+import { GameStatsPanel } from '../ui/GameStatsPanel';
 import { IconList } from '../ui/IconList';
 import { PlayerStatsPanel } from '../ui/PlayerStatsPanel';
 
@@ -374,6 +374,7 @@ export const WizardDuelBoard = ({
         setShowEffectStack={setShowEffectStack}
         aiStrategy={aiStrategy}
         setAiStrategy={setAiStrategy}
+        level={G.level}
       />
       <HelpModal
         showHelpModal={showHelpModal}
