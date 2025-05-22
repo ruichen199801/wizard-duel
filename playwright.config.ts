@@ -26,7 +26,7 @@ export default defineConfig({
 
     /* Add a delay to visually know what's going on when testing locally with headed browser. */
     launchOptions: {
-      slowMo: process.env.CI ? 0 : 100,
+      slowMo: process.env.CI ? 0 : 200,
     },
   },
 
