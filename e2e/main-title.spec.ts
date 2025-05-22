@@ -5,7 +5,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('Main Title', () => {
-  test('should load main title page', async ({ page }) => {
+  test('load main title page', async ({ page }) => {
     await expect(page.getByText('Wizard Duel')).toBeVisible();
     await expect(page.getByRole('button', { name: 'Play' })).toBeVisible();
     await expect(
@@ -15,7 +15,7 @@ test.describe('Main Title', () => {
     await expect(page.getByRole('button', { name: 'About' })).toBeVisible();
   });
 
-  test('should navigate to /game on Play button click', async ({ page }) => {
+  test('navigate to /game on Play button click', async ({ page }) => {
     await page.getByRole('button', { name: 'Play' }).click();
     await expect(page).toHaveURL('/game');
   });

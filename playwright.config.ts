@@ -23,6 +23,11 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+
+    /* Add a delay to visually know what's going on when testing locally with headed browser. */
+    launchOptions: {
+      slowMo: process.env.CI ? 0 : 100,
+    },
   },
 
   /* Configure projects for major browsers */
