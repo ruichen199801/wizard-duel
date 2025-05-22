@@ -1,6 +1,18 @@
 node_modules
 .DS_Store
 build
+
+# Vercel
 .vercel
+
+# Madge
 graph.svg
+
+# Jest
 coverage
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

@@ -9,12 +9,12 @@ Provide a brief summary of your changes. Include any relevant context and the re
 - [ ] Code refactor
 - [ ] Other
 
-## Checklist
+## Testing
 
 Please verify the following before marking the PR as ready for review:
 
-- [ ] Relevant assets, AI logic, and unit tests are included
-- [ ] All unit and end-to-end tests pass
+- [ ] Relevant unit and e2e tests are updated or added
+- [ ] All unit and e2e tests pass
 - [ ] Manually tested a full game locally or on Vercel (images render, win/lose/draw flow, final level works)
 
 ## Known Issues
