@@ -24,7 +24,7 @@ export const maxTurn: number =
     ? getPowerConfigs().pyroMaxTurn // Pyro debuff
     : 50;
 
-const FIRE_HAND_DISTRIBUTION = [0.2, 0.3, 0.4, 0.09, 0.01]; // Level 2
+const FIRE_HAND_DISTRIBUTION = [0.3, 0.3, 0.35, 0.04, 0.01]; // Level 2
 
 export const levelRules: Record<string, number> = {
   freezeRate: 0.4, // Level 3
@@ -53,12 +53,12 @@ export const levelConfigs: Record<string, LevelProps> = {
 
   2: {
     playerStatsOverride: {
-      maxHp: 50,
-      hp: 50,
+      maxHp: 35,
+      hp: 35,
     },
     enemyStatsOverride: {
-      maxHp: 50,
-      hp: 50,
+      maxHp: 35,
+      hp: 35,
     },
 
     playerHandOverride: randomPopulateHand(
@@ -75,23 +75,23 @@ export const levelConfigs: Record<string, LevelProps> = {
 
   3: {
     playerStatsOverride: {
-      maxHp: 55,
-      hp: 55,
+      maxHp: 40,
+      hp: 40,
     },
     enemyStatsOverride: {
-      maxHp: 55,
-      hp: 55,
+      maxHp: 40,
+      hp: 40,
     },
   },
 
   4: {
     playerStatsOverride: {
-      maxHp: 60,
-      hp: 60,
+      maxHp: 45,
+      hp: 45,
     },
     enemyStatsOverride: {
-      maxHp: 60,
-      hp: 60,
+      maxHp: 45,
+      hp: 45,
     },
 
     globalEffectsOverride: {
@@ -101,12 +101,12 @@ export const levelConfigs: Record<string, LevelProps> = {
 
   5: {
     playerStatsOverride: {
-      maxHp: 65,
-      hp: 65,
+      maxHp: 50,
+      hp: 50,
     },
     enemyStatsOverride: {
-      maxHp: 65,
-      hp: 65,
+      maxHp: 50,
+      hp: 50,
     },
 
     globalEffectsOverride: {
@@ -116,12 +116,12 @@ export const levelConfigs: Record<string, LevelProps> = {
 
   6: {
     playerStatsOverride: {
-      maxHp: 70,
-      hp: 70,
+      maxHp: 55,
+      hp: 55,
     },
     enemyStatsOverride: {
-      maxHp: 70,
-      hp: 70,
+      maxHp: 55,
+      hp: 55,
     },
 
     globalEffectsOverride: {
@@ -134,12 +134,12 @@ export const levelConfigs: Record<string, LevelProps> = {
 
   7: {
     playerStatsOverride: {
-      maxHp: 75,
-      hp: 75,
+      maxHp: 60,
+      hp: 60,
     },
     enemyStatsOverride: {
-      maxHp: 75,
-      hp: 75,
+      maxHp: 60,
+      hp: 60,
     },
 
     globalEffectsOverride: {

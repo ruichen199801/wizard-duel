@@ -55,7 +55,7 @@ export const resolveAction = (actions: Card[], G: WizardDuelState): Card => {
   if (
     actions.some((card) => card.keywords.includes(CardKeyword.sustain)) &&
     !G.players[1].effects.some((e) => e.type === EffectType.poison) &&
-    G.players[1].hp <= Math.ceil(G.players[1].maxHp * 0.3)
+    G.players[1].hp <= Math.ceil(G.players[1].maxHp * 0.4)
   ) {
     // console.log('Resolve to healing cards');
     return actions.find((card) => card.keywords.includes(CardKeyword.sustain))!;
@@ -68,7 +68,7 @@ export const resolveAction = (actions: Card[], G: WizardDuelState): Card => {
     (G.players[1].effects.some((e) => e.type === EffectType.doubleDmg) ||
       G.players[1].atk >= G.players[1].baseAtk + 3 ||
       G.players[0].def <= G.players[0].baseDef - 3 ||
-      G.players[0].hp <= Math.ceil(G.players[0].maxHp * 0.3))
+      G.players[0].hp <= Math.ceil(G.players[0].maxHp * 0.4))
   ) {
     // console.log('Resolve to damage cards');
     return actions.find((card) => card.keywords.includes(CardKeyword.damage))!;
