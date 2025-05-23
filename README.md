@@ -1,6 +1,8 @@
 # Wizard Duel
 
 [![CI](https://github.com/ruichen199801/wizard-duel/actions/workflows/ci.yml/badge.svg)](https://github.com/ruichen199801/wizard-duel/actions/workflows/ci.yml)
+![Release](https://img.shields.io/github/v/release/ruichen199801/wizard-duel)
+![License](https://img.shields.io/github/license/ruichen199801/wizard-duel)
 [![Component Docs](https://img.shields.io/badge/TypeDoc-React+TS-blue)](https://ruichen199801.github.io/wizard-duel/)
 
 <img src=".github/game-screenshot.png" alt="game screenshot" width="500">
