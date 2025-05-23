@@ -68,7 +68,7 @@ const drawCard: Move<WizardDuelState> = ({ G, ctx }, cardId?: CardId) => {
   }
 
   if (G.deck.length === 0) {
-    console.log('Deck is empty, shuffling...');
+    console.debug('Deck is empty, shuffling...');
     G.deck = shuffle([...getDeckForLevel(G.level)]);
   }
 };

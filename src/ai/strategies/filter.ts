@@ -65,21 +65,30 @@ const filters: Filter[] = [
 const applyFilter = (
   cardsBefore: Card[],
   ruleFn: FilterRule,
+  reason: string,
   G: WizardDuelState,
   ctx: Ctx
 ): FilterResult => {
   const cardsAfter = cardsBefore.filter((card) => ruleFn(card, G, ctx));
-  return onFilterEnd(cardsBefore, cardsAfter);
+  return onFilterEnd(cardsBefore, cardsAfter, reason);
 };
 
-const onFilterEnd = (cardsBefore: Card[], cardsAfter: Card[]): FilterResult => {
+const onFilterEnd = (
+  cardsBefore: Card[],
+  cardsAfter: Card[],
+  reason: string
+): FilterResult => {
   let result: Card | undefined; // Result after current filter
 
   if (cardsAfter.length === 1) {
     // Return the only action left and stop filtering
+    console.debug(`Only one card left after filter rule: ${reason}`);
     result = cardsAfter[0];
   } else if (cardsAfter.length === 0) {
     // Fallback to Sandstorm || random(original cards) when no cards left
+    console.debug(
+      `No cards left after filter rule: ${reason}, fallback to Sandstorm or random`
+    );
     result = cardsBefore.some((card) => card.id === CardId.Sandstorm)
       ? cardsBefore.find((card) => card.id === CardId.Sandstorm)!
       : random(cardsBefore);
@@ -101,16 +110,21 @@ export const filterActions = (
   G: WizardDuelState,
   ctx: Ctx
 ): Card[] => {
+  console.debug(
+    'Filtering cards: ',
+    cards.map((card) => card.name)
+  );
+
   let cardsBefore = cards;
-  for (const { rule } of filters) {
+  for (const { rule, reason } of filters) {
     const { result, cardsAfter }: FilterResult = applyFilter(
       cardsBefore,
       rule,
+      reason,
       G,
       ctx
     );
     if (result) {
-      // console.log(`Exit from filter rule: ${reason}`);
       return [result];
     }
     cardsBefore = cardsAfter;

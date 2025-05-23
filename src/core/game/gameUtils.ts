@@ -262,7 +262,7 @@ export const executeGlobalEndOfTurnEffects = (
 ) => {
   // Clear all buffs and debuffs on scheduled turns
   if (G.globalEffects.shouldClearEffects?.[ctx.turn - 1]) {
-    console.log(`Clearing all effects at turn ${ctx.turn}.`);
+    console.debug(`Clearing all effects at turn ${ctx.turn}.`);
     G.players[0].effects.forEach((e) => {
       undoEffect(G, '0', e);
     });

@@ -182,7 +182,7 @@ const replaceHand: EffectHandler = ({ G, target }) => {
       }
     }
     if (G.deck.length === 0) {
-      console.log('Deck is empty, shuffling...');
+      console.debug('Deck is empty, shuffling...');
       G.deck = shuffle([...getDeckForLevel(G.level)]);
     }
 
@@ -193,7 +193,7 @@ const replaceHand: EffectHandler = ({ G, target }) => {
 
   // Handle the edge case where deck becomes empty after playing `Sandstorm`
   if (G.deck.length === 0) {
-    console.log('Deck is empty, shuffling...');
+    console.debug('Deck is empty, shuffling...');
     G.deck = shuffle([...getDeckForLevel(G.level)]);
   }
 };
