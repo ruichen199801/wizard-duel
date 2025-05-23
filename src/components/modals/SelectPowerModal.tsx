@@ -88,7 +88,15 @@ export const SelectPowerModal = ({
                   height={AVATAR_HEIGHT * AVATAR_SMALL_SCALE}
                   width={AVATAR_WIDTH * AVATAR_SMALL_SCALE}
                 />
-                <p className='mt-2 fw-bold'>{power.name}</p>
+                <p
+                  className={`mt-2 fw-bold ${
+                    selectedPowerClass === power.class
+                      ? `pwr-text-${power.class}`
+                      : ''
+                  }`}
+                >
+                  {power.name}
+                </p>
               </div>
             ))}
           </div>

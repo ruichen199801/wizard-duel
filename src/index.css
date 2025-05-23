@@ -135,6 +135,30 @@ body {
   border-color: #7d3fbd !important;
 }
 
+.pwr-text-pyro {
+  color: #b22222;
+}
+
+.pwr-text-cryo {
+  color: #add8e6;
+}
+
+.pwr-text-psammo {
+  color: #d2b48c;
+}
+
+.pwr-text-dentro {
+  color: #2e8b57;
+}
+
+.pwr-text-hydro {
+  color: #024873;
+}
+
+.pwr-text-erebo {
+  color: #7d3fbd;
+}
+
 /* Styling static images over player avatars for level effects. */
 
 .overlay-ice {
