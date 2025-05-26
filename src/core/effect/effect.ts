@@ -175,17 +175,14 @@ const replaceHand: EffectHandler = ({ G, target }) => {
   let hasSkippedFirstSandstorm = false;
 
   for (let i = 0; i < hand.length; i++) {
-    if (hand[i].id === CardId.Sandstorm) {
-      if (!hasSkippedFirstSandstorm) {
-        hasSkippedFirstSandstorm = true;
-        continue;
-      }
+    if (hand[i].id === CardId.Sandstorm && !hasSkippedFirstSandstorm) {
+      hasSkippedFirstSandstorm = true;
+      continue;
     }
     if (G.deck.length === 0) {
       console.debug('Deck is empty, shuffling...');
       G.deck = shuffle([...getDeckForLevel(G.level)]);
     }
-
     const card = G.deck.pop();
     if (!card) throw new Error('Tried to replace hand from an empty deck.');
     hand[i] = card;
