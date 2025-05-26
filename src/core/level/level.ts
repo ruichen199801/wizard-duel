@@ -28,7 +28,7 @@ const FIRE_HAND_DISTRIBUTION = [0.3, 0.3, 0.35, 0.04, 0.01]; // Level 2
 
 export const levelRules: Record<string, number> = {
   freezeRate: 0.4, // Level 3
-  missRate: 0.5, // Level 4
+  missRate: 0.3, // Level 4
   clearEffectInterval: 11, // Level 6
   loseHpAmount: 5, // Level 7
 };
