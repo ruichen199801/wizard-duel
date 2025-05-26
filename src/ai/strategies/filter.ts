@@ -69,6 +69,24 @@ const filters: Filter[] = [
     reason:
       'Filter unique effect cards when the same effect is already applied or an identical aura exists',
   },
+  {
+    rule: (card, G, ctx) =>
+      !(
+        G.level === '4' &&
+        ctx.currentPlayer === '1' &&
+        G.globalEffects.shouldMiss?.[ctx.turn - 1]
+      ) || !card.keywords.includes(CardKeyword.damage),
+    reason: 'Filter damage cards during miss turns in level 4',
+  },
+  {
+    rule: (card, G, ctx) =>
+      !(
+        G.level === '6' &&
+        ctx.currentPlayer === '1' &&
+        G.globalEffects.shouldClearEffects?.[ctx.turn - 1]
+      ) || !card.keywords.includes(CardKeyword.effect),
+    reason: 'Filter effect cards during clearEffects turns in level 6',
+  },
 ];
 
 const applyFilter = (
