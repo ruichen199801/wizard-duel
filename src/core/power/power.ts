@@ -38,7 +38,7 @@ const powerConfigsByDifficulty: Record<
   [GameDifficulty.hard]: {
     pyroMaxTurn: 30,
     psammoMissRate: 0.3,
-    dentroEnemyHpBuffPoint: 40,
+    dentroEnemyHpBuffPoint: 70,
     hydroEnemyStatBuffPoint: 6,
     ereboPlayerInitialHp: 35,
   },
