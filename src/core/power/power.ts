@@ -17,10 +17,10 @@ export const PYRO_HAND_DISTRIBUTION = [0.4, 0.4, 0.15, 0.04, 0.01];
 
 // GameDifficulty agnostic contants
 const powerConfigs: Record<string, number> = {
-  cryoFreezeRate: 0.4,
-  psammoWishRate: 0.4,
-  hydroBuffRate: 0.5,
-  hydroPlayerStatBuffPoint: 4,
+  cryoFreezeRate: 0.3,
+  psammoWishRate: 0.3,
+  hydroBuffRate: 0.3,
+  hydroPlayerStatBuffPoint: 3,
 };
 
 // GameDifficulty dependent contants
@@ -30,14 +30,14 @@ const powerConfigsByDifficulty: Record<
 > = {
   [GameDifficulty.normal]: {
     pyroMaxTurn: 40,
-    psammoMissRate: 0.15,
+    psammoMissRate: 0.2,
     dentroEnemyHpBuffPoint: 20,
     hydroEnemyStatBuffPoint: 3,
     ereboPlayerInitialHp: 45,
   },
   [GameDifficulty.hard]: {
     pyroMaxTurn: 30,
-    psammoMissRate: 0.3,
+    psammoMissRate: 0.4,
     dentroEnemyHpBuffPoint: 70,
     hydroEnemyStatBuffPoint: 6,
     ereboPlayerInitialHp: 35,

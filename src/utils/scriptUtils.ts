@@ -125,9 +125,9 @@ const powers: PowerSelectionProps[] = [
     class: PowerClass.dentro,
     ruleText: {
       [GameDifficulty.normal]:
-        'you pick a card instead of drawing, but enemy starts with 20 more HP.',
+        'you pick a card instead of drawing, but enemy starts with 100 HP.',
       [GameDifficulty.hard]:
-        'you pick a card instead of drawing, but enemy starts with 40 more HP.',
+        'you pick a card instead of drawing, but enemy starts with 150 HP.',
     },
   },
 
