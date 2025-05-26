@@ -118,8 +118,8 @@ export const SettingsModal = ({
               onClick={handleAiDifficultyChange}
             >
               {aiStrategy === Strategy.filter
-                ? 'AI Difficulty: Normal'
-                : 'AI Difficulty: Hard'}
+                ? 'AI Difficulty: Easy'
+                : 'AI Difficulty: Normal'}
             </button>
           </div>
 

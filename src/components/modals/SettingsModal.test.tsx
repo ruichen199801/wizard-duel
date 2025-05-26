@@ -31,7 +31,7 @@ describe('SettingsModal', () => {
     setShowGameStats,
     showEffectStack: false,
     setShowEffectStack,
-    aiStrategy: Strategy.filter,
+    aiStrategy: Strategy.optimal,
     setAiStrategy,
     level: '2',
   };
