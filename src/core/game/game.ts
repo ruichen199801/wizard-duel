@@ -19,7 +19,6 @@ import {
   isVictory,
   logPlay,
   onGameEnd,
-  removeCard,
   removeCardById,
 } from './gameUtils';
 
@@ -96,7 +95,7 @@ const playCard: Move<WizardDuelState> = ({ G, ctx }, index: number) => {
 
   executeGlobalEndOfTurnEffects(G, ctx, card, freezeTriggered);
 
-  removeCard(hand, index);
+  removeCardById(hand, card.id);
 
   logPlay(G, ctx, card);
 };

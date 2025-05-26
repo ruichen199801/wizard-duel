@@ -15,7 +15,7 @@ export enum EffectType {
   replaceHand = 'replaceHand',
   swapHp = 'swapHp',
   stealBuff = 'stealBuff',
-  showEnemyHand = 'showEnemyHand',
+  copyEnemyHand = 'copyEnemyHand',
   lifesteal = 'lifesteal',
   counterAttack = 'counterAttack',
   poison = 'poison',
@@ -285,13 +285,10 @@ export const stealBuff: Effect = {
   target: EffectTarget.opponent,
 };
 
-/**
- * Display enemy's hand for the rest of the game.
- */
-export const showEnemyHand: Effect = {
-  type: EffectType.showEnemyHand,
+export const copyEnemyHand: Effect = {
+  type: EffectType.copyEnemyHand,
   duration: EffectDuration.instant,
-  target: EffectTarget.opponent,
+  target: EffectTarget.self,
 };
 
 /**

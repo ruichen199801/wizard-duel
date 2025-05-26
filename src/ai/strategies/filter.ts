@@ -85,13 +85,17 @@ const onFilterEnd = (
     console.debug(`Only one card left after filter rule: ${reason}`);
     result = cardsAfter[0];
   } else if (cardsAfter.length === 0) {
-    // Fallback to Sandstorm || random(original cards) when no cards left
     console.debug(
-      `No cards left after filter rule: ${reason}, fallback to Sandstorm or random`
+      `No cards left after filter rule: ${reason}, fallback to Sandstorm or Vision or random`
     );
-    result = cardsBefore.some((card) => card.id === CardId.Sandstorm)
-      ? cardsBefore.find((card) => card.id === CardId.Sandstorm)!
-      : random(cardsBefore);
+
+    if (cardsBefore.some((card) => card.id === CardId.Sandstorm)) {
+      result = cardsBefore.find((card) => card.id === CardId.Sandstorm);
+    } else if (cardsBefore.some((card) => card.id === CardId.Vision)) {
+      result = cardsBefore.find((card) => card.id === CardId.Vision);
+    } else {
+      result = random(cardsBefore);
+    }
   }
   // Result undefined means continue filtering
 

@@ -13,7 +13,6 @@ import {
   getCardById,
   getCurrentLevel,
   isVictory,
-  removeCard,
   removeCardById,
   setNextLevel,
   setPrevLevel,
@@ -55,14 +54,6 @@ describe('gameUtils', () => {
 
       expect(hand).toHaveLength(5);
       expect(G.deck).toHaveLength(deckSize - 5);
-    });
-  });
-
-  describe('removeCard', () => {
-    it('removes a card by index', () => {
-      const hand = [Fireball1, Fireball2];
-      removeCard(hand, 1);
-      expect(hand).toContainEqual(Fireball1);
     });
   });
 

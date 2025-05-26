@@ -2,6 +2,7 @@ import {
   aura,
   buffAtk,
   buffDef,
+  copyEnemyHand,
   counterAttack,
   damage,
   debuffAtk,
@@ -17,7 +18,6 @@ import {
   removeDebuff,
   replaceHand,
   resurrect,
-  showEnemyHand,
   stealBuff,
   swapHp,
 } from './cardEffects';
@@ -303,7 +303,7 @@ export const Wish1: Card = {
 export const Wish2: Card = {
   id: CardId.Wish2,
   name: 'Wish',
-  text: 'Remove Buff and Freeze 1 Turn',
+  text: 'Remove Buff and Freeze Enemy',
   effects: [removeBuff, freeze],
   keywords: [CardKeyword.effect],
 };
@@ -351,8 +351,8 @@ export const Ambush: Card = {
 export const Vision: Card = {
   id: CardId.Vision,
   name: 'Vision',
-  text: 'Show Enemy Hand',
-  effects: [showEnemyHand],
+  text: 'Copy Enemy Hand',
+  effects: [copyEnemyHand],
   keywords: [],
 };
 

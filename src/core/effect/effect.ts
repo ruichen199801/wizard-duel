@@ -172,12 +172,12 @@ const aura: EffectHandler = () => {};
 
 const replaceHand: EffectHandler = ({ G, target }) => {
   const hand = G.players[target].hand;
-  let skippedCurrent = false; // Skip the current `Sandstorm` card (once)
+  let hasSkippedFirstSandstorm = false;
 
   for (let i = 0; i < hand.length; i++) {
     if (hand[i].id === CardId.Sandstorm) {
-      if (!skippedCurrent) {
-        skippedCurrent = true;
+      if (!hasSkippedFirstSandstorm) {
+        hasSkippedFirstSandstorm = true;
         continue;
       }
     }
@@ -238,9 +238,21 @@ const stealBuff: EffectHandler = ({ G, ctx, target }) => {
   }
 };
 
-const showEnemyHand: EffectHandler = ({ G, ctx }) => {
-  if (ctx.currentPlayer === '0') {
-    G.globalEffects.showEnemyHand = true;
+const copyEnemyHand: EffectHandler = ({ G, target }) => {
+  const opponent = target === '0' ? '1' : '0';
+  const hand = G.players[target].hand;
+
+  // `Vision` is removed AFTER effect is applied, so we want to keep at least one `Vision` in hand.
+  let hasSkippedFirstVision = false;
+  let enemyIndex = 0;
+
+  for (let i = 0; i < hand.length; i++) {
+    if (hand[i].id === CardId.Vision && !hasSkippedFirstVision) {
+      hasSkippedFirstVision = true;
+      continue;
+    }
+    if (enemyIndex >= G.players[opponent].hand.length) break;
+    hand[i] = { ...G.players[opponent].hand[enemyIndex++] };
   }
 };
 
@@ -273,7 +285,7 @@ const effectHandlers: Record<EffectType, EffectHandler> = {
   [EffectType.replaceHand]: replaceHand,
   [EffectType.swapHp]: swapHp,
   [EffectType.stealBuff]: stealBuff,
-  [EffectType.showEnemyHand]: showEnemyHand,
+  [EffectType.copyEnemyHand]: copyEnemyHand,
   [EffectType.lifesteal]: lifesteal,
   [EffectType.counterAttack]: counterAttack,
   [EffectType.poison]: poison,
