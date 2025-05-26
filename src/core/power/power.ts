@@ -19,7 +19,7 @@ export const PYRO_HAND_DISTRIBUTION = [0.4, 0.4, 0.15, 0.04, 0.01];
 const powerConfigs: Record<string, number> = {
   cryoFreezeRate: 0.3,
   psammoWishRate: 0.3,
-  hydroBuffRate: 0.3,
+  hydroBuffRate: 0.4,
   hydroPlayerStatBuffPoint: 3,
 };
 
@@ -39,8 +39,8 @@ const powerConfigsByDifficulty: Record<
     pyroMaxTurn: 30,
     psammoMissRate: 0.4,
     dentroEnemyHpBuffPoint: 70,
-    hydroEnemyStatBuffPoint: 6,
-    ereboPlayerInitialHp: 35,
+    hydroEnemyStatBuffPoint: 9,
+    ereboPlayerInitialHp: 30,
   },
 };
 
