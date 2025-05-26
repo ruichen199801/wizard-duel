@@ -89,26 +89,20 @@ describe('SettingsModal', () => {
   });
 
   it('confirms and resets the game on "Reset Entire Run"', () => {
-    window.confirm = jest.fn(() => true);
-
     render(<SettingsModal {...defaultProps} />);
     fireEvent.click(screen.getByRole('button', { name: /Reset Entire Run/i }));
 
-    expect(window.confirm).toHaveBeenCalledWith(
-      'Are you sure you want to reset your entire run?'
-    );
+    expect(screen.getByText('Reset Entire Run?')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /Confirm/i }));
     expect(resetGame).toHaveBeenCalled();
   });
 
   it('confirms and exits to title screen on "Exit to Title"', () => {
-    window.confirm = jest.fn(() => true);
-
     render(<SettingsModal {...defaultProps} />);
     fireEvent.click(screen.getByRole('button', { name: /Exit to Title/i }));
 
-    expect(window.confirm).toHaveBeenCalledWith(
-      'Are you sure you want to exit to the title screen? This will also reset your current run.'
-    );
+    expect(screen.getByText('Exit to Title?')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /Confirm/i }));
     expect(exitToMenu).toHaveBeenCalled();
   });
 });

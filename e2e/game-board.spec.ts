@@ -42,28 +42,26 @@ test.describe('Game Board', () => {
   });
 
   test('reset entire run', async ({ page }) => {
-    page.once('dialog', async (dialog) => {
-      console.log(`Dialog message: ${dialog.message()}`);
-      await dialog.accept();
-    });
-
     await page.getByRole('button', { name: 'Continue' }).click();
     await page.getByRole('img', { name: 'settings' }).click();
     await page.getByRole('button', { name: 'Reset Entire Run' }).click();
+
+    // Expect confirmation dialog to be visible
+    await expect(page.getByText('Reset Entire Run?')).toBeVisible();
+    await page.getByRole('button', { name: 'Confirm' }).click();
 
     // Expect page to refresh and MatchupModal to pop up again
     await expect(page.getByRole('button', { name: 'Continue' })).toBeVisible();
   });
 
   test('exit to title', async ({ page }) => {
-    page.once('dialog', async (dialog) => {
-      console.log(`Dialog message: ${dialog.message()}`);
-      await dialog.accept();
-    });
-
     await page.getByRole('button', { name: 'Continue' }).click();
     await page.getByRole('img', { name: 'settings' }).click();
     await page.getByRole('button', { name: 'Exit to Title' }).click();
+
+    // Expect confirmation dialog to be visible
+    await expect(page.getByText('Exit to Title?')).toBeVisible();
+    await page.getByRole('button', { name: 'Confirm' }).click();
 
     // Expect main title page to load
     await expect(page).toHaveURL('/');
