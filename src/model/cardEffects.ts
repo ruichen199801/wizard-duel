@@ -58,8 +58,11 @@ export const effectsByGroup: Record<EffectGroupName, EffectType[]> = {
   ],
 
   // Only one effect of the same type can exist at a time. Can be either buff or debuff.
-  // NOTE: This enum isn't set in card effects. ALWAYS USE isUnique() to check uniqueness
-  // instead of accessing the group field directly.
+  // NOTE:
+  //  1. Always use isUnique() to check uniqueness.
+  //  2. Do not use effect.group to check uniqueness, because the value is always buff/debuff, not unique.
+  //  3. Aura is not unique, but exact same aura like aura(heal(3)) is unique.
+  //  4. In practice, isUnique() is always used together with aura strict equality check.
   [EffectGroupName.unique]: [
     EffectType.doubleDmg,
     EffectType.preventDmg,

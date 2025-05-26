@@ -218,11 +218,16 @@ const stealBuff: EffectHandler = ({ G, ctx, target }) => {
     opponentEffects.splice(index, 1);
   }
 
-  // Apply the chosen buff to the player unless the buff is unique and already exists.
+  // Apply the chosen buff to the player unless:
+  //  - the buff is unique and already exists.
+  //  - the buff is an aura and exact same aura already exists.
   const player = target === '0' ? '1' : '0';
   const playerEffects = G.players[player].effects;
   const uniqueEffectExists = playerEffects.some(
-    (e) => isUnique(e) && e.type === chosenBuff.type
+    (e) =>
+      (isUnique(e) && e.type === chosenBuff.type) ||
+      (chosenBuff.type === EffectType.aura &&
+        JSON.stringify(e) === JSON.stringify(chosenBuff))
   );
   if (!uniqueEffectExists) {
     effectHandlers[chosenBuff.type]({

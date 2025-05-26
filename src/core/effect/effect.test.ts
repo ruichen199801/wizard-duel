@@ -370,6 +370,32 @@ describe('applyEffect', () => {
       expect(G.players[0].effects).toHaveLength(1);
       expect(G.players[1].effects).toHaveLength(0);
     });
+
+    it('steals an identical aura effect, current p0', () => {
+      G.players[0].effects = [
+        aura(heal(3), '+3 HP per Turn', '+3 HP per Turn'),
+      ];
+      G.players[1].effects = [
+        aura(heal(3), '+3 HP per Turn', '+3 HP per Turn'),
+      ];
+      applyEffect(G, ctx, stealBuff);
+
+      expect(G.players[0].effects).toHaveLength(1);
+      expect(G.players[1].effects).toHaveLength(0);
+    });
+
+    it('steals a different aura effect, current p0', () => {
+      G.players[0].effects = [
+        aura(heal(3), '+3 HP per Turn', '+3 HP per Turn'),
+      ];
+      G.players[1].effects = [
+        aura(heal(5), '+5 HP per Turn', '+5 HP per Turn'),
+      ];
+      applyEffect(G, ctx, stealBuff);
+
+      expect(G.players[0].effects).toHaveLength(2);
+      expect(G.players[1].effects).toHaveLength(0);
+    });
   });
 
   describe('copyEnemyHand handler', () => {

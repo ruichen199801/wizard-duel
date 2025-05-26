@@ -1,6 +1,11 @@
 import { Ctx } from 'boardgame.io';
-import { getTarget, hasEffect, isUnique } from '../../core/effect/effectUtils';
-import { EffectGroupName } from '../../model/cardEffects';
+import {
+  getTarget,
+  hasEffect,
+  hasSameEffect,
+  isUnique,
+} from '../../core/effect/effectUtils';
+import { EffectGroupName, EffectType } from '../../model/cardEffects';
 import { Card, CardId, CardKeyword } from '../../model/cards';
 import { WizardDuelState } from '../../model/shared';
 import { random } from './random';
@@ -54,11 +59,15 @@ const filters: Filter[] = [
     rule: (card, G, ctx) => {
       return !card.effects.some((effect) => {
         const target = getTarget(ctx.currentPlayer, effect.target);
-        return isUnique(effect) && hasEffect(G, target, effect.type);
+        return (
+          (isUnique(effect) && hasEffect(G, target, effect.type)) ||
+          (effect.type === EffectType.aura &&
+            hasSameEffect(G, ctx.currentPlayer, effect))
+        );
       });
     },
     reason:
-      'Filter unique effect cards when the same effect is already applied',
+      'Filter unique effect cards when the same effect is already applied or an identical aura exists',
   },
 ];
 
