@@ -9,7 +9,7 @@ interface ConfirmModalProps {
 }
 
 export const ConfirmModal = ({
-  title = 'Are you sure?',
+  title = 'Are you Sure?',
   isOpen,
   message,
   onConfirm,
