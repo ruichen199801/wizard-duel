@@ -9,10 +9,10 @@ export enum Strategy {
   // AI makes random moves.
   random = 'random',
 
-  // AI filters bad moves, but is not able to make optimal moves.
+  // AI filters bad moves, but is not able to make optimal moves. Level effect is considered.
   filter = 'filter',
 
-  // AI makes optimal moves based on the board state but is unaware of level effects.
+  // AI makes optimal moves based on the board state.
   optimal = 'optimal',
 }
 

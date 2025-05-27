@@ -3,6 +3,7 @@ import {
   aura,
   buffAtk,
   buffDef,
+  copyEnemyHand,
   counterAttack,
   damage,
   debuffAtk,
@@ -17,7 +18,6 @@ import {
   removeDebuff,
   replaceHand,
   resurrect,
-  showEnemyHand,
   stealBuff,
   swapHp,
 } from '../../model/cardEffects';
@@ -293,8 +293,8 @@ describe('applyEffect', () => {
 
       expect(G.players[0].hand).toHaveLength(5);
       expect(G.deck).toHaveLength(1); // 6 - 5
-      expect(G.players[0].hand).not.toContain(Fireball1);
-      expect(G.players[0].hand).toContain(Fireball2);
+      expect(G.players[0].hand).not.toContainEqual(Fireball1);
+      expect(G.players[0].hand).toContainEqual(Fireball2);
     });
 
     it('replaces hand with empty deck, current p0', () => {
@@ -331,9 +331,9 @@ describe('applyEffect', () => {
 
       expect(G.players[0].hand).toHaveLength(5);
       expect(G.deck).toHaveLength(2); // 6 - 4
-      expect(G.players[0].hand).not.toContain(Fireball1);
-      expect(G.players[0].hand).toContain(Fireball2);
-      expect(G.players[0].hand).toContain(Sandstorm);
+      expect(G.players[0].hand).not.toContainEqual(Fireball1);
+      expect(G.players[0].hand).toContainEqual(Fireball2);
+      expect(G.players[0].hand).toContainEqual(Sandstorm);
     });
   });
 
@@ -370,13 +370,55 @@ describe('applyEffect', () => {
       expect(G.players[0].effects).toHaveLength(1);
       expect(G.players[1].effects).toHaveLength(0);
     });
+
+    it('steals an identical aura effect, current p0', () => {
+      G.players[0].effects = [
+        aura(heal(3), '+3 HP per Turn', '+3 HP per Turn'),
+      ];
+      G.players[1].effects = [
+        aura(heal(3), '+3 HP per Turn', '+3 HP per Turn'),
+      ];
+      applyEffect(G, ctx, stealBuff);
+
+      expect(G.players[0].effects).toHaveLength(1);
+      expect(G.players[1].effects).toHaveLength(0);
+    });
+
+    it('steals a different aura effect, current p0', () => {
+      G.players[0].effects = [
+        aura(heal(3), '+3 HP per Turn', '+3 HP per Turn'),
+      ];
+      G.players[1].effects = [
+        aura(heal(5), '+5 HP per Turn', '+5 HP per Turn'),
+      ];
+      applyEffect(G, ctx, stealBuff);
+
+      expect(G.players[0].effects).toHaveLength(2);
+      expect(G.players[1].effects).toHaveLength(0);
+    });
   });
 
-  describe('showEnemyHand handler', () => {
-    it('shows enemy hand, current p0', () => {
-      G.globalEffects.showEnemyHand = false;
-      applyEffect(G, ctx, showEnemyHand);
-      expect(G.globalEffects.showEnemyHand).toBe(true);
+  describe('copyEnemyHand handler', () => {
+    it('copies hand, current p0', () => {
+      G.players[0].hand = [
+        Fireball1,
+        Fireball1,
+        Fireball1,
+        Fireball1,
+        Fireball1,
+      ];
+      G.players[1].hand = [
+        Fireball2,
+        Fireball2,
+        Fireball2,
+        Fireball2,
+        Fireball2,
+      ];
+      applyEffect(G, ctx, copyEnemyHand);
+
+      expect(G.players[0].hand).toHaveLength(5);
+      expect(G.players[0].hand).not.toContainEqual(Fireball1);
+      expect(G.players[0].hand).toContainEqual(Fireball2);
     });
   });
 
@@ -427,7 +469,7 @@ describe('applyEffect', () => {
 
     it('mutates effect array for enduring effect, current p0', () => {
       applyEffect(G, ctx, freeze);
-      expect(G.players[1].effects).toContain(freeze);
+      expect(G.players[1].effects).toContainEqual(freeze);
     });
   });
 });

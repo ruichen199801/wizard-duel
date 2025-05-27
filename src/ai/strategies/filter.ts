@@ -1,6 +1,11 @@
 import { Ctx } from 'boardgame.io';
-import { getTarget, hasEffect, isUnique } from '../../core/effect/effectUtils';
-import { EffectGroupName } from '../../model/cardEffects';
+import {
+  getTarget,
+  hasEffect,
+  hasSameEffect,
+  isUnique,
+} from '../../core/effect/effectUtils';
+import { EffectGroupName, EffectType } from '../../model/cardEffects';
 import { Card, CardId, CardKeyword } from '../../model/cards';
 import { WizardDuelState } from '../../model/shared';
 import { random } from './random';
@@ -54,35 +59,70 @@ const filters: Filter[] = [
     rule: (card, G, ctx) => {
       return !card.effects.some((effect) => {
         const target = getTarget(ctx.currentPlayer, effect.target);
-        return isUnique(effect) && hasEffect(G, target, effect.type);
+        return (
+          (isUnique(effect) && hasEffect(G, target, effect.type)) ||
+          (effect.type === EffectType.aura &&
+            hasSameEffect(G, ctx.currentPlayer, effect))
+        );
       });
     },
     reason:
-      'Filter unique effect cards when the same effect is already applied',
+      'Filter unique effect cards when the same effect is already applied or an identical aura exists',
+  },
+  {
+    rule: (card, G, ctx) =>
+      !(
+        G.level === '4' &&
+        ctx.currentPlayer === '1' &&
+        G.globalEffects.shouldMiss?.[ctx.turn - 1]
+      ) || !card.keywords.includes(CardKeyword.damage),
+    reason: 'Filter damage cards during miss turns in level 4',
+  },
+  {
+    rule: (card, G, ctx) =>
+      !(
+        G.level === '6' &&
+        ctx.currentPlayer === '1' &&
+        G.globalEffects.shouldClearEffects?.[ctx.turn - 1]
+      ) || !card.keywords.includes(CardKeyword.effect),
+    reason: 'Filter effect cards during clearEffects turns in level 6',
   },
 ];
 
 const applyFilter = (
   cardsBefore: Card[],
   ruleFn: FilterRule,
+  reason: string,
   G: WizardDuelState,
   ctx: Ctx
 ): FilterResult => {
   const cardsAfter = cardsBefore.filter((card) => ruleFn(card, G, ctx));
-  return onFilterEnd(cardsBefore, cardsAfter);
+  return onFilterEnd(cardsBefore, cardsAfter, reason);
 };
 
-const onFilterEnd = (cardsBefore: Card[], cardsAfter: Card[]): FilterResult => {
+const onFilterEnd = (
+  cardsBefore: Card[],
+  cardsAfter: Card[],
+  reason: string
+): FilterResult => {
   let result: Card | undefined; // Result after current filter
 
   if (cardsAfter.length === 1) {
     // Return the only action left and stop filtering
+    console.debug(`Only one card left after filter rule: ${reason}`);
     result = cardsAfter[0];
   } else if (cardsAfter.length === 0) {
-    // Fallback to Sandstorm || random(original cards) when no cards left
-    result = cardsBefore.some((card) => card.id === CardId.Sandstorm)
-      ? cardsBefore.find((card) => card.id === CardId.Sandstorm)!
-      : random(cardsBefore);
+    console.debug(
+      `No cards left after filter rule: ${reason}, fallback to Sandstorm or Vision or random`
+    );
+
+    if (cardsBefore.some((card) => card.id === CardId.Sandstorm)) {
+      result = cardsBefore.find((card) => card.id === CardId.Sandstorm);
+    } else if (cardsBefore.some((card) => card.id === CardId.Vision)) {
+      result = cardsBefore.find((card) => card.id === CardId.Vision);
+    } else {
+      result = random(cardsBefore);
+    }
   }
   // Result undefined means continue filtering
 
@@ -101,16 +141,21 @@ export const filterActions = (
   G: WizardDuelState,
   ctx: Ctx
 ): Card[] => {
+  console.debug(
+    'Filtering cards: ',
+    cards.map((card) => card.name)
+  );
+
   let cardsBefore = cards;
-  for (const { rule } of filters) {
+  for (const { rule, reason } of filters) {
     const { result, cardsAfter }: FilterResult = applyFilter(
       cardsBefore,
       rule,
+      reason,
       G,
       ctx
     );
     if (result) {
-      // console.log(`Exit from filter rule: ${reason}`);
       return [result];
     }
     cardsBefore = cardsAfter;

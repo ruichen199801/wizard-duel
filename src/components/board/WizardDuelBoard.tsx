@@ -81,7 +81,7 @@ export const WizardDuelBoard = ({
 
   const [aiStrategy, setAiStrategy] = usePersistentState(
     'aiStrategy',
-    Strategy.filter
+    Strategy.optimal
   );
   const [showGameStats, setShowGameStats] = usePersistentState(
     'showGameStats',

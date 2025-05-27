@@ -125,9 +125,9 @@ const powers: PowerSelectionProps[] = [
     class: PowerClass.dentro,
     ruleText: {
       [GameDifficulty.normal]:
-        'you pick a card instead of drawing, but enemy starts with 20 more HP.',
+        'you pick a card instead of drawing, but enemy starts with 100 HP.',
       [GameDifficulty.hard]:
-        'you pick a card instead of drawing, but enemy starts with 40 more HP.',
+        'you pick a card instead of drawing, but enemy starts with 150 HP.',
     },
   },
 
@@ -139,7 +139,7 @@ const powers: PowerSelectionProps[] = [
       [GameDifficulty.normal]:
         'you may gain a random buff at the end of your turns, but enemy has +3 Attack/+3 Shield permanently.',
       [GameDifficulty.hard]:
-        'you may gain a random buff at the end of your turns, but enemy has +6 Attack/+6 Shield permanently.',
+        'you may gain a random buff at the end of your turns, but enemy has +9 Attack/+9 Shield permanently.',
     },
   },
 
@@ -151,7 +151,7 @@ const powers: PowerSelectionProps[] = [
       [GameDifficulty.normal]:
         'your damage cards reduce Max HP, but you start with 45 HP. HP swap is disabled.',
       [GameDifficulty.hard]:
-        'your damage cards reduce Max HP, but you start with 35 HP. HP swap is disabled.',
+        'your damage cards reduce Max HP, but you start with 30 HP. HP swap is disabled.',
     },
   },
 ];

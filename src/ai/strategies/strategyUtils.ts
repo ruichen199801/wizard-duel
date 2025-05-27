@@ -15,4 +15,4 @@ export const POWERFUL_CARDS = [
   CardId.Poison,
 ];
 
-export const USELESS_CARDS = [CardId.Wish1, CardId.Vision];
+export const USELESS_CARDS = [CardId.Wish1];

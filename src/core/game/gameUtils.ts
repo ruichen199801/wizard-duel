@@ -34,15 +34,6 @@ export const dealCards = (hand: Card[], deck: Card[]) => {
 };
 
 /**
- * Remove a card from the player's hand by index.
- */
-export const removeCard = (hand: Card[], index: number) => {
-  if (index !== -1) {
-    hand.splice(index, 1);
-  }
-};
-
-/**
  * Get one copy of a card from a deck by id.
  */
 export const getCardById = (deck: Card[], cardId: CardId): Card => {
@@ -54,12 +45,12 @@ export const getCardById = (deck: Card[], cardId: CardId): Card => {
 };
 
 /**
- * Remove one copy of a card from a deck by id.
+ * Remove one copy of a card from deck or hand array by id.
  */
-export const removeCardById = (deck: Card[], cardId: CardId) => {
-  const index = deck.findIndex((card) => card.id === cardId);
+export const removeCardById = (array: Card[], cardId: CardId) => {
+  const index = array.findIndex((card) => card.id === cardId);
   if (index !== -1) {
-    deck.splice(index, 1);
+    array.splice(index, 1);
   }
 };
 
@@ -262,7 +253,7 @@ export const executeGlobalEndOfTurnEffects = (
 ) => {
   // Clear all buffs and debuffs on scheduled turns
   if (G.globalEffects.shouldClearEffects?.[ctx.turn - 1]) {
-    console.log(`Clearing all effects at turn ${ctx.turn}.`);
+    console.debug(`Clearing all effects at turn ${ctx.turn}.`);
     G.players[0].effects.forEach((e) => {
       undoEffect(G, '0', e);
     });

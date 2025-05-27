@@ -172,20 +172,17 @@ const aura: EffectHandler = () => {};
 
 const replaceHand: EffectHandler = ({ G, target }) => {
   const hand = G.players[target].hand;
-  let skippedCurrent = false; // Skip the current `Sandstorm` card (once)
+  let hasSkippedFirstSandstorm = false;
 
   for (let i = 0; i < hand.length; i++) {
-    if (hand[i].id === CardId.Sandstorm) {
-      if (!skippedCurrent) {
-        skippedCurrent = true;
-        continue;
-      }
+    if (hand[i].id === CardId.Sandstorm && !hasSkippedFirstSandstorm) {
+      hasSkippedFirstSandstorm = true;
+      continue;
     }
     if (G.deck.length === 0) {
-      console.log('Deck is empty, shuffling...');
+      console.debug('Deck is empty, shuffling...');
       G.deck = shuffle([...getDeckForLevel(G.level)]);
     }
-
     const card = G.deck.pop();
     if (!card) throw new Error('Tried to replace hand from an empty deck.');
     hand[i] = card;
@@ -193,7 +190,7 @@ const replaceHand: EffectHandler = ({ G, target }) => {
 
   // Handle the edge case where deck becomes empty after playing `Sandstorm`
   if (G.deck.length === 0) {
-    console.log('Deck is empty, shuffling...');
+    console.debug('Deck is empty, shuffling...');
     G.deck = shuffle([...getDeckForLevel(G.level)]);
   }
 };
@@ -221,11 +218,16 @@ const stealBuff: EffectHandler = ({ G, ctx, target }) => {
     opponentEffects.splice(index, 1);
   }
 
-  // Apply the chosen buff to the player unless the buff is unique and already exists.
+  // Apply the chosen buff to the player unless:
+  //  - the buff is unique and already exists.
+  //  - the buff is an aura and exact same aura already exists.
   const player = target === '0' ? '1' : '0';
   const playerEffects = G.players[player].effects;
   const uniqueEffectExists = playerEffects.some(
-    (e) => isUnique(e) && e.type === chosenBuff.type
+    (e) =>
+      (isUnique(e) && e.type === chosenBuff.type) ||
+      (chosenBuff.type === EffectType.aura &&
+        JSON.stringify(e) === JSON.stringify(chosenBuff))
   );
   if (!uniqueEffectExists) {
     effectHandlers[chosenBuff.type]({
@@ -238,9 +240,21 @@ const stealBuff: EffectHandler = ({ G, ctx, target }) => {
   }
 };
 
-const showEnemyHand: EffectHandler = ({ G, ctx }) => {
-  if (ctx.currentPlayer === '0') {
-    G.globalEffects.showEnemyHand = true;
+const copyEnemyHand: EffectHandler = ({ G, target }) => {
+  const opponent = target === '0' ? '1' : '0';
+  const hand = G.players[target].hand;
+
+  // `Vision` is removed AFTER effect is applied, so we want to keep at least one `Vision` in hand.
+  let hasSkippedFirstVision = false;
+  let enemyIndex = 0;
+
+  for (let i = 0; i < hand.length; i++) {
+    if (hand[i].id === CardId.Vision && !hasSkippedFirstVision) {
+      hasSkippedFirstVision = true;
+      continue;
+    }
+    if (enemyIndex >= G.players[opponent].hand.length) break;
+    hand[i] = { ...G.players[opponent].hand[enemyIndex++] };
   }
 };
 
@@ -273,7 +287,7 @@ const effectHandlers: Record<EffectType, EffectHandler> = {
   [EffectType.replaceHand]: replaceHand,
   [EffectType.swapHp]: swapHp,
   [EffectType.stealBuff]: stealBuff,
-  [EffectType.showEnemyHand]: showEnemyHand,
+  [EffectType.copyEnemyHand]: copyEnemyHand,
   [EffectType.lifesteal]: lifesteal,
   [EffectType.counterAttack]: counterAttack,
   [EffectType.poison]: poison,

@@ -16,9 +16,14 @@ import {
  * @returns The resolved card object.
  */
 export const resolveAction = (actions: Card[], G: WizardDuelState): Card => {
+  console.debug(
+    'Resolving filtered cards: ',
+    actions.map((card) => card.name)
+  );
+
   // When AI is frozen, resolve to random(cards)
   if (G.players[1].effects.some((e) => e.type === EffectType.freeze)) {
-    // console.log('Resolve to random card when frozen');
+    console.debug('Resolve to random card when frozen');
     return random(actions);
   }
 
@@ -27,7 +32,7 @@ export const resolveAction = (actions: Card[], G: WizardDuelState): Card => {
     actions.some((card) => card.id === CardId.Mutate) &&
     G.players[0].hp - G.players[1].hp >= 20
   ) {
-    // console.log('Resolve to Mutate');
+    console.debug('Resolve to Mutate');
     return actions.find((card) => card.id === CardId.Mutate)!;
   }
 
@@ -37,7 +42,7 @@ export const resolveAction = (actions: Card[], G: WizardDuelState): Card => {
     G.players[1].effects.filter((e) => e.group === EffectGroupName.debuff)
       .length >= 2
   ) {
-    // console.log('Resolve to removing debuff');
+    console.debug('Resolve to removing debuff');
     return actions.find((card) => REMOVE_DEBUFF_CARDS.includes(card.id))!;
   }
 
@@ -47,7 +52,7 @@ export const resolveAction = (actions: Card[], G: WizardDuelState): Card => {
     G.players[0].effects.filter((e) => e.group === EffectGroupName.buff)
       .length >= 2
   ) {
-    // console.log('Resolve to removing buff');
+    console.debug('Resolve to removing buff');
     return actions.find((card) => REMOVE_BUFF_CARDS.includes(card.id))!;
   }
 
@@ -55,9 +60,9 @@ export const resolveAction = (actions: Card[], G: WizardDuelState): Card => {
   if (
     actions.some((card) => card.keywords.includes(CardKeyword.sustain)) &&
     !G.players[1].effects.some((e) => e.type === EffectType.poison) &&
-    G.players[1].hp <= Math.ceil(G.players[1].maxHp * 0.3)
+    G.players[1].hp <= Math.ceil(G.players[1].maxHp * 0.4)
   ) {
-    // console.log('Resolve to healing cards');
+    console.debug('Resolve to healing cards');
     return actions.find((card) => card.keywords.includes(CardKeyword.sustain))!;
   }
 
@@ -68,19 +73,19 @@ export const resolveAction = (actions: Card[], G: WizardDuelState): Card => {
     (G.players[1].effects.some((e) => e.type === EffectType.doubleDmg) ||
       G.players[1].atk >= G.players[1].baseAtk + 3 ||
       G.players[0].def <= G.players[0].baseDef - 3 ||
-      G.players[0].hp <= Math.ceil(G.players[0].maxHp * 0.3))
+      G.players[0].hp <= Math.ceil(G.players[0].maxHp * 0.4))
   ) {
-    // console.log('Resolve to damage cards');
+    console.debug('Resolve to damage cards');
     return actions.find((card) => card.keywords.includes(CardKeyword.damage))!;
   }
 
   // Resolve to cards with powerful effects if any
   if (actions.some((card) => POWERFUL_CARDS.includes(card.id))) {
-    // console.log('Resolve to powerful cards');
+    console.debug('Resolve to powerful cards');
     return actions.find((card) => POWERFUL_CARDS.includes(card.id))!;
   }
 
   // Resolve to random(original actions)
-  // console.log('Exit from resolver fallback');
+  console.debug('Resolve to random cards as fallback');
   return random(actions);
 };

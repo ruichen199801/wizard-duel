@@ -13,14 +13,14 @@ export enum GameDifficulty {
   hard = 'hard',
 }
 
-export const PYRO_HAND_DISTRIBUTION = [0.4, 0.4, 0.15, 0.04, 0.01];
+export const PYRO_HAND_DISTRIBUTION = [0.3, 0.3, 0.3, 0.09, 0.01];
 
 // GameDifficulty agnostic contants
 const powerConfigs: Record<string, number> = {
-  cryoFreezeRate: 0.4,
-  psammoWishRate: 0.4,
-  hydroBuffRate: 0.5,
-  hydroPlayerStatBuffPoint: 4,
+  cryoFreezeRate: 0.3,
+  psammoWishRate: 0.3,
+  hydroBuffRate: 0.4,
+  hydroPlayerStatBuffPoint: 3,
 };
 
 // GameDifficulty dependent contants
@@ -37,10 +37,10 @@ const powerConfigsByDifficulty: Record<
   },
   [GameDifficulty.hard]: {
     pyroMaxTurn: 30,
-    psammoMissRate: 0.3,
-    dentroEnemyHpBuffPoint: 40,
-    hydroEnemyStatBuffPoint: 6,
-    ereboPlayerInitialHp: 35,
+    psammoMissRate: 0.35,
+    dentroEnemyHpBuffPoint: 70,
+    hydroEnemyStatBuffPoint: 9,
+    ereboPlayerInitialHp: 30,
   },
 };
 

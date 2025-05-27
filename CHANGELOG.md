@@ -1,10 +1,19 @@
+# 🚀 Release v1.3 (2025-5-26)
+
+Game improvements.
+
+- AI now accounts for level effects and uses optimal strategy by default.
+- Remake Vision card effect.
+- Make boss level more challenging.
+- Revamp the confirm dialog.
+
 # 🚀 Release v1.2 (2025-5-22)
 
-🌟 Project improvements:
+Project improvements.
 
-- Add unit and end-to-end tests, automated via GitHub Actions
-- Optimized asset size significantly
-- Code refactoring
+- Add unit and end-to-end tests, automated via GitHub Actions.
+- Optimize asset size significantly.
+- Code refactoring.
 
 # 🚀 Release v1.1 (2025-5-9)
 
@@ -12,7 +21,8 @@ Migrate project to TypeScript.
 
 # 🚀 Release v1.0 (2025-4-13)
 
-Stable release with minor game balance tweaks and font improvements from the previous version.
+- Game balance updates.
+- Font improvements.
 
 # 🚀 Release v0.18 (2025-3-31)
 

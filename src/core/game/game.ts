@@ -19,7 +19,6 @@ import {
   isVictory,
   logPlay,
   onGameEnd,
-  removeCard,
   removeCardById,
 } from './gameUtils';
 
@@ -68,7 +67,7 @@ const drawCard: Move<WizardDuelState> = ({ G, ctx }, cardId?: CardId) => {
   }
 
   if (G.deck.length === 0) {
-    console.log('Deck is empty, shuffling...');
+    console.debug('Deck is empty, shuffling...');
     G.deck = shuffle([...getDeckForLevel(G.level)]);
   }
 };
@@ -96,7 +95,7 @@ const playCard: Move<WizardDuelState> = ({ G, ctx }, index: number) => {
 
   executeGlobalEndOfTurnEffects(G, ctx, card, freezeTriggered);
 
-  removeCard(hand, index);
+  removeCardById(hand, card.id);
 
   logPlay(G, ctx, card);
 };
