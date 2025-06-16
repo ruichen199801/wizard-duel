@@ -52,6 +52,8 @@ const icon: Record<string, string> = {
   level: `${imgPrefix}/icons/level.svg`,
   turn: `${imgPrefix}/icons/turn.svg`,
   deck: `${imgPrefix}/icons/deck.svg`,
+  decklist: `${imgPrefix}/icons/decklist.svg`,
+  artifacts: `${imgPrefix}/icons/artifacts.svg`,
 };
 
 const cardFront = (cardId: CardId) => `${cardPrefix}/front/${cardId}.png`;

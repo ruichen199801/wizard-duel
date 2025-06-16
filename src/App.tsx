@@ -4,6 +4,7 @@ import { Client } from 'boardgame.io/react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { MainMenu } from './components/board/MainMenu';
 import { WizardDuelBoard } from './components/board/WizardDuelBoard';
+import { RoguelikeScreen } from './components/roguelike/RoguelikeScreen';
 import { WizardDuel } from './core/game/game';
 
 const WizardDuelClient = Client({
@@ -19,6 +20,7 @@ export const App = () => {
         <Routes>
           <Route path='/' element={<MainMenu />} />
           <Route path='/game' element={<WizardDuelClient />} />
+          <Route path='/roguelike' element={<RoguelikeScreen />} />
         </Routes>
       </BrowserRouter>
 
